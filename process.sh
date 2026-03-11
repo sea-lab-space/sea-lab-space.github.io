@@ -12,4 +12,4 @@
 
 
 # Make sure you have installed the HUGO academic tool: https://github.com/girtel/hugo-academic-cli-girtel
-academic import ./sea-lab-publication.bib ./content/publication/ --compact`
+academic import ./sea-lab-publication.bib ./content/publication/ --compact
