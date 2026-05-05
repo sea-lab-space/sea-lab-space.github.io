@@ -1,0 +1,44 @@
+---
+title: 'MindfulAgents: Personalizing Mindfulness Meditation via an Expert-Aligned
+  Multi-Agent System'
+authors:
+- Mengyuan Wu
+- Zhihan Jiang
+- Yuang Fan
+- Richard Feng
+- Sahiti Dharmavaram
+- Mathew Polowitz
+- Shawn Fallon
+- Bashima Islam
+- Lizbeth Benson
+- Irene Tung
+- David Creswell
+- Xuhai Xu
+date: '2026-01-01'
+publishDate: '2026-05-05T16:22:53.591411Z'
+publication_types:
+- paper-conference
+publication: '*Proceedings of the 2026 CHI Conference on Human Factors in Computing
+  Systems*'
+doi: 10.1145/3772318.3791817
+abstract: 'Mindfulness meditation is a widely accessible and evidence-based method
+  for supporting mental health. Despite the proliferation of mindfulness meditation
+  apps, sustaining user engagement remains a persistent challenge. Personalizing the
+  meditation experience is a promising strategy to improve engagement, but it often
+  requires costly and unscalable manual effort. We present MindfulAgents, a multi-agent
+  system powered by large language models that: (1) generates guided meditation scripts
+  based on an expert-established mindfulness framework, (2) encourages users’ reflection
+  on emotional states and mindfulness skills, and (3) enables real-time personalization
+  of the mindfulness meditation experience for each user. In a formative lab study
+  (N=13), MindfulAgents significantly improved in-session engagement (p = 0.011) and
+  self-awareness (p = 0.014), as well as reduced momentary stress (p = 0.020). Furthermore,
+  a four-week deployment study (N=62) demonstrated a notable increase (p = 0.002)
+  in long-term engagement and level of mindfulness (p = 0.023). Participants reported
+  that MindfulAgents offered more relevant meditation sessions personalized to individual
+  needs in various contexts, supporting sustained practice. Our findings highlight
+  the potential of LLM-driven personalization for enhancing user engagement in digital
+  mindfulness meditation interventions.'
+links:
+- name: URL
+  url: https://doi.org/10.1145/3772318.3791817
+---
