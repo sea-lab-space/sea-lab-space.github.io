@@ -31,6 +31,8 @@ tags:
 links:
 - name: Project Website
   url: https://sea-lab.space/MIND/
+awards:
+- "honorable mention award"
 tags:
   - 'clinical support'
 ---

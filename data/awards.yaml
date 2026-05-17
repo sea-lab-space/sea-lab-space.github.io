@@ -1,0 +1,25 @@
+# Award name → icon + canonical display name.
+# Keys are lowercased for case-insensitive matching against the `awards` list
+# in a publication's frontmatter. The `display` field is what shows in the
+# hover tooltip, regardless of how the user typed the award name in frontmatter.
+#
+# To add a new award: add an entry below using a lowercased key.
+awards:
+  "best paper award":
+    icon: "🏆"
+    display: "Best Paper Award"
+  "distinguished paper award":
+    icon: "🏆"
+    display: "Distinguished Paper Award"
+  "honorable mention award":
+    icon: "🏅"
+    display: "Honorable Mention Award"
+  "editor's pick":
+    icon: "🏆"
+    display: "Editor's Pick"
+  "oral presentation":
+    icon: "⭐️"
+    display: "Oral Presentation"
+  "spotlight":
+    icon: "💡"
+    display: "Spotlight"

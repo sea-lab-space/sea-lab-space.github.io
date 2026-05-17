@@ -43,4 +43,7 @@ links:
   url: https://dl.acm.org/doi/10.1145/3659625
 tags:
   - 'clinical support'
+awards:
+- "distinguished paper award"
+- "editor's pick"
 ---

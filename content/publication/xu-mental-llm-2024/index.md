@@ -44,4 +44,6 @@ links:
   url: https://dl.acm.org/doi/10.1145/3643540
 tags:
   - 'health prediction'
+awards:
+- "editor's pick"
 ---

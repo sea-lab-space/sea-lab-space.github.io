@@ -20,6 +20,8 @@
   </span>
   {{ end }}
 
+  {{ partial "award_icons.html" $item }}
+
   {{ if $has_attachments }}
   <div class="flex space-x-3">
     {{ partial "page_links" (dict "page" $item "is_list" 1) }}
@@ -39,6 +41,8 @@
     {{- $item.Params.publication | markdownify -}},
   {{ end }}
   {{- $item.Date.Format "2006" -}}.
+
+  {{ partial "award_icons.html" $item }}
 
   {{ if $has_attachments }}
   <div class="flex space-x-3">

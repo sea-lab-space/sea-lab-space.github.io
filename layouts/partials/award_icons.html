@@ -1,0 +1,17 @@
+{{/*
+  Render award badges for a publication.
+  Input: a page object with optional .Params.awards (list of strings).
+  Matching is case-insensitive against data/awards.yaml.
+  Unknown awards are silently skipped.
+
+  Each matched award renders as its own line "{icon} {display name}"
+  in red (#B54434), intended to sit beneath the venue and author rows.
+*/}}
+{{ with .Params.awards }}
+  {{ range . }}
+    {{ $entry := index site.Data.awards.awards (lower .) }}
+    {{ with $entry }}
+      <div class="award-badge" style="color: #B54434; font-size: medium;">{{ .icon }} {{ .display }}</div>
+    {{ end }}
+  {{ end }}
+{{ end }}

@@ -11,7 +11,7 @@ authors:
 - David J. Slotwiner
 - Fei Wang
 - Matthew B. A. McDermott
-- Xuhai "Orson" Xu
+- Xuhai Xu
 date: '2025-12-01'
 publishDate: '2026-05-17T03:19:46.650235Z'
 publication_types:

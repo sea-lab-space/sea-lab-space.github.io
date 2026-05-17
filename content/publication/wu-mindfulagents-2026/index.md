@@ -41,4 +41,6 @@ links:
   url: https://sea-lab.space/mindfulagents/
 tags:
   - 'intelligent interaction and intervention'
+awards:
+- "honorable mention award"
 ---
