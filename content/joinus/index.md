@@ -34,7 +34,7 @@ sections:
         - Intelligent health intervention design and evaluation with real-world deployability.
         - Clinician-AI collaboration for actionaable insights exploration and clinical decision support.
 
-        The position can go through either <u>[Biomedical Informatics](https://www.dbmi.columbia.edu/phd-in-biomedical-informatics/)</u> (starting 2025 Fall) or <u>[Computer Science](https://www.cs.columbia.edu/education/phd/)</u> (starting 2026 Fall) Ph.D. programs. Please contact Dr. Xu (xx2489 (at) columbia.edu) for more details.
+        The position can go through either <u>[Biomedical Informatics](https://www.dbmi.columbia.edu/phd-in-biomedical-informatics/)</u> or <u>[Computer Science](https://www.cs.columbia.edu/education/phd/)</u> Ph.D. programs. Please contact Dr. Xu (xx2489 (at) columbia.edu) for more details.
         {{< /details >}}
 
         ### Visiting Role / General Opportunities
