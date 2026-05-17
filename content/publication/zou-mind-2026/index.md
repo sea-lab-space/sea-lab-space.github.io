@@ -20,8 +20,7 @@ date: '2026-01-01'
 publishDate: '2026-04-29T21:49:29.943598Z'
 publication_types:
 - paper-conference
-publication: '*Proceedings of the 2026 CHI Conference on Human Factors in Computing
-  Systems*'
+publication: '*Proceedings of the ACM Conference on Human Factors in Computing Systems (ACM CHI)*'
 doi: 10.1145/3772318.3790529
 tags:
 - Clinical Dashboard
@@ -30,6 +29,8 @@ tags:
 - Natural Language Processing
 - Mental Healthcare
 links:
-- name: URL
-  url: https://doi.org/10.1145/3772318.3790529
+- name: Project Website
+  url: https://sea-lab.space/MIND/
+tags:
+  - 'clinical support'
 ---

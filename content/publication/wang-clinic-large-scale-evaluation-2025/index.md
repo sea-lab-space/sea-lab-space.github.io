@@ -21,4 +21,6 @@ doi: 10.48550/arXiv.2509.22920
 links:
 - name: arXiv
   url: https://arxiv.org/abs/2509.22920
+tags:
+  - 'health prediction'
 ---

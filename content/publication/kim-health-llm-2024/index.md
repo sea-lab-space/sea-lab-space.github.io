@@ -1,6 +1,5 @@
 ---
-title: 'Health-LLM: Large Language Models for Health Prediction via Wearable Sensor
-  Data'
+title: 'Health-LLM: Large Language Models for Health Prediction via Wearable Sensor Data'
 authors:
 - Yubin Kim
 - Xuhai Xu
@@ -11,7 +10,7 @@ date: '2024-04-01'
 publishDate: '2024-09-29T06:40:21.541879Z'
 publication_types:
 - paper-conference
-publication: '*Proceedings of Machine Learning Research*'
+publication: '*Proceedings of Machine Learning Research, Conference on Health, Inference, and Learning (CHIL)*'
 abstract: Large language models (LLMs) are capable of many natural language tasks,
   yet they are far from perfect. In health applications, grounding and interpreting
   domain-specific and nonlinguistic data is important. This paper investigates the

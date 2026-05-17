@@ -1,8 +1,7 @@
 ---
-title: 'MindfulAgents: Personalizing Mindfulness Meditation via an Expert-Aligned
-  Multi-Agent System'
+title: 'MindfulAgents: Personalizing Mindfulness Meditation via an Expert-Aligned Multi-Agent System'
 authors:
-- Mengyuan Wu
+- Millie (Mengyuan) Wu
 - Zhihan Jiang
 - Yuang Fan
 - Richard Feng
@@ -18,8 +17,7 @@ date: '2026-01-01'
 publishDate: '2026-05-05T16:22:53.591411Z'
 publication_types:
 - paper-conference
-publication: '*Proceedings of the 2026 CHI Conference on Human Factors in Computing
-  Systems*'
+publication: '*Proceedings of the ACM Conference on Human Factors in Computing Systems (ACM CHI)*'
 doi: 10.1145/3772318.3791817
 abstract: 'Mindfulness meditation is a widely accessible and evidence-based method
   for supporting mental health. Despite the proliferation of mindfulness meditation
@@ -39,6 +37,8 @@ abstract: 'Mindfulness meditation is a widely accessible and evidence-based meth
   the potential of LLM-driven personalization for enhancing user engagement in digital
   mindfulness meditation interventions.'
 links:
-- name: URL
-  url: https://doi.org/10.1145/3772318.3791817
+- name: Project Website
+  url: https://sea-lab.space/mindfulagents/
+tags:
+  - 'intelligent interaction and intervention'
 ---

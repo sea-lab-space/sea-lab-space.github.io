@@ -38,6 +38,7 @@ Submit a pull request once you edit the website, and ping Orson to check the con
   - `'health prediction'`: Section 1 in the Research page
   - `'intelligent interaction and intervention'`: Section 2
   - `'clinical support'`: Section 3
+- Add a feature image `featured.png` in the same folder. Use the template for the appropriate size if needed: `content/size_4x3_formatter.pptx`
 - [Here](./content/publication/xu-globem-2023/index.md) is an example of the tag setup in the `index.md`.
 - [Optional] By default, each section will highlight the top 3 publications with this tag, ranked by publication date (the latest will be on the top).
   - If you want to move up/down some papers, tweak the `date` in the `index.md` of the corresponding publication slightly.
