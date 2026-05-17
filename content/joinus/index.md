@@ -16,18 +16,19 @@ sections:
         ### Postdoctoral Researcher
         {{< details title="Learn More" >}}
         A Postdoctoral Research Scientist position is available in the Department of Biomedical Informatics (DBMI) at the Columbia University Irving Medical Center.
-        We are seeking a highly motivated postdoc to join our team in **Spring 2025 or Fall 2025**, focusing on the intersection of HCI, Ubiquitous Computing, and applied AI/ML.
+        We are seeking 0-1 highly motivated postdoc to join our team in **Fall 2026** or later, focusing on the intersection of HCI, Ubiquitous Computing, and applied AI/ML.
 
         The research projects will align with our mutual interests, exploring diverse topics, including but not limited to:
         - General Population-focused: Developing health prediction models, designing and evaluating well-being interventions, or enhancing human-AI interaction for health promotion.
-        - Expert-focused: Advancing clinician-AI collaboration, creating clinical decision support tools, or improving clinical workflows with innovative HCI and AI methodologies.
+        - Health Expert-focused: Advancing clinician-AI collaboration, creating clinical decision support tools, or improving clinical workflows with innovative HCI and AI methodologies.
+        - Integration of health data modalities across wearables, clinical data, and genomics.
 
         For more information, please contact Dr. Xu at xx2489 (at) columbia.edu. Additional details can be found on the <u>[job posting](https://apply.interfolio.com/154006)</u> page.
         {{< /details >}}
 
         ### Ph.D. Student
         {{< details title="Learn More" >}}
-        We are recruiting 1-2 self-motivated Ph.D. students in **Fall 2025**!
+        We are recruiting 1-2 self-motivated Ph.D. students in **Fall 2027**!
         Join us if your research interests include one or more of the following areas:
         - Applied machine learning and data mining with multimodal behavior data across wearable and medical records.
         - Intelligent health intervention design and evaluation with real-world deployability.
