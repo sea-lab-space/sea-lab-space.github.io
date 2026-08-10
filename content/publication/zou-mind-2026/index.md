@@ -22,12 +22,6 @@ publication_types:
 - paper-conference
 publication: '*Proceedings of the ACM Conference on Human Factors in Computing Systems (ACM CHI)*'
 doi: 10.1145/3772318.3790529
-tags:
-- Clinical Dashboard
-- Multimodal Data
-- Narrative Visualization
-- Natural Language Processing
-- Mental Healthcare
 links:
 - name: Project Website
   url: https://sea-lab.space/MIND/
