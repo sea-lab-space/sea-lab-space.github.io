@@ -49,7 +49,7 @@ social:
     link: 'https://www.linkedin.com/in/varunmangla/'
   - icon: envelope
     icon_pack: fas
-    link: 'vm2816@columbia.edu'
+    link: 'mailto:vm2816@columbia.edu'
   - icon: github
     icon_pack: fab
     link: https://github.com/vm-57
@@ -70,5 +70,5 @@ highlight_name: true
 #   Set this to `[]` or comment out if you are not using People widget.
 # Right now only pick one of the following: [Researchers, Alumni]
 user_groups:
-  - Researcher
+  - Researchers
 ---
