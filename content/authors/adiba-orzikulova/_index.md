@@ -13,7 +13,10 @@ authors:
   - adiba-orzikulova
   
 # Role/position
-role: PhD Collaborator
+role: PhD Research Intern
+
+# Where they are now
+now_at: KAIST PhD
 
 # Organizations/Affiliations
 organizations:

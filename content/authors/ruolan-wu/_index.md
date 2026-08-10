@@ -13,7 +13,10 @@ authors:
 superuser: false
 
 # Role/position
-role: Research Intern
+role: "Master's Research Intern"
+
+# Where they are now
+now_at: Tencent
 
 # Organizations/Affiliations
 organizations:

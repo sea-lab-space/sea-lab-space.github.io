@@ -13,7 +13,10 @@ authors:
 superuser: false
   
 # Role/position
-role: Research Intern
+role: Undergraduate Research Intern
+
+# Where they are now
+now_at: Microsoft
 
 # Organizations/Affiliations
 organizations:

@@ -80,6 +80,7 @@
               <h2>{{ with $link }}<a href="{{ . }}">{{ end }}{{ .Title }}{{ if $link }}</a>{{ end }}</h2>
               {{ if and $show_organizations .Params.organizations }}{{ range .Params.organizations }}<h3>{{ .name }}</h3>{{ end }}{{ end }}
               {{ if and $show_role .Params.role }}<h3>{{ .Params.role | markdownify | emojify }}</h3>{{ end }}
+              {{ with .Params.now_at }}<h3 class="people-now-at">Now at {{ . | markdownify | emojify }}</h3>{{ end }}
               {{ if $show_social }}{{ partial "social_links" . }}{{ end }}
               {{ if and $show_interests .Params.interests }}<p class="people-interests">{{ delimit .Params.interests ", " | markdownify | emojify }}</p>{{ end }}
             </div>
@@ -129,6 +130,7 @@
               <h2>{{ with $link }}<a href="{{ . }}">{{ end }}{{ .Title }}{{ if $link }}</a>{{ end }}</h2>
               {{ if and $show_organizations .Params.organizations }}{{ range .Params.organizations }}<h3>{{ .name }}</h3>{{ end }}{{ end }}
               {{ if and $show_role .Params.role }}<h3>{{ .Params.role | markdownify | emojify }}</h3>{{ end }}
+              {{ with .Params.now_at }}<h3 class="people-now-at">Now at {{ . | markdownify | emojify }}</h3>{{ end }}
               {{ if $show_social }}{{ partial "social_links" . }}{{ end }}
               {{ if and $show_interests .Params.interests }}<p class="people-interests">{{ delimit .Params.interests ", " | markdownify | emojify }}</p>{{ end }}
             </div>

@@ -17,7 +17,10 @@ superuser: false
 ## Research Intern
 ## PhD Student
 ## Postdoc Researcher
-role: Research Intern
+role: "Master's Research Intern"
+
+# Where they are now
+now_at: Harvard PhD
 
 # Organizations/Affiliations
 organizations:
@@ -79,6 +82,6 @@ highlight_name: true
 #   Set this to `[]` or comment out if you are not using People widget.
 # Right now only pick one of the following: [Researchers, Alumni]
 user_groups:
-  - Researchers
+  - Alumni
 ---
 I am currently a master's student in Computer Science at UC San Diego. My research interests lie in Human-Computer Interaction and Visualization, with a specific emphasis on designing human-AI systems to empower humans in understanding complex, multimodal information. My vision is to improve the experience and outcome of healthcare stakeholders through human-AI systems.
