@@ -1,0 +1,14 @@
+// People page: the "Now at <organization>" line shown under an alum's role.
+// Rendered by `layouts/partials/blocks/people.html` when a person's front matter
+// sets `now_at`; this rule is inert for everyone else.
+//
+// The theme already styles `.people-widget .portrait-title h3` (0-2-1), so this
+// selector needs the extra class to win on `font-size`. Muting via `opacity`
+// rather than a literal colour keeps the theme's light and dark `h3` colours
+// intact. `margin-top` collapses with the role's `10px` bottom margin, so the
+// gap between the two lines is unchanged.
+.people-widget .portrait-title h3.people-now-at {
+  margin-top: 4px;
+  font-size: 0.65rem;
+  opacity: 0.75;
+}

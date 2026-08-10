@@ -19,6 +19,9 @@ superuser: false
 ## Postdoc Researcher
 role: 
 
+# Where an alum is now (Alumni only). Rendered as "Now at <value>" on the People page.
+# now_at: 'Tencent'
+
 # Organizations/Affiliations
 organizations:
   - name: 
