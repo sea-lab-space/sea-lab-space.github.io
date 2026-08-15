@@ -13,7 +13,7 @@ sections:
         The **SEA** (<u>**S**</u>ense, <u>**E**</u>mpower, and <u>**A**</u>ugment) Lab at Columbia University, led by <u>[Dr. Xuhai "Orson" Xu](https://orsonxu.com)</u>, focuses on designing, developing, and deploying innovative and practical human-computer interaction (HCI) and applied artificial intelligent and machine learning (AI/ML) techniques to advance human health and well-being.
 
         With everyday sensors and intelligent systems rapidly evolving, we adopt interdisciplinary approaches across computer science and health informatics to tackle real-world challenges.
-        Our vision is to establish a set of human-centered methods, devices, and systems to **sense, empower, and augment** our everyday behavior, thereby enhancing daily experience and health outcomes.<br/> <br/>
+        Our vision is to establish a set of human-centered methods, devices, and systems to **sense, empower, and augment** our everyday behavior, thereby enhancing daily experience and health outcomes. <br/>
 
         SEA lab is fortunate to be funded by National Science Foundation (NSF), National Institutes of Health (NIH), Google, OpenAI, NVIDIA.<br/> <br/>
 
