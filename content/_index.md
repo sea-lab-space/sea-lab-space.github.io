@@ -15,6 +15,8 @@ sections:
         With everyday sensors and intelligent systems rapidly evolving, we adopt interdisciplinary approaches across computer science and health informatics to tackle real-world challenges.
         Our vision is to establish a set of human-centered methods, devices, and systems to **sense, empower, and augment** our everyday behavior, thereby enhancing daily experience and health outcomes.<br/> <br/>
 
+        SEA lab is fortunate to be funded by National Science Foundation (NSF), National Health Institute (NIH), Google, OpenAI, NVIDIA.<br/> <br/>
+
         <div class="container-fluid", style="text-align: justify">
           <div class="row">
               <div class="col-md-4" style="text-align: center;">
