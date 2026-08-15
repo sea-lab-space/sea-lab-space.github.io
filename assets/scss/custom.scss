@@ -12,3 +12,89 @@
   font-size: 0.65rem;
   opacity: 0.75;
 }
+
+// Homepage "Our Funders" logo row, rendered by the last markdown block in
+// `content/_index.md`. Sources are SVGs in `static/uploads/funders/`.
+//
+// The five marks have very different aspect ratios (NSF is ~1:1, NVIDIA is
+// ~5.5:1), so sizing them by width would leave the emblems towering over the
+// wordmarks. Sizing by height instead, with a taller cap for the two agency
+// emblems, is what makes the row read as one line. `height: auto` +
+// `max-width: 100%` keeps each SVG's aspect ratio and stops the widest mark
+// from overflowing on narrow screens.
+.funder-logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.75rem 3rem;
+  margin: 0.25rem 0 0.5rem;
+}
+
+.funder-logos .funder-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  // The theme underlines links inside markdown blocks; a logo is not a word.
+  border-bottom: none;
+  text-decoration: none;
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
+
+  &:hover,
+  &:focus {
+    opacity: 1;
+    text-decoration: none;
+  }
+
+  // Height is set explicitly rather than via `max-height`: an SVG whose root
+  // element carries only a `viewBox` has no intrinsic size, so `height: auto`
+  // collapses it. A fixed height plus `width: auto` makes every mark size off
+  // its viewBox ratio instead. `object-fit: contain` keeps that ratio if the
+  // `max-width` clamp ever has to shrink the widest mark.
+  img {
+    display: block;
+    width: auto;
+    height: 38px;
+    max-width: 100%;
+    object-fit: contain;
+  }
+}
+
+// NSF seal and the stacked NIH master logo. Set taller than the wordmarks so
+// their cap-height lands near the wordmarks' rather than shrinking to a smudge.
+.funder-logos .funder-logo--emblem img {
+  height: 82px;
+}
+
+// Tablet: at full size the five marks total just over the container width, which
+// orphans the widest one (NVIDIA) onto a line by itself. Trimming the heights a
+// little keeps the row on one line down to ~700px.
+@media (min-width: 576px) and (max-width: 991.98px) {
+  .funder-logos {
+    gap: 1.5rem 2rem;
+  }
+
+  .funder-logos .funder-logo img {
+    height: 32px;
+  }
+
+  .funder-logos .funder-logo--emblem img {
+    height: 70px;
+  }
+}
+
+// Phones: two lines is unavoidable here, so size for legibility instead.
+@media (max-width: 575.98px) {
+  .funder-logos {
+    gap: 1.5rem 2rem;
+  }
+
+  .funder-logos .funder-logo img {
+    height: 30px;
+  }
+
+  .funder-logos .funder-logo--emblem img {
+    height: 64px;
+  }
+}

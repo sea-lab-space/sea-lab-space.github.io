@@ -15,7 +15,7 @@ sections:
         With everyday sensors and intelligent systems rapidly evolving, we adopt interdisciplinary approaches across computer science and health informatics to tackle real-world challenges.
         Our vision is to establish a set of human-centered methods, devices, and systems to **sense, empower, and augment** our everyday behavior, thereby enhancing daily experience and health outcomes.<br/> <br/>
 
-        SEA lab is fortunate to be funded by National Science Foundation (NSF), National Health Institute (NIH), Google, OpenAI, NVIDIA.<br/> <br/>
+        SEA lab is fortunate to be funded by National Science Foundation (NSF), National Institutes of Health (NIH), Google, OpenAI, NVIDIA.<br/> <br/>
 
         <div class="container-fluid", style="text-align: justify">
           <div class="row">
@@ -108,5 +108,38 @@ sections:
       spacing:
         padding: ['280px', '0', '20px', '0']
       css_class: "intro-image-banner"
+
+  # Funder logos. Images live in `static/uploads/funders/` (published verbatim, no
+  # Hugo image processing needed for SVG); the row is styled by `.funder-logos`
+  # in `assets/scss/custom.scss`, which normalises the mixed logo aspect ratios.
+  #
+  # Each <img> carries its source SVG's intrinsic width/height. CSS overrides the
+  # rendered size, but the attributes give the browser an aspect ratio to reserve
+  # space with, so the lazy-loaded marks don't reflow the row as they arrive.
+  - block: markdown
+    content:
+      title: 'Our Funders'
+      subtitle:
+      text: |
+        <div class="funder-logos">
+          <a class="funder-logo funder-logo--emblem" href="https://www.nsf.gov/" target="_blank" rel="noopener">
+            <img src="/uploads/funders/nsf.svg" alt="National Science Foundation" width="169" height="171" loading="lazy">
+          </a>
+          <a class="funder-logo funder-logo--emblem" href="https://www.nih.gov/" target="_blank" rel="noopener">
+            <img src="/uploads/funders/nih.svg" alt="National Institutes of Health" width="374" height="329" loading="lazy">
+          </a>
+          <a class="funder-logo" href="https://research.google/" target="_blank" rel="noopener">
+            <img src="/uploads/funders/google.svg" alt="Google" width="272" height="92" loading="lazy">
+          </a>
+          <a class="funder-logo" href="https://openai.com/" target="_blank" rel="noopener">
+            <img src="/uploads/funders/openai.svg" alt="OpenAI" width="270" height="73" loading="lazy">
+          </a>
+          <a class="funder-logo" href="https://www.nvidia.com/" target="_blank" rel="noopener">
+            <img src="/uploads/funders/nvidia.svg" alt="NVIDIA" width="656" height="120" loading="lazy">
+          </a>
+        </div>
+    design:
+      columns: '1'
+      css_class: section-title-left-aligned
 
 ---
