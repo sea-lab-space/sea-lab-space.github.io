@@ -53,5 +53,5 @@ Our website is based on the following templates and tools:
 
 ## Local Test
 
-- Follow [this page](https://docs.hugoblox.com/getting-started/install-hugo/) to install dependencies.
+- Follow [this page](https://hugoblox.com/docs/start/cli) to install dependencies.
 - Run `hugo server -D` locally.
