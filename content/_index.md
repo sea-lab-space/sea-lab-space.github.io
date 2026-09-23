@@ -24,11 +24,11 @@ sections:
                   <h5>Sense</h5>
               </div>
               <div class="col-md-4" style="text-align: center;">
-                  {{<figure src="empower.png" alt="Sense">}}
+                  {{<figure src="empower.png" alt="Empower">}}
                   <h5>Empower</h5>
               </div>
               <div class="col-md-4" style="text-align: center;">
-                  {{<figure src="augment.png" alt="Sense">}}
+                  {{<figure src="augment.png" alt="Augment">}}
                   <h5>Augment</h5>
               </div>
               <div class="col-md-4">
