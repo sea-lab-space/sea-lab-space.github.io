@@ -49,7 +49,7 @@ education:
 social:
   - icon: globe
     icon_pack: fas
-    link: 'www.linkedin.com/in/millie-wu'
+    link: 'https://www.linkedin.com/in/millie-wu'
   - icon: envelope
     icon_pack: fas
     link: 'mailto:mw3209@columbia.edu'
