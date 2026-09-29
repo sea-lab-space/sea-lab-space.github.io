@@ -1,5 +1,5 @@
 ---
-title: Contact
+title: Join Us
 date: 2024-09-30
 
 type: landing
