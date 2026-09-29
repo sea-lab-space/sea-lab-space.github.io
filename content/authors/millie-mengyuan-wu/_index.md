@@ -17,7 +17,7 @@ superuser: false
 ## Research Intern
 ## PhD Student
 ## Postdoc Researcher
-role: PhD student
+role: PhD Student
 
 # Organizations/Affiliations
 organizations:
