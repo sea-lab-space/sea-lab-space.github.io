@@ -2,6 +2,9 @@
 # Display name
 title: Varun Mangla
 
+# Page address: always the folder name, so the URL and the paper links agree
+slug: varun-mangla
+
 # Full Name (for SEO)
 first_name: Varun
 last_name: Mangla

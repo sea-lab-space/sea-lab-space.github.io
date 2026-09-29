@@ -2,6 +2,9 @@
 # Display name
 title: Han Xiao
 
+# Page address: always the folder name, so the URL and the paper links agree
+slug: han-xiao
+
 # Full Name (for SEO)
 first_name: Han
 last_name: Xiao

@@ -2,6 +2,9 @@
 # Display name
 title: Yubin Kim
 
+# Page address: always the folder name, so the URL and the paper links agree
+slug: yubin-kim
+
 # Full Name (for SEO)
 first_name: Yubin
 last_name: Kim

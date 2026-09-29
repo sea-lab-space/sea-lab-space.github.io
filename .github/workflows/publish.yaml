@@ -31,6 +31,10 @@ jobs:
         with:
           # Fetch history for Hugo's .GitInfo and .Lastmod
           fetch-depth: 0
+      - name: Check that every member's name links to their profile
+        run: |
+          python3 -m pip install --quiet pyyaml
+          python3 scripts/check_author_links.py
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:

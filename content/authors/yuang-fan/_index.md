@@ -2,6 +2,9 @@
 # Display name
 title: Yuang Fan
 
+# Page address: always the folder name, so the URL and the paper links agree
+slug: yuang-fan
+
 # Full Name (for SEO)
 first_name: Yuang
 last_name: Fan
