@@ -2,6 +2,9 @@
 # Display name
 title: Shiyu Xu
 
+# Page address: always the folder name, so the URL and the paper links agree
+slug: shiyu-xu
+
 # Full Name (for SEO)
 first_name: Shiyu
 last_name: Xu

@@ -2,6 +2,9 @@
 # Display name
 title: Will Ke Wang
 
+# Page address: always the folder name, so the URL and the paper links agree
+slug: will-ke-wang
+
 # Full Name (for SEO)
 first_name: Will
 last_name: Wang

@@ -2,6 +2,9 @@
 # Display name
 title: Adiba Orzikulova
 
+# Page address: always the folder name, so the URL and the paper links agree
+slug: adiba-orzikulova
+
 # Full Name (for SEO)
 first_name: Adiba
 last_name: Orzikulova

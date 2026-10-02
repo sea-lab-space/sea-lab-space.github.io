@@ -2,6 +2,9 @@
 # Display name
 title: Ruolan Wu
 
+# Page address: always the folder name, so the URL and the paper links agree
+slug: ruolan-wu
+
 # Full Name (for SEO)
 first_name: Ruolan
 last_name: Wu

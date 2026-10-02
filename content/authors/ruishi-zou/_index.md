@@ -2,6 +2,9 @@
 # Display name
 title: Ruishi Zou
 
+# Page address: always the folder name, so the URL and the paper links agree
+slug: ruishi-zou
+
 # Full Name (for SEO)
 first_name: Ruishi
 last_name: Zou
