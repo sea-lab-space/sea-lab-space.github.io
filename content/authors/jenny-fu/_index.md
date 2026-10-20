@@ -2,6 +2,9 @@
 # Display name
 title: Jenny Fu
 
+# Page address: always the folder name, so the URL and the paper links agree
+slug: jenny-fu
+
 # Full Name (for SEO)
 first_name: Jenny
 last_name: Fu
@@ -57,7 +60,7 @@ social:
     link: 'mailto:xf2318@columbia.edu'
   - icon: google-scholar
     icon_pack: ai
-    link: https://scholar.google.com/citations?user=4iGTMnYAAAAJ&amp;hl=en&amp;authuser=1
+    link: https://scholar.google.com/citations?user=4iGTMnYAAAAJ
   - icon: github
     icon_pack: fab
     link: https://github.com/jennyxfu
