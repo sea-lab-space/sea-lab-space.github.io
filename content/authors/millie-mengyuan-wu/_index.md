@@ -7,8 +7,8 @@ first_name: Millie (Mengyuan)
 last_name: Wu
 
 # Username (this should match the folder name)
-authors: millie-mengyuan-wu
-  - 
+authors:
+  - millie-mengyuan-wu
   
 # superuser: (should be false by default)
 superuser: false

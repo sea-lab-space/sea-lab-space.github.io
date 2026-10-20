@@ -1,7 +1,7 @@
 ---
 title: 'MindfulAgents: Personalizing Mindfulness Meditation via an Expert-Aligned Multi-Agent System'
 authors:
-- Millie (Mengyuan) Wu
+- Millie Mengyuan Wu
 - Zhihan Jiang
 - Yuang Fan
 - Richard Feng
