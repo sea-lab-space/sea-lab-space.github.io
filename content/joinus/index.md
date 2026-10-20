@@ -7,7 +7,7 @@ type: landing
 sections:
   - block: markdown
     content:
-      title: Opportunties
+      title: Opportunities
       subtitle: Join our crew to sail in the SEA!
       text: |
         We are dedicated to fostering an inclusive, supportive, and collaborative research environment that values diversity and promotes innovation, creativity, and well-being.
@@ -32,14 +32,14 @@ sections:
         Join us if your research interests include one or more of the following areas:
         - Applied machine learning and data mining with multimodal behavior data across wearable and medical records.
         - Intelligent health intervention design and evaluation with real-world deployability.
-        - Clinician-AI collaboration for actionaable insights exploration and clinical decision support.
+        - Clinician-AI collaboration for actionable insights exploration and clinical decision support.
 
         The position can go through either <u>[Biomedical Informatics](https://www.dbmi.columbia.edu/phd-in-biomedical-informatics/)</u> or <u>[Computer Science](https://www.cs.columbia.edu/education/phd/)</u> Ph.D. programs. Please contact Dr. Xu (xx2489 (at) columbia.edu) for more details.
         {{< /details >}}
 
         ### Visiting Role / General Opportunities
 
-        We always welcome undergraduate and graduate studnets from diverse background. Visiting roles can be either in-person or remote. If you are intersted in joining us as an master, undergraduate, or high school researcher, please fill out <u>[this form](https://forms.gle/zfHRzEqR9USm3sXV8)</u>!
+        We always welcome undergraduate and graduate students from diverse background. Visiting roles can be either in-person or remote. If you are interested in joining us as a master's, undergraduate, or high school researcher, please fill out <u>[this form](https://forms.gle/zfHRzEqR9USm3sXV8)</u>!
 
         <br />
 
