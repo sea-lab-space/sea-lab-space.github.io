@@ -1,5 +1,5 @@
 PersonID,Full Name,Last Name,First Name,Institution,Current Email,Institution History,Email History,Alias,Full Name (Last First),Latest Collaboration Year,Latest Active
-1,Xuhai Xu,Xu,Xuhai,Columbia University,xx2489@columbia.edu,University of Washington; Massachusetts Institute of Technology,xuhaixu@uw.edu; xoxu@mit.edu,"Orson Xu; Xuhai ""Orson"" Xu; Xuhai Orson Xu; Xuhai “Orson” Xu; Xu, Xuhai ""Orson""; Xuhai ""Orson"" Xu","Xu, Xuhai",2024,2024-08-22
+1,Xuhai Xu,Xu,Xuhai,Columbia University,xx2489@columbia.edu,University of Washington; Massachusetts Institute of Technology,xuhaixu@uw.edu; xoxu@mit.edu,"Orson Xu; Xuhai ""Orson"" Xu; Xuhai Orson Xu; Xuhai “Orson” Xu; Xu, Xuhai ""Orson""","Xu, Xuhai",2024,2024-08-22
 2,Anind K Dey,Dey,Anind K,University of Washington,anind@uw.edu,,,Anind K. Dey; Anind Dey,"Dey, Anind K",2024,2024-05-11
 3,Yuanchun Shi,Shi,Yuanchun,Tsinghua University,shiyc@tsinghua.edu.cn,,,,"Shi, Yuanchun",2024,2024-08-22
 4,Jennifer Mankoff,Mankoff,Jennifer,University of Washington,yuntaowang@tsinghua.edu.cn,,,Jen Mankoff; Jennifer C. Mankoff,"Mankoff, Jennifer",2023,2023-10-22
@@ -255,3 +255,18 @@ PersonID,Full Name,Last Name,First Name,Institution,Current Email,Institution Hi
 254,Yuzhou Zhuang,Zhuang,Yuzhou,University of Washington,,,,,"Zhuang, Yuzhou",2021,2021-10-10
 -1,Yuang Li,Li,Yang,BUPT,,,,,"Li, Yuang",2022,2022-09-01
 -1,Yi He,He,Yi,BUPT,,,,,"He, Yi",2023,2023-04-19
+255,Millie Mengyuan Wu,Wu,Millie Mengyuan,Columbia University,,,,"Millie Wu; Mengyuan Wu; Millie (Mengyuan) Wu; Wu, Mengyuan","Wu, Millie Mengyuan",2026,2026-09-23
+256,Georgianna Lin,Lin,Georgianna,Columbia University,,,,Blue Lin; Blue (Georgianna) Lin; Georgianna (Blue) Lin; Blue Georgianna Lin,"Lin, Georgianna",,2026-09-23
+257,Will Ke Wang,Wang,Will Ke,Columbia University,,,,Will Wang; Ke Wang; Will K Wang; Will K. Wang,"Wang, Will Ke",2026,2026-09-23
+258,Seung Jae Hong,Hong,Seung Jae,Columbia University,,,,Seung-Jae Hong; Seungjae Hong; SeungJae Hong,"Hong, Seung Jae",,2026-09-23
+259,Idranne Mbah Ndum,Mbah Ndum,Idranne,Mount Holyoke College,,,,Idranne Mbah-Ndum; Idranne Ndum,"Mbah Ndum, Idranne",,2026-09-23
+260,Siddhartha Reddy Pullannagari,Pullannagari,Siddhartha Reddy,Columbia University,,,,Siddhartha Reddy; Siddhartha Pullannagari; Siddhartha R Pullannagari,"Pullannagari, Siddhartha Reddy",,2026-09-23
+261,Zhihan Jiang,Jiang,Zhihan,Columbia University,,,,,"Jiang, Zhihan",2026,2026-09-23
+262,Yuang Fan,Fan,Yuang,Columbia University,,,,,"Fan, Yuang",2026,2026-09-23
+263,Shiyu Xu,Xu,Shiyu,University of Michigan,,,,,"Xu, Shiyu",2025,2026-09-23
+264,Hitesh Goel,Goel,Hitesh,International Institute of Information Technology Hyderabad,,,,,"Goel, Hitesh",2025,2026-09-23
+265,Ruishi Zou,Zou,Ruishi,"University of California, San Diego",,,,,"Zou, Ruishi",2026,2026-09-23
+266,Sahiti Dharmavaram,Dharmavaram,Sahiti,Columbia University,,,,,"Dharmavaram, Sahiti",2026,2026-09-23
+267,Irene Nam,Nam,Irene,Columbia University,,,,,"Nam, Irene",,2026-09-23
+268,Nikhil Anand,Anand,Nikhil,Columbia University,,,,,"Anand, Nikhil",,2026-09-23
+269,Varun Mangla,Mangla,Varun,Columbia University,,,,,"Mangla, Varun",,2026-09-23
