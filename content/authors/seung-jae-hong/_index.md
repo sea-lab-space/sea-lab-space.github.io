@@ -2,6 +2,9 @@
 # Display name
 title: Seung Jae Hong
 
+# Page address: always the folder name, so the URL and the paper links agree
+slug: seung-jae-hong
+
 # Full Name (for SEO)
 first_name: Seung Jae
 last_name: Hong

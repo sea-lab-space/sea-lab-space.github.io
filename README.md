@@ -18,6 +18,10 @@ Submit a pull request once you edit the website, and ping Orson to check the con
   - E.g., "Xuhai Xu" will become `xuhai-xu`, "Anind K Dey" will become `anind-k-dey`.
   - Making the folder name consistent with your name in publications (i.e., bib file, more in [add publication](#add-pub) section) will link your page with the papers listed in the [Publication](https://sea-lab.space/publication/) page.
 - Copy a template `_index.md` from `content/authors/0-author-template` to the new folder. Fill in with your personal content. Feel free to take a look at others' `md` for reference.
+- Set both `authors:` and `slug:` in `_index.md` to the folder name. `slug` controls your page address (`/author/<slug>/`); `authors` is what papers link to. If either differs from the folder, your page and your papers end up in different places.
+  - Your display `title` can be anything, e.g. a nickname in quotes or parentheses. It no longer affects the address.
+  - On papers and in the bib, always write your name exactly as the folder name with spaces (`millie-mengyuan-wu` becomes `Millie Mengyuan Wu`). Other spellings you publish under go in the `Alias` column of `processing/Lab Collaboration Track Record - Person-Pub.csv`.
+  - `scripts/check_author_links.py` checks all of this on every pull request and before every deploy, and tells you exactly which line to fix.
 - Add a personal headshot to the new folder. Name it as `avatar`, with the original file extension `[png/jpg/jpeg]`. Please make the photo to be square for the best visualization on the page.
 
 ## <a name="add-pub"></a> Add A New Publication

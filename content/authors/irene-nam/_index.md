@@ -2,6 +2,9 @@
 # Display name
 title: Irene Nam
 
+# Page address: always the folder name, so the URL and the paper links agree
+slug: irene-nam
+
 # Full Name (for SEO)
 first_name: Irene (Yaejin)
 last_name: Nam

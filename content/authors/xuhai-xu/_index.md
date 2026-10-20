@@ -2,6 +2,12 @@
 # Display name
 title: Xuhai "Orson" Xu
 
+# Page address: always the folder name, so the URL and the paper links agree
+slug: xuhai-xu
+# Old address, kept as a redirect so existing links still work
+aliases:
+  - /author/xuhai-orson-xu/
+
 # Full Name (for SEO)
 first_name: Xuhai "Orson"
 last_name: Xu

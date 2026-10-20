@@ -2,6 +2,12 @@
 # Display name
 title: Blue (Georgianna) Lin
 
+# Page address: always the folder name, so the URL and the paper links agree
+slug: georgianna-lin
+# Old address, kept as a redirect so existing links still work
+aliases:
+  - /author/blue-georgianna-lin/
+
 # Full Name (for SEO)
 first_name: Blue (Georgianna)
 last_name: Lin

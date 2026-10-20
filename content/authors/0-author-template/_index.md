@@ -2,6 +2,9 @@
 # Display name
 title: 
 
+# Page address: must be the same as the folder name, e.g. firstname-lastname
+slug: 
+
 # Full Name (for SEO)
 first_name: 
 last_name: 

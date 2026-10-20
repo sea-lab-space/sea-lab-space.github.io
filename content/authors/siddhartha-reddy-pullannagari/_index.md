@@ -2,6 +2,12 @@
 # Display name
 title: Siddhartha Reddy
 
+# Page address: always the folder name, so the URL and the paper links agree
+slug: siddhartha-reddy-pullannagari
+# Old address, kept as a redirect so existing links still work
+aliases:
+  - /author/siddhartha-reddy/
+
 # Full Name (for SEO)
 first_name: Siddhartha Reddy
 last_name: Pullannagari

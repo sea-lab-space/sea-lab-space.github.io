@@ -2,6 +2,9 @@
 # Display name
 title: Sahiti Dharmavaram
 
+# Page address: always the folder name, so the URL and the paper links agree
+slug: sahiti-dharmavaram
+
 # Full Name (for SEO)
 first_name: Sahiti
 last_name: Dharmavaram

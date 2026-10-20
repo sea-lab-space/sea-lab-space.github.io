@@ -2,6 +2,9 @@
 # Display name
 title: Nikhil Anand
 
+# Page address: always the folder name, so the URL and the paper links agree
+slug: nikhil-anand
+
 # Full Name (for SEO)
 first_name: Nikhil
 last_name: Anand

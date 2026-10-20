@@ -2,6 +2,9 @@
 # Display name
 title: Idranne Mbah Ndum
 
+# Page address: always the folder name, so the URL and the paper links agree
+slug: idranne-mbah-ndum
+
 # Full Name (for SEO)
 first_name: Idranne
 last_name: Ndum

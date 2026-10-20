@@ -2,6 +2,12 @@
 # Display name
 title: Millie Wu
 
+# Page address: always the folder name, so the URL and the paper links agree
+slug: millie-mengyuan-wu
+# Old address, kept as a redirect so existing links still work
+aliases:
+  - /author/millie-wu/
+
 # Full Name (for SEO)
 first_name: Millie (Mengyuan)
 last_name: Wu

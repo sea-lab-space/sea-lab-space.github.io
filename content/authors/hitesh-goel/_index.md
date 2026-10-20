@@ -2,6 +2,9 @@
 # Display name
 title: Hitesh Goel
 
+# Page address: always the folder name, so the URL and the paper links agree
+slug: hitesh-goel
+
 # Full Name (for SEO)
 first_name: Hitesh
 last_name: Goel

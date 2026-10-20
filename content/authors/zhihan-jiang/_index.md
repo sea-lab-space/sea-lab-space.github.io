@@ -2,6 +2,9 @@
 # Display name
 title: Zhihan Jiang
 
+# Page address: always the folder name, so the URL and the paper links agree
+slug: zhihan-jiang
+
 # Full Name (for SEO)
 first_name: Zhihan
 last_name: Jiang
