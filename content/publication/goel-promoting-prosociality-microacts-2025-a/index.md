@@ -21,6 +21,7 @@ publishDate: '2026-05-17T03:19:46.610579Z'
 publication_types:
 - paper-conference
 publication: '*Proceedings of the ACM Conference on Human Factors in Computing Systems (ACM CHI)*'
+url_pdf: research/pubs/chi25-bigjoy.pdf
 doi: 10.1145/3706598.3713947
 tags:
   - 'intelligent interaction and intervention'
