@@ -33,8 +33,8 @@ jobs:
       - name: Run Academic (Bibtex To Markdown Converter)
         # Check `.bib` file exists for case when action runs on `.bib` deletion
         # Note GH only provides hashFiles func in `steps.if` context, not `jobs.if` context
-        if: ${{ hashFiles('publications.bib') != '' }}
-        run: academic import publications.bib content/publication/ --compact
+        if: ${{ hashFiles('sea-lab-publication.bib') != '' }}
+        run: academic import sea-lab-publication.bib content/publication/ --compact
       - name: Create Pull Request
         # Set ID for `Check outputs` stage
         id: cpr
@@ -43,8 +43,8 @@ jobs:
           commit-message: 'content: import publications from Bibtex'
           title: Hugo Blox Builder - Import latest publications
           body: |
-            Import the latest publications from `publications.bib` to `content/publication/`.
-            将最新的出版物从`publications.bib`导入到`content/publication/`。
+            Import the latest publications from `sea-lab-publication.bib` to `content/publication/`.
+            将最新的出版物从`sea-lab-publication.bib`导入到`content/publication/`。
             [View Documentation](https://github.com/GetRD/academic-file-converter)
           base: main
           labels: automated-pr, content
