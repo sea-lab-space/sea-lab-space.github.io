@@ -28,6 +28,9 @@ publication_types:
 publication: '*Thirty-Ninth Conference on Neural Information Processing Systems Datasets
   and Benchmarks Track*'
 publication_short: '*NeurIPS*'
+links:
+- name: URL
+  url: https://proceedings.neurips.cc/paper_files/paper/2025/hash/42cd98f0e7520d4a63c34891ac1c972f-Abstract-Conference.html
 directions:
   - human-centered-health-foundation-models
 selected: true

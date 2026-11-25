@@ -25,6 +25,9 @@ publication_types:
 - paper-conference
 publication: '*The Thirteenth International Conference on Learning Representations*'
 publication_short: '*ICLR*'
+links:
+- name: URL
+  url: https://proceedings.iclr.cc/paper_files/paper/2025/hash/94b25992757a549470c8f8dfe73d8df6-Abstract-Conference.html
 directions:
   - human-centered-health-foundation-models
 selected: true

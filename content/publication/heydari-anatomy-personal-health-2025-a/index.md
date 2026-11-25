@@ -44,7 +44,7 @@ publishDate: '2026-05-17T03:23:07.869606Z'
 publication_types:
 - article-journal
 publication: '*Nature*'
-doi: 10.48550/arXiv.2508.20148
+doi: 10.1038/s41586-026-11161-8
 links:
 - name: arXiv
   url: https://arxiv.org/abs/2508.20148

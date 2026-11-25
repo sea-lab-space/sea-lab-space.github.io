@@ -41,6 +41,9 @@ abstract: Recent research has demonstrated the capability of behavior signals ca
   achieve adequate cross-dataset generalizability. We envision our multi-year datasets
   can support the ML community in developing generalizable longitudinal behavior modeling
   algorithms.
+links:
+- name: URL
+  url: https://proceedings.neurips.cc/paper_files/paper/2022/hash/9c7e8a0821dfcb58a9a83cbd37cc8131-Abstract-Datasets_and_Benchmarks.html
 directions:
   - human-centered-evaluation
   - human-centered-health-foundation-models

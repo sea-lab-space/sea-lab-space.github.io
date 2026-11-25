@@ -9,27 +9,20 @@
 */ -}}
 {{- $item := .item -}}
 
-{{- /* Link target, copied from views/compact.html so cards and lists agree:
-       external_link, else the `links` entry named URL, else the DOI, else the
-       paper's own page. External targets open in a new tab. */ -}}
-{{- $link := $item.RelPermalink -}}
-{{- $target := "" -}}
-{{- if $item.Params.external_link -}}
-  {{- $link = $item.Params.external_link -}}
-  {{- $target = "target=\"_blank\" rel=\"noopener\"" -}}
-{{- else if $item.Params.links -}}
-  {{- $foundLink := false -}}
-  {{- range $item.Params.links -}}
-    {{- if (and (not $foundLink) (eq .name "URL") ) -}}
-      {{- $link = .url -}}
-      {{- $target = "target=\"_blank\" rel=\"noopener\"" -}}
-      {{- $foundLink = true -}}
-    {{- end -}}
-  {{- end -}}
-{{- else if $item.Params.doi -}}
-  {{- $link = printf "https://doi.org/%s" $item.Params.doi -}}
-  {{- $target = "target=\"_blank\" rel=\"noopener\"" -}}
-{{- end -}}
+{{- /* Link target. A card opens the paper itself, not its page on this site
+       (Orson's review): external_link, else the `links` entry named URL, else
+       the DOI, else a `links` entry named arXiv, PDF, or Preprint, else
+       url_pdf. Only a paper with none of these falls back to its own page.
+       External targets open in a new tab. To fix where a card goes, give the
+       paper a `url` (or `doi`) in sea-lab-publication.bib and its index.md. */ -}}
+{{- $link := "" -}}
+{{- with $item.Params.external_link }}{{ $link = . }}{{ end -}}
+{{- if not $link }}{{ range $item.Params.links }}{{ if and (not $link) (eq .name "URL") }}{{ $link = .url }}{{ end }}{{ end }}{{ end -}}
+{{- if and (not $link) $item.Params.doi }}{{ $link = printf "https://doi.org/%s" $item.Params.doi }}{{ end -}}
+{{- if not $link }}{{ range $item.Params.links }}{{ if and (not $link) (in (slice "arXiv" "PDF" "Preprint") .name) }}{{ $link = .url }}{{ end }}{{ end }}{{ end -}}
+{{- if not $link }}{{ with $item.Params.url_pdf }}{{ $link = cond (strings.HasPrefix . "http") . (relURL .) }}{{ end }}{{ end -}}
+{{- $target := "target=\"_blank\" rel=\"noopener\"" -}}
+{{- if not $link }}{{ $link = $item.RelPermalink }}{{ $target = "" }}{{ end -}}
 
 {{- /* Venue: the short form when a paper sets one, so long proceedings names
        don't wrap across the card. Both are markdown (usually *italic*). */ -}}
