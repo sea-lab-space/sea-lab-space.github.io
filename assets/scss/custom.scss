@@ -42,9 +42,9 @@
 // Homepage "Our Funders" logo row, rendered by the last markdown block in
 // `content/_index.md`. Sources are SVGs in `static/uploads/funders/`.
 //
-// The five marks have very different aspect ratios (NSF is ~1:1, NVIDIA is
-// ~5.5:1), so sizing them by width would leave the emblems towering over the
-// wordmarks. Sizing by height instead, with a taller cap for the two agency
+// The six marks have very different aspect ratios (NSF is ~1:1, NVIDIA is
+// ~5.5:1, Meta ~4.9:1), so sizing them by width would leave the emblems towering
+// over the wordmarks. Sizing by height instead, with a taller cap for the two agency
 // emblems, is what makes the row read as one line. `height: auto` +
 // `max-width: 100%` keeps each SVG's aspect ratio and stops the widest mark
 // from overflowing on narrow screens.
@@ -93,12 +93,26 @@
   height: 82px;
 }
 
-// Tablet: at full size the five marks total just over the container width, which
-// orphans the widest one (NVIDIA) onto a line by itself. Trimming the heights a
-// little keeps the row on one line down to ~700px.
-@media (min-width: 576px) and (max-width: 991.98px) {
+// Meta's lockup fills its box more than the other wordmarks do (a full-height
+// symbol and tall capitals), so at the shared height it reads a size larger
+// than OpenAI and NVIDIA. Scaling the drawing down a tenth evens out the
+// letter heights. A transform rather than a smaller height keeps this one rule
+// valid at every breakpoint below, and it leaves the layout box alone, so the
+// row widths those breakpoints were sized for still hold.
+.funder-logos .funder-logo--meta img {
+  transform: scale(0.9);
+}
+
+// The sizes below are worked out from the marks' aspect ratios so that each
+// width range gets a deliberate layout rather than whatever flex-wrap leaves
+// over. With six marks the full-size row is ~820px of logos plus gaps, and any
+// overflow orphans the last mark (Meta) on a line by itself.
+//
+// Small desktop (992-1199px, a 930px content box): full size plus gaps is just
+// over the box, so trim the heights and the gap to keep one line.
+@media (min-width: 992px) and (max-width: 1199.98px) {
   .funder-logos {
-    gap: 1.5rem 2rem;
+    gap: 1.75rem 2rem;
   }
 
   .funder-logos .funder-logo img {
@@ -106,14 +120,61 @@
   }
 
   .funder-logos .funder-logo--emblem img {
-    height: 70px;
+    height: 72px;
   }
 }
 
-// Phones: two lines is unavoidable here, so size for legibility instead.
+// Tablet (768-991px, a 690px content box): one line still fits, but only at
+// these smaller heights and a tighter gap.
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .funder-logos {
+    gap: 1.5rem 1.25rem;
+  }
+
+  .funder-logos .funder-logo img {
+    height: 25px;
+  }
+
+  .funder-logos .funder-logo--emblem img {
+    height: 56px;
+  }
+}
+
+// Small tablet (576-767px, a 510px content box): one line would need
+// unreadably small marks, so aim for two lines instead. At these heights the
+// two emblems, Google, and OpenAI fill the first line and NVIDIA cannot join
+// them, so NVIDIA and Meta share the second line rather than Meta sitting
+// alone. The content box is a fixed 510px across this whole range, so the
+// break always falls in the same place.
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .funder-logos {
+    gap: 1.5rem;
+  }
+
+  .funder-logos .funder-logo img {
+    height: 28px;
+  }
+
+  .funder-logos .funder-logo--emblem img {
+    height: 62px;
+  }
+}
+
+// Phones: a fixed two-column grid gives three tidy rows (the two agency
+// emblems, then Google and OpenAI, then NVIDIA and Meta) at every phone width.
+// Flex-wrap would break the row in a different place on every device and
+// strand a lone mark. Each mark is centred in its column, and `max-width: 100%`
+// on the image lets the widest ones shrink to fit on the narrowest phones.
 @media (max-width: 575.98px) {
   .funder-logos {
-    gap: 1.5rem 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-items: center;
+    gap: 1.5rem 1rem;
+  }
+
+  .funder-logos .funder-logo {
+    max-width: 100%;
   }
 
   .funder-logos .funder-logo img {
@@ -935,4 +996,242 @@
 // bar on the Research page, should add only its own height on top of this.
 html {
   scroll-padding-top: var(--sea-navbar-height, 84px);
+}
+
+// ---- Homepage hero and Lab News (T6) ----
+
+// Hero: the first block of `content/_index.md` (`css_class: sea-hero`). The
+// mission line is the one sentence a visitor should read first, so it is set a
+// step larger than body text. It stays justified like the paragraphs around
+// it, which `.section-title-left-aligned p` in `template.scss` already does.
+.sea-hero__mission p {
+  font-size: 1.15em;
+  line-height: 1.6;
+}
+
+// The Sense, Empower, and Augment cards. A grid rather than Bootstrap columns
+// so that each card keeps its image, title, text, and links together when the
+// row stacks on phones (the old `col-md-4` markup stacked all three images
+// first and all three texts after them). `minmax(0, 1fr)` stops a long word
+// from widening one column.
+.sea-pillars {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
+  margin: 1.75rem 0 2rem;
+}
+
+// Each card is a flex column with the links pushed to the bottom, so the link
+// rows line up across the three cards even when their texts wrap to different
+// lengths.
+.sea-pillar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  figure {
+    width: 100%;
+    margin-bottom: 0.75rem;
+  }
+
+  // The pictograms carry their own rounded frame, so no card border is drawn
+  // around them. A second frame would read as a box inside a box.
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
+// The card titles are `h2`, one level under the section's `h1`, so the
+// heading outline does not skip a level. The theme sets `h2` in a regular
+// weight, so the bold is set here to keep the card titles reading as titles.
+.sea-pillar__title {
+  margin: 0 0 0.35rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+// Links inside the hero's sentences are underlined, to match the `<u>`-wrapped
+// links in the closing line of the same block. The theme's link blue alone is
+// hard to tell from the body text. The direction pills are excluded.
+.sea-hero p > a:not(.direction-link) {
+  text-decoration: underline;
+}
+
+// Card text is centred under the centred image and title. The section-wide
+// `.section-title-left-aligned p` rule would justify it, which leaves wide gaps
+// between words in a column this narrow, so this selector is one class more
+// specific to win.
+.sea-hero .sea-pillar p.sea-pillar__text {
+  margin-bottom: 0.75rem;
+  text-align: center;
+}
+
+.sea-hero .sea-pillar p.sea-pillar__links {
+  margin: auto 0 0;
+  text-align: center;
+}
+
+// The direction links under each card, drawn as small outlined pills in the
+// theme's accent colour so they read as "go to this part of the Research page"
+// rather than as words in the sentence above. The label and the URL come from
+// `layouts/shortcodes/direction_link.html`. Filled with the primary blue on
+// hover and focus, with a visible outline for keyboard users.
+.sea-pillar__links .direction-link {
+  display: inline-block;
+  margin: 0.2rem 0.15rem;
+  padding: 0.15rem 0.8rem;
+  border: 1px solid #3A8FB7;
+  border-radius: 999px;
+  color: #003373;
+  font-size: 0.85em;
+  font-weight: 600;
+  line-height: 1.5;
+  text-decoration: none;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+
+  &:hover,
+  &:focus {
+    background-color: #003373;
+    border-color: #003373;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #3A8FB7;
+    outline-offset: 2px;
+  }
+}
+
+// Below 768px three columns get too narrow for the text, so the cards stack.
+// The pictograms are line drawings, and at the full phone width they would
+// dwarf everything else on the screen, so the image is capped.
+@media (max-width: 767.98px) {
+  .sea-pillars {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.25rem;
+  }
+
+  .sea-pillar figure {
+    max-width: 300px;
+  }
+}
+
+// Lab News list, drawn by `layouts/partials/blocks/news.html` from
+// `data/news.yaml` on the homepage and on /news/. A compact dated list rather
+// than cards, so six items take about as much space as the old Overview text.
+//
+// Each item is a three-column grid (date, type icon, text). `baseline`
+// alignment puts the date and the icon on the first line of the text however
+// many lines the text wraps to.
+.sea-news__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sea-news__item {
+  display: grid;
+  grid-template-columns: 5.25em 1.25em minmax(0, 1fr);
+  column-gap: 0.75em;
+  align-items: baseline;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid rgba(0, 51, 115, 0.15);
+
+  &:first-child {
+    border-top: 1px solid rgba(0, 51, 115, 0.15);
+  }
+}
+
+// Tabular figures keep "Nov 2026" and "Apr 2026" the same width, so the icons
+// form a straight column.
+.sea-news__date {
+  color: #003373;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.sea-news__icon {
+  color: #3A8FB7;
+  text-align: center;
+}
+
+// Links inside an item (people, papers) are underlined like the `<u>` links in
+// the markdown blocks, because the theme's link blue is close to the body text
+// colour and they would otherwise be hard to spot.
+.sea-news__text a {
+  text-decoration: underline;
+  text-decoration-color: rgba(0, 51, 115, 0.4);
+  text-underline-offset: 2px;
+
+  &:hover,
+  &:focus {
+    text-decoration-color: currentColor;
+  }
+}
+
+// The optional external `link:` of an item, as a short "More" after the text.
+.sea-news__text a.sea-news__more {
+  margin-left: 0.3em;
+  font-size: 0.85em;
+  font-weight: 600;
+  white-space: nowrap;
+
+  i {
+    margin-left: 0.3em;
+    font-size: 0.8em;
+  }
+}
+
+// Year headings on /news/ (`group_by_year: true`).
+.sea-news__year {
+  margin: 2rem 0 0.5rem;
+  color: #003373;
+  font-size: 1.5rem;
+  font-weight: 700;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+// "All news →" under the homepage list. Shown only when the list is cut short.
+.sea-news__archive {
+  margin: 1rem 0 0;
+  font-weight: 600;
+
+  a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+}
+
+// Phones: three columns would leave the text a narrow strip, so the icon sits
+// in a slim left gutter and the date moves above the text.
+@media (max-width: 575.98px) {
+  .sea-news__item {
+    grid-template-columns: 1.25em minmax(0, 1fr);
+    grid-template-areas:
+      "icon date"
+      "icon text";
+    column-gap: 0.6em;
+    row-gap: 0.1rem;
+  }
+
+  .sea-news__date {
+    grid-area: date;
+    font-size: 0.85em;
+  }
+
+  .sea-news__icon {
+    grid-area: icon;
+  }
+
+  .sea-news__text {
+    grid-area: text;
+  }
 }

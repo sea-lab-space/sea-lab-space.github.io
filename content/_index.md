@@ -6,48 +6,64 @@ type: landing
 
 sections:
 
+  # Hero: the mission line, the three Sense, Empower, and Augment cards, and the
+  # funder sentence. Each card links to its directions' views on the Research
+  # page. `direction_link` reads the label from `data/research_directions.yaml`
+  # and fails the build on an unknown or hidden id, so a renamed direction can't
+  # leave a dead link here. Keep the card markup free of blank lines, because a
+  # blank line ends a raw HTML block in markdown. Styles: `.sea-hero` and
+  # `.sea-pillars` in `assets/scss/custom.scss`.
   - block: markdown
+    id: overview
     content:
       title: 'Overview'
-      text: | 
-        The **SEA** (<u>**S**</u>ense, <u>**E**</u>mpower, and <u>**A**</u>ugment) Lab at Columbia University, led by <u>[Dr. Xuhai "Orson" Xu](https://orsonxu.com)</u>, focuses on designing, developing, and deploying innovative and practical human-computer interaction (HCI) and applied artificial intelligent and machine learning (AI/ML) techniques to advance human health and well-being.
+      text: |
+        <div class="sea-hero__mission">
 
-        With everyday sensors and intelligent systems rapidly evolving, we adopt interdisciplinary approaches across computer science and health informatics to tackle real-world challenges.
-        Our vision is to establish a set of human-centered methods, devices, and systems to **sense, empower, and augment** our everyday behavior, thereby enhancing daily experience and health outcomes. <br/>
+        The **SEA Lab** (**S**ense, **E**mpower, **A**ugment) at Columbia University, led by [Dr. Xuhai "Orson" Xu](https://orsonxu.com), is an HCI lab building human-centered AI that helps people live healthier lives and helps health experts make better decisions.
 
-        SEA lab is fortunate to be funded by National Science Foundation (NSF), National Institutes of Health (NIH), Google, OpenAI, NVIDIA.<br/> <br/>
-
-        <div class="container-fluid", style="text-align: justify">
-          <div class="row">
-              <div class="col-md-4" style="text-align: center;">
-                  {{<figure src="sense.png" alt="Sense">}}
-                  <h5>Sense</h5>
-              </div>
-              <div class="col-md-4" style="text-align: center;">
-                  {{<figure src="empower.png" alt="Empower">}}
-                  <h5>Empower</h5>
-              </div>
-              <div class="col-md-4" style="text-align: center;">
-                  {{<figure src="augment.png" alt="Augment">}}
-                  <h5>Augment</h5>
-              </div>
-              <div class="col-md-4">
-                  Collecting and integrating data from daily devices & medical systems to obtain a comprehensive picture of personal health.
-              </div>
-              <div class="col-md-4">
-                  Creating AI methods and tools to derive actionable health insights and enable informed decisions.
-              </div>
-              <div class="col-md-4">
-                  Developing human-centered systems to promote healthy behaviors, enhance capabilities, and improve well-being.
-              </div>
+        </div>
+        <div class="sea-pillars">
+          <div class="sea-pillar">
+            {{<figure src="sense.png" alt="" lightbox="false">}}
+            <h2 class="sea-pillar__title">Sense</h2>
+            <p class="sea-pillar__text">Collecting and integrating data from everyday devices and medical systems to build a complete picture of personal health.</p>
+            <p class="sea-pillar__links">{{< direction_link "human-centered-health-foundation-models" >}}</p>
           </div>
-        </div> <br>
+          <div class="sea-pillar">
+            {{<figure src="empower.png" alt="" lightbox="false">}}
+            <h2 class="sea-pillar__title">Empower</h2>
+            <p class="sea-pillar__text">Creating AI agents and tools that turn health data into actionable insight and informed decisions.</p>
+            <p class="sea-pillar__links">{{< direction_link "personal-health-agents" >}} {{< direction_link "clinician-ai-collaboration" >}}</p>
+          </div>
+          <div class="sea-pillar">
+            {{<figure src="augment.png" alt="" lightbox="false">}}
+            <h2 class="sea-pillar__title">Augment</h2>
+            <p class="sea-pillar__text">Developing human-centered systems that promote healthy behaviors, enhance capabilities, and improve well-being.</p>
+            <p class="sea-pillar__links">{{< direction_link "adaptive-interventions" >}}</p>
+          </div>
+        </div>
+
+        Across all three, we hold health AI to a high bar through [human-centered benchmarks and real-world evaluation](/research/?direction=human-centered-evaluation).
+
+        SEA Lab is grateful for support from the National Science Foundation (NSF), the National Institutes of Health (NIH), Google, OpenAI, NVIDIA, and Meta.
 
         For more details, please visit our <u>[Research Direction](/research/)</u> and <u>[Publication](/publication/)</u> pages.
     design:
       columns: '1'
-      # css_style: 'text-align: justify'
-      css_class: justify-text, section-title-left-aligned
+      css_class: sea-hero section-title-left-aligned
+
+  # Lab News: the six newest items from `data/news.yaml`, drawn by
+  # `layouts/partials/blocks/news.html`. The "All news" link to /news/ appears
+  # only when there are more than `count` items.
+  - block: news
+    id: news
+    content:
+      title: 'Lab News'
+      count: 6
+      archive_link: /news/
+    design:
+      css_class: section-title-left-aligned
 
   - block: markdown
     content:
@@ -68,25 +84,6 @@ sections:
       columns: '1'
       # css_style: 'text-align: justify'
       css_class: justify-text, section-title-left-aligned
-
-  # - block: collection
-  #   content:
-  #     title: News
-  #     subtitle:
-  #     text:
-  #     count: 5
-  #     filters:
-  #       author: ''
-  #       category: ''
-  #       exclude_featured: false
-  #       publication_type: ''
-  #       tag: ''
-  #     offset: 0
-  #     order: desc
-  #     page_type: post
-  #   design:
-  #     view: card
-  #     columns: '1'
 
   - block: markdown
     content:
@@ -136,6 +133,9 @@ sections:
           </a>
           <a class="funder-logo" href="https://www.nvidia.com/" target="_blank" rel="noopener">
             <img src="/uploads/funders/nvidia.svg" alt="NVIDIA" width="656" height="120" loading="lazy">
+          </a>
+          <a class="funder-logo funder-logo--meta" href="https://ai.meta.com/" target="_blank" rel="noopener">
+            <img src="/uploads/funders/meta.svg" alt="Meta" width="4972" height="1010" loading="lazy">
           </a>
         </div>
     design:
