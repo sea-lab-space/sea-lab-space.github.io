@@ -1,0 +1,32 @@
+{{- /*
+  The research directions under one homepage pillar (Sense, Empower or
+  Augment), as links to their views on the Research page.
+
+  Usage, inside a `.sea-pillar` card in content/_index.md:
+    {{< pillar-directions sense >}}
+
+  A direction is listed when its `pillars` in data/research_directions.yaml
+  names this pillar. A direction can sit under several pillars, by Orson's
+  choice, so the lists overlap on purpose. Only directions on the Research
+  page are listed (not `hidden`, not `research_page: false`), in file order,
+  with the same number and short title as their Research page chip.
+  The output has no blank lines, because it sits inside a raw HTML block.
+*/ -}}
+{{- $pillar := lower (.Get 0) -}}
+{{- $base := "/research/" -}}
+{{- with site.GetPage "/research" }}{{ $base = .RelPermalink }}{{ end -}}
+{{- $items := slice -}}
+{{- range site.Data.research_directions.directions -}}
+  {{- if and (not .hidden) (ne .research_page false) (in (.pillars | default slice) $pillar) -}}
+    {{- $items = $items | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- with $items -}}
+<ul class="sea-pillar__directions" aria-label="Research directions under {{ title $pillar }}">
+  {{- range . }}
+  <li><a class="sea-pillar__direction" href="{{ $base }}?direction={{ .id }}">
+    {{- with .number }}<span class="sea-pillar__direction-number" aria-hidden="true">{{ . }}</span>{{ end }}{{ .short_title -}}
+  </a></li>
+  {{- end }}
+</ul>
+{{- end -}}

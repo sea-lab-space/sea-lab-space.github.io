@@ -268,12 +268,12 @@
 // that gets focus while someone tabs, a #direction jump, `scrollIntoView()`)
 // must clear both the header and the sticky bar, or it ends up hidden behind
 // the bar. The script keeps `--research-chipbar-h` equal to the bar's real
-// height plus a small gap (one row of chips, or two from 576px to 1199px).
-// The fallbacks cover the page without JavaScript.
+// height plus a small gap (one row of chips, or two from 768px to about
+// 1290px). The fallbacks cover the page without JavaScript.
 html:has(.research-chipbar) {
   scroll-padding-top: calc(var(--sea-navbar-height, 84px) + var(--research-chipbar-h, 3.75rem));
 
-  @media (min-width: 576px) and (max-width: 1199.98px) {
+  @media (min-width: 768px) and (max-width: 1289.98px) {
     scroll-padding-top: calc(var(--sea-navbar-height, 84px) + var(--research-chipbar-h, 5.5rem));
   }
 }
@@ -347,10 +347,11 @@ html:has(.research-chipbar) {
   background: rgba(255, 255, 255, 0.2);
 }
 
-// Tablets and small laptops: the six chips are wider than the container, so
-// they wrap onto a second row. Slightly smaller chips and tighter spacing keep
-// that two-row bar short while it sticks.
-@media (min-width: 576px) and (max-width: 1199.98px) {
+// From tablets up: slightly smaller chips and tighter spacing keep the bar
+// short while it sticks. With the full direction names (Orson's review), the
+// six chips need about 1255px, so they fit one row only in the widest
+// container (viewports from about 1290px). Narrower screens get two rows.
+@media (min-width: 576px) {
   .research-chipbar {
     padding: 0.45rem 0;
   }
@@ -365,11 +366,12 @@ html:has(.research-chipbar) {
   }
 }
 
-// Phones: one row that scrolls sideways, never a tall wrapped block that would
-// eat the screen while it sticks. The padding leaves room for the focus ring,
+// Phones and small tablets (below 768px): one row that scrolls sideways, never
+// a tall wrapped block that would eat the screen while it sticks. With the
+// full direction names, 576-767px would otherwise wrap to three rows. The padding leaves room for the focus ring,
 // which the scroll box would otherwise clip, and the negative margin takes the
 // same room back so the chips stay aligned with the text below.
-@media (max-width: 575.98px) {
+@media (max-width: 767.98px) {
   .research-chips {
     flex-wrap: nowrap;
     overflow-x: auto;
@@ -1102,6 +1104,65 @@ html {
 .sea-hero .sea-pillar p.sea-pillar__text {
   margin-bottom: 0.75rem;
   text-align: center;
+}
+
+// The research directions under each pillar (shortcode
+// `layouts/shortcodes/pillar-directions.html`): small pill links in the
+// Research page chip colours, centred and wrapping under the card text. A
+// direction can appear under more than one pillar. Unlike the Research chips
+// they may wrap inside a chip, because three columns get narrow on tablets.
+.sea-pillar__directions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.45rem;
+  margin: 0.15rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sea-pillar__direction {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  max-width: 100%;
+  padding: 0.3rem 0.8rem;
+  border: 1px solid #003373;
+  border-bottom: 1px solid #003373; // the theme underlines markdown-block links with a border
+  border-radius: 999px;
+  background: #fff;
+  color: #003373;
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: left;
+  text-decoration: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+
+  &:hover,
+  &:focus {
+    border-color: #3A8FB7;
+    color: #3A8FB7;
+    text-decoration: none;
+  }
+
+  &:focus-visible {
+    outline: 3px solid #3A8FB7;
+    outline-offset: 2px;
+  }
+}
+
+.sea-pillar__direction-number {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.45em;
+  height: 1.45em;
+  border-radius: 50%;
+  background: rgba(0, 51, 115, 0.1);
+  font-size: 0.85em;
+  line-height: 1;
 }
 
 // Below 768px three columns get too narrow for the text, so the cards stack.

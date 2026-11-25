@@ -36,6 +36,7 @@ links:
 - name: URL
   url: https://ieeexplore.ieee.org/document/10049667/
 directions:
+  - interaction-techniques
   - beyond-health
 awards:
 - "best paper nominee"

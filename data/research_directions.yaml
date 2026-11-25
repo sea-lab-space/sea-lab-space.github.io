@@ -5,14 +5,29 @@
 # Every publication must list one or more of these ids under `directions:`.
 # Do NOT add, remove, or rename a direction without Orson's approval.
 # Propose changes in a pull request (CODEOWNERS requests his review).
+#
+# Where a direction shows:
+# - By default: a numbered section and chip on the Research page, and a filter
+#   chip on the Publications page.
+# - `research_page: false`: only the Publications page chip. For past lines of
+#   work the lab still lists but no longer features (Interaction Techniques).
+# - `hidden: true`: nowhere. Its papers still show on the Publications page
+#   under "All" (Beyond Health).
+#
+# `pillars` lists which homepage cards (sense, empower, augment) show the
+# direction as a link. A direction can sit under several cards, and the lists
+# overlap on purpose (Orson's choice). Personal Health Agents spans all three,
+# like the data scientist, domain expert, and health coach roles of the agent
+# in "The Anatomy of a Personal Health Agent".
 
 # The Research page intro lives in content/research/_index.md (its first block).
 
 directions:
   - id: personal-health-agents
     number: 1
+    pillars: [sense, empower, augment]
     title: Personal Health Agents
-    short_title: Health Agents
+    short_title: Personal Health Agents
     description: >-
       We design LLM-powered agents that act as long-term partners in personal
       health. Our agents reason across wearable, clinical, and conversational
@@ -25,8 +40,9 @@ directions:
 
   - id: adaptive-interventions
     number: 2
+    pillars: [augment]
     title: Adaptive Interventions for Behavior Change
-    short_title: Interventions
+    short_title: Intelligent Interventions
     description: >-
       We create personalized, just-in-time interventions that meet people in the
       moment, from curbing smartphone overuse to guiding mindfulness practice and
@@ -40,8 +56,9 @@ directions:
 
   - id: clinician-ai-collaboration
     number: 3
+    pillars: [empower, augment]
     title: Clinician–AI Collaboration
-    short_title: Clinician–AI
+    short_title: Clinician–AI Collaboration
     description: >-
       We bring AI into the clinic as a true collaborator. We study how AI
       explanations shape clinicians' diagnostic decisions, build narrative
@@ -55,6 +72,7 @@ directions:
 
   - id: human-centered-health-foundation-models
     number: 4
+    pillars: [sense]
     title: Human-Centered Multimodal Foundation Models for Health
     short_title: Foundation Models
     description: >-
@@ -71,6 +89,7 @@ directions:
 
   - id: human-centered-evaluation
     number: 5
+    pillars: [empower]
     title: Human-Centered Benchmarks and Real-World Evaluation
     short_title: Human-Centered Evaluation
     description: >-
@@ -82,6 +101,19 @@ directions:
       Benchmarks, datasets, evaluation methods and networks, and studies of how
       patients, clinicians, and the public use and perceive health AI.
 
+  - id: interaction-techniques
+    title: Interaction Techniques
+    short_title: Interaction Techniques
+    research_page: false
+    description: >-
+      Our earlier work on new ways to interact with everyday devices, from
+      on-face, mouth, and waist input to gesture, voice, and gaze interaction.
+    definition: >-
+      Papers whose main contribution is a new interaction or input technique for
+      a device or system (a new input modality, gesture or touch technique,
+      on-body input, voice or gaze interaction, or the design space or tracking
+      that enables one).
+
   - id: beyond-health
     title: "Beyond Health: Interaction Techniques, Accessibility, and More"
     short_title: Beyond Health
@@ -90,4 +122,6 @@ directions:
       Selected work on interaction techniques, accessibility, and other topics
       beyond health.
     definition: >-
-      Interaction techniques, accessibility, and other work outside health.
+      Interaction techniques, accessibility, and other work outside health. An
+      interaction-technique paper also lists `interaction-techniques`, so it
+      shows under that filter on the Publications page.

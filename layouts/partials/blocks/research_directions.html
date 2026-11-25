@@ -4,7 +4,8 @@
 
   Where the content comes from:
     - data/research_directions.yaml lists the directions in display order.
-      A direction with `hidden: true` never appears here (no chip, heading or view).
+      A direction with `hidden: true` or `research_page: false` never appears
+      here (no chip, heading or view).
     - Each publication's front matter says which directions it belongs to
       (`directions`), whether it is shown here (`selected`), and whether it is
       one of a direction's top cards (`highlight`, `highlight_rank`).
@@ -32,7 +33,7 @@
 
 {{- $directions := slice -}}
 {{- range site.Data.research_directions.directions -}}
-  {{- if not .hidden }}{{ $directions = $directions | append . }}{{ end -}}
+  {{- if and (not .hidden) (ne .research_page false) }}{{ $directions = $directions | append . }}{{ end -}}
 {{- end -}}
 
 {{- /* Papers shown on this page. `highlight` implies `selected`. */ -}}

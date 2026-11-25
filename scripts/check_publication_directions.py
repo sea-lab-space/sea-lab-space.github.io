@@ -4,9 +4,10 @@
 How the site decides "which paper goes where":
   * data/research_directions.yaml lists the lab's research directions. It is
     the single source of truth for the Research page, the Publications page
-    filters, and this check. A direction with `hidden: true` never shows on
-    the Research page or as a filter chip, but its papers still appear on the
-    Publications page under "All".
+    filters, the homepage pillars, and this check. A direction with
+    `research_page: false` is a Publications page filter chip only. A direction
+    with `hidden: true` never shows on the Research page or as a filter chip,
+    but its papers still appear on the Publications page under "All".
   * Every content/publication/<folder>/index.md picks one or more of those
     directions in its front matter:
 
@@ -18,14 +19,15 @@ How the site decides "which paper goes where":
       authors_display: "Rui Yang et al."  # optional, short author line
 
   * `selected`, `highlight` and `highlight_rank` are Orson's decisions. Each
-    visible direction shows at most 4 highlight cards. When more papers than
+    Research page direction shows at most 4 highlight cards. When more papers than
     that name the same highlight, the 4 most recent by `date` show, ordered by
     `highlight_rank` (unranked cards last, newest first).
 
 Fails (exit 1) when:
   1. data/research_directions.yaml is broken: a direction without `id`,
      `title`, `short_title`, `description` or `definition`, a repeated id, an
-     id that is not a lowercase-dash slug, or a field of the wrong type.
+     id that is not a lowercase-dash slug, a `pillars` entry other than
+     sense, empower or augment, or a field of the wrong type.
   2. A publication has no `directions`, or an empty list.
   3. A publication names a direction id that is not in the YAML.
   4. A publication still carries one of the legacy research tags
@@ -39,8 +41,10 @@ Fails (exit 1) when:
      `highlight_rank` a whole number from 1 up.
 
 Warns (printed, but the check still passes) when:
-  * a visible direction has more than 4 highlights (it names the 4 that show),
-  * a visible direction has no highlights at all,
+  ("Research page direction" below means neither hidden nor research_page: false.)
+  * a Research page direction has no `number` or no `pillars`,
+  * a Research page direction has more than 4 highlights (it names the 4 that show),
+  * a Research page direction has no highlights at all,
   * a highlighted paper has no featured image (featured.png or similar) in
     its folder, so its Research card shows a plain placeholder.
 
@@ -65,6 +69,7 @@ PUBS = ROOT / "content" / "publication"
 MEDIA = ROOT / "assets" / "media"
 
 REQUIRED_DIRECTION_FIELDS = ("id", "title", "short_title", "description", "definition")
+PILLARS = ("sense", "empower", "augment")
 LEGACY_TAGS = {"health prediction", "intelligent interaction and intervention", "clinical support"}
 MAX_HIGHLIGHTS = 4
 SLUG = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
@@ -138,6 +143,11 @@ def has_featured_image(folder, fm):
 
 # ---- data/research_directions.yaml ---------------------------------------
 
+def on_research_page(entry):
+    """True when the direction has a section on the Research page."""
+    return not entry.get("hidden") and entry.get("research_page", True) is not False
+
+
 def load_directions(report):
     """Validate the directions file. Returns {id: entry} in file order, or None."""
     where = rel(DIRECTIONS_FILE)
@@ -180,6 +190,14 @@ def load_directions(report):
         if "hidden" in entry and not isinstance(entry["hidden"], bool):
             report.error(where, f"{label}: 'hidden' must be true or false, "
                                 f"found {type_name(entry['hidden'])}.")
+        if "research_page" in entry and not isinstance(entry["research_page"], bool):
+            report.error(where, f"{label}: 'research_page' must be true or false, "
+                                f"found {type_name(entry['research_page'])}.")
+        if "pillars" in entry:
+            pillars = entry["pillars"]
+            if not isinstance(pillars, list) or any(p not in PILLARS for p in pillars):
+                report.error(where, f"{label}: 'pillars' must be a list drawn from "
+                                    f"{', '.join(PILLARS)}, found {pillars!r}.")
         if "number" in entry and not is_int(entry["number"]):
             report.error(where, f"{label}: 'number' must be a whole number, "
                                 f"found {type_name(entry['number'])}.")
@@ -196,18 +214,21 @@ def load_directions(report):
             continue
         directions[did] = entry
 
-        if not entry.get("hidden") and is_int(entry.get("number")):
+        if on_research_page(entry) and is_int(entry.get("number")):
             numbers.setdefault(entry["number"], []).append(did)
-        elif not entry.get("hidden"):
-            report.warn(where, f"{label} is visible but has no 'number', so the Research "
-                               f"page heading has no number.")
+        elif on_research_page(entry):
+            report.warn(where, f"{label} is on the Research page but has no 'number', so "
+                               f"its heading has no number.")
+        if on_research_page(entry) and not entry.get("pillars"):
+            report.warn(where, f"{label} has no 'pillars', so the homepage lists it under "
+                               f"none of Sense, Empower and Augment.")
 
     for number, ids in sorted(numbers.items()):
         if len(ids) > 1:
-            report.warn(where, f"visible directions {', '.join(ids)} share number {number}.")
+            report.warn(where, f"Research page directions {', '.join(ids)} share number {number}.")
 
-    if directions and all(d.get("hidden") for d in directions.values()):
-        report.error(where, "every direction is hidden, so the Research page would be empty.")
+    if directions and not any(on_research_page(d) for d in directions.values()):
+        report.error(where, "no direction is on the Research page, so it would be empty.")
     return directions
 
 
@@ -300,9 +321,9 @@ def check_publication(page, directions, report):
                                 f"highlighted in a direction it belongs to.")
         else:
             paper["highlight"] = highlight
-            if directions[highlight].get("hidden"):
-                report.warn(where, f"'highlight' is '{highlight}', a hidden direction, so "
-                                   f"the card never shows on the Research page.")
+            if not on_research_page(directions[highlight]):
+                report.warn(where, f"'highlight' is '{highlight}', a direction that is not on "
+                                   f"the Research page, so the card never shows there.")
             if selected is False:
                 report.warn(where, "'selected' is false but 'highlight' is set. A highlight "
                                    "is always treated as selected, so drop one of the two.")
@@ -349,12 +370,12 @@ def check_highlights(papers, directions, report):
                 report.error(files, f"these papers share highlight_rank {rank} in '{did}'. "
                                     f"Give each highlight in a direction its own rank.")
 
-        if entry.get("hidden"):
+        if not on_research_page(entry):
             continue
         where = rel(DIRECTIONS_FILE)
         if not cards:
-            report.warn(where, f"visible direction '{did}' has no highlighted papers, so its "
-                               f"Research overview shows no cards.")
+            report.warn(where, f"Research page direction '{did}' has no highlighted papers, so "
+                               f"its Research overview shows no cards.")
             continue
         if len(cards) > MAX_HIGHLIGHTS:
             newest = sorted(cards, key=lambda p: (p["date"], p["folder"].name), reverse=True)
@@ -368,7 +389,7 @@ def check_highlights(papers, directions, report):
             tie = ""
             if shown and hidden and min(p["date"] for p in shown) == hidden[0]["date"]:
                 tie = " Some papers at the cut-off share a date, so which of them shows may vary."
-            report.warn(where, f"visible direction '{did}' has {len(cards)} highlights, but "
+            report.warn(where, f"Research page direction '{did}' has {len(cards)} highlights, but "
                                f"only the {MAX_HIGHLIGHTS} most recent show: {names}. Not shown: "
                                f"{', '.join(p['folder'].name for p in hidden)}.{tie}")
 
@@ -428,7 +449,8 @@ def main():
             print("\nDirection ids you can use (read each 'definition' in "
                   "data/research_directions.yaml to choose):")
             for did, entry in directions.items():
-                note = "   (hidden, for work outside health)" if entry.get("hidden") else ""
+                note = ("   (hidden, for work outside health)" if entry.get("hidden") else
+                        "   (Publications page only)" if not on_research_page(entry) else "")
                 print(f"    {did:<42} {entry.get('title', '')}{note}")
         print(
             "\nRule: every publication lists one or more direction ids under "
@@ -437,11 +459,11 @@ def main():
         )
         return 1
 
-    visible = sum(1 for d in directions.values() if not d.get("hidden"))
+    visible = sum(1 for d in directions.values() if on_research_page(d))
     selected = sum(1 for p in papers if p["fm"].get("selected") is True or p["highlight"])
     highlights = sum(1 for p in papers if p["highlight"])
     print(f"Publication directions check passed: {len(directions)} directions "
-          f"({visible} visible), {len(papers)} publications, {selected} selected, "
+          f"({visible} on the Research page), {len(papers)} publications, {selected} selected, "
           f"{highlights} highlights, {len(report.warnings)} warnings.")
     return 0
 

@@ -6,12 +6,14 @@ type: landing
 
 sections:
 
-  # Hero: the mission line, the three Sense, Empower, and Augment cards, one
-  # sentence pointing to the Research and Publication pages, and the funder
-  # sentence. Kept deliberately plain: no buttons, so it reads as a short
-  # overview. Keep the card markup free of blank lines, because a blank line
-  # ends a raw HTML block in markdown. Styles: `.sea-hero` and `.sea-pillars`
-  # in `assets/scss/custom.scss`.
+  # Hero: the mission line, the three Sense, Empower, and Augment cards, and
+  # one sentence pointing to the Research and Publication pages. Under each
+  # card, `pillar-directions` lists the research directions that belong to it,
+  # as links to the Research page. Which direction goes under which card is set
+  # by `pillars` in data/research_directions.yaml, and a direction can sit
+  # under several cards. Keep the card markup free of blank lines, because a
+  # blank line ends a raw HTML block in markdown. Styles: `.sea-hero` and
+  # `.sea-pillars` in `assets/scss/custom.scss`.
   - block: markdown
     id: overview
     content:
@@ -27,16 +29,19 @@ sections:
             {{<figure src="sense.png" alt="" lightbox="false">}}
             <h2 class="sea-pillar__title">Sense</h2>
             <p class="sea-pillar__text">Collecting and integrating data from everyday devices and medical systems to build a complete picture of personal health.</p>
+            {{< pillar-directions sense >}}
           </div>
           <div class="sea-pillar">
             {{<figure src="empower.png" alt="" lightbox="false">}}
             <h2 class="sea-pillar__title">Empower</h2>
             <p class="sea-pillar__text">Creating AI agents and tools that turn health data into actionable insight and informed decisions.</p>
+            {{< pillar-directions empower >}}
           </div>
           <div class="sea-pillar">
             {{<figure src="augment.png" alt="" lightbox="false">}}
             <h2 class="sea-pillar__title">Augment</h2>
             <p class="sea-pillar__text">Developing human-centered systems that promote healthy behaviors, enhance capabilities, and improve well-being.</p>
+            {{< pillar-directions augment >}}
           </div>
         </div>
 

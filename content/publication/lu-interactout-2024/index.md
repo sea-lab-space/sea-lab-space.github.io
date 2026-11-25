@@ -18,4 +18,5 @@ links:
   url: https://dl.acm.org/doi/10.1145/3613904.3642317
 directions:
   - adaptive-interventions
+  - interaction-techniques
 ---

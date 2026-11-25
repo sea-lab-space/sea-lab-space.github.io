@@ -30,5 +30,6 @@ abstract: Past research regarding on-body interaction typically requires custom 
   input method that is compatible with commercial wireless earbuds and has the potential
   for scalability and generalizability.
 directions:
+  - interaction-techniques
   - beyond-health
 ---

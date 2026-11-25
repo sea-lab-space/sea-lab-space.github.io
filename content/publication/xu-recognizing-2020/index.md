@@ -34,5 +34,6 @@ links:
 - name: URL
   url: https://dl.acm.org/doi/10.1145/3381011
 directions:
+  - interaction-techniques
   - beyond-health
 ---
