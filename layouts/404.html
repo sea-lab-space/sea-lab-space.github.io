@@ -34,8 +34,7 @@
     {{ range first 10 $query }}
       {{- if and (eq .Section "publication") (eq .Kind "page") }}
       {{- $paper := partialCached "functions/paper_link.html" . .RelPermalink }}
-      <li><a href="{{ $paper.url }}"{{ if $paper.new_tab }} target="_blank" rel="noopener"{{ end }}>{{ .Title }}
-        {{- if $paper.new_tab }}<span class="sr-only"> (opens in a new tab)</span>{{ end }}</a></li>
+      <li><a href="{{ $paper.url }}"{{ if $paper.new_tab }} target="_blank" rel="noopener" aria-describedby="new-tab-hint"{{ end }}>{{ .Title }}</a></li>
       {{- else }}
       <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
       {{- end }}

@@ -37,8 +37,7 @@
         <li>
           {{- if eq .Section "publication" }}
           {{- $paper := partialCached "functions/paper_link.html" . .RelPermalink }}
-          <a href="{{ $paper.url }}"{{ if $paper.new_tab }} target="_blank" rel="noopener"{{ end }}>{{ .Title }}
-            {{- if $paper.new_tab }}<span class="sr-only"> (opens in a new tab)</span>{{ end }}</a>
+          <a href="{{ $paper.url }}"{{ if $paper.new_tab }} target="_blank" rel="noopener" aria-describedby="new-tab-hint"{{ end }}>{{ .Title }}</a>
           {{- else }}
           <a href="{{ .RelPermalink }}">{{ .Title }}</a>
           {{- end }}

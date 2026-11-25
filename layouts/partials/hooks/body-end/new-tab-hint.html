@@ -1,0 +1,9 @@
+{{- /*
+  Body-end hook: one shared, hidden description, "opens in a new tab", on
+  every page. Paper links that open the paper itself in a new tab point to it
+  with aria-describedby="new-tab-hint" (functions/paper_link.html says which
+  links do). Screen readers announce it after the link's name, while the
+  link's visible text, its name, a copied title, and the Research cards'
+  title tooltips stay just the paper title.
+*/ -}}
+<span id="new-tab-hint" hidden>opens in a new tab</span>

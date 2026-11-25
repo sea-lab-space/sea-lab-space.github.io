@@ -8,7 +8,8 @@
   its Research card and its title on the Publications page
   (functions/paper_link.html). This is how Lab News links its papers, and it
   keeps data/news.yaml free of copied DOIs. A folder that doesn't exist keeps
-  the link as written and prints a build warning naming it. Links to the
+  the link as written and prints a build warning naming it. Such a link points
+  to the shared "opens in a new tab" description (hooks/body-end/new-tab-hint.html). Links to the
   Publications page itself, or with a #fragment or ?query, are not touched.
 */ -}}
 {{- $dest := .Destination -}}
@@ -25,7 +26,7 @@
   {{- else -}}
     {{- $where := "a page" -}}
     {{- with $.Page.File }}{{ $where = .Path }}{{ end -}}
-    {{- warnf "%s links to %q, but there is no paper in content/publication/%s/" $where $dest $folder -}}
+    {{- warnf "%s: a link to %q has no paper in content/publication/%s/. If that page shows Lab News, the link may be in data/news.yaml." $where $dest $folder -}}
   {{- end -}}
 {{- end -}}
-<a href="{{ $dest | safeURL }}"{{ with .Title}} title="{{ . }}"{{ end }}{{ if $new_tab }} target="_blank" rel="noopener"{{ end }}>{{ .Text | safeHTML }}{{ if $paper_link }}<span class="sr-only"> (opens in a new tab)</span>{{ end }}</a>
+<a href="{{ $dest | safeURL }}"{{ with .Title}} title="{{ . }}"{{ end }}{{ if $new_tab }} target="_blank" rel="noopener"{{ end }}{{ if $paper_link }} aria-describedby="new-tab-hint"{{ end }}>{{ .Text | safeHTML }}</a>

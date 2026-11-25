@@ -52,8 +52,8 @@
     {{- partial "award_icons.html" $item }}
 
     <h3 class="paper-card__title">
-      <a href="{{ $link }}" title="{{ $item.Title }}" {{ $target | safeHTMLAttr }}>{{ $item.Title }}
-        {{- if $paper.new_tab }}<span class="sr-only"> (opens in a new tab)</span>{{ end }}</a>
+      <a href="{{ $link }}" title="{{ $item.Title }}" {{ $target | safeHTMLAttr }}
+        {{- if $paper.new_tab }} aria-describedby="new-tab-hint"{{ end }}>{{ $item.Title }}</a>
     </h3>
 
     <p class="paper-card__authors">

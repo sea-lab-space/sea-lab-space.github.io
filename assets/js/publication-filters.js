@@ -200,13 +200,15 @@
   // papers (CSL `paper-conference`) send readers to the Conference list, which
   // does not include them. When the reader came from a paper on this list, use
   // that paper's own bucket instead. Returns null when that cannot be told.
+  // Each row names its paper page in `data-page`. The title link can't be used
+  // for this, because it opens the paper itself, off this site.
   function referrerType() {
     try {
       var from = new URL(document.referrer);
       if (from.origin !== window.location.origin) return null;
       for (var i = 0; i < items.length; i++) {
-        var link = items[i].querySelector('b a[href]');
-        if (link && new URL(link.getAttribute('href'), window.location.href).pathname === from.pathname) {
+        var page = items[i].getAttribute('data-page');
+        if (page && new URL(page, window.location.href).pathname === from.pathname) {
           return items[i].getAttribute('data-type');
         }
       }
