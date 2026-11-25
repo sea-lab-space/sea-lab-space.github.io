@@ -33,5 +33,6 @@ links:
   url: https://dl.acm.org/doi/10.1145/3411764.3445624
 directions:
   - interaction-techniques
+  - adaptive-interventions
   - beyond-health
 ---

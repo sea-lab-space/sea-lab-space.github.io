@@ -20,7 +20,7 @@ sections:
 
         The research projects will align with our mutual interests, exploring diverse topics, including but not limited to:
         - Personal Health Agents
-        - Adaptive Interventions for Behavior Change
+        - Intelligent and Adaptive Interventions for Behavior Change
         - Clinician–AI Collaboration
         - Human-Centered Multimodal Foundation Models for Health
         - Human-Centered Benchmarks and Real-World Evaluation
@@ -35,7 +35,7 @@ sections:
         We are recruiting 1-2 self-motivated Ph.D. students in **Fall 2027**!
         Join us if your research interests include one or more of the following areas:
         - Personal Health Agents
-        - Adaptive Interventions for Behavior Change
+        - Intelligent and Adaptive Interventions for Behavior Change
         - Clinician–AI Collaboration
         - Human-Centered Multimodal Foundation Models for Health
         - Human-Centered Benchmarks and Real-World Evaluation
