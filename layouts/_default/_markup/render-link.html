@@ -1,0 +1,31 @@
+{{- /*
+  Markdown link hook. Site override of the theme's hook (blox-bootstrap v5 at
+  the pinned commit 41bd113535e8), which opens http(s) links in a new tab and
+  leaves every other link as written. That behaviour is kept unchanged.
+
+  Added (Orson's review): a link to one of our papers, written by its folder as
+  [Title](/publication/<folder>/), opens the paper itself, the same target as
+  its Research card and its title on the Publications page
+  (functions/paper_link.html). This is how Lab News links its papers, and it
+  keeps data/news.yaml free of copied DOIs. A folder that doesn't exist keeps
+  the link as written and prints a build warning naming it. Links to the
+  Publications page itself, or with a #fragment or ?query, are not touched.
+*/ -}}
+{{- $dest := .Destination -}}
+{{- $new_tab := strings.HasPrefix $dest "http" -}}
+{{- $paper_link := false -}}
+{{- with findRESubmatch `^/publication/([^/?#]+)/?$` $dest 1 -}}
+  {{- $folder := index (index . 0) 1 -}}
+  {{- $paper := site.GetPage (printf "/publication/%s" $folder) -}}
+  {{- if and $paper $paper.IsPage (eq $paper.Section "publication") -}}
+    {{- $link := partialCached "functions/paper_link.html" $paper $paper.RelPermalink -}}
+    {{- $dest = $link.url -}}
+    {{- $new_tab = $link.new_tab -}}
+    {{- $paper_link = $link.new_tab -}}
+  {{- else -}}
+    {{- $where := "a page" -}}
+    {{- with $.Page.File }}{{ $where = .Path }}{{ end -}}
+    {{- warnf "%s links to %q, but there is no paper in content/publication/%s/" $where $dest $folder -}}
+  {{- end -}}
+{{- end -}}
+<a href="{{ $dest | safeURL }}"{{ with .Title}} title="{{ . }}"{{ end }}{{ if $new_tab }} target="_blank" rel="noopener"{{ end }}>{{ .Text | safeHTML }}{{ if $paper_link }}<span class="sr-only"> (opens in a new tab)</span>{{ end }}</a>

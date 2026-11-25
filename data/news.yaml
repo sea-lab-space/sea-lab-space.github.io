@@ -19,9 +19,12 @@
 #   order they have in this file, so put the one you want shown first higher up.
 # - The type picks the small icon next to the item. A misspelled type or a
 #   malformed date stops the build with a message that names the entry.
-# - In `text`, link people to their profile and papers to their page, using the
-#   folder names: [Will](/author/will-ke-wang/) for content/authors/will-ke-wang/
+# - In `text`, link people to their profile and papers by their folder, using
+#   the folder names: [Will](/author/will-ke-wang/) for content/authors/will-ke-wang/
 #   and [MIND](/publication/zou-mind-2026/) for content/publication/zou-mind-2026/.
+#   A paper link opens the paper itself (its URL or DOI) in a new tab, the same
+#   place its title goes on the Publication page. The site looks that up, so
+#   keep writing the folder link. A folder that doesn't exist prints a warning.
 # - New papers follow one pattern, so the list is quick to skim: "Excited to
 #   share that our paper [Title](/publication/<folder>/) is published in
 #   *Venue*!" and then one short, plain sentence (about ten words) on what

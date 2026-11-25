@@ -1,0 +1,28 @@
+{{- /*
+  Where a click on one of our papers goes. Orson's review: a click on a paper
+  opens the paper itself, not its page on this site. Shared by every place
+  that links a paper: the Research cards (views/paper_card.html), the
+  Publications list (views/publication_list_item.html), Lab News and any other
+  Markdown link written as [Title](/publication/<folder>/)
+  (_default/_markup/render-link.html), and the "Latest" list on author pages
+  (authors/list.html).
+
+  Input: a publication page.
+  Returns: (dict "url" <string> "new_tab" <bool>).
+
+  Order: external_link, else the `links` entry named URL, else the DOI, else a
+  `links` entry named arXiv, PDF, or Preprint, else url_pdf. All of these open
+  in a new tab. Only a paper with none of them falls back to its own page on
+  this site, in the same tab. To change where a paper goes, give it a `url`
+  (or `doi`) in sea-lab-publication.bib and the same link in its index.md.
+*/ -}}
+{{- $item := . -}}
+{{- $link := "" -}}
+{{- with $item.Params.external_link }}{{ $link = . }}{{ end -}}
+{{- if not $link }}{{ range $item.Params.links }}{{ if and (not $link) (eq .name "URL") }}{{ $link = .url }}{{ end }}{{ end }}{{ end -}}
+{{- if and (not $link) $item.Params.doi }}{{ $link = printf "https://doi.org/%s" $item.Params.doi }}{{ end -}}
+{{- if not $link }}{{ range $item.Params.links }}{{ if and (not $link) (in (slice "arXiv" "PDF" "Preprint") .name) }}{{ $link = .url }}{{ end }}{{ end }}{{ end -}}
+{{- if not $link }}{{ with $item.Params.url_pdf }}{{ $link = cond (strings.HasPrefix . "http") . (relURL .) }}{{ end }}{{ end -}}
+{{- $new_tab := true -}}
+{{- if not $link }}{{ $link = $item.RelPermalink }}{{ $new_tab = false }}{{ end -}}
+{{- return (dict "url" $link "new_tab" $new_tab) -}}

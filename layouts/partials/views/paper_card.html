@@ -10,19 +10,11 @@
 {{- $item := .item -}}
 
 {{- /* Link target. A card opens the paper itself, not its page on this site
-       (Orson's review): external_link, else the `links` entry named URL, else
-       the DOI, else a `links` entry named arXiv, PDF, or Preprint, else
-       url_pdf. Only a paper with none of these falls back to its own page.
-       External targets open in a new tab. To fix where a card goes, give the
-       paper a `url` (or `doi`) in sea-lab-publication.bib and its index.md. */ -}}
-{{- $link := "" -}}
-{{- with $item.Params.external_link }}{{ $link = . }}{{ end -}}
-{{- if not $link }}{{ range $item.Params.links }}{{ if and (not $link) (eq .name "URL") }}{{ $link = .url }}{{ end }}{{ end }}{{ end -}}
-{{- if and (not $link) $item.Params.doi }}{{ $link = printf "https://doi.org/%s" $item.Params.doi }}{{ end -}}
-{{- if not $link }}{{ range $item.Params.links }}{{ if and (not $link) (in (slice "arXiv" "PDF" "Preprint") .name) }}{{ $link = .url }}{{ end }}{{ end }}{{ end -}}
-{{- if not $link }}{{ with $item.Params.url_pdf }}{{ $link = cond (strings.HasPrefix . "http") . (relURL .) }}{{ end }}{{ end -}}
-{{- $target := "target=\"_blank\" rel=\"noopener\"" -}}
-{{- if not $link }}{{ $link = $item.RelPermalink }}{{ $target = "" }}{{ end -}}
+       (Orson's review). The order lives in functions/paper_link.html, shared
+       with the Publications list, Lab News, and author pages. */ -}}
+{{- $paper := partialCached "functions/paper_link.html" $item $item.RelPermalink -}}
+{{- $link := $paper.url -}}
+{{- $target := cond $paper.new_tab "target=\"_blank\" rel=\"noopener\"" "" -}}
 
 {{- /* Venue: the short form when a paper sets one, so long proceedings names
        don't wrap across the card. Both are markdown (usually *italic*). */ -}}
@@ -60,7 +52,8 @@
     {{- partial "award_icons.html" $item }}
 
     <h3 class="paper-card__title">
-      <a href="{{ $link }}" title="{{ $item.Title }}" {{ $target | safeHTMLAttr }}>{{ $item.Title }}</a>
+      <a href="{{ $link }}" title="{{ $item.Title }}" {{ $target | safeHTMLAttr }}>{{ $item.Title }}
+        {{- if $paper.new_tab }}<span class="sr-only"> (opens in a new tab)</span>{{ end }}</a>
     </h3>
 
     <p class="paper-card__authors">

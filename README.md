@@ -37,6 +37,7 @@ Submit a pull request once you edit the website, and ping Orson to check the con
 - The command should automatically populate folders in `./content/publication/`. The folder should follow this naming format: `[last name of the first author]-[first word of the paper title]-[publication year]`.
 - **Required:** open the `index.md` in each new folder and add its research directions under `directions:`, as described in [Categorize a publication](#categorize-pub) below. Then run `python scripts/check_publication_directions.py` to confirm.
 - If you only push the bib change to `main`, the import Action opens a pull request with the new folders instead. Add the `directions` to those folders in that pull request before it is merged.
+- A click on a paper anywhere on the site (Research cards, the Publication page, Lab News, and author pages) opens the paper itself in a new tab: its `url`, else its DOI, else its arXiv or PDF link. So give every paper a `url` or `doi` in the bib, and the same link in its `index.md`. A paper with none of these opens its page on this site instead.
 
 ### <a name="categorize-pub"></a> Categorize a publication (required)
 Every publication belongs to one or more research directions. The [Research Page](https://sea-lab.space/research/) and the direction filters on the [Publication Page](https://sea-lab.space/publication/) are built from them.
@@ -74,7 +75,7 @@ Every publication belongs to one or more research directions. The [Research Page
   ```
 - Put links inside `text`, on the words they belong to. The optional `link:` field adds a separate "More" link and is rarely needed.
 - New papers follow one pattern so the list is quick to skim: "Excited to share that our paper [Title](/publication/<folder>/) is published in *Venue*!" and then one plain sentence on what it found or built.
-- `text` is Markdown, one or two sentences. Link people to their profile (`/author/<folder>/`) and papers to their page (`/publication/<folder>/`), using the folder names.
+- `text` is Markdown, one or two sentences. Link people to their profile (`/author/<folder>/`) and papers by their folder (`/publication/<folder>/`), using the folder names. The site turns a paper link into a link to the paper itself, the same place its title goes on the Publication page, and a link to a folder that doesn't exist prints a warning in the build.
 - `type` picks the small icon next to the item. Leave `link` empty or out when there is no external page.
 - Items are sorted newest first. Items from the same month keep their order in the file, so put the one that should show first higher up. The comment at the top of `data/news.yaml` has the details.
 

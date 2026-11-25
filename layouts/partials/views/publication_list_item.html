@@ -15,8 +15,12 @@
     <details> right below, so it stays one click away and works without JS.
   * The wrapper carries the data the filter script reads: year, type bucket,
     direction ids, and one lowercase-able search string.
+  * The title opens the paper itself, in a new tab, not its page on this site
+    (Orson's review). Where it goes comes from functions/paper_link.html, the
+    same order the Research cards use.
 */ -}}
 {{- $item := .item -}}
+{{- $paper := partialCached "functions/paper_link.html" $item $item.RelPermalink -}}
 {{- $has_attachments := partial "functions/has_attachments" $item -}}
 {{- $bucket := partial "functions/get_pub_type_bucket.html" $item -}}
 {{- $year := $item.Date.Format "2006" -}}
@@ -47,7 +51,8 @@
      data-directions="{{ delimit ($item.Params.directions | default slice) " " }}"
      data-search="{{ delimit $search " " }}">
   <i class="far fa-file-alt pub-icon" aria-hidden="true"></i>
-  <b><a href="{{ $item.RelPermalink }}" class="underline">{{ $item.Title }}</a></b><br/>
+  <b><a href="{{ $paper.url }}" class="underline"{{ if $paper.new_tab }} target="_blank" rel="noopener"{{ end }}>{{ $item.Title }}
+    {{- if $paper.new_tab }}<span class="sr-only"> (opens in a new tab)</span>{{ end }}</a></b><br/>
 
   {{- if $item.Params.authors_display }}
   <span class="article-metadata li-cite-author pub-authors">{{ $item.Params.authors_display }}</span><br/>

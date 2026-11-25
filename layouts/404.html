@@ -1,0 +1,48 @@
+{{- define "main" -}}
+
+{{- /*
+  Page not found. Site override of the theme's `404.html`, copied from
+  blox-bootstrap v5 at the pinned commit 41bd113535e8.
+  The only change: in the "Latest" list, a paper opens the paper itself, in a
+  new tab, not its page on this site (Orson's review). Where it goes comes
+  from functions/paper_link.html, the same order the Research cards and the
+  Publications page use. Anything that is not a paper links as before.
+*/ -}}
+
+<div class="universal-wrapper pt-3">
+
+  <h1>{{ i18n "page_not_found" }}</h1>
+
+  {{/* Show search box if built-in search engine is enabled. */}}
+  {{ if in (slice "wowchemy" "algolia") (lower site.Params.features.search.provider) }}
+  <form class="d-flex align-items-center mb-3">
+    <input name="q" type="search" class="form-control" placeholder="{{ i18n "search_placeholder" }}" autocomplete="off">
+  </form>
+  {{ else if eq (lower site.Params.features.search.provider) "docsearch" }}
+  <div id="docsearch" style="margin-left: -16px" class="mb-2"></div>
+  {{ end }}
+
+  {{/* Suggest recently published pages to the user. */}}
+
+  <p>{{ i18n "404_recommendations" }}</p>
+
+  {{ $query := where (where (where (where site.Pages.ByDate.Reverse "Title" "!=" "") "Kind" "in" (slice "page" "section")) "Params.private" "!=" true) "Permalink" "!=" "" }}
+  {{ $count := len $query }}
+  {{ if gt $count 0 }}
+  <h2>{{ i18n "user_profile_latest" }}</h2>
+  <ul>
+    {{ range first 10 $query }}
+      {{- if and (eq .Section "publication") (eq .Kind "page") }}
+      {{- $paper := partialCached "functions/paper_link.html" . .RelPermalink }}
+      <li><a href="{{ $paper.url }}"{{ if $paper.new_tab }} target="_blank" rel="noopener"{{ end }}>{{ .Title }}
+        {{- if $paper.new_tab }}<span class="sr-only"> (opens in a new tab)</span>{{ end }}</a></li>
+      {{- else }}
+      <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+      {{- end }}
+    {{ end }}
+  </ul>
+  {{ end }}
+
+</div>
+
+{{- end -}}
