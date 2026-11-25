@@ -1235,3 +1235,74 @@ html {
     grid-area: text;
   }
 }
+
+// ---- Site footer (T7) ----
+// Markup: `layouts/partials/site_footer.html`. Three short centered lines in the
+// theme's small grey footer type: the lab's address, a row of links, then the
+// copyright year and build date.
+//
+// The theme already sets the size and centering for `footer p` and
+// `.powered-by`, so these rules mostly tighten the spacing and handle the parts
+// the theme has no opinion on: the `<address>` element and the `·` separators.
+.sea-footer {
+  // The theme's footer grey, black at 54% opacity, comes out at 4.4:1 on the
+  // light footer background. That is just under the 4.5:1 that WCAG AA asks of
+  // small text. At 60% it reaches 5.5:1 and still reads as the same quiet grey.
+  // The theme's `.dark .site-footer` rule is more specific, so a dark theme
+  // keeps its own colour.
+  color: rgba(0, 0, 0, 0.6);
+
+  // Bootstrap gives every paragraph (and `<address>`) a 1rem bottom margin,
+  // which spreads three one-liners into a tall block. A small gap keeps the
+  // footer compact while the lines still read as separate groups.
+  .sea-footer__address,
+  p {
+    margin-bottom: 0.35rem;
+  }
+
+  // The last line keeps the theme's breathing room above the bottom edge.
+  .sea-footer__meta {
+    margin-bottom: 1rem;
+  }
+
+  // `<address>` is the right element for contact details, but browsers italicise
+  // it and `footer p` (which centers text) does not match it.
+  .sea-footer__address {
+    font-style: normal;
+    text-align: center;
+  }
+
+  .sea-footer__sep {
+    margin: 0 0.45em;
+  }
+
+  // Links keep the theme's link colours. The vertical padding enlarges the tap
+  // target on phones without changing how the line looks.
+  .sea-footer__link {
+    display: inline-block;
+    padding: 0.2rem 0;
+  }
+
+  .sea-footer__link .fa-github {
+    margin-right: 0.3em;
+  }
+
+  // A wrapped date ("Nov 25," / "2026") reads badly, so keep it on one line.
+  time {
+    white-space: nowrap;
+  }
+}
+
+// Phones: the address is too long for one line, and a wrapped line would leave a
+// stray `·` at a line edge. Stack the lab name over the street address instead.
+@media (max-width: 575.98px) {
+  .sea-footer .sea-footer__address {
+    .sea-footer__item {
+      display: block;
+    }
+
+    .sea-footer__sep {
+      display: none;
+    }
+  }
+}

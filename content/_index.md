@@ -72,7 +72,7 @@ sections:
       text: |
         We are excited to welcome passionate and self-motivated researchers to join our team!
 
-        **Postdoc**: We have 0-1 talented postdoc position that start in Fall 2026 or later.
+        **Postdoc**: We have 0-1 talented postdoc position with a flexible start date.
 
         **PhD**: We are looking for 1-2 talented PhD students to begin in Fall 2027.
 

@@ -16,7 +16,7 @@ sections:
         ### Postdoctoral Researcher
         {{< details title="Learn More" >}}
         A Postdoctoral Research Scientist position is available in the Department of Biomedical Informatics (DBMI) at the Columbia University Irving Medical Center.
-        We are seeking 0-1 highly motivated postdoc to join our team in **Fall 2026** or later, focusing on the intersection of HCI, Ubiquitous Computing, and applied AI/ML.
+        We are seeking 0-1 highly motivated postdoc to join our team with a **flexible start date**, focusing on the intersection of HCI, Ubiquitous Computing, and applied AI/ML.
 
         The research projects will align with our mutual interests, exploring diverse topics, including but not limited to:
         - General Population-focused: Developing health prediction models, designing and evaluating well-being interventions, or enhancing human-AI interaction for health promotion.
