@@ -1105,7 +1105,7 @@ While we began our investigation by developing methods to use LLMs to output bin
   author = {Heydari, A. Ali and Gu, Ken and Srinivas, Vidya and Yu, Hong and Zhang, Zhihan and Zhang, Yuwei and Paruchuri, Akshay and He, Qian and Palangi, Hamid and Hammerquist, Nova and Metwally, Ahmed A. and Winslow, Brent and Kim, Yubin and Ayush, Kumar and Yang, Yuzhe and Narayanswamy, Girish and Xu, Maxwell A. and Garrison, Jake and Lee, Amy Armento and Vafeiadou, Jenny and Graef, Ben and {Galatzer-Levy}, Isaac R. and Schenck, Erik and Barakat, Andrew and Perez, Javier and Shreibati, Jacqueline and Hernandez, John and Faranesh, Anthony Z. and Prieto, Javier L. and Heneghan, Connor and Liu, Yun and Zhan, Jiening and Malhotra, Mark and Patel, Shwetak and Althoff, Tim and Liu, Xin and McDuff, Daniel and Xu, Xuhai "Orson"},
   year = 2025,
   month = sep,
-  journal = {Nature (under revision)},
+  journal = {Nature},
   eprint = {2508.20148},
   primaryclass = {cs},
   publisher = {Nature},
@@ -1368,3 +1368,246 @@ location = {
 series = {CHI '26}
 }
 
+@article{xu_divergent_2026,
+ abstract = {Artificial intelligence (AI) is increasingly permeating healthcare, from serving as a physician assistant to powering consumer applications. The opacity of AI algorithms makes the ability of humans to interact with AI algorithms challenging. To overcome this limitation, explainable AI (XAI) provides insight into AI decision-making, but evidence suggests that XAI can paradoxically induce bias in the human decision-making process. Here we present results from two large-scale experiments, involving 623 lay people and 153 primary care physicians (PCPs), respectively, in which a fairness-based AI model for dermatological diagnoses and different XAI-based explanations were combined to examine how XAI assistance, particularly multimodal large language models (LLMs), influences diagnostic performance. With fairness-constrained model training, assistance from an AI model that achieved balanced performance across skin tones improved final diagnostic accuracy and reduced skin-tone-related performance disparities among both lay people and PCPs. In this setting, LLM explanations yielded divergent effects: lay users showed higher automation bias—accuracy was boosted when the diagnoses provided by the AI model were correct but was reduced when the model erred—whereas experienced PCPs remained resilient, benefiting irrespective of the AI modelʼs accuracy. In addition, presenting the AI modelʼs diagnosis before human decision-making may lead to stronger anchoring bias. These findings highlight XAIʼs varying impacts based on human expertise and the timing of when the AI-based prediction is provided, underscoring the concept that LLMs can act as a ‘double-edged sword’ in medical AI and informing future human–AI collaborative system design.},
+ author = {Xu, Xuhai and Hu, Haoyu and Zhang, Haoran and Wang, Will Ke and Wang, Reina and Soenksen, Luis R and Badri, Omar and Jafry, Sheharbano and Burger, Elise and Nwandu, Lotanna and Mehta, Apoorva and Duhaime, Erik P and Qasim, Asif and Lin, Hause and Pereira, Janis and Hershon, Jonathan and Mui, Paulius and Gru, Alejandro A and Elhadad, Noemie and Mamykina, Lena and Groh, Matthew and Tschandl, Philipp and Daneshjou, Roxana and Ghassemi, Marzyeh},
+ journal = {Nature Medicine},
+ publisher = {Nature Publishing Group},
+ doi = {10.1038/s41591-026-04553-w},
+ month = {August},
+ number = {8},
+ pages = {3000--3009},
+ title = {Divergent impacts of explainable AI for dermatological diagnosis on clinicians versus lay people},
+ url = {https://www.nature.com/articles/s41591-026-04553-w},
+ volume = {32},
+ year = {2026}
+}
+
+@article{lin_framework_2026,
+ abstract = {Although artificial intelligence (AI) agents are increasingly proposed to support potentially longitudinal health tasks, such as symptom management, behaviour change and patient support, most current implementations fall short of facilitating user intent and fostering accountability. This contrasts with prior work on supporting longitudinal needs, both within and beyond clinical settings, where follow-up, coherent reasoning and sustained alignment with individuals’ goals are critical for both effectiveness and safety. In this Perspective, we draw on established clinical and personal health informatics frameworks to define what it would mean to orchestrate longitudinal health interactions with AI agents. We propose a multilayer framework and corresponding agent architecture that operationalizes Coherence, Continuity, Adaptation and Agency across repeated interactions. Through representative use cases, we demonstrate how longitudinal agents can maintain meaningful engagement, adapt to evolving goals and support safe, personalized decision-making over time. Our findings underscore both the promise and the complexity of designing systems capable of supporting health trajectories beyond isolated interactions, and we offer guidance for future research and development in multisession, user-centred health AI.},
+ author = {Lin, Georgianna and Jiang, Rencong and Elhadad, Noémie and Xu, Xuhai},
+ journal = {Nature Health},
+ publisher = {Nature Publishing Group},
+ doi = {10.1038/s44360-026-00141-x},
+ eprint = {2604.12019},
+ archiveprefix = {arXiv},
+ month = {May},
+ number = {8},
+ pages = {796--805},
+ title = {A Framework for Longitudinal Health AI Agents},
+ url = {https://www.nature.com/articles/s44360-026-00141-x},
+ volume = {1},
+ year = {2026}
+}
+
+@article{kim_capable_2026,
+ abstract = {Agents, language model-based systems that can reason, plan and act with tools to accomplish tasks, are widely deployed, yet it remains unclear when multi-agent coordination outperforms a strong single agent. Here we conduct a controlled experiment that holds task prompts, tools and compute budgets constant while varying only coordination structure and model capability. Across 260 configurations spanning six benchmarks, five architectures and three LLM families, we derive a predictive model using empirical coordination metrics. Across benchmarks, single-agent baseline performance emerges as the most robust predictor of whether coordination improves or decreases performance. In particular, we identify an empirical capability-saturation threshold beyond which additional agents are unlikely to improve performance. This threshold correctly predicts the effect of multi-agent coordination on performance in 94\% of validation configurations on SWE-bench Verified and Terminal-Bench. We therefore interpret this threshold as a practical selection rule rather than a universal scaling principle. A second effect, baseline-scaled error amplification, survives cluster-robust inference (Probust = 0.030) and supports the failure-mode taxonomy. The fitted model achieves cross-validated R2 = 0.373 (0.413 with a task-grounded capability metric) and selects the best architecture in 87\% of held-out configurations. These results provide a quantitative framework for within-domain architecture selection and for estimating when multi-agent coordination is likely to improve performance or add overhead.},
+ author = {Kim, Yubin and Gu, Ken and Park, Chanwoo and Park, Chunjong and Schmidgall, Samuel and Heydari, A Ali and Yan, Yao and Zhang, Zhihan and Zhuang, Yuchen and Liu, Yun and Malhotra, Mark and Liang, Paul Pu and Park, Hae Won and Yang, Yuzhe and Xu, Xuhai and Du, Yilun and Patel, Shwetak and Althoff, Tim and McDuff, Daniel and Liu, Xin},
+ journal = {Nature Machine Intelligence},
+ publisher = {Nature Publishing Group},
+ doi = {10.1038/s42256-026-01268-y},
+ eprint = {2512.08296},
+ archiveprefix = {arXiv},
+ month = {July},
+ number = {7},
+ pages = {1157--1172},
+ title = {Capable language models can outgrow the benefits of collaboration},
+ url = {https://www.nature.com/articles/s42256-026-01268-y},
+ volume = {8},
+ year = {2026}
+}
+
+@article{yang_magic_2026,
+ author = {Yang, Rui and Xuan, Weihao and Liu, Tianyu and Bitterman, Danielle S. and Collins, Gary S. and Adapa, Karthik and Amissah-Arthur, Kwesi Nyan and Cai, Tianxi and Campos, Simão and Cao, Hanqun and Car, Josip and Cheung, Carol Y. and Diab, Mona and Dzinotyiwei, Chido and Ge, Siqi and Ghassemi, Marzyeh and Goh, Ethan and Goldstein, Benjamin Alan and Hartley, Mary-Anne and He, Yulan and Heng, Pheng Ann and Hong, Chuan and Tavárez, Michelle María Jiménez de and Ke, Yuhe and Keane, Pearse A. and Keller, Eva C. and Khan, Rubayat and Le, Phuoc V. and Lecoultre, Marc and Lee, Jisan and Li, Huitao and Luo, Yuan and Marivate, Vukosi and Mateen, Bilal A. and McCradden, Melissa D. and Mustafa, Maryam and Nakatumba-Nabende, Joyce and Ning, Yilin and Ong, Jasmine Chiat Ling and Peng, Yifan and Pujari, Sameer and Qazi, Ihsan Ayyub and Rech, Dino and Tan, Iain Beehuat and Tan, Patrick and Teodoro, Douglas and Tham, Yih Chung and Thirunavukarasu, Arun James and Ting, Daniel Shu Wei and Car, Lorainne Tudor and Vissoci, Joao Ricardo Nickenig and Weng, Chunhua and Wong, Matthew Yu Heng and Xiao, Yunze and Xu, Xuhai and Yang, Carl and Yokoya, Naoto and Yu, Kunyu and Zhang, Chaofan and Zhang, Rui and Zou, James and Moons, Karel G. M. and Shah, Nigam H. and Wong, Tien Yin and Topol, Eric J. and Liu, Nan},
+ journal = {Nature Medicine},
+ publisher = {Nature Publishing Group},
+ doi = {10.1038/s41591-026-04706-x},
+ month = {October},
+ title = {MAGIC: an international network for evaluating generative artificial intelligence in global health},
+ url = {https://www.nature.com/articles/s41591-026-04706-x},
+ year = {2026}
+}
+
+@article{fan_timesrl_2026,
+ abstract = {Longitudinal passive sensing enables continuous health prediction, yet models often fail under cross-dataset distribution shifts. Traditional ML overfits cohort-specific artifacts, while Large Language Models (LLMs) struggle to reason reliably over long, heterogeneous time-series. We introduce TimeSRL, a two-stage LLM framework that routes predictions through an explicit semantic bottleneck. The model first abstracts raw signals into high-level natural language, then predicts behavioral outcomes from these abstractions alone. This forces the model to reason over semantic concepts that we argue generalize better than raw numbers. We optimize this process end-to-end using Group Relative Policy Optimization (GRPO) with Reinforcement Learning from Verifiable Rewards (RLVR), learning outcome-aligned abstractions without gold intermediate annotations. Instantiated on mental-health prediction, TimeSRL achieves state-of-the-art performance on a benchmark designed to stress-test cross-cohort generalization under a rigorous leave-one-dataset-out (LOSO) protocol, reducing mean absolute error (MAE) over strong non-LLM ML and LLM baselines by 3.1--10.1\% and 9.5--44.1\% for anxiety, and 3.2--9.6\% and 27.4--57.6\% for depression (all \$p\$s<0.05). TimeSRL significantly outperforms prior methods in cross-benchmark transfer across different sensing pipelines, rivaling its own within-domain performance without target-domain fine-tuning. These results demonstrate that semantic abstractions are reusable and point to a new direction for generalizable behavior modeling via RL-tuned LLMs.},
+ author = {Fan, Yuang and Xu, Lilin and Wu, Millie Mengyuan and Nie, Jingping and Chen, Qingyu and Yang, Yuzhe and Zhang, Zhuo and Liu, Xin and Nepal, Subigya and Jiang, Xiaofan and Xu, Xuhai},
+ journal = {Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies},
+ doi = {10.48550/arXiv.2605.21295},
+ eprint = {2605.21295},
+ archiveprefix = {arXiv},
+ title = {TimeSRL: Generalizable Time-Series Behavioral Modeling via Semantic RL-Tuned LLMs – A Case Study in Mental Health},
+ url = {https://arxiv.org/abs/2605.21295},
+ year = {2026}
+}
+
+@inproceedings{choi_recovery_2026,
+ abstract = {Eating disorder (ED) recovery extends beyond therapy sessions, unfolding in vulnerable moments embedded in everyday life and relationships. Yet empirical understanding of how these moments arise, how supporters contribute, and how technologies might offer timely, contextual assistance remains limited. To address this gap, we conducted a design session and two-week diary study with 27 individuals with ED and 12 social supporters. Our analysis identified diverse contexts in which patients and supporters perceived support to be needed, and the forms of support they envisioned digital tools could offer. While many needs were mutually recognized, the actual practice of support often involved mismatches, suggesting opportunities for technologies to help mediate supportive engagement. Our study contributes empirical insight into everyday support moments in ED recovery and highlights opportunities to design digital interventions that provide context-sensitive assistance, empower supporters, and extend care beyond clinical settings.},
+ author = {Choi, Ryuhaerang and Yoo, Seohyeon and Xu, Xuhai and Lee, Sung-Ju},
+ booktitle = {Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems},
+ publisher = {Association for Computing Machinery},
+ doi = {10.1145/3772318.3791262},
+ month = {April},
+ pages = {1--19},
+ articleno = {1099},
+ title = {Recovery is Relational: Everyday Support Needs in Eating Disorder Recovery with Patients and Their Supporters},
+ url = {https://dl.acm.org/doi/10.1145/3772318.3791262},
+ year = {2026}
+}
+
+@inproceedings{cai_toward_2026,
+ abstract = {American Sign Language (ASL) is the primary language of many Deaf and Hard of Hearing (DHH) individuals. However, existing learning resources often lack timely, individualized feedback, leaving learners uncertain about signing accuracy. We introduce a novel egocentric ASL learning system that integrates stereo vision, error detection across four manual ASL parameters (handshape, orientation, location, movement), and large language model (LLM)–driven natural language feedback. To our knowledge, this is the first system to deliver error-aware, pedagogically grounded feedback for ASL learners. A formative study with 15 ASL teachers and 30 learners (both Deaf and hearing backgrounds) supports the motivation and design goals, while a system evaluation with 13 Deaf ASL participants (novice to advanced) practicing 230 signs provides initial evidence of system feasibility and short-term, pedagogically promising behavior within the primary user community. Across two complementary studies, we identify key design principles: prioritizing reliability over sensitivity, stratifying feedback by error severity, and leveraging egocentric alignment for natural practice. Collectively, these contributions establish a foundation for scalable ASL education and provide generalizable insights for designing AI-mediated feedback in Human-Computer Interaction (HCI).},
+ author = {Cai, Yongxiang and Li, Zhenghao and Lu, Taiting and Zhu, Yanjun and Wu, Yi-Shan and Zhang, Qingsen and Xu, Xuhai and Jin, Zhanpeng and Gowda, Mahanth and Jin, Yincheng},
+ booktitle = {Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems},
+ publisher = {Association for Computing Machinery},
+ doi = {10.1145/3772318.3790774},
+ month = {April},
+ pages = {1--24},
+ articleno = {84},
+ title = {Toward Equitable ASL Edu: Egocentric Stereo Sensing with LLM Feedback for Error-Aware Learning},
+ url = {https://dl.acm.org/doi/10.1145/3772318.3790774},
+ year = {2026}
+}
+
+@article{turchioe_older_2026,
+ abstract = {General-purpose large language models (LLMs) like ChatGPT are increasingly used for medical advice despite lacking medical training and frequently producing incorrect or unsafe output. Older adults’ health information-seeking behaviors using LLMs remain poorly characterized. We conducted a cross-sectional survey of 574 US adults aged 50+ recruited via Prolific, balanced by sex and race. Participants reported health information sources, ChatGPT and PubMed use, demographics, and health literacy. Most participants (92\%) searched online for health information. All had heard of ChatGPT, and 63\% used it for medical information, compared to 44\% who had heard of PubMed and 39\% who used it. Those with inadequate health literacy had higher odds of ChatGPT use for medical advice (AOR 2.36, 95\% CI 1.30-4.52) versus those with adequate health literacy. In conclusion, with more than half of older adults using LLMs for medical advice, the development of safer, purpose-trained medical LLMs is warranted.},
+ author = {Reading Turchioe, Meghan and Shamnath, Afra and Mayfield, Jarrott and Xu, Xuhai and Slotwiner, David and Benda, Natalie},
+ journal = {Journal of Medical Internet Research},
+ doi = {10.64898/2026.01.01.25342468},
+ title = {Are older adults using ChatGPT for medical advice? Results from a cross-sectional survey study},
+ url = {https://www.medrxiv.org/content/10.64898/2026.01.01.25342468v1},
+ year = {2026}
+}
+
+@article{benda_public_2026,
+ author = {Benda, Natalie C. and Suresh, Uday and Shamnath, Afra and Buitron, Isabella and Salwei, Megan E. and Lovett Novak, Laurie and Xu, Xuhai and Reading Turchioe, Meghan},
+ journal = {JAMA Network Open},
+ publisher = {American Medical Association},
+ doi = {10.1001/jamanetworkopen.2026.39048},
+ month = {October},
+ number = {10},
+ pages = {e2639048},
+ title = {Public Perceptions of Timeliness for AI Use and Human Oversight},
+ url = {https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2855284},
+ volume = {9},
+ year = {2026}
+}
+
+@article{jiang_dietglance_2026,
+ abstract = {Growing awareness of wellness has prompted people to consider whether their dietary patterns align with their health and fitness goals. In response, researchers have introduced various wearable dietary monitoring systems and dietary assessment approaches. However, these solutions are either limited to identifying foods with simple ingredients or insufficient in providing an analysis of individual dietary behaviors with domain-specific knowledge. In this article, we present DietGlance, a system that automatically monitors dietary behaviors in daily routines and delivers personalized analysis from knowledge sources. DietGlance first detects ingestive episodes from multimodal inputs using eyeglasses, capturing privacy-preserving meal images of various dishes being consumed. Based on the inferred food items and consumed quantities from these images, DietGlance further provides nutritional analysis and personalized dietary suggestions, empowered by the retrieval-augmented generation module on a reliable nutrition library. A short-term user study (N = 33) and a 4-week longitudinal study (N = 16) demonstrate the usability and effectiveness of DietGlance, offering insights and implications for future AI-assisted dietary monitoring and personalized healthcare intervention systems using eyewear.},
+ author = {Jiang, Zhihan and Zhao, Running and Lin, Lin and Yu, Yue and Chen, Handi and Zhang, Xinchen and Xu, Xuhai and Wang, Yifang and Ma, Xiaojuan and Ngai, Edith C. H.},
+ journal = {ACM Transactions on Computing for Healthcare},
+ publisher = {Association for Computing Machinery},
+ doi = {10.1145/3797883},
+ eprint = {2502.01317},
+ archiveprefix = {arXiv},
+ month = {April},
+ number = {2},
+ pages = {1--46},
+ title = {DietGlance: Dietary Monitoring and Personalized Analysis at a Glance with Knowledge-Empowered AI Assistant},
+ url = {https://dl.acm.org/doi/10.1145/3797883},
+ volume = {7},
+ year = {2026}
+}
+
+@article{he_human_2026,
+ abstract = {With the rapid advancement of AI systems, their abilities to store, retrieve, and utilize information over the long term—referred to as long-term memory—have become increasingly significant. These capabilities are crucial for enhancing the performance of AI systems across a wide range of tasks. However, there is currently no comprehensive survey that systematically investigates AI’s long-term memory capabilities, formulates a theoretical framework, and inspires the development of next-generation AI long-term memory systems. This article begins by introducing the mechanisms of human long-term memory, then explores AI long-term memory mechanisms, establishing a mapping between the two. Based on the mapping relationships identified, we extend the current cognitive architectures and propose the cognitive architecture of self-adaptive long-term memory (SALM). SALM provides a theoretical framework for the practice of AI long-term memory and holds potential for guiding the creation of next-generation long-term memory-driven AI systems. Finally, we delve into the future directions and application prospects of AI long-term memory.},
+ author = {He, Zihong and Lin, Weizhe and Zheng, Hao and Zhang, Fan and Jones, Matt W and Aitchison, Laurence and Xu, Xuhai and Liu, Miao and Liang, Hai-Ning and Kristensson, Per Ola and Shen, Junxiao},
+ journal = {Proceedings of the IEEE},
+ publisher = {IEEE},
+ doi = {10.1109/JPROC.2026.3713201},
+ eprint = {2411.00489},
+ archiveprefix = {arXiv},
+ month = {August},
+ number = {3},
+ pages = {484--515},
+ title = {Human-inspired perspectives: A survey on AI long-term memory},
+ url = {https://ieeexplore.ieee.org/document/11640865/},
+ volume = {114},
+ year = {2026}
+}
+
+@inproceedings{hu_duet_2026,
+ abstract = {Reinforcement learning with verifiable rewards (RLVR) generates hundreds of thousands of tokens per training step, with rollout generation dominating the computational cost. The overall token budget can be controlled along two main dimensions: (i) deciding which prompts to allocate rollouts to, and (ii) deciding how long each rollout should be. Prior work has generally controlled only one of these dimensions at a time. We show that jointly tuning both decisions under a shared compute budget improves both reasoning quality and wall-clock training time. We instantiate this view as \textbfDUal-controlled tok\textbfEn alloca\textbfTion (DUET), a computationally efficient layer over GRPO that uses a lightweight pre-rollout surrogate of prompt informativeness to set how many rollouts each prompt receives, and a marker-gated abort rule with importance reweighting to set when to stop them. On Qwen3-1.7B trained on MATH, DUET outperforms full-budget GRPO and the other three budget-aware baseline methods. DUET's advantage further generalizes to other benchmarks across math and coding, and is on par with the best baseline on the scientific Q\\&A domain, while also achieving a \$1.62\times\$ wall-clock speedup. More notably, using only 50\\% of the token budget, DUET still outperforms all baseline methods at their full budget, achieving an even higher \$2.51\times\$ speedup over full-budget GRPO. We verify the high performance of DUET on other backbone LLMs, including Qwen3-4B to 14B and Llama-3.2-3B-Instruct. Notably, the gap between DUET and the strongest baseline \emphwidens as the budget tightens, contrary to the usual pattern in which efficient methods trade off quality as compute decreases. More broadly, these results suggest that DUET budget-aware control strategies are valuable not only for accelerating training, but also for improving the quality of the learning signal. The code and data setup are publicly available at https://github.com/Haoyu-Hu/DUET},
+ author = {Hu, Haoyu and Zhao, Xuandong and Xu, Xuhai and Jacoby, Nori},
+ booktitle = {Advances in Neural Information Processing Systems},
+ eprint = {2605.08441},
+ archiveprefix = {arXiv},
+ month = {September},
+ title = {DUET: Optimize Token-Budget Allocation for Reinforcement Learning with Verifiable Rewards},
+ url = {https://openreview.net/forum?id=N80WSnmidb},
+ year = {2026}
+}
+
+@inproceedings{sun_agents_2026,
+ abstract = {Recent AI systems achieve strong results on many benchmarks, yet these gains have not translated into economically meaningful deployment across professional domains. We argue that this gap is largely an evaluation problem: existing benchmarks rarely measure sustained performance on real, economically valuable workflows. We introduce Agents’ Last Exam (ALE), a benchmark for evaluating generalist computer-use AI agents on long-horizon professional tasks with verifiable outcomes. ALE is developed in collaboration with 250+ industry experts and organized around a taxonomy grounded in O*NET / SOC 2018. The benchmark spans 55 subdomains across 13 industry clusters and currently contains 1,490 task instances sourced from authentic professional workflows. Tasks require integrated GUI interaction, shell execution, software operation, and long-horizon planning inside real computing environments. To support scalable evaluation, ALE uses deterministic deliverable-based scoring and structured rubric verification rather than open-ended human judgment whenever possible. Experimental results show that current frontier agents remain far from saturation: across mainstream harness and backbone configurations, the average full-pass rate on the hardest tier is only 2.6\%. More broadly, ALE is intended not merely as another leaderboard, but as an instrument for measuring the gap between benchmark success and GDP-relevant impact.},
+ author = {Sun, Yiyou and Han, Xinyang and Zhang, Weichen and Pang, Yuanbo and Wang, Tianyu and Cao, Yuhan and Huang, Yixiao and Duroiu, Christopher and Zhang, Haoyun and Lin, Jeffrey and Zhang, Weishu and Zeng, Tianren and Yan, Ying and Liu, Bo and Wen, Hanson and Xu, Mingyang and Liu, Xiaoyuan and Chen, Zimeng and Shi, Weiyan and Dsouza, Amanda and Chen, Vincent Sunn and Li, Yushan and Deng, Wenxi and Wang, Huiqi and Xu, Justin and Sun, Tao and Wang, Zhun and Liu, Chris Yuhao and Cheng, Yafei and Hu, Rongwang and Bacho, Aras and Cao, Shengcao and Qin, Zengyi and Chen, Yixiong and Fan, Hengduan and Liu, Hao and Zeng, Lin and Bharadwaj, Shashank Muralidhar and Gong, Litian and Song, Maojia and Wang, Ruheng and Zhang, Zongzheng and Tu, Jianhong and Wang, Zhonghua and Zhang, Zheng and Chen, Zijiao and Jiang, Yanqiong and Li, Zhendong and Lyu, Bohan and Ma, Chang and Xu, Peiran and Zhang, Benran and Gu, Shangding and Hua, Haoyue and Li, Haoyang and Liao, Wanzhe and Liu, Chengzhi and Peng, Junbo and Xu, Zechen and Chen, Bo and Cheng, Jiayi and Jiang, Yi and Kuang, Keying and Li, Yuan and Pan, Youbang and Rao, Ziyan and Schubert, Alexander Marcel and Shen, Ivan and Siu, Vincent and Sun, Xiatao and Zhang, Xiaopan and Zhu, Yuchen and Chandok, Ishaan Singh and Ding, Lei and Fan, Jingxuan and Glover, Andrew and Hu, Jiaming and HU, Yiran and Huang, Wenbo and Jin, Haoran and Kim, Lukas and Liu, Ming and Rafiei, Alireza and Sun, Kunyang and Sun, Ting and Wang, Yingze and Wang, Yixin and Xing, Hanwen and Xu, Sihan and Xu, Yuzheng and Xu, Zhongxing and Yan, Zhiling and Yuan, Boqin and Zhang, Ruiqi and Zhang, Yifan and Zhao, Zibo and Bai, Haoyue and Bosio, Carlo and Cavanagh, Joe and Chen, Tianxing and Chen, Yipu and ZHU, CHENYU and Dai, Chen and Castro, Stefano De and Deng, Yunfu and Dhole, Kaustubh and Ding, Jiayuan and Du, Chenchen and Du, Zhehang and Fan, Hao and Fan, Run-Ze and Fu, Hengyu and Gu, Shi and Gu, Yifan and Huang, Baihe and Huang, Baixiang and Jin, Ran and Lan, Xin and Lee, Joseph and Lei, Deren and Li, Chenyu and Li, Daofeng and Li, Jingyan and Li, Yi and Li, Yuangang and Li, Zhixu and Li, Yinsheng and Liang, Wenyu and Liao, Longtai and Lin, Kevin Qinghong and Liu, Andy Zeyi and Liu, Jiaming and Liu, Kaiyuan and Liu, Xuan and Lu, Pan and Lyu, Yicheng and Mang, Qiuyang and Montgomery, Kyle and Ning, Ruoxi and Overwiening, Jorin and Pan, Xu and Park, Core Francisco and Purnomo, Justin and Rankin, Scott and Ren, Bixuan and Shang, HaoYang and Shen, Hejia and SHEN, JIAWEI and Qiu, Shi and Shi, Tianneng and So, Jonah and Susoy, Vladislav and Wang, Haocheng and Wang, Jialu and Wang, Wei and Wang, Xinyu Jessica and Wang, Zehao and Wu, Ruoxi and Wu, Dehao and Wu, Fangyu and Wu, Millie Mengyuan and Wu, Yu and Wu, Yuchen and Wu, Yuhao and Wuwu, Qingpo and Xiao, Weihang and Xiong, Yongyi and Xu, Fan and Xu, Ruiling and Yan, Mingxuan and Yang, Benjamin and Yang, Jirong and Yang, Xiaoli and Yang, Yushi and Ye, Haoran and Yu, Xiaohu and Yu, Zhengming and Zhang, Chenlong and Zhang, Chi and Zhang, Hanning and Zhang, Hanwen and Zhang, Junge and Zhang, Kunpeng and Zhang, Song and Zhang, Wenjin and Zhang, Wenshuo and Zhao, Qijian and Zhao, Yimin and Zheng, Yuhaohua and Zhou, Liwei and Zhou, Tianyue and Zhu, Sichen and Zhu, Yan and Zhu, Yishu and Zuo, Jierui and Cai, Chonghao and Casademunt, Helena and Cheng, Cheng and Deng, Nawen and Fu, Rao and Han, Yifan and Ren, He and He, Zhenyu and Jin, Qiao and Li, Langlang and Li, Yuetai and Lu, Lu and Zhou, Luqing and Mukherjee, Subhabrata and Ouyang, Yunqi and Ren, Yin and Shi, Dawei and Wu, Haoran and Wu, Zhiyue and Yao, Hannah and Yi, Zhuoran and Yu, Jenny and Zhan, Rhea and Zhou, Hang and Zhu, Shiqiao and Zhu, Junfan and Dong, Zhen and Emami, Ali and Gao, Yanjun and Hu, Haimin and Schneider, Erika Jen and Li, Zhenglu and Li, Jiachen and Liu, Lihui and Niu, Murphy Yuezhen and Shao, Yi and Shi, Wenqi and Sun, Lichao and Sun, Jianxin and Wang, Chenguang and Xu, Xuhai and Yao, Huaxiu and Caliskan, Aylin and Huang, Jing and Liu, Yang and Mueller, Mark Wilfried and Poldrack, Russell A. and Das, Sanjiv Ranjan and Lu, Zhiyong and Poovendran, Radha and Sojoudi, Somayeh and Spanos, Costas and Tao, Molei and Tolonen, Mikko and Wang, Ting and Yuille, Alan and Bryant, Patrick and Boettiger, Carl and Rao, Arvind and Schneider, Tapio and Yannakakis, Georgios N. and Zanna, Laure and Sim, Ida and Zohdi, Tarek and Gallant, Jack L. and Head-Gordon, Teresa and Song, Dawn},
+ booktitle = {Advances in Neural Information Processing Systems, Datasets and Benchmarks Track},
+ eprint = {2606.05405},
+ archiveprefix = {arXiv},
+ month = {September},
+ title = {Agents' Last Exam},
+ url = {https://openreview.net/forum?id=L1pAwhCE4k},
+ year = {2026}
+}
+
+@article{sung_rehabgen_2026,
+ abstract = {Self-directed rehabilitation in everyday environments remains difficult due to limited feedback and the absence of contextually grounded guidance. In response, we present RehabGen, a generative vision-language model that generates personalized exercise plans contextualized to a patient's egocentric image and available everyday objects. We followed an expert-in-the-loop (EITL) framework: gathering domain requirements through expert interviews and focus group interviews (N=8), constructing a 1.66k multimodal preference dataset, and aligning the model using supervised fine-tuning (SFT) and Direct Preference Optimization (DPO). In Expert Validation (N=23), DPO achieved a 57.6\% item-level win rate over the Baseline, with higher scores in Personalized Recommendation (85.7\%), Identify Purpose (63.6\%), and Recommendation Satisfaction (66.7\%). In Patient Experience Evaluation (N=8), both models outperformed the Baseline. This work contributes an EITL framework and open-source models available at http://rehabgen.hcitech.org/ for clinically grounded, context-aware rehabilitation planning.},
+ author = {Sung, Youjin and Jeong, Heejin and Xu, Xuhai and Yoon, Sang Ho},
+ journal = {Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies},
+ publisher = {Association for Computing Machinery},
+ doi = {10.1145/3810235},
+ month = {June},
+ number = {2},
+ pages = {1--23},
+ articleno = {60},
+ title = {RehabGen: Generative Expert-in-the-Loop Vision-Language Model for Everyday Contextualized Rehabilitation Exercises},
+ url = {https://dl.acm.org/doi/10.1145/3810235},
+ volume = {10},
+ year = {2026}
+}
+
+@article{mahmood_learning_2026,
+ abstract = {Human behavior is difficult to observe continuously at scale, yet it leaves measurable traces in everyday device use. We test whether encrypted smartphone network traffic---a ubiquitous, always-on, passive sensing modality---can passively capture behavioral patterns related to sleep, stress, and loneliness. We model shared behavioral structure using a transformer backbone with per-user adapters, allowing the model to represent both typical individual behavior and deviations from it. To make these representations interpretable, we apply a sparse autoencoder to extract behavioral features corresponding to distinct patterns of activity. We relate these features to sleep disturbance, stress, and loneliness using generalized estimating equations with Mundlak decomposition, separating between-person differences from within-person changes over time. We find that the three outcomes reflect distinct temporal structures: stress is primarily associated with stable between-person differences, loneliness with within-person variation, and sleep disturbance with a combination of both. Notably, these within-person dynamics are not captured by predefined network-traffic features, demonstrating the value of learned representations for longitudinal behavioral sensing. These results establish encrypted network traffic as a viable passive sensing modality, revealing interpretable behavioral dynamics---particularly deviations from an individual's baseline---that are not visible in raw traffic features.},
+ author = {Mahmood, Rameen and El Shahawy, Omar and Barua, Souptik and Beattie, Zachary and Kaye, Jeffrey and Xu, Xuhai and Wu, Chao-Yi and Huang, Danny Yuxing},
+ journal = {Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies},
+ doi = {10.48550/arXiv.2605.01616},
+ eprint = {2605.01616},
+ archiveprefix = {arXiv},
+ title = {Learning Behavioral Signals from Encrypted Smartphone Network Traffic},
+ url = {https://arxiv.org/abs/2605.01616},
+ year = {2026}
+}
+
+@article{khan_mindfulness_2025,
+ abstract = {Mindfulness training is widely recognized for its benefits in reducing depression, anxiety, and loneliness. With the rise of smartphone-based mindfulness apps, digital meditation has become more accessible, but sustaining long-term user engagement remains a challenge. This paper explores whether respiration biosignal feedback and mindfulness skill estimation enhance system usability and skill development. We develop a smartphone's accelerometer-based respiration tracking algorithm, eliminating the need for additional wearables. Unlike existing methods, our approach accurately captures slow breathing patterns typical of mindfulness meditation. Additionally, we introduce the first quantitative framework to estimate mindfulness skills---concentration, sensory clarity, and equanimity---based on accelerometer-derived respiration data. We develop and test our algorithms on 261 mindfulness sessions in both controlled and real-world settings. A user study comparing an experimental group receiving biosignal feedback with a control group using a standard app shows that respiration feedback enhances system usability. Our respiration tracking model achieves a mean absolute error (MAE) of 1.6 breaths per minute, closely aligning with ground truth data, while our mindfulness skill estimation attains F1 scores of 80-84\% in tracking skill progression. By integrating respiration tracking and mindfulness estimation into a commercial app, we demonstrate the potential of smartphone sensors to enhance digital mindfulness training.},
+ author = {Khan, Mohammad Nur Hossain and Creswell, David and Albert, Jordan and O'Connell, Patrick and Fallon, Shawn and Polowitz, Mathew and Xu, Xuhai and Islam, Bashima},
+ journal = {Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies},
+ publisher = {Association for Computing Machinery},
+ doi = {10.1145/3749498},
+ eprint = {2507.17688},
+ archiveprefix = {arXiv},
+ month = {September},
+ number = {3},
+ pages = {1--32},
+ articleno = {95},
+ title = {Mindfulness meditation and respiration: Accelerometer-based respiration rate and mindfulness progress estimation to enhance app engagement and mindfulness skills},
+ url = {https://dl.acm.org/doi/10.1145/3749498},
+ volume = {9},
+ year = {2025}
+}
+
+@inproceedings{gu_radar_2025,
+ abstract = {Language models (LMs) are increasingly being deployed to perform autonomous data analyses. However, their data awareness—the ability to recognize, reason over, and appropriately handle data artifacts such as missing values, outliers, and logical inconsistencies—remains underexplored. These artifacts are especially common in real-world tabular data and, if mishandled, can significantly compromise the validity of analytical conclusions. To address this gap, we present RADAR, a benchmark for systematically evaluating data-aware reasoning on tabular data. We develop a framework to simulate data artifacts via programmatic perturbations to enable targeted evaluation of model behavior. RADAR comprises 2,980 table-query pairs, grounded in real-world data spanning 9 domains and 5 data artifact types. In addition to evaluating artifact handling, RADAR systematically varies table size to study how reasoning performance holds when increasing table size. Our evaluation reveals that, despite decent performance on tables without data artifacts, frontier models degrade significantly when data artifacts are introduced, exposing critical gaps in their capacity for robust, data-aware analysis. Designed to be flexible and extensible, RADAR supports diverse perturbation types and controllable table sizes, offering a valuable resource for advancing tabular reasoning.},
+ author = {Gu, Ken and Zhang, Zhihan and Lin, Kate and Zhang, Yuwei and Paruchuri, Akshay and Yu, Hong and Kazemi, Mehran and Ayush, Kumar and Heydari, A Ali and Xu, Maxwell A and Narayanswamy, Girish and Liu, Yun and Poh, Ming-Zher and Yang, Yuzhe and Malhotra, Mark and Patel, Shwetak and Palangi, Hamid and Xu, Xuhai and McDuff, Daniel and Althoff, Tim and Liu, Xin},
+ booktitle = {Advances in Neural Information Processing Systems, Datasets and Benchmarks Track},
+ publisher = {Curran Associates, Inc.},
+ doi = {10.52202/085713-3699},
+ eprint = {2506.08249},
+ archiveprefix = {arXiv},
+ month = {September},
+ pages = {122748--122813},
+ title = {RADAR: Benchmarking Language Models on Imperfect Tabular Data},
+ url = {https://proceedings.neurips.cc/paper_files/paper/2025/hash/a0434f04b6437e875d52d0b0e25c1729-Abstract-Datasets_and_Benchmarks_Track.html},
+ volume = {38},
+ year = {2025}
+}

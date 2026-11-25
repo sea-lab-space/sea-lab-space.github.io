@@ -43,7 +43,7 @@ date: '2026-04-28'
 publishDate: '2026-05-17T03:23:07.869606Z'
 publication_types:
 - article-journal
-publication: '*Nature (under revision)*'
+publication: '*Nature*'
 doi: 10.48550/arXiv.2508.20148
 links:
 - name: arXiv

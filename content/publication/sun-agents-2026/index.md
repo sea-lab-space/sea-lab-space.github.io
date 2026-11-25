@@ -1,0 +1,295 @@
+---
+title: Agents' Last Exam
+authors:
+- Yiyou Sun
+- Xinyang Han
+- Weichen Zhang
+- Yuanbo Pang
+- Tianyu Wang
+- Yuhan Cao
+- Yixiao Huang
+- Christopher Duroiu
+- Haoyun Zhang
+- Jeffrey Lin
+- Weishu Zhang
+- Tianren Zeng
+- Ying Yan
+- Bo Liu
+- Hanson Wen
+- Mingyang Xu
+- Xiaoyuan Liu
+- Zimeng Chen
+- Weiyan Shi
+- Amanda Dsouza
+- Vincent Sunn Chen
+- Yushan Li
+- Wenxi Deng
+- Huiqi Wang
+- Justin Xu
+- Tao Sun
+- Zhun Wang
+- Chris Yuhao Liu
+- Yafei Cheng
+- Rongwang Hu
+- Aras Bacho
+- Shengcao Cao
+- Zengyi Qin
+- Yixiong Chen
+- Hengduan Fan
+- Hao Liu
+- Lin Zeng
+- Shashank Muralidhar Bharadwaj
+- Litian Gong
+- Maojia Song
+- Ruheng Wang
+- Zongzheng Zhang
+- Jianhong Tu
+- Zhonghua Wang
+- Zheng Zhang
+- Zijiao Chen
+- Yanqiong Jiang
+- Zhendong Li
+- Bohan Lyu
+- Chang Ma
+- Peiran Xu
+- Benran Zhang
+- Shangding Gu
+- Haoyue Hua
+- Haoyang Li
+- Wanzhe Liao
+- Chengzhi Liu
+- Junbo Peng
+- Zechen Xu
+- Bo Chen
+- Jiayi Cheng
+- Yi Jiang
+- Keying Kuang
+- Yuan Li
+- Youbang Pan
+- Ziyan Rao
+- Alexander Marcel Schubert
+- Ivan Shen
+- Vincent Siu
+- Xiatao Sun
+- Xiaopan Zhang
+- Yuchen Zhu
+- Ishaan Singh Chandok
+- Lei Ding
+- Jingxuan Fan
+- Andrew Glover
+- Jiaming Hu
+- Yiran HU
+- Wenbo Huang
+- Haoran Jin
+- Lukas Kim
+- Ming Liu
+- Alireza Rafiei
+- Kunyang Sun
+- Ting Sun
+- Yingze Wang
+- Yixin Wang
+- Hanwen Xing
+- Sihan Xu
+- Yuzheng Xu
+- Zhongxing Xu
+- Zhiling Yan
+- Boqin Yuan
+- Ruiqi Zhang
+- Yifan Zhang
+- Zibo Zhao
+- Haoyue Bai
+- Carlo Bosio
+- Joe Cavanagh
+- Tianxing Chen
+- Yipu Chen
+- CHENYU ZHU
+- Chen Dai
+- Stefano De Castro
+- Yunfu Deng
+- Kaustubh Dhole
+- Jiayuan Ding
+- Chenchen Du
+- Zhehang Du
+- Hao Fan
+- Run-Ze Fan
+- Hengyu Fu
+- Shi Gu
+- Yifan Gu
+- Baihe Huang
+- Baixiang Huang
+- Ran Jin
+- Xin Lan
+- Joseph Lee
+- Deren Lei
+- Chenyu Li
+- Daofeng Li
+- Jingyan Li
+- Yi Li
+- Yuangang Li
+- Zhixu Li
+- Yinsheng Li
+- Wenyu Liang
+- Longtai Liao
+- Kevin Qinghong Lin
+- Andy Zeyi Liu
+- Jiaming Liu
+- Kaiyuan Liu
+- Xuan Liu
+- Pan Lu
+- Yicheng Lyu
+- Qiuyang Mang
+- Kyle Montgomery
+- Ruoxi Ning
+- Jorin Overwiening
+- Xu Pan
+- Core Francisco Park
+- Justin Purnomo
+- Scott Rankin
+- Bixuan Ren
+- HaoYang Shang
+- Hejia Shen
+- JIAWEI SHEN
+- Shi Qiu
+- Tianneng Shi
+- Jonah So
+- Vladislav Susoy
+- Haocheng Wang
+- Jialu Wang
+- Wei Wang
+- Xinyu Jessica Wang
+- Zehao Wang
+- Ruoxi Wu
+- Dehao Wu
+- Fangyu Wu
+- Millie Mengyuan Wu
+- Yu Wu
+- Yuchen Wu
+- Yuhao Wu
+- Qingpo Wuwu
+- Weihang Xiao
+- Yongyi Xiong
+- Fan Xu
+- Ruiling Xu
+- Mingxuan Yan
+- Benjamin Yang
+- Jirong Yang
+- Xiaoli Yang
+- Yushi Yang
+- Haoran Ye
+- Xiaohu Yu
+- Zhengming Yu
+- Chenlong Zhang
+- Chi Zhang
+- Hanning Zhang
+- Hanwen Zhang
+- Junge Zhang
+- Kunpeng Zhang
+- Song Zhang
+- Wenjin Zhang
+- Wenshuo Zhang
+- Qijian Zhao
+- Yimin Zhao
+- Yuhaohua Zheng
+- Liwei Zhou
+- Tianyue Zhou
+- Sichen Zhu
+- Yan Zhu
+- Yishu Zhu
+- Jierui Zuo
+- Chonghao Cai
+- Helena Casademunt
+- Cheng Cheng
+- Nawen Deng
+- Rao Fu
+- Yifan Han
+- He Ren
+- Zhenyu He
+- Qiao Jin
+- Langlang Li
+- Yuetai Li
+- Lu Lu
+- Luqing Zhou
+- Subhabrata Mukherjee
+- Yunqi Ouyang
+- Yin Ren
+- Dawei Shi
+- Haoran Wu
+- Zhiyue Wu
+- Hannah Yao
+- Zhuoran Yi
+- Jenny Yu
+- Rhea Zhan
+- Hang Zhou
+- Shiqiao Zhu
+- Junfan Zhu
+- Zhen Dong
+- Ali Emami
+- Yanjun Gao
+- Haimin Hu
+- Erika Jen Schneider
+- Zhenglu Li
+- Jiachen Li
+- Lihui Liu
+- Murphy Yuezhen Niu
+- Yi Shao
+- Wenqi Shi
+- Lichao Sun
+- Jianxin Sun
+- Chenguang Wang
+- Xuhai Xu
+- Huaxiu Yao
+- Aylin Caliskan
+- Jing Huang
+- Yang Liu
+- Mark Wilfried Mueller
+- Russell A. Poldrack
+- Sanjiv Ranjan Das
+- Zhiyong Lu
+- Radha Poovendran
+- Somayeh Sojoudi
+- Costas Spanos
+- Molei Tao
+- Mikko Tolonen
+- Ting Wang
+- Alan Yuille
+- Patrick Bryant
+- Carl Boettiger
+- Arvind Rao
+- Tapio Schneider
+- Georgios N. Yannakakis
+- Laure Zanna
+- Ida Sim
+- Tarek Zohdi
+- Jack L. Gallant
+- Teresa Head-Gordon
+- Dawn Song
+date: '2026-09-01'
+publishDate: '2026-11-25T06:51:07.859571Z'
+publication_types:
+- paper-conference
+publication: '*Advances in Neural Information Processing Systems, Datasets and Benchmarks
+  Track*'
+abstract: 'Recent AI systems achieve strong results on many benchmarks, yet these
+  gains have not translated into economically meaningful deployment across professional
+  domains. We argue that this gap is largely an evaluation problem: existing benchmarks
+  rarely measure sustained performance on real, economically valuable workflows. We
+  introduce Agents’ Last Exam (ALE), a benchmark for evaluating generalist computer-use
+  AI agents on long-horizon professional tasks with verifiable outcomes. ALE is developed
+  in collaboration with 250+ industry experts and organized around a taxonomy grounded
+  in O*NET / SOC 2018. The benchmark spans 55 subdomains across 13 industry clusters
+  and currently contains 1,490 task instances sourced from authentic professional
+  workflows. Tasks require integrated GUI interaction, shell execution, software operation,
+  and long-horizon planning inside real computing environments. To support scalable
+  evaluation, ALE uses deterministic deliverable-based scoring and structured rubric
+  verification rather than open-ended human judgment whenever possible. Experimental
+  results show that current frontier agents remain far from saturation: across mainstream
+  harness and backbone configurations, the average full-pass rate on the hardest tier
+  is only 2.6%. More broadly, ALE is intended not merely as another leaderboard, but
+  as an instrument for measuring the gap between benchmark success and GDP-relevant
+  impact.'
+links:
+- name: arXiv
+  url: https://arxiv.org/abs/2606.05405
+- name: URL
+  url: https://openreview.net/forum?id=L1pAwhCE4k
+---
