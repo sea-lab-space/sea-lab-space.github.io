@@ -40,7 +40,8 @@
 }
 
 .section-custom-header .section-heading h1 {
-  font-family:'Gill Sans', san-serif;
+  // Uses the site heading font (Inter, data/fonts/inter.toml) like every
+  // other heading. It used to be pinned to Gill Sans.
   // font-size: 44px;
   text-align: left;
 }

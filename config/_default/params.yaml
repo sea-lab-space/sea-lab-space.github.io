@@ -8,7 +8,7 @@
 appearance:
   theme_day: sea-lab
   theme_night:
-  font: native
+  font: Inter  # font pack in data/fonts/inter.toml
   font_size: L
   mode: light
 
