@@ -34,4 +34,6 @@ abstract: Recent advances in ultra-low-power ubiquitous touch interfaces make to
 links:
 - name: URL
   url: https://dl.acm.org/doi/10.1145/3491101.3519805
+directions:
+  - beyond-health
 ---

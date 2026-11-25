@@ -54,6 +54,10 @@ abstract: There is a growing body of research revealing that longitudinal passiv
 links:
 - name: URL
   url: https://dl.acm.org/doi/10.1145/3569485
-tags:
-  - 'health prediction'
+directions:
+  - human-centered-evaluation
+  - human-centered-health-foundation-models
+selected: true
+highlight: human-centered-evaluation
+highlight_rank: 1
 ---

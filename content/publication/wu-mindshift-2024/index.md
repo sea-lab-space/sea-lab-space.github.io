@@ -23,6 +23,7 @@ doi: 10.1145/3613904.3642790
 links:
 - name: URL
   url: https://dl.acm.org/doi/10.1145/3613904.3642790
-tags:
-  - 'intelligent interaction and intervention'
+directions:
+  - adaptive-interventions
+selected: true
 ---

@@ -33,4 +33,6 @@ abstract: Cough event detection is the foundation of any measurement associated 
 links:
 - name: URL
   url: https://linkinghub.elsevier.com/retrieve/pii/S1046202322001165
+directions:
+  - human-centered-health-foundation-models
 ---

@@ -30,4 +30,7 @@ abstract: General-purpose large language models (LLMs) like ChatGPT are increasi
 links:
 - name: URL
   url: https://www.medrxiv.org/content/10.64898/2026.01.01.25342468v1
+directions:
+  - human-centered-evaluation
+selected: true
 ---

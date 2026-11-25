@@ -33,4 +33,6 @@ abstract: Despite the growing interest in leveraging Large Language Models (LLMs
 links:
 - name: URL
   url: http://arxiv.org/abs/2406.19528
+directions:
+  - beyond-health
 ---

@@ -47,4 +47,6 @@ abstract: 'This mixed-method study examined the experiences of college students 
 links:
 - name: URL
   url: https://dx.plos.org/10.1371/journal.pone.0251580
+directions:
+  - human-centered-health-foundation-models
 ---

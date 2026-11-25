@@ -19,4 +19,6 @@ links:
 # The arXiv preprint used to have its own page; send its old address here
 aliases:
 - /publication/gabriel-can-2024/
+directions:
+  - human-centered-evaluation
 ---

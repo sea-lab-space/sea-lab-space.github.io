@@ -41,4 +41,7 @@ links:
   url: https://arxiv.org/abs/2507.17688
 - name: URL
   url: https://dl.acm.org/doi/10.1145/3749498
+directions:
+  - human-centered-health-foundation-models
+  - adaptive-interventions
 ---

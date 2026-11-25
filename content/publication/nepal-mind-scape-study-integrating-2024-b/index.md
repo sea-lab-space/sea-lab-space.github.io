@@ -26,4 +26,6 @@ publication_types:
 publication: '*Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous
   Technologies*'
 doi: 10.1145/3699761
+directions:
+  - adaptive-interventions
 ---

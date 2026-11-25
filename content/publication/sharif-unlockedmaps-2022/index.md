@@ -33,4 +33,6 @@ abstract: 'Current web-based maps do not provide visibility into real-time eleva
 links:
 - name: URL
   url: https://dl.acm.org/doi/10.1145/3517428.3550397
+directions:
+  - beyond-health
 ---

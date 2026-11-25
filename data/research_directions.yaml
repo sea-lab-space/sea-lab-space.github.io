@@ -1,0 +1,101 @@
+# Research directions for the SEA Lab website.
+# Single source of truth for the Research page, the Publications page filters,
+# and scripts/check_publication_directions.py.
+#
+# Every publication must list one or more of these ids under `directions:`.
+# Do NOT add, remove, or rename a direction without Orson's approval.
+# Propose changes in a pull request (CODEOWNERS requests his review).
+
+intro: >-
+  SEA Lab is an HCI lab at heart. We design, build, and deploy human-centered AI
+  that turns the data of everyday life into insight and action. Our work serves
+  two groups of people: (i) **the general population**, including end-users and
+  patients, whom we help live healthier lives every day, and (ii) **health
+  experts**, including physicians, nurses, and other care providers, whom we help
+  make better-informed decisions. Our research spans five directions, from AI
+  agents that partner with people over months to benchmarks that test whether
+  health AI holds up in the real world.
+
+directions:
+  - id: personal-health-agents
+    number: 1
+    title: Personal Health Agents
+    short_title: Health Agents
+    description: >-
+      We design LLM-powered agents that act as long-term partners in personal
+      health. Our agents reason across wearable, clinical, and conversational
+      data, coordinate specialized roles such as data scientist, domain expert,
+      and health coach, and keep context over weeks and months. We study what it
+      takes for people to trust and rely on them in everyday life.
+    definition: >-
+      LLM-based agents and agent architectures for health, and studies of how
+      people use conversational or agentic AI for their health.
+
+  - id: adaptive-interventions
+    number: 2
+    title: Adaptive Interventions for Behavior Change
+    short_title: Interventions
+    description: >-
+      We create personalized, just-in-time interventions that meet people in the
+      moment, from curbing smartphone overuse to guiding mindfulness practice and
+      sparking everyday joy. We build them into phones, smartwatches, and AI
+      agents, and we test them in the wild, from field deployments to large-scale
+      programs.
+    definition: >-
+      Systems and studies that aim to change a specific behavior or state (e.g.,
+      smartphone overuse, stress, mindfulness, diet), including formative studies
+      that inform them.
+
+  - id: clinician-ai-collaboration
+    number: 3
+    title: Clinician–AI Collaboration
+    short_title: Clinician–AI
+    description: >-
+      We bring AI into the clinic as a true collaborator. We study how AI
+      explanations shape clinicians' diagnostic decisions, build narrative
+      dashboards that turn patient-generated data into clinical insight, design
+      systems that keep patients and providers connected between visits, and
+      bridge the gap between AI researchers and medical experts.
+    definition: >-
+      AI in clinical decision-making and care workflows, including clinician-facing
+      tools, AI explanations, patient–provider communication, and collaboration
+      between AI and medical experts.
+
+  - id: human-centered-health-foundation-models
+    number: 4
+    title: Human-Centered Multimodal Foundation Models for Health
+    short_title: Foundation Models
+    description: >-
+      We build foundation models that learn from the rich, messy data of everyday
+      life, from smartphones and wearables to electronic health records, and we
+      make them work for real people. Grown from our long-standing work on
+      modeling longitudinal behavior through passive sensing, this direction now
+      spans sensor-language models, LLMs that reason over behavioral time series,
+      and large-scale studies of how wearable data strengthens clinical prediction.
+    definition: >-
+      Models that learn from multimodal health data (sensors, wearables, EHR,
+      text), including foundation models and LLM-based reasoning, plus the
+      longitudinal behavior models that led to them.
+
+  - id: human-centered-evaluation
+    number: 5
+    title: Human-Centered Benchmarks and Real-World Evaluation
+    short_title: Human-Centered Evaluation
+    description: >-
+      We ask whether health AI truly works, for whom, and in what context. We
+      build open benchmarks and global evaluation networks that stress-test
+      models and agents on realistic health tasks, and we study how patients,
+      clinicians, and the public use, perceive, and trust AI in practice.
+    definition: >-
+      Benchmarks, datasets, evaluation methods and networks, and studies of how
+      patients, clinicians, and the public use and perceive health AI.
+
+  - id: beyond-health
+    title: "Beyond Health: Interaction Techniques, Accessibility, and More"
+    short_title: Beyond Health
+    hidden: true
+    description: >-
+      Selected work on interaction techniques, accessibility, and other topics
+      beyond health.
+    definition: >-
+      Interaction techniques, accessibility, and other work outside health.

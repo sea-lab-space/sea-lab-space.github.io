@@ -23,6 +23,9 @@ publication_types:
 publication: '*Proceedings of the ACM Conference on Human Factors in Computing Systems (ACM CHI)*'
 url_pdf: research/pubs/chi25-bigjoy.pdf
 doi: 10.1145/3706598.3713947
-tags:
-  - 'intelligent interaction and intervention'
+directions:
+  - adaptive-interventions
+selected: true
+highlight: adaptive-interventions
+highlight_rank: 2
 ---

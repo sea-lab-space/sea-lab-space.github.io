@@ -78,4 +78,9 @@ links:
 - name: URL
   url: https://www.nature.com/articles/s41591-026-04706-x
 authors_display: "Rui Yang et al."
+directions:
+  - human-centered-evaluation
+selected: true
+highlight: human-centered-evaluation
+highlight_rank: 4
 ---

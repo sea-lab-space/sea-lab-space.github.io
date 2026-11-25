@@ -44,4 +44,9 @@ links:
   url: https://arxiv.org/abs/2605.21295
 - name: URL
   url: https://arxiv.org/abs/2605.21295
+directions:
+  - human-centered-health-foundation-models
+selected: true
+highlight: human-centered-health-foundation-models
+highlight_rank: 1
 ---

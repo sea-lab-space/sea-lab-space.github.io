@@ -29,4 +29,6 @@ abstract: Eating disorder (ED) recovery extends beyond therapy sessions, unfoldi
 links:
 - name: URL
   url: https://dl.acm.org/doi/10.1145/3772318.3791262
+directions:
+  - adaptive-interventions
 ---

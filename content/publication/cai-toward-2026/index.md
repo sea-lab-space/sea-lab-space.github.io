@@ -39,4 +39,6 @@ abstract: 'American Sign Language (ASL) is the primary language of many Deaf and
 links:
 - name: URL
   url: https://dl.acm.org/doi/10.1145/3772318.3790774
+directions:
+  - beyond-health
 ---

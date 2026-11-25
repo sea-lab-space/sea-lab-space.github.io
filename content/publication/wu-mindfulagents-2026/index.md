@@ -39,8 +39,12 @@ abstract: 'Mindfulness meditation is a widely accessible and evidence-based meth
 links:
 - name: Project Website
   url: https://sea-lab.space/mindfulagents/
-tags:
-  - 'intelligent interaction and intervention'
 awards:
 - "honorable mention award"
+directions:
+  - adaptive-interventions
+  - personal-health-agents
+selected: true
+highlight: adaptive-interventions
+highlight_rank: 1
 ---

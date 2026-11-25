@@ -39,4 +39,6 @@ links:
   url: https://arxiv.org/abs/2605.01616
 - name: URL
   url: https://arxiv.org/abs/2605.01616
+directions:
+  - human-centered-health-foundation-models
 ---

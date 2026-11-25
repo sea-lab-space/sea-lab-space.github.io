@@ -292,4 +292,10 @@ links:
   url: https://arxiv.org/abs/2606.05405
 - name: URL
   url: https://openreview.net/forum?id=L1pAwhCE4k
+directions:
+  - human-centered-evaluation
+  - personal-health-agents
+selected: true
+highlight: human-centered-evaluation
+highlight_rank: 3
 ---

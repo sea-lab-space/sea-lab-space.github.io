@@ -33,4 +33,6 @@ abstract: Sign language builds up an important bridge between the d/Deaf and har
 links:
 - name: URL
   url: https://dl.acm.org/doi/10.1145/3596255
+directions:
+  - beyond-health
 ---

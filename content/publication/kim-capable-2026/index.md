@@ -51,4 +51,9 @@ links:
   url: https://arxiv.org/abs/2512.08296
 - name: URL
   url: https://www.nature.com/articles/s42256-026-01268-y
+directions:
+  - personal-health-agents
+selected: true
+highlight: personal-health-agents
+highlight_rank: 3
 ---

@@ -12,4 +12,7 @@ doi: 10.1145/3526114.3558524
 links:
 - name: URL
   url: https://dl.acm.org/doi/10.1145/3526114.3558524
+directions:
+  - human-centered-health-foundation-models
+  - adaptive-interventions
 ---

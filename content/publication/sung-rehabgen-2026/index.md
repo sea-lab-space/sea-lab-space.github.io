@@ -29,4 +29,6 @@ abstract: "Self-directed rehabilitation in everyday environments remains difficu
 links:
 - name: URL
   url: https://dl.acm.org/doi/10.1145/3810235
+directions:
+  - adaptive-interventions
 ---

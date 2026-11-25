@@ -35,4 +35,6 @@ abstract: Remote communication is essential for efficient collaboration among pe
 links:
 - name: URL
   url: https://ieeexplore.ieee.org/document/10049667/
+directions:
+  - beyond-health
 ---

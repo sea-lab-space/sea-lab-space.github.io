@@ -41,9 +41,13 @@ abstract: "Despite the plethora of telehealth applications to assist home-based 
 links:
 - name: URL
   url: https://dl.acm.org/doi/10.1145/3659625
-tags:
-  - 'clinical support'
 awards:
 - "distinguished paper award"
 - "editor's pick"
+directions:
+  - clinician-ai-collaboration
+  - personal-health-agents
+selected: true
+highlight: clinician-ai-collaboration
+highlight_rank: 3
 ---

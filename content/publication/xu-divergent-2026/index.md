@@ -56,4 +56,10 @@ abstract: 'Artificial intelligence (AI) is increasingly permeating healthcare, f
 links:
 - name: URL
   url: https://www.nature.com/articles/s41591-026-04553-w
+directions:
+  - clinician-ai-collaboration
+  - human-centered-evaluation
+selected: true
+highlight: clinician-ai-collaboration
+highlight_rank: 1
 ---

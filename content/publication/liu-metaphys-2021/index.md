@@ -30,4 +30,6 @@ abstract: There are large individual differences in physiological processes, mak
 links:
 - name: URL
   url: https://dl.acm.org/doi/10.1145/3450439.3451870
+directions:
+  - human-centered-health-foundation-models
 ---

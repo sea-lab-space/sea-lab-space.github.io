@@ -27,4 +27,7 @@ publication_types:
 - paper-conference
 publication: '*Thirty-Ninth Conference on Neural Information Processing Systems Datasets
   and Benchmarks Track*'
+directions:
+  - human-centered-health-foundation-models
+selected: true
 ---

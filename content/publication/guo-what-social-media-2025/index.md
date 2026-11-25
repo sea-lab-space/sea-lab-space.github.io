@@ -14,4 +14,7 @@ publication_types:
 - paper-conference
 publication: '*Proceedings of the ACM Conference on Human Factors in Computing Systems*'
 doi: 10.1145/3706598.3713724
+directions:
+  - adaptive-interventions
+selected: true
 ---

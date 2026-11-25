@@ -32,4 +32,9 @@ links:
   url: https://arxiv.org/abs/2604.12019
 - name: URL
   url: https://www.nature.com/articles/s44360-026-00141-x
+directions:
+  - personal-health-agents
+selected: true
+highlight: personal-health-agents
+highlight_rank: 2
 ---

@@ -48,6 +48,9 @@ doi: 10.48550/arXiv.2508.20148
 links:
 - name: arXiv
   url: https://arxiv.org/abs/2508.20148
-tags:
-  - 'intelligent interaction and intervention'
+directions:
+  - personal-health-agents
+selected: true
+highlight: personal-health-agents
+highlight_rank: 1
 ---

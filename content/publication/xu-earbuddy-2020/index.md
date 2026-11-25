@@ -28,4 +28,6 @@ abstract: Past research regarding on-body interaction typically requires custom 
   very positively about the system. EarBuddy provides a new eyes-free, socially acceptable
   input method that is compatible with commercial wireless earbuds and has the potential
   for scalability and generalizability.
+directions:
+  - beyond-health
 ---

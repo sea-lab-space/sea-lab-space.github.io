@@ -42,8 +42,11 @@ abstract: Advances in large language models (LLMs) have empowered a variety of a
 links:
 - name: URL
   url: https://dl.acm.org/doi/10.1145/3643540
-tags:
-  - 'health prediction'
 awards:
 - "editor's pick"
+directions:
+  - human-centered-health-foundation-models
+selected: true
+highlight: human-centered-health-foundation-models
+highlight_rank: 3
 ---

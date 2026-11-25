@@ -18,4 +18,7 @@ doi: 10.1001/jamanetworkopen.2026.39048
 links:
 - name: URL
   url: https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2855284
+directions:
+  - human-centered-evaluation
+selected: true
 ---

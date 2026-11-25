@@ -37,4 +37,7 @@ links:
   url: https://arxiv.org/abs/2411.00489
 - name: URL
   url: https://ieeexplore.ieee.org/document/11640865/
+directions:
+  - personal-health-agents
+selected: true
 ---

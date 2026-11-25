@@ -39,4 +39,8 @@ links:
   url: https://arxiv.org/abs/2502.01317
 - name: URL
   url: https://dl.acm.org/doi/10.1145/3797883
+directions:
+  - personal-health-agents
+  - adaptive-interventions
+selected: true
 ---

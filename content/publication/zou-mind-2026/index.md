@@ -27,6 +27,9 @@ links:
   url: https://sea-lab.space/MIND/
 awards:
 - "honorable mention award"
-tags:
-  - 'clinical support'
+directions:
+  - clinician-ai-collaboration
+selected: true
+highlight: clinician-ai-collaboration
+highlight_rank: 2
 ---

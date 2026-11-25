@@ -35,4 +35,10 @@ abstract: Large language models (LLMs) have been increasingly adopted to support
 links:
 - name: URL
   url: https://doi.org/10.1145/3772318.3791946
+directions:
+  - personal-health-agents
+  - human-centered-evaluation
+selected: true
+highlight: personal-health-agents
+highlight_rank: 4
 ---

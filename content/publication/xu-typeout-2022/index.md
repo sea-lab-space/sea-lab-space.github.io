@@ -34,6 +34,6 @@ abstract: 'Smartphone overuse is related to a variety of issues such as lack of 
 links:
 - name: URL
   url: https://dl.acm.org/doi/10.1145/3491102.3517476
-tags:
-  - 'intelligent interaction and intervention'
+directions:
+  - adaptive-interventions
 ---

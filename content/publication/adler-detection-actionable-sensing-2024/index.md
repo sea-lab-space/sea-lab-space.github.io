@@ -19,4 +19,7 @@ publication_types:
 publication: '*Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous
   Technologies*'
 doi: 10.1145/3699755
+directions:
+  - clinician-ai-collaboration
+selected: true
 ---

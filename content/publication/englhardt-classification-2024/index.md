@@ -42,6 +42,8 @@ abstract: Passively collected behavioral health data from ubiquitous sensors cou
 links:
 - name: URL
   url: https://dl.acm.org/doi/10.1145/3659604
-tags:
-  - 'clinical support'
+directions:
+  - clinician-ai-collaboration
+  - human-centered-health-foundation-models
+selected: true
 ---

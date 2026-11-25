@@ -55,7 +55,7 @@ related:
   includeNewer: true
   toLower: true
   indices:
-    - name: tags
+    - name: directions
       weight: 100
     - name: categories
       weight: 70

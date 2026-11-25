@@ -24,4 +24,9 @@ publication_types:
 - article-journal
 publication: '*ACM Trans. Comput. Healthcare*'
 doi: 10.1145/3788689
+directions:
+  - adaptive-interventions
+selected: true
+highlight: adaptive-interventions
+highlight_rank: 4
 ---

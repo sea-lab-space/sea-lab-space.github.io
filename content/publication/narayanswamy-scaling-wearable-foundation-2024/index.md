@@ -24,4 +24,7 @@ publishDate: '2026-05-17T03:19:46.639426Z'
 publication_types:
 - paper-conference
 publication: '*The Thirteenth International Conference on Learning Representations*'
+directions:
+  - human-centered-health-foundation-models
+selected: true
 ---

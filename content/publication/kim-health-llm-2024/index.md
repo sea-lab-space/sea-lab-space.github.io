@@ -32,6 +32,9 @@ abstract: Large language models (LLMs) are capable of many natural language task
 links:
 - name: URL
   url: http://arxiv.org/abs/2401.06866
-tags:
-  - 'health prediction'
+directions:
+  - human-centered-health-foundation-models
+selected: true
+highlight: human-centered-health-foundation-models
+highlight_rank: 4
 ---

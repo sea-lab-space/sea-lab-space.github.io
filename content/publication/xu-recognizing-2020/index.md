@@ -33,4 +33,6 @@ abstract: A multi-touch interactive tabletop is designed to embody the benefits 
 links:
 - name: URL
   url: https://dl.acm.org/doi/10.1145/3381011
+directions:
+  - beyond-health
 ---

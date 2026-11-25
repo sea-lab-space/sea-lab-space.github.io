@@ -40,4 +40,6 @@ links:
   url: https://arxiv.org/abs/2605.08441
 - name: URL
   url: https://openreview.net/forum?id=N80WSnmidb
+directions:
+  - beyond-health
 ---

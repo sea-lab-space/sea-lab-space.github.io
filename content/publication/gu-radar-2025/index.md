@@ -52,4 +52,9 @@ links:
 - name: URL
   url: 
     https://proceedings.neurips.cc/paper_files/paper/2025/hash/a0434f04b6437e875d52d0b0e25c1729-Abstract-Datasets_and_Benchmarks_Track.html
+directions:
+  - human-centered-evaluation
+selected: true
+highlight: human-centered-evaluation
+highlight_rank: 2
 ---
