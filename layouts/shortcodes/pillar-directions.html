@@ -11,8 +11,9 @@
   page are listed (not `hidden`, not `research_page: false`), in file order,
   with the same number and short title as their Research page chip.
   A small "Research directions" label above the links says what the numbers
-  are: the direction numbers on the Research page. It also names the list
-  for screen readers.
+  are: the direction numbers on the Research page. Screen readers skip the
+  label and hear the list's own name, "Research directions under Sense", so
+  the three cards' lists stay distinct and the words are not read twice.
   The output has no blank lines, because it sits inside a raw HTML block.
 */ -}}
 {{- $pillar := lower (.Get 0) -}}
@@ -25,8 +26,8 @@
   {{- end -}}
 {{- end -}}
 {{- with $items -}}
-<p class="sea-pillar__directions-label" id="pillar-directions-{{ $pillar }}">Research directions</p>
-<ul class="sea-pillar__directions" aria-labelledby="pillar-directions-{{ $pillar }}">
+<p class="sea-pillar__directions-label" aria-hidden="true">Research directions</p>
+<ul class="sea-pillar__directions" aria-label="Research directions under {{ title $pillar }}">
   {{- range . }}
   <li><a class="sea-pillar__direction" href="{{ $base }}?direction={{ .id }}">
     {{- with .number }}<span class="sea-pillar__direction-number" aria-hidden="true">{{ . }}</span>{{ end }}{{ .short_title -}}

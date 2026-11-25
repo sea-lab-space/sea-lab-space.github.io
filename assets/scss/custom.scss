@@ -1043,10 +1043,18 @@ html {
 // Hero: the first block of `content/_index.md` (`css_class: sea-hero`). The
 // mission line is the one sentence a visitor should read first, so it is set a
 // step larger than body text. It stays justified like the paragraphs around
-// it, which `.section-title-left-aligned p` in `template.scss` already does.
+// it, which `.section-title-left-aligned p` in `template.scss` already does,
+// except on phones: there a short line such as "human-centered and AI-powered"
+// gets stretched across the column with wide gaps between the words.
 .sea-hero__mission p {
   font-size: 1.15em;
   line-height: 1.6;
+}
+
+@media (max-width: 575.98px) {
+  .sea-hero .sea-hero__mission p {
+    text-align: left;
+  }
 }
 
 // The Sense, Empower, and Augment cards. A grid rather than Bootstrap columns
@@ -1106,14 +1114,10 @@ html {
   text-align: center;
 }
 
-// The research directions under each pillar (shortcode
-// `layouts/shortcodes/pillar-directions.html`): small pill links in the
-// Research page chip colours, centred and wrapping under the card text. A
-// direction can appear under more than one pillar. Unlike the Research chips
-// they may wrap inside a chip, because three columns get narrow on tablets.
-// The "Research directions" label above them, in the style of the
-// Publications page filter labels. Its selector is as specific as the card
-// text's, to win over `.section-title-left-aligned p` in the same way.
+// The "Research directions" label above each card's direction links (below),
+// in the style of the Publications page filter labels. It says what the
+// numbers on the links are. Its selector is as specific as the card text's, to
+// win over `.section-title-left-aligned p` in the same way.
 .sea-hero .sea-pillar p.sea-pillar__directions-label {
   margin: 0.15rem 0 0.45rem;
   font-size: 0.68rem;
@@ -1125,6 +1129,11 @@ html {
   color: rgba(0, 0, 0, 0.6);
 }
 
+// The research directions under each pillar (shortcode
+// `layouts/shortcodes/pillar-directions.html`): small pill links in the
+// Research page chip colours, centred and wrapping under the card text. A
+// direction can appear under more than one pillar. Unlike the Research chips
+// they may wrap inside a chip, because three columns get narrow on tablets.
 .sea-pillar__directions {
   display: flex;
   flex-wrap: wrap;
