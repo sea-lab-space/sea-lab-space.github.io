@@ -1,0 +1,25 @@
+# Instrument Sans font pack for the SEA Lab site.
+#
+# Selected by `appearance.font: Instrument Sans` in config/_default/params.yaml.
+# The theme lowercases that name and swaps spaces for underscores to find this
+# file, then loads `google_fonts` in the page head and feeds the families below
+# into its SCSS (headings, body text, and the nav bar).
+#
+# Instrument Sans is a variable font, so one request covers every weight the
+# site uses (400 for body text and page titles, 600 for nav links, 700 for
+# bold headings and paper titles) plus italics. Only the weight axis is
+# requested. The width axis stays at its normal 100%.
+
+# Font style metadata
+name = "Instrument Sans"
+
+# Google Fonts CSS API v2 query (the theme adds &display=swap). Spaces in the
+# family name are written as "+" here.
+google_fonts = "family=Instrument+Sans:ital,wght@0,400..700;1,400..700"
+
+# Font families
+heading_font = "Instrument Sans"
+body_font = "Instrument Sans"
+nav_font = "Instrument Sans"
+# Code stays in the system monospace font, as before.
+mono_font = ""
