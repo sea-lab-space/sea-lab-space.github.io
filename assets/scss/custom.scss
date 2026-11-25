@@ -1111,6 +1111,20 @@ html {
 // Research page chip colours, centred and wrapping under the card text. A
 // direction can appear under more than one pillar. Unlike the Research chips
 // they may wrap inside a chip, because three columns get narrow on tablets.
+// The "Research directions" label above them, in the style of the
+// Publications page filter labels. Its selector is as specific as the card
+// text's, to win over `.section-title-left-aligned p` in the same way.
+.sea-hero .sea-pillar p.sea-pillar__directions-label {
+  margin: 0.15rem 0 0.45rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+  text-align: center;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.6);
+}
+
 .sea-pillar__directions {
   display: flex;
   flex-wrap: wrap;
