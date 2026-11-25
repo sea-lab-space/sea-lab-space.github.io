@@ -1,3 +1,29 @@
+// Height of the top bar, the site header `#navbar-main`.
+//
+// This one custom property is the single source of truth for that height.
+// The bar's own `min-height`, the anchor offset (`scroll-padding-top`) and
+// anything that has to sit just under the bar, such as the sticky chip bar on
+// the Research page, all read it from here rather than repeating a number.
+// Consumers write `var(--sea-navbar-height, 84px)`, so the page still gets a
+// sensible desktop value if this definition is ever missing.
+//
+// There are two values because the bar has two layouts. From 992px up
+// (Bootstrap's `lg`, where the menu sits inline next to the logo) the bar is
+// 84px tall around a 60px logo. Below 992px the menu folds into the hamburger
+// toggle and the bar is 64px tall around a 44px logo. Both are roughly half
+// of the old bar, which was a fixed 200px at every width. The "Top bar (T5)"
+// block at the end of this file applies these values to the bar and sizes the
+// logo from them, so changing a value here moves the bar and the logo together.
+:root {
+  --sea-navbar-height: 64px;
+}
+
+@media (min-width: 992px) {
+  :root {
+    --sea-navbar-height: 84px;
+  }
+}
+
 // People page: the "Now at <organization>" line shown under an alum's role.
 // Rendered by `layouts/partials/blocks/people.html` when a person's front matter
 // sets `now_at`; this rule is inert for everyone else.
@@ -820,4 +846,93 @@
   .pub-year__heading {
     font-size: 1.35rem;
   }
+}
+
+// ---- Top bar (T5) ----
+// Sizes for the site header, `layouts/partials/components/headers/navbar.html`.
+// They used to be inline styles in that template (a fixed `height:200px` on the
+// bar and a `max-height` on each of the two logo images). Here they follow
+// `--sea-navbar-height` from the top of this file, so there is one place to
+// change them.
+
+// The bar. The id selector outranks the theme's `.navbar { height: 70px }`
+// (50px below 992px). `min-height` rather than `height` lets the bar grow if
+// its content ever needs more room, instead of that content spilling out of a
+// box of fixed height. Bootstrap's navbar is a flex row that centres its items
+// vertically, so the logo and the links stay centred in the bar.
+#navbar-main {
+  height: auto;
+  min-height: var(--sea-navbar-height, 84px);
+}
+
+// The logo. navbar.html generates it 120px tall and it is shown at half that
+// or less, so it stays sharp on 2x screens. `height: auto` replaces the theme's
+// stretch-to-fill height, which leaves `max-height` as the only thing that sets
+// the size. `width: auto` keeps the aspect ratio, so the logo never distorts.
+//
+// The logo height is the bar height minus a fixed margin, so the logo always
+// fits inside the bar. If it did not, `min-height` would let the bar grow past
+// `--sea-navbar-height`, and the anchor offset and the chip bar would then sit
+// too high. Phones get a 44px logo in the 64px bar, which leaves 10px of bar
+// above and below it. If the bar is ever made taller than 84px, raise the
+// `get_logo` size in navbar.html too, so the logo stays at 2x.
+#navbar-main .navbar-brand img {
+  width: auto;
+  height: auto;
+  max-height: calc(var(--sea-navbar-height, 84px) - 20px);
+}
+
+// Desktop gets a 60px logo in the 84px bar, which leaves 12px of bar above and
+// below it.
+@media (min-width: 992px) {
+  #navbar-main .navbar-brand img {
+    max-height: calc(var(--sea-navbar-height, 84px) - 24px);
+  }
+}
+
+// The mobile menu, below 992px. The theme hangs the open menu panel from a
+// hard-coded `top: 50px`, which matched its own 50px bar. On the old 200px bar
+// that put the open panel over the logo and the hamburger toggle, and since the
+// panel's z-index is above both, the toggle could not be tapped to close the
+// menu again. `top: 100%` hangs the panel from the bottom edge of the bar at
+// whatever height the bar has, so the logo and the toggle stay visible and
+// usable while the menu is open.
+//
+// On a short screen, such as a phone held sideways, the open panel can be
+// taller than the space left under the bar. Capping it to that space and
+// letting it scroll keeps every item reachable. `100dvh` follows the mobile
+// browser toolbars, and browsers without it keep the `100vh` line. The cap
+// applies only once the panel is fully open (`.show`), so it leaves Bootstrap's
+// open and close animation alone.
+//
+// `overscroll-behavior: contain` keeps a swipe on the open panel inside the
+// panel. Without it, a swipe past the end of the panel (or on a panel too short
+// to need scrolling) scrolls the page behind it. On every page except home the
+// theme then hides the header, which slides the open panel up over the content
+// with the toggle out of view. A swipe on the page below the panel still
+// scrolls the page as usual.
+@media (max-width: 991.98px) {
+  #navbar-main .navbar-collapse {
+    top: 100%;
+  }
+
+  #navbar-main .navbar-collapse.show {
+    max-height: calc(100vh - var(--sea-navbar-height, 84px));
+    max-height: calc(100dvh - var(--sea-navbar-height, 84px));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+}
+
+// Anchor offset. The theme's hash scrolling (`wowchemy-navigation.js`) measures
+// the bar at the moment it scrolls and stops that far above the target, so it
+// needs nothing from here. Jumps that skip that code (the browser's own jump to
+// a `#fragment` before the theme's scripts run, `scrollIntoView()`, or the page
+// scrolling a focused element into view while someone tabs through it) would
+// otherwise tuck the target under the bar. This padding gives them the same
+// offset. It does not add to the theme's own scrolling, which sets the scroll
+// position directly. Anything that also sits under the bar, such as the chip
+// bar on the Research page, should add only its own height on top of this.
+html {
+  scroll-padding-top: var(--sea-navbar-height, 84px);
 }
