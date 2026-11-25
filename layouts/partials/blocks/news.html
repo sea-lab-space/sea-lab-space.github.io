@@ -23,8 +23,10 @@
   sort key carries its file position as a tie-breaker, so the result is the
   same whatever the sort algorithm does with equal keys.
 
-  Bad data fails the build with a message naming the entry, so a typo in a
-  student's PR shows up in CI instead of as a silently wrong row.
+  Bad data fails the build with a message naming the entry. That shows up in
+  `hugo server` locally and in the deploy build (publish.yaml), which then
+  stops and leaves the live site as it was, instead of publishing a silently
+  wrong row. No pull-request check builds the site.
 */ -}}
 
 {{- $page := .wcPage -}}

@@ -237,6 +237,20 @@
   top: 0;
 }
 
+// On this page, anything the browser scrolls into view on its own (a link
+// that gets focus while someone tabs, a #direction jump, `scrollIntoView()`)
+// must clear both the header and the sticky bar, or it ends up hidden behind
+// the bar. The script keeps `--research-chipbar-h` equal to the bar's real
+// height plus a small gap (one row of chips, or two from 576px to 1199px).
+// The fallbacks cover the page without JavaScript.
+html:has(.research-chipbar) {
+  scroll-padding-top: calc(var(--sea-navbar-height, 84px) + var(--research-chipbar-h, 3.75rem));
+
+  @media (min-width: 576px) and (max-width: 1199.98px) {
+    scroll-padding-top: calc(var(--sea-navbar-height, 84px) + var(--research-chipbar-h, 5.5rem));
+  }
+}
+
 .research-chips {
   display: flex;
   flex-wrap: wrap;
@@ -359,19 +373,12 @@
 // theme's `.section-heading h1` are repeated here. The font is left to the
 // site's heading font, so it changes with the rest of the site.
 //
-// `scroll-margin-top` keeps a #direction jump clear of the sticky chip bar.
-// The `scroll-padding-top` on `html` from the top-bar work already clears the
-// site header, so this adds only the bar's own height (one row of chips, or
-// two between 576px and 1199px) plus a small gap.
+// A #direction jump clears the header and the sticky chip bar through the
+// page's `scroll-padding-top` (just below), so the headings need no margin.
 .wg-research-directions .section-custom-header .section-heading h2 {
   margin: 0 0 10px;
   font-size: 2.25rem;
   text-align: left;
-  scroll-margin-top: 3.75rem;
-
-  @media (min-width: 576px) and (max-width: 1199.98px) {
-    scroll-margin-top: 5.5rem;
-  }
 
   // On phones the longest titles ran to four lines at full size.
   @media (max-width: 575.98px) {
@@ -393,7 +400,7 @@
   margin-bottom: 0;
 }
 
-// "See all N selected papers" under each overview row. The theme shrinks
+// "See all highlighted papers" (no count) under each overview row. The theme shrinks
 // `.btn` text to 0.8rem with a tight line height, which is too cramped for a
 // sentence, so the size and padding are reset here.
 .research-see-all {
@@ -1339,28 +1346,35 @@ html {
   font-weight: 600;
 }
 
-// Phones and small tablets: the buttons move under the text and share a row,
-// and the panel and the photo margins tighten to give the text room.
+// Below 992px a button column beside the text would squeeze the text to a
+// narrow strip, so the buttons move under the text and share a row.
+@media (max-width: 991.98px) {
+  .sea-join {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.5rem;
+  }
+
+  .sea-join__actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+// Phones: the panel and the photo margins tighten to give the text room, and
+// the two buttons share the full width.
 @media (max-width: 767.98px) {
   .sea-join-section {
     padding: 2.5rem 0;
   }
 
   .sea-join {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 1.5rem;
     padding: 1.5rem 1.25rem;
   }
 
   // Matches the theme's smaller section titles on phones.
   .sea-join__title {
     font-size: 1.73rem;
-  }
-
-  .sea-join__actions {
-    flex-direction: row;
-    flex-wrap: wrap;
   }
 
   .sea-join__btn {

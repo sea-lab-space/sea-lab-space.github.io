@@ -12,6 +12,13 @@
       modifier clicks are left alone and open the real URL.
     - On load it reads ?direction=. An unknown or hidden id shows the overview
       and the bad parameter is dropped from the address bar.
+    - It keeps `--research-chipbar-h` on <html> equal to the chip bar's height,
+      so the page's `scroll-padding-top` (custom.scss) clears both the header
+      and the bar. Anything the browser scrolls into view on its own, such as
+      a link that gets focus while someone tabs, then lands below the bar.
+    - The theme scrolls to a #hash itself (on load and on hashchange) and
+      offsets only the header. For a #direction heading the script scrolls
+      again right after it, with the bar included.
     - After a switch it scrolls to the top of the views, just below the sticky
       chip bar, but only when that spot is out of sight. Back returns to the
       scroll position the visitor left. Smooth scrolling is skipped when the
@@ -39,6 +46,33 @@
 
   var reducedMotion = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
   var current = '';
+
+  // The bar's height plus a small gap, kept current as the chips wrap or the
+  // window resizes. custom.scss adds it to the header height in the page's
+  // `scroll-padding-top`.
+  function measureBar() {
+    document.documentElement.style.setProperty('--research-chipbar-h', (bar.offsetHeight + 12) + 'px');
+  }
+  measureBar();
+  if (window.ResizeObserver) {
+    new ResizeObserver(measureBar).observe(bar);
+  } else {
+    window.addEventListener('resize', measureBar);
+  }
+
+  // The theme's own #hash scroll stops one header height above the target,
+  // which leaves a direction heading under the chip bar. Scroll again just
+  // after it, this time with the browser's scroll padding (header plus bar).
+  function fixHashScroll() {
+    var id = window.location.hash ? decodeURIComponent(window.location.hash.slice(1)) : '';
+    var target = id ? document.getElementById(id) : null;
+    if (!target || !root.contains(target)) return;
+    window.setTimeout(function () {
+      target.scrollIntoView({ block: 'start', behavior: 'auto' });
+    }, 60);
+  }
+  window.addEventListener('load', fixHashScroll);
+  window.addEventListener('hashchange', fixHashScroll);
 
   // Only the visible directions are rendered, so a hidden id is simply unknown here.
   function isDirection(id) {

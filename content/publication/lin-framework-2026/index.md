@@ -3,7 +3,7 @@ title: A Framework for Longitudinal Health AI Agents
 authors:
 - Georgianna Lin
 - Rencong Jiang
-- Noémie Elhadad
+- Noemie Elhadad
 - Xuhai Xu
 date: '2026-05-01'
 publishDate: '2026-11-25T06:51:07.831661Z'
