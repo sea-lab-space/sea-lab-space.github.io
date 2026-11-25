@@ -13,7 +13,8 @@
   What it renders:
     - A sticky chip bar: "Overview", then one chip per visible direction.
     - The overview: for each direction, its heading, description, up to 4
-      highlight cards, and a "See all N selected papers" link.
+      highlight cards, and a "See all highlighted papers" link (no count, by
+      Orson's choice). It shows only when the direction has selected papers.
     - One view per direction with every selected paper in that direction.
 
   Every view is in the HTML, so the page works without JavaScript: the
@@ -90,7 +91,7 @@
 
         {{- with len $in_direction }}
         <a class="btn btn-outline-primary research-see-all" href="{{ $page.RelPermalink }}?direction={{ $id }}" data-direction="{{ $id }}">
-          See all {{ . }} selected {{ cond (eq . 1) "paper" "papers" }} →
+          See all highlighted papers →
         </a>
         {{- end }}
       </section>

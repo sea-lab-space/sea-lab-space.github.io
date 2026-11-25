@@ -17,8 +17,9 @@ sections:
     content:
       title: Research Directions
       text: >-
-        SEA Lab is an HCI lab at heart. We design, build, and deploy human-centered AI
-        that turns the data of everyday life into insight and action. Our work serves
+        Grounded in human-computer interaction (HCI), SEA Lab designs, builds, and
+        deploys human-centered AI that turns the data of everyday life into insight and
+        action. Our work serves
         two groups of people: (i) **the general population**, including end-users and
         patients, whom we help live healthier lives every day, and (ii) **health
         experts**, including physicians, nurses, and other care providers, whom we help
