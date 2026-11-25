@@ -18,4 +18,6 @@ links:
   url: https://dl.acm.org/doi/10.1145/3587281.3587283
 directions:
   - beyond-health
+awards:
+- "best artifact award"
 ---

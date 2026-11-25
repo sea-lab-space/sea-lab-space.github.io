@@ -17,4 +17,6 @@ links:
   url: https://dl.acm.org/doi/10.1145/3613904.3641955
 directions:
   - beyond-health
+awards:
+- "best paper award"
 ---

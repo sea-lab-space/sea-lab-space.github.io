@@ -31,4 +31,6 @@ links:
   url: https://dl.acm.org/doi/10.1145/3544548.3581500
 directions:
   - beyond-health
+awards:
+- "honorable mention award"
 ---

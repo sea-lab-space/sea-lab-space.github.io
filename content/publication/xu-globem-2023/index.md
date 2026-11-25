@@ -61,4 +61,6 @@ directions:
 selected: true
 highlight: human-centered-evaluation
 highlight_rank: 1
+awards:
+- "distinguished paper award"
 ---

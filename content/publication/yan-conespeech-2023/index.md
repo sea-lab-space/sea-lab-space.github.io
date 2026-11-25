@@ -37,4 +37,6 @@ links:
   url: https://ieeexplore.ieee.org/document/10049667/
 directions:
   - beyond-health
+awards:
+- "best paper nominee"
 ---
