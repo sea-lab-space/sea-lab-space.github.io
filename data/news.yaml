@@ -1,6 +1,6 @@
 # Lab News for the SEA Lab website.
 #
-# The homepage shows the six newest items, with an "All news" link, and
+# The homepage shows the ten newest items, with an "All news" link, and
 # /news/ shows every item grouped by year. Both are drawn by
 # layouts/partials/blocks/news.html from this one file, so this is the only
 # place to edit.
@@ -11,7 +11,7 @@
 # - date: "2026-04"   # quoted string, "YYYY-MM" or "YYYY-MM-DD"
 #   type: award       # paper | award | grant | people | teaching | service | talk | press
 #   text: "Markdown, one or two sentences."
-#   link: ""          # optional external URL
+#   link: ""          # optional external URL (prefer a link inside `text`)
 #
 # Notes:
 # - Keep the date in quotes. Only the month and year are shown ("Apr 2026").
@@ -22,6 +22,9 @@
 # - In `text`, link people to their profile and papers to their page, using the
 #   folder names: [Will](/author/will-ke-wang/) for content/authors/will-ke-wang/
 #   and [MIND](/publication/zou-mind-2026/) for content/publication/zou-mind-2026/.
+# - New papers follow one pattern, so the list is quick to skim: "Excited to
+#   share that our paper [Title](/publication/<folder>/) is published in
+#   *Venue*!" and then one plain sentence on what it found or built.
 # - Wrap `text` in double quotes, and write any double quote inside it as \".
 # - `link` is for one extra external page, such as an award announcement. Leave
 #   it out when there is none.
@@ -31,29 +34,43 @@
   text: "Congratulations to [Will](/author/will-ke-wang/) on his new role as Associate Research Scientist at Columbia's Mailman School of Public Health, where he supports AI and agent research!"
 - date: "2026-11"
   type: award
-  text: "Congratulations to [Zhihan](/author/zhihan-jiang/) on being selected as a UW Rising Star in EECS!"
-  link: "https://risingstars.cs.washington.edu/"
+  text: "Congratulations to [Zhihan](/author/zhihan-jiang/) on being selected as a [UW Rising Star in EECS](https://risingstars.cs.washington.edu/)!"
 - date: "2026-10"
   type: paper
-  text: "[The Anatomy of a Personal Health Agent](/publication/heydari-anatomy-personal-health-2025-a/) is published in *Nature*. It is the science behind Google's Fitbit personal health coach."
+  text: "Excited to share that our paper [The Anatomy of a Personal Health Agent](/publication/heydari-anatomy-personal-health-2025-a/) is published in *Nature*! It supports Google's **[Fitbit personal health coach](https://blog.google/products-and-platforms/devices/fitbit/personal-health-coach-public-preview/)**."
+- date: "2026-10"
+  type: paper
+  text: "Excited to share that our correspondence [MAGIC](/publication/yang-magic-2026/) is published in *Nature Medicine*! MAGIC is a new international network for evaluating generative AI in global health, starting with an LLM benchmark and a reporting standard for global deployment."
+- date: "2026-10"
+  type: paper
+  text: "Excited to share that our paper [Public Perceptions of Timeliness for AI Use and Human Oversight](/publication/benda-public-2026/) is published in *JAMA Network Open*! In a survey of 1,185 US adults, many accepted faster AI replies to routine portal messages, but most wanted a health professional's review for medical and mental health questions."
 - date: "2026-09"
   type: paper
-  text: "Our [*Nature Medicine* paper](/publication/xu-divergent-2026/) shows that explainable AI affects clinicians and lay people differently in dermatological diagnosis."
+  text: "Excited to share that our paper [Divergent impacts of explainable AI for dermatological diagnosis on clinicians versus lay people](/publication/xu-divergent-2026/) is published in *Nature Medicine*! Across 623 lay people and 153 primary care physicians, LLM explanations made lay users over-rely on the AI, while physicians benefited whether the AI was right or wrong."
+- date: "2026-09"
+  type: paper
+  text: "Excited to share that two of our papers are accepted at NeurIPS 2026! [Agents' Last Exam](/publication/sun-agents-2026/) is a benchmark of long-horizon, real-world tasks for AI agents, built with industry experts, and [DUET](/publication/hu-duet-2026/) spends the training budget of reinforcement learning for language models more wisely, beating full-budget training while running faster."
 - date: "2026-09"
   type: teaching
-  text: "New course: BINF 4070, \"The Future of Personal Health Assistant.\""
+  text: "New course: [BINF 4070 / COMS 4995: The Future of Personal Health Assistant](https://personal-health-agent.github.io/), cross-listed between Columbia DBMI and Computer Science."
 - date: "2026-08"
   type: grant
-  text: "New NIH R01s, with Orson as site PI: MindGuard (NICHD) and multi-cancer early detection with an EHR foundation model (NIBIB)."
+  text: "New NIH R01, with Orson as site PI (Co-I): MindGuard (NICHD)."
 - date: "2026-07"
   type: grant
   text: "New NSF award: \"Human-AI Teaming for Health Coaching\" (Orson as Co-PI)."
+- date: "2026-07"
+  type: paper
+  text: "Excited to share that our paper [Capable language models can outgrow the benefits of collaboration](/publication/kim-capable-2026/) is published in *Nature Machine Intelligence*! Across 260 setups, how well a single agent performed best predicted whether adding agents helps, and past a capability threshold more agents rarely help."
 - date: "2026-05"
   type: paper
-  text: "Our perspective, [A Framework for Longitudinal Health AI Agents](/publication/lin-framework-2026/), is published in *Nature Health*."
+  text: "Excited to share that our perspective [A Framework for Longitudinal Health AI Agents](/publication/lin-framework-2026/) is published in *Nature Health*! It proposes a framework for health AI agents built on coherence, continuity, adaptation, and agency across repeated interactions."
 - date: "2026-04"
   type: award
   text: "Congratulations to [Ruishi](/author/ruishi-zou/), [Shiyu](/author/shiyu-xu/), and [Millie](/author/millie-mengyuan-wu/)! [MIND](/publication/zou-mind-2026/) and [MindfulAgents](/publication/wu-mindfulagents-2026/) both received Best Paper Honorable Mention Awards at CHI 2026."
 - date: "2026-04"
   type: award
   text: "Congratulations to [Zhihan](/author/zhihan-jiang/) and [Millie](/author/millie-mengyuan-wu/)! PAWS, an AI digital pet on smartwatches for cannabis use disorder support, won the Best Workshop Paper Award at the CHI 2026 Workshop on Everyday Wearable for Personalized Health and Well-Being."
+- date: "2026-04"
+  type: paper
+  text: "Excited to share that our paper [DietGlance](/publication/jiang-dietglance-2026/) is published in *ACM Transactions on Computing for Healthcare*! DietGlance uses eyeglasses to capture privacy-preserving meal images and gives nutrition analysis and personalized dietary suggestions."

@@ -47,14 +47,14 @@ sections:
       columns: '1'
       css_class: sea-hero section-title-left-aligned
 
-  # Lab News: the six newest items from `data/news.yaml`, drawn by
+  # Lab News: the ten newest items from `data/news.yaml`, drawn by
   # `layouts/partials/blocks/news.html`. The "All news" link to /news/ appears
   # only when there are more than `count` items.
   - block: news
     id: news
     content:
       title: 'Lab News'
-      count: 6
+      count: 10
       archive_link: /news/
     design:
       css_class: section-title-left-aligned

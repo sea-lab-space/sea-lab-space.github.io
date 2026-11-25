@@ -65,14 +65,15 @@ Every publication belongs to one or more research directions. The [Research Page
 - Each direction needs an `id` (lowercase words joined by dashes, used in page addresses), a `title`, a `short_title` for the filter chips, a `description` for the Research page, and a `definition` that tells others which papers belong to it. A visible direction also has a `number`, shown in its Research page heading and chip. Directions appear in the order they are listed in the file.
 
 ## <a name="add-news"></a> Add Lab News
-- Lab News lives in `data/news.yaml`. The homepage shows the six newest items, and the [News page](https://sea-lab.space/news/) shows all of them, grouped by year.
+- Lab News lives in `data/news.yaml`. The homepage shows the ten newest items, and the [News page](https://sea-lab.space/news/) shows all of them, grouped by year.
 - Copy an existing entry to the top of the list, below the header comment, and fill in its fields:
   ```yaml
   - date: "2026-11"   # quoted string, "YYYY-MM" or "YYYY-MM-DD"
     type: award       # paper | award | grant | people | teaching | service | talk | press
-    text: "Congratulations to [Zhihan](/author/zhihan-jiang/) on being selected as a UW Rising Star in EECS!"
-    link: "https://risingstars.cs.washington.edu/"   # optional external URL
+    text: "Congratulations to [Zhihan](/author/zhihan-jiang/) on being selected as a [UW Rising Star in EECS](https://risingstars.cs.washington.edu/)!"
   ```
+- Put links inside `text`, on the words they belong to. The optional `link:` field adds a separate "More" link and is rarely needed.
+- New papers follow one pattern so the list is quick to skim: "Excited to share that our paper [Title](/publication/<folder>/) is published in *Venue*!" and then one plain sentence on what it found or built.
 - `text` is Markdown, one or two sentences. Link people to their profile (`/author/<folder>/`) and papers to their page (`/publication/<folder>/`), using the folder names.
 - `type` picks the small icon next to the item. Leave `link` empty or out when there is no external page.
 - Items are sorted newest first. Items from the same month keep their order in the file, so put the one that should show first higher up. The comment at the top of `data/news.yaml` has the details.
