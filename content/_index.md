@@ -42,7 +42,7 @@ sections:
 
         Learn more about our five research directions on the [Research](/research/) page, and browse all our papers on the [Publication](/publication/) page.
 
-        SEA Lab is grateful for support from the National Science Foundation (NSF), the National Institutes of Health (NIH), Google, OpenAI, NVIDIA, and Meta.
+        SEA Lab is grateful for support from the National Science Foundation (NSF), the National Institutes of Health (NIH), Columbia University, Google, OpenAI, NVIDIA, and Meta.
     design:
       columns: '1'
       css_class: sea-hero section-title-left-aligned
@@ -109,6 +109,10 @@ sections:
   # Each <img> carries its source SVG's intrinsic width/height. CSS overrides the
   # rendered size, but the attributes give the browser an aspect ratio to reserve
   # space with, so the lazy-loaded marks don't reflow the row as they arrive.
+  #
+  # Order: the three institutions (NSF, NIH, Columbia), then the companies. The
+  # empty `funder-logos__break` span after Columbia is where tablets start the
+  # second line. It is hidden at every other width.
   - block: markdown
     content:
       title: 'Our Funders'
@@ -121,6 +125,10 @@ sections:
           <a class="funder-logo funder-logo--emblem" href="https://www.nih.gov/" target="_blank" rel="noopener">
             <img src="/uploads/funders/nih.svg" alt="National Institutes of Health" width="374" height="329" loading="lazy">
           </a>
+          <a class="funder-logo funder-logo--emblem funder-logo--crown" href="https://www.columbia.edu/" target="_blank" rel="noopener">
+            <img src="/uploads/funders/columbia.svg" alt="Columbia University" width="164" height="124" loading="lazy">
+          </a>
+          <span class="funder-logos__break" aria-hidden="true"></span>
           <a class="funder-logo" href="https://research.google/" target="_blank" rel="noopener">
             <img src="/uploads/funders/google.svg" alt="Google" width="272" height="92" loading="lazy">
           </a>

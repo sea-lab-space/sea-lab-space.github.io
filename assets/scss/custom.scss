@@ -42,18 +42,28 @@
 // Homepage "Our Funders" logo row, rendered by the last markdown block in
 // `content/_index.md`. Sources are SVGs in `static/uploads/funders/`.
 //
-// The six marks have very different aspect ratios (NSF is ~1:1, NVIDIA is
-// ~5.5:1, Meta ~4.9:1), so sizing them by width would leave the emblems towering
-// over the wordmarks. Sizing by height instead, with a taller cap for the two agency
-// emblems, is what makes the row read as one line. `height: auto` +
-// `max-width: 100%` keeps each SVG's aspect ratio and stops the widest mark
-// from overflowing on narrow screens.
+// Seven marks: three institutional ones (the NSF seal, the stacked NIH logo,
+// and Columbia's crown), then four company wordmarks (Google, OpenAI, NVIDIA,
+// Meta). Their aspect ratios differ a lot (NSF is ~1:1, NVIDIA is ~5.5:1), so
+// sizing them by width would leave the emblems towering over the wordmarks.
+// Sizing by height instead, with taller caps for the emblems, makes the row
+// read as one line. `max-width: 100%` keeps the widest mark from overflowing
+// on narrow screens.
+//
+// Layout by screen width, each measured so that no mark is left alone on a
+// line:
+// - 992px and up: one line.
+// - Tablets (768-991px): two lines, the three institutions above the four
+//   companies. The `.funder-logos__break` element in the markup forces the
+//   break, so it never falls somewhere arbitrary.
+// - Below 768px: a grid with the three institutions in one row, then the
+//   companies two by two.
 .funder-logos {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 1.75rem 3rem;
+  gap: 1.75rem 2rem;
   margin: 0.25rem 0 0.5rem;
 }
 
@@ -93,6 +103,13 @@
   height: 82px;
 }
 
+// Columbia's crown is one solid shape, so at the seals' height it would
+// outweigh them. About three quarters of their height balances the row. It comes
+// after the emblem rule so it wins at every width.
+.funder-logos .funder-logo--crown img {
+  height: 62px;
+}
+
 // Meta's lockup fills its box more than the other wordmarks do (a full-height
 // symbol and tall capitals), so at the shared height it reads a size larger
 // than OpenAI and NVIDIA. Scaling the drawing down a tenth evens out the
@@ -103,78 +120,43 @@
   transform: scale(0.9);
 }
 
-// The sizes below are worked out from the marks' aspect ratios so that each
-// width range gets a deliberate layout rather than whatever flex-wrap leaves
-// over. With six marks the full-size row is ~820px of logos plus gaps, and any
-// overflow orphans the last mark (Meta) on a line by itself.
-//
-// Small desktop (992-1199px, a 930px content box): full size plus gaps is just
-// over the box, so trim the heights and the gap to keep one line.
+// The forced line break between the institutions and the companies. Only the
+// tablet layout shows it.
+.funder-logos__break {
+  display: none;
+}
+
+// Small desktop (992-1199px, a 930px content box): the full-size row is wider
+// than the box, so trim the heights and the gap to keep one line.
 @media (min-width: 992px) and (max-width: 1199.98px) {
   .funder-logos {
-    gap: 1.75rem 2rem;
+    gap: 1.75rem 1.25rem;
   }
 
   .funder-logos .funder-logo img {
-    height: 32px;
+    height: 30px;
   }
 
   .funder-logos .funder-logo--emblem img {
-    height: 72px;
+    height: 68px;
+  }
+
+  .funder-logos .funder-logo--crown img {
+    height: 50px;
   }
 }
 
-// Tablet (768-991px, a 690px content box): one line still fits, but only at
-// these smaller heights and a tighter gap.
+// Tablet (768-991px, a 690px content box): two lines, the institutions above
+// the companies. One line would need unreadably small marks.
 @media (min-width: 768px) and (max-width: 991.98px) {
   .funder-logos {
-    gap: 1.5rem 1.25rem;
+    gap: 1.5rem 2rem;
   }
 
-  .funder-logos .funder-logo img {
-    height: 25px;
-  }
-
-  .funder-logos .funder-logo--emblem img {
-    height: 56px;
-  }
-}
-
-// Small tablet (576-767px, a 510px content box): one line would need
-// unreadably small marks, so aim for two lines instead. At these heights the
-// two emblems, Google, and OpenAI fill the first line and NVIDIA cannot join
-// them, so NVIDIA and Meta share the second line rather than Meta sitting
-// alone. The content box is a fixed 510px across this whole range, so the
-// break always falls in the same place.
-@media (min-width: 576px) and (max-width: 767.98px) {
-  .funder-logos {
-    gap: 1.5rem;
-  }
-
-  .funder-logos .funder-logo img {
-    height: 28px;
-  }
-
-  .funder-logos .funder-logo--emblem img {
-    height: 62px;
-  }
-}
-
-// Phones: a fixed two-column grid gives three tidy rows (the two agency
-// emblems, then Google and OpenAI, then NVIDIA and Meta) at every phone width.
-// Flex-wrap would break the row in a different place on every device and
-// strand a lone mark. Each mark is centred in its column, and `max-width: 100%`
-// on the image lets the widest ones shrink to fit on the narrowest phones.
-@media (max-width: 575.98px) {
-  .funder-logos {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    justify-items: center;
-    gap: 1.5rem 1rem;
-  }
-
-  .funder-logos .funder-logo {
-    max-width: 100%;
+  .funder-logos__break {
+    display: block;
+    flex-basis: 100%;
+    height: 0;
   }
 
   .funder-logos .funder-logo img {
@@ -183,6 +165,45 @@
 
   .funder-logos .funder-logo--emblem img {
     height: 64px;
+  }
+
+  .funder-logos .funder-logo--crown img {
+    height: 50px;
+  }
+}
+
+// Small tablets and phones: a six-column grid. Each institution spans two
+// columns (three in a row) and each company three (two in a row), so the rows
+// are the three institutions, Google and OpenAI, then NVIDIA and Meta, at
+// every width. Each mark is centred in its cell, and `max-width: 100%` on the
+// image lets the widest ones shrink to fit on the narrowest phones.
+@media (max-width: 767.98px) {
+  .funder-logos {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    justify-items: center;
+    gap: 1.5rem 1rem;
+  }
+
+  .funder-logos .funder-logo {
+    grid-column: span 3;
+    max-width: 100%;
+  }
+
+  .funder-logos .funder-logo--emblem {
+    grid-column: span 2;
+  }
+
+  .funder-logos .funder-logo img {
+    height: 30px;
+  }
+
+  .funder-logos .funder-logo--emblem img {
+    height: 64px;
+  }
+
+  .funder-logos .funder-logo--crown img {
+    height: 50px;
   }
 }
 
