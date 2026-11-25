@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 ################
 #### uncomment only if need to process exported files
@@ -11,5 +11,7 @@
 # python3 ./processing/bib_post_processing.py
 
 
-# Make sure you have installed the HUGO academic tool: https://github.com/girtel/hugo-academic-cli-girtel
+# Needs the import tool, the same version the import Action uses (Python 3.11.5+):
+#   python3 -m pip install academic==0.10.0
+# Never add --overwrite: it deletes the directions and other hand-added fields.
 academic import ./sea-lab-publication.bib ./content/publication/ --compact
