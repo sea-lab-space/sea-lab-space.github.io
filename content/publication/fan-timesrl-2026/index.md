@@ -34,8 +34,8 @@ abstract: Longitudinal passive sensing enables continuous health prediction, yet
   annotations. Instantiated on mental-health prediction, TimeSRL achieves state-of-the-art
   performance on a benchmark designed to stress-test cross-cohort generalization under
   a rigorous leave-one-dataset-out (LOSO) protocol, reducing mean absolute error (MAE)
-  over strong non-LLM ML and LLM baselines by 3.1--10.1% and 9.5--44.1% for anxiety,
-  and 3.2--9.6% and 27.4--57.6% for depression (all $p$s<0.05). TimeSRL significantly
+  over strong non-LLM ML and LLM baselines by 3.1–10.1% and 9.5–44.1% for anxiety,
+  and 3.2–9.6% and 27.4–57.6% for depression (all p < 0.05). TimeSRL significantly
   outperforms prior methods in cross-benchmark transfer across different sensing pipelines,
   rivaling its own within-domain performance without target-domain fine-tuning. These
   results demonstrate that semantic abstractions are reusable and point to a new direction

@@ -806,13 +806,17 @@
     font-size: medium;
   }
 
-  .pub-authors {
-    color: gray;
+  // Darker than the old inline `gray` (3.4:1 on the page background) so the
+  // author line passes the 4.5:1 contrast bar (about 5.5:1). Non-member names
+  // are links to auto-made author pages, so they take the same colour.
+  .pub-authors,
+  .pub-authors a:not(.author-lab-member) {
+    color: rgba(0, 0, 0, 0.6);
   }
 }
 
-// Long author lists (Agents' Last Exam has 262 names) and `authors_display`
-// papers show a short line plus this native disclosure with the full list.
+// Long author lists (Agents' Last Exam has 262 names) show a short line plus
+// this native disclosure with the full list.
 // <details> needs no JS, and the browser handles keyboard and screen readers.
 .pub-authors-all {
   margin: 0.15rem 0 0.25rem;

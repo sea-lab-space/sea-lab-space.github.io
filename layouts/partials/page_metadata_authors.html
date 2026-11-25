@@ -26,8 +26,11 @@
     is the same rule the Research cards use, so a 262-author paper still shows
     who in the lab worked on it without a 20-line wall of names.
 
-  Names display as the theme shows them: a member's profile title (e.g.
-  `Xuhai "Orson" Xu`), otherwise the name as written on the paper.
+  Names display as follows: a member shows their profile title (e.g.
+  `Xuhai "Orson" Xu`). Everyone else shows the name exactly as written on the
+  paper. The theme printed the auto-made author page's title instead, and Hugo
+  title-cases those, which turned middle initials into lowercase words
+  ("Eve A Riskin" became "Eve a Riskin").
 */ -}}
 
 {{- $page := . -}}
@@ -68,9 +71,9 @@
           <a class="author-lab-member" href="{{ $member_url }}">{{ .LinkTitle }}</a>
         {{- else if .RelPermalink -}}
           {{- /* Effectively check the page's `_build` option as `_build` is not exposed in Hugo's Page object. */ -}}
-          <a href="{{.RelPermalink}}">{{.LinkTitle}}</a>
+          <a href="{{.RelPermalink}}">{{ $name | default .LinkTitle }}</a>
         {{- else -}}
-          {{ .LinkTitle }}
+          {{ $name | default .LinkTitle }}
         {{- end -}}
       </span>
       {{- if isset $page.Params "author_notes" -}}

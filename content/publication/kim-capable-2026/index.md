@@ -41,8 +41,8 @@ abstract: Agents, language model-based systems that can reason, plan and act wit
   configurations on SWE-bench Verified and Terminal-Bench. We therefore interpret
   this threshold as a practical selection rule rather than a universal scaling principle.
   A second effect, baseline-scaled error amplification, survives cluster-robust inference
-  (Probust = 0.030) and supports the failure-mode taxonomy. The fitted model achieves
-  cross-validated R2 = 0.373 (0.413 with a task-grounded capability metric) and selects
+  (robust P = 0.030) and supports the failure-mode taxonomy. The fitted model achieves
+  cross-validated R² = 0.373 (0.413 with a task-grounded capability metric) and selects
   the best architecture in 87% of held-out configurations. These results provide a
   quantitative framework for within-domain architecture selection and for estimating
   when multi-agent coordination is likely to improve performance or add overhead.
