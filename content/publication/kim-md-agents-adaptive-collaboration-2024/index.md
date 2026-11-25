@@ -19,7 +19,7 @@ publication: '*Advances in Neural Information Processing Systems*'
 publication_short: '*NeurIPS*'
 links:
 - name: URL
-  url: https://proceedings.neurips.cc/paper_files/paper/2024/hash/90d1fc07f46e31387978b88e7e057a31-Abstract-Conference.html
+  url: https://github.com/mitmedialab/MDAgents
 directions:
   - personal-health-agents
   - clinician-ai-collaboration

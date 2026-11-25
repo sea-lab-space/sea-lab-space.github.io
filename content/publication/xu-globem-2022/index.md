@@ -43,7 +43,7 @@ abstract: Recent research has demonstrated the capability of behavior signals ca
   algorithms.
 links:
 - name: URL
-  url: https://proceedings.neurips.cc/paper_files/paper/2022/hash/9c7e8a0821dfcb58a9a83cbd37cc8131-Abstract-Datasets_and_Benchmarks.html
+  url: https://the-globem.github.io/
 directions:
   - human-centered-evaluation
   - human-centered-health-foundation-models
