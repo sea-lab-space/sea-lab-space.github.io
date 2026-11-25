@@ -1,0 +1,85 @@
+{{- /*
+  One paper in the Publications page list (`layouts/section/publication.html`).
+  Input: the usual view dict, (dict "page" $page "item" $item "index" $i).
+
+  It keeps the look of `views/citation_custom.html` (the view this page used
+  before): bold title, grey author line, "Year. Venue.", award badges, and the
+  Cite / PDF / DOI buttons. What is different:
+  * The venue is always the full `publication` string. `publication_short` is
+    for the Research cards and is ignored here, so every row reads the same.
+  * `authors_display` (e.g. "Rui Yang et al.") replaces the author line.
+  * Author lists longer than $long_list names show the condensed form (first
+    author, lab members, last author). In both cases the full list sits in a
+    native <details> right below, so it stays one click away, works without
+    JS, and its names still match the search box.
+  * The wrapper carries the data the filter script reads: year, type bucket,
+    direction ids, and one lowercase-able search string.
+*/ -}}
+{{- $item := .item -}}
+{{- $has_attachments := partial "functions/has_attachments" $item -}}
+{{- $bucket := partial "functions/get_pub_type_bucket.html" $item -}}
+{{- $year := $item.Date.Format "2006" -}}
+{{- $names := $item.Params.authors | default slice -}}
+{{- $count := len $names -}}
+
+{{- /* Above this many authors the list view condenses the line. 40 keeps every
+       ordinary paper in full and only folds consortium-sized ones (Agents'
+       Last Exam has 262). */ -}}
+{{- $long_list := 40 -}}
+{{- $condense := or $item.Params.authors_display (gt $count $long_list) -}}
+
+{{- /* Search text: title, year, venue, every author as written on the paper,
+       lab members' profile names (so "Orson" finds Xuhai "Orson" Xu), and
+       `authors_display`. The script lowercases and strips accents. */ -}}
+{{- $search := slice $item.Title $year -}}
+{{- with $item.Params.publication }}{{ $search = $search | append (. | markdownify | plainify | htmlUnescape) }}{{ end -}}
+{{- with $item.Params.authors_display }}{{ $search = $search | append . }}{{ end -}}
+{{- range $names }}{{ $search = $search | append (string .) }}{{ end -}}
+{{- range $item.GetTerms "authors" }}{{ if .File }}{{ $search = $search | append .LinkTitle }}{{ end }}{{ end -}}
+
+<div class="pub-list-item view-citation pub-item"
+     data-year="{{ $year }}"
+     data-type="{{ $bucket }}"
+     data-directions="{{ delimit ($item.Params.directions | default slice) " " }}"
+     data-search="{{ delimit $search " " }}">
+  <i class="far fa-file-alt pub-icon" aria-hidden="true"></i>
+  <b><a href="{{ $item.RelPermalink }}" class="underline">{{ $item.Title }}</a></b><br/>
+
+  {{- if $condense }}
+  <span class="article-metadata li-cite-author pub-authors">
+    {{- with $item.Params.authors_display -}}
+      {{ . }}
+    {{- else -}}
+      {{ partial "page_metadata_authors" (dict "page" $item "abbreviate" true) }}
+    {{- end -}}
+  </span>
+  <details class="pub-authors-all">
+    <summary>
+      <span class="pub-authors-all__more">Show all {{ $count }} authors</span>
+      <span class="pub-authors-all__less">Show fewer authors</span>
+    </summary>
+    <span class="article-metadata li-cite-author pub-authors">
+      {{- partial "page_metadata_authors" $item -}}
+    </span>
+  </details>
+  {{- else if $count }}
+  <span class="article-metadata li-cite-author pub-authors">
+    {{- partial "page_metadata_authors" $item -}}
+  </span><br/>
+  {{- end }}
+
+  {{- /* "Year. Venue." with no doubled period when the venue is an
+         abbreviation that already ends in one ("…Ubiquitous Technol."). */}}
+  <span class="pub-venue">
+    {{- $year -}}.
+    {{ with $item.Params.publication }}{{ $venue := . | markdownify }}{{ $venue }}{{ if not (strings.HasSuffix (trim ($venue | plainify) " \n") ".") }}.{{ end }}{{ end }}
+  </span>
+
+  {{ partial "award_icons.html" $item }}
+
+  {{ if $has_attachments }}
+  <div class="flex space-x-3">
+    {{ partial "page_links" (dict "page" $item "is_list" 1) }}
+  </div>
+  {{ end }}
+</div>

@@ -1,0 +1,83 @@
+{{- /*
+  Author list for a publication (or any page with `authors:`).
+
+  Site override of the theme's `page_metadata_authors.html`, copied from
+  blox-bootstrap v5 at the pinned commit 41bd113535e8 and then edited. The theme
+  calls it for the author line on paper pages (via `page_metadata.html`) and in
+  every list view (`views/*.html`), so this one file decides how names look
+  everywhere.
+
+  What changed from the theme:
+  * Lab members are bold links to their profile:
+    `<a class="author-lab-member" href="/author/<folder>/">Name</a>`.
+    "Lab member" means the name as written on the paper matches a folder in
+    `content/authors/` (the shared rule in `functions/lab_member_url.html`, the
+    same one `scripts/check_author_links.py` enforces). The bold weight itself
+    comes from `.author-lab-member` in `assets/scss/custom.scss`.
+  * Everyone else keeps the theme's behaviour, a plain link to the auto-made
+    `/author/<name>/` page, as do `highlight_name` and `author_notes`.
+  * An optional condensed form for very long lists, used by the Publications
+    page only (see below).
+
+  Input, either of:
+  * a Page, which is how the theme calls it. Renders the full list.
+  * (dict "page" $page "abbreviate" true), which renders the first author,
+    every lab member, and the last author, with "…" for each skipped run. This
+    is the same rule the Research cards use, so a 262-author paper still shows
+    who in the lab worked on it without a 20-line wall of names.
+
+  Names display as the theme shows them: a member's profile title (e.g.
+  `Xuhai "Orson" Xu`), otherwise the name as written on the paper.
+*/ -}}
+
+{{- $page := . -}}
+{{- $abbreviate := false -}}
+{{- if reflect.IsMap . -}}
+  {{- $page = .page -}}
+  {{- $abbreviate = .abbreviate | default false -}}
+{{- end -}}
+
+{{- $taxonomy := "authors" }}
+{{ if $page.Param $taxonomy }}
+  {{- /* `.GetTerms` returns the term pages in front-matter order, so index i
+         of the terms is index i of `authors:`, the name as written. */ -}}
+  {{- $names := $page.Params.authors -}}
+  {{- $terms := $page.GetTerms $taxonomy -}}
+  {{- $last := sub (len $terms) 1 -}}
+  {{- $prev_shown := -1 -}}
+  {{ range $index, $value := $terms }}
+    {{- $name := "" -}}
+    {{- if lt $index (len $names) }}{{ $name = index $names $index }}{{ end -}}
+    {{- $member_url := partial "functions/lab_member_url.html" $name -}}
+
+    {{- /* Condensed form: keep the ends and every lab member, skip the rest. */ -}}
+    {{- $show := true -}}
+    {{- if $abbreviate -}}
+      {{- $show = or (eq $index 0) (eq $index $last) (ne $member_url "") -}}
+    {{- end -}}
+
+    {{- if $show -}}
+      {{- if gt $index 0 }}, {{ end -}}
+      {{- if gt (sub $index $prev_shown) 1 }}…, {{ end -}}
+      {{- $prev_shown = $index -}}
+
+      {{- /* Highlight the author's name? (theme behaviour, set on a profile) */ -}}
+      {{- $highlight_name := .Page.Params.highlight_name | default false -}}
+      <span {{ if $highlight_name }}class="author-highlighted"{{end}}>
+        {{- if $member_url -}}
+          <a class="author-lab-member" href="{{ $member_url }}">{{ .LinkTitle }}</a>
+        {{- else if .RelPermalink -}}
+          {{- /* Effectively check the page's `_build` option as `_build` is not exposed in Hugo's Page object. */ -}}
+          <a href="{{.RelPermalink}}">{{.LinkTitle}}</a>
+        {{- else -}}
+          {{ .LinkTitle }}
+        {{- end -}}
+      </span>
+      {{- if isset $page.Params "author_notes" -}}
+        {{- with (index $page.Params.author_notes $index) -}}
+          <i class="author-notes fas fa-info-circle" data-toggle="tooltip" title="{{.}}"></i>
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

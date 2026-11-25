@@ -1,0 +1,44 @@
+{{- /*
+  Publications-page type bucket for one publication.
+  Input: a publication Page.
+  Returns one of "journal", "conference", "workshop-poster", "preprint", or
+  "other" (a type with no chip, shown under "All" only).
+
+  The rules, checked in this order:
+  1. Preprint: the CSL type is `manuscript` (or `article`, which the theme
+     labels "Preprint"), or the venue names arXiv. An arXiv venue wins even
+     when the bib calls the entry a journal article.
+  2. Journal: `article-journal`.
+  3. Conference: `paper-conference`, unless the venue says Extended Abstracts,
+     Adjunct, Workshop, Poster, Late-Breaking, or Doctoral Consortium, which
+     makes it Workshop & Poster.
+  4. Anything else (thesis, chapter, report, no type at all) is "other".
+
+  Only the full `publication` venue is read, never `publication_short`, so the
+  bucket does not change when someone adds a short venue for the cards.
+  To see where a paper landed, look at `data-type` on its row in the built
+  /publication/ page. A paper in the wrong bucket is usually a wrong
+  `publication_types` or venue in the bib, so fix it there, not here.
+*/ -}}
+{{- $csl := "" -}}
+{{- with .Params.publication_types -}}
+  {{- if reflect.IsSlice . -}}
+    {{- $csl = index . 0 | string -}}
+  {{- else -}}
+    {{- $csl = . | string -}}
+  {{- end -}}
+{{- end -}}
+{{- $venue := .Params.publication | default "" | string -}}
+
+{{- $bucket := "other" -}}
+{{- if or (in (slice "manuscript" "article") $csl) (findRE `(?i)\barxiv\b` $venue 1) -}}
+  {{- $bucket = "preprint" -}}
+{{- else if eq $csl "article-journal" -}}
+  {{- $bucket = "journal" -}}
+{{- else if eq $csl "paper-conference" -}}
+  {{- $bucket = "conference" -}}
+  {{- if findRE `(?i)extended abstracts|adjunct|workshop|poster|late[- ]?breaking|doctoral consortium` $venue 1 -}}
+    {{- $bucket = "workshop-poster" -}}
+  {{- end -}}
+{{- end -}}
+{{- return $bucket -}}

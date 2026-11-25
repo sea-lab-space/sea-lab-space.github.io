@@ -503,3 +503,321 @@
     transform: none;
   }
 }
+
+// ---- Publications page and lab-member names (T4) ----
+//
+// The /publication/ list is `layouts/section/publication.html`, one row per
+// paper from `layouts/partials/views/publication_list_item.html`, filtered by
+// `assets/js/publication-filters.js`. The author-name rule at the top of this
+// block is site-wide.
+
+// Lab members' names, bold in every author list: paper pages, this list, the
+// other list views, and the Research cards. The class comes from
+// `layouts/partials/page_metadata_authors.html` (and the cards' own markup),
+// and only this block defines it, so change the weight here and nowhere else.
+.author-lab-member {
+  font-weight: 700;
+}
+
+// Inside the theme's grey metadata line, the theme greys every link to
+// rgba(0, 0, 0, 0.54). Bold alone at that grey sits just under the 4.5:1
+// contrast bar on the page background, so members get a darker grey. Hover
+// keeps the theme's primary blue.
+.article-metadata a.author-lab-member {
+  color: rgba(0, 0, 0, 0.75);
+
+  &:hover,
+  &:focus {
+    color: #003373;
+  }
+}
+
+// Filter panel: search box, a row of direction chips, a row of type chips, and
+// the "Showing N of M papers" line. A white card so the controls read as one
+// unit against the grey page. Hidden without JS by a <noscript> style in the
+// template, because the chips cannot do anything then.
+.pub-filters {
+  margin: 0.5rem 0 0;
+  padding: 1.25rem 1.25rem 0.85rem;
+  background: #fff;
+  border: 1px solid rgba(0, 51, 115, 0.12);
+  border-radius: 8px;
+}
+
+.pub-search {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+// The magnifier sits inside the input's left padding and ignores clicks, so
+// clicking it still focuses the field.
+.pub-search__icon {
+  position: absolute;
+  top: 50%;
+  left: 0.9rem;
+  transform: translateY(-50%);
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 0.85rem;
+  pointer-events: none;
+}
+
+.pub-search__input {
+  height: auto;
+  padding: 0.45rem 0.9rem 0.45rem 2.4rem;
+  font-size: 0.95rem;
+  border-radius: 6px;
+
+  &:focus {
+    border-color: #3A8FB7;
+    box-shadow: 0 0 0 0.2rem rgba(58, 143, 183, 0.25);
+  }
+}
+
+// One labelled row of chips. The label sits in a fixed column beside the
+// chips, so both rows line up.
+.pub-filter-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem 1rem;
+  margin-bottom: 0.6rem;
+}
+
+.pub-filter-label {
+  flex: 0 0 5.25rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.pub-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+// The chips are toggle buttons: `aria-pressed="true"` marks the active one in
+// each row, and the same attribute drives the filled style, so what a screen
+// reader hears and what the eye sees cannot drift apart.
+.pub-chip {
+  padding: 0.25rem 0.8rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.4;
+  white-space: nowrap;
+  color: #003373;
+  background: #fff;
+  border: 1px solid rgba(0, 51, 115, 0.35);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    color: #3A8FB7;
+    border-color: #3A8FB7;
+  }
+
+  // Bootstrap's reboot drops the outline for mouse focus only. Keyboard focus
+  // gets a clear accent ring that also shows on the filled (active) chip.
+  &:focus-visible {
+    outline: 2px solid #3A8FB7;
+    outline-offset: 2px;
+  }
+
+  &[aria-pressed="true"] {
+    color: #fff;
+    background: #003373;
+    border-color: #003373;
+
+    &:hover {
+      color: #fff;
+      background: #00285c;
+      border-color: #00285c;
+    }
+  }
+}
+
+// The live count, plus a "Clear filters" link that only shows while something
+// is filtered.
+.pub-filter-status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 1rem;
+  margin-top: 0.85rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  font-size: 0.9rem;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.pub-count {
+  margin: 0;
+
+  strong {
+    color: #003373;
+  }
+}
+
+.pub-reset {
+  padding: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #003373;
+  text-decoration: underline;
+  background: none;
+  border: 0;
+  cursor: pointer;
+
+  &:hover {
+    color: #3A8FB7;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #3A8FB7;
+    outline-offset: 2px;
+  }
+}
+
+// Year groups. The heading carries the year and a muted count that the script
+// keeps in step with the filters. The script hides a whole group when nothing
+// in it matches. The gap lives on the group, not the heading, so a hidden
+// group (display: none) takes its gap with it.
+.pub-year {
+  margin-top: 2rem;
+}
+
+.pub-year__heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0 0 1rem;
+  padding-bottom: 0.4rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #003373;
+  border-bottom: 2px solid rgba(0, 51, 115, 0.15);
+}
+
+.pub-year__count {
+  font-size: 0.85rem;
+  font-weight: 400;
+  white-space: nowrap;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+// One paper. These are the values `views/citation_custom.html` used to set
+// inline, kept so the list looks the same as before.
+.pub-item {
+  margin-bottom: 1.25rem;
+
+  .pub-authors,
+  .pub-venue {
+    font-size: medium;
+  }
+
+  .pub-authors {
+    color: gray;
+  }
+}
+
+// Long author lists (Agents' Last Exam has 262 names) and `authors_display`
+// papers show a short line plus this native disclosure with the full list.
+// <details> needs no JS, and the browser handles keyboard and screen readers.
+.pub-authors-all {
+  margin: 0.15rem 0 0.25rem;
+
+  > summary {
+    width: max-content;
+    max-width: 100%;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #003373;
+    cursor: pointer;
+
+    &::marker {
+      color: #3A8FB7;
+    }
+
+    &:hover {
+      color: #3A8FB7;
+    }
+
+    &:focus-visible {
+      outline: 2px solid #3A8FB7;
+      outline-offset: 2px;
+    }
+  }
+
+  .pub-authors-all__less {
+    display: none;
+  }
+
+  &[open] {
+    .pub-authors-all__more {
+      display: none;
+    }
+
+    .pub-authors-all__less {
+      display: inline;
+    }
+  }
+}
+
+// Once the full list is open, the short line above it is redundant.
+.pub-item .pub-authors:has(+ .pub-authors-all[open]) {
+  display: none;
+}
+
+.pub-empty {
+  margin-top: 2rem;
+  padding: 2.5rem 1rem;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.6);
+  background: #fff;
+  border: 1px dashed rgba(0, 51, 115, 0.25);
+  border-radius: 8px;
+
+  p {
+    margin-bottom: 0.75rem;
+  }
+}
+
+// Phones: each label goes above its chips, and each chip row becomes a single
+// line that scrolls sideways instead of wrapping into a tall block (the same
+// rule as the Research page chip bar). The row bleeds to the panel's edges so
+// the cut-off chip at the right hints that there is more.
+@media (max-width: 575.98px) {
+  .pub-filters {
+    padding: 1rem 1rem 0.75rem;
+  }
+
+  .pub-filter-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pub-filter-label {
+    flex-basis: auto;
+  }
+
+  .pub-chips {
+    flex-wrap: nowrap;
+    margin: 0 -1rem;
+    padding: 3px 1rem 5px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .pub-year__heading {
+    font-size: 1.35rem;
+  }
+}

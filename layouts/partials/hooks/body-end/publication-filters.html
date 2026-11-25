@@ -1,0 +1,18 @@
+{{- /*
+  Body-end hook: the Publications page filter script (T4).
+  The theme renders every file in this folder at the end of <body> on every
+  page (blox-core `get_hook`), with the page as context. This one only emits
+  the script where `layouts/section/publication.html` asked for it.
+
+  The script lives in `assets/js/publication-filters.js` so Hugo can bundle,
+  minify, and (in production) fingerprint it, the same way the theme loads its
+  own scripts. Note: a stray .DS_Store in this folder breaks the build, because
+  the hook renders every file it finds.
+*/ -}}
+{{- if .Store.Get "has_pub_filters" -}}
+  {{- $js := resources.Get "js/publication-filters.js" | js.Build (dict "minify" true "target" "es2017") -}}
+  {{- if hugo.IsProduction -}}
+    {{- $js = $js | fingerprint "sha256" -}}
+  {{- end }}
+<script src="{{ $js.RelPermalink }}" defer{{ with $js.Data.Integrity }} integrity="{{ . }}" crossorigin="anonymous"{{ end }}></script>
+{{- end -}}
