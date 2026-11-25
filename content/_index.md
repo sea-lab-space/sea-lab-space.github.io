@@ -21,14 +21,14 @@ sections:
       text: |
         <div class="sea-hero__mission">
 
-        The **SEA Lab** (**S**ense, **E**mpower, **A**ugment) at Columbia University, led by [Dr. Xuhai "Orson" Xu](https://orsonxu.com), is an HCI lab building human-centered AI that helps people live healthier lives and helps health experts make better decisions.
+        The **SEA Lab** (**S**ense, **E**mpower, **A**ugment) at Columbia University, led by [Dr. Xuhai "Orson" Xu](https://orsonxu.com), designs and builds human-centered and AI-powered methods that help people live healthier lives and empower health experts to make better decisions.
 
         </div>
         <div class="sea-pillars">
           <div class="sea-pillar">
             {{<figure src="sense.png" alt="" lightbox="false">}}
             <h2 class="sea-pillar__title">Sense</h2>
-            <p class="sea-pillar__text">Collecting and integrating data from everyday devices and medical systems to build a complete picture of personal health.</p>
+            <p class="sea-pillar__text">Integrating data from everyday devices and health systems to build a holistic picture of personal health.</p>
             {{< pillar-directions sense >}}
           </div>
           <div class="sea-pillar">
@@ -40,14 +40,13 @@ sections:
           <div class="sea-pillar">
             {{<figure src="augment.png" alt="" lightbox="false">}}
             <h2 class="sea-pillar__title">Augment</h2>
-            <p class="sea-pillar__text">Developing human-centered systems that promote healthy behaviors, enhance capabilities, and improve well-being.</p>
+            <p class="sea-pillar__text">Developing human-centered methods to promote healthy behaviors, enhance capabilities, and improve well-being.</p>
             {{< pillar-directions augment >}}
           </div>
         </div>
 
-        Learn more about our five research directions on the [Research](/research/) page, and browse all our papers on the [Publication](/publication/) page.
+        Learn more about our research directions on the [Research](/research/) page, and browse all our papers on the [Publication](/publication/) page.
 
-        SEA Lab is grateful for support from NSF, NIH, Columbia University, Google, OpenAI, NVIDIA, and Meta.
     design:
       columns: '1'
       css_class: sea-hero section-title-left-aligned

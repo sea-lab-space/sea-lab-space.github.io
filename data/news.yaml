@@ -35,19 +35,19 @@
 
 - date: "2026-11"
   type: people
-  text: "We're thrilled for [Blue](/author/georgianna-lin/), who co-founded [nuri](https://nurihealth.ai/), an exciting new startup using data and AI for women's health! We're so glad to see our lab members bring their work out into the world."
+  text: "We're thrilled for our lab member [Blue](/author/georgianna-lin/) for her next thrilling chapter: she co-founded [nuri](https://nurihealth.ai/), an exciting new startup using data and AI for women's health! We are so proud to see Blue bring her work out into the world."
 - date: "2026-11"
   type: people
-  text: "Congratulations to [Will](/author/will-ke-wang/) on his new role as Associate Research Scientist at Columbia's Mailman School of Public Health, where he supports AI and agent research!"
+  text: "Congratulations to one of the earliest lab members [Will](/author/will-ke-wang/) on his new role as Associate Research Scientist at Columbia's Mailman School of Public Health, where he continues to lead health AI and agent research!"
 - date: "2026-11"
   type: award
-  text: "Congratulations to [Zhihan](/author/zhihan-jiang/) on being selected as a [UW Rising Star in EECS](https://risingstars.cs.washington.edu/)!"
+  text: "Congratulations to our amazing lab member [Zhihan](/author/zhihan-jiang/) on being selected as a [UW Rising Star in EECS](https://risingstars.cs.washington.edu/)!"
 - date: "2026-10"
   type: paper
-  text: "Excited to share that our paper [The Anatomy of a Personal Health Agent](/publication/heydari-anatomy-personal-health-2025-a/) is published in *Nature*! It supports **[the science behind Google Health Coach](https://healthapp.google/our-research/)**."
+  text: "Excited to share that our paper [The Anatomy of a Personal Health Agent](/publication/heydari-anatomy-personal-health-2025-a/) is published in *Nature*! It supports [the science behind Google Health Coach](https://healthapp.google/our-research/)."
 - date: "2026-09"
   type: paper
-  text: "Excited to share that our paper [Divergent impacts of explainable AI for dermatological diagnosis on clinicians versus lay people](/publication/xu-divergent-2026/) is published in *Nature Medicine*! AI explanations helped physicians but led lay people to over-rely on the AI."
+  text: "Excited to share that our paper [Divergent impacts of explainable AI for dermatological diagnosis on clinicians versus lay people](/publication/xu-divergent-2026/) is published in *Nature Medicine*!"
 - date: "2026-09"
   type: paper
   text: "Excited to share that our paper [DUET](/publication/hu-duet-2026/) is accepted at *NeurIPS 2026*! It trains reasoning models better and faster on the same compute budget."
@@ -59,13 +59,10 @@
   text: "New NSF award: [Human-AI Teaming for Health Coaching](https://www.nsf.gov/awardsearch/show-award?AWD_ID=2615689) (Orson as Co-PI)."
 - date: "2026-07"
   type: grant
-  text: "New NIH R01, with Orson as site PI (Co-I): [MindGuard: Early Prediction of Post-Concussion Mental Health Sequelae in Youth with a Multimodal AI System](https://reporter.nih.gov/project-details/11274912) (NICHD)."
-- date: "2026-07"
-  type: paper
-  text: "Excited to share that our paper [Capable language models can outgrow the benefits of collaboration](/publication/kim-capable-2026/) is published in *Nature Machine Intelligence*! Past a capability threshold, adding more agents rarely helps."
+  text: "New NIH NICHD R01: [MindGuard: Early Prediction of Post-Concussion Mental Health Sequelae in Youth with a Multimodal AI System](https://reporter.nih.gov/project-details/11274912) (Orson as site PI, Co-I)."
 - date: "2026-05"
   type: paper
-  text: "Excited to share that our perspective [A Framework for Longitudinal Health AI Agents](/publication/lin-framework-2026/) is published in *Nature Health*! It lays out how health AI agents can support people over time."
+  text: "Excited to share that our perspective [A Framework for Longitudinal Health AI Agents](/publication/lin-framework-2026/) is published in *Nature Health*!"
 - date: "2026-04"
   type: award
   text: "Congratulations to [Ruishi](/author/ruishi-zou/), [Shiyu](/author/shiyu-xu/), and [Millie](/author/millie-mengyuan-wu/)! [MIND](/publication/zou-mind-2026/) and [MindfulAgents](/publication/wu-mindfulagents-2026/) both received Best Paper Honorable Mention Awards at CHI 2026."
