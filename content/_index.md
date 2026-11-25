@@ -63,7 +63,7 @@ sections:
   # separate "Meet the Team" banner. The photo is the block background, and the
   # text sits on a white, mostly opaque panel so it stays easy to read. The two
   # buttons sit to the right of the text on wide screens and below it on
-  # phones. Styles: `.sea-join` in `assets/scss/custom.scss`. Keep the panel
+  # tablets and phones. Styles: `.sea-join` in `assets/scss/custom.scss`. Keep the panel
   # markup free of blank lines, except around the markdown text, because a
   # blank line ends a raw HTML block in markdown.
   - block: markdown
@@ -85,7 +85,7 @@ sections:
 
         </div>
         <div class="sea-join__actions">
-          <a class="btn btn-primary sea-join__btn" href="/joinus/">Open Positions <span aria-hidden="true">→</span></a>
+          <a class="btn btn-primary sea-join__btn" href="/joinus/" aria-label="Read more about joining SEA Lab">Read more <span aria-hidden="true">→</span></a>
           <a class="btn btn-outline-primary sea-join__btn" href="/people/">Meet the Team <span aria-hidden="true">→</span></a>
         </div>
         </div>
