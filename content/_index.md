@@ -6,13 +6,12 @@ type: landing
 
 sections:
 
-  # Hero: the mission line, the three Sense, Empower, and Augment cards, and the
-  # funder sentence. Each card links to its directions' views on the Research
-  # page. `direction_link` reads the label from `data/research_directions.yaml`
-  # and fails the build on an unknown or hidden id, so a renamed direction can't
-  # leave a dead link here. Keep the card markup free of blank lines, because a
-  # blank line ends a raw HTML block in markdown. Styles: `.sea-hero` and
-  # `.sea-pillars` in `assets/scss/custom.scss`.
+  # Hero: the mission line, the three Sense, Empower, and Augment cards, one
+  # sentence pointing to the Research and Publication pages, and the funder
+  # sentence. Kept deliberately plain: no buttons, so it reads as a short
+  # overview. Keep the card markup free of blank lines, because a blank line
+  # ends a raw HTML block in markdown. Styles: `.sea-hero` and `.sea-pillars`
+  # in `assets/scss/custom.scss`.
   - block: markdown
     id: overview
     content:
@@ -28,27 +27,22 @@ sections:
             {{<figure src="sense.png" alt="" lightbox="false">}}
             <h2 class="sea-pillar__title">Sense</h2>
             <p class="sea-pillar__text">Collecting and integrating data from everyday devices and medical systems to build a complete picture of personal health.</p>
-            <p class="sea-pillar__links">{{< direction_link "human-centered-health-foundation-models" >}}</p>
           </div>
           <div class="sea-pillar">
             {{<figure src="empower.png" alt="" lightbox="false">}}
             <h2 class="sea-pillar__title">Empower</h2>
             <p class="sea-pillar__text">Creating AI agents and tools that turn health data into actionable insight and informed decisions.</p>
-            <p class="sea-pillar__links">{{< direction_link "personal-health-agents" >}} {{< direction_link "clinician-ai-collaboration" >}}</p>
           </div>
           <div class="sea-pillar">
             {{<figure src="augment.png" alt="" lightbox="false">}}
             <h2 class="sea-pillar__title">Augment</h2>
             <p class="sea-pillar__text">Developing human-centered systems that promote healthy behaviors, enhance capabilities, and improve well-being.</p>
-            <p class="sea-pillar__links">{{< direction_link "adaptive-interventions" >}}</p>
           </div>
         </div>
 
-        Across all three, we hold health AI to a high bar through [human-centered benchmarks and real-world evaluation](/research/?direction=human-centered-evaluation).
+        Learn more about our five research directions on the [Research](/research/) page, and browse all our papers on the [Publication](/publication/) page.
 
         SEA Lab is grateful for support from the National Science Foundation (NSF), the National Institutes of Health (NIH), Google, OpenAI, NVIDIA, and Meta.
-
-        For more details, please visit our <u>[Research Direction](/research/)</u> and <u>[Publication](/publication/)</u> pages.
     design:
       columns: '1'
       css_class: sea-hero section-title-left-aligned
@@ -65,11 +59,22 @@ sections:
     design:
       css_class: section-title-left-aligned
 
+  # Join Us, set on the campus photo (CUIMC and Columbia CS) that used to be a
+  # separate "Meet the Team" banner. The photo is the block background, and the
+  # text sits on a white, mostly opaque panel so it stays easy to read. The two
+  # buttons sit to the right of the text on wide screens and below it on
+  # phones. Styles: `.sea-join` in `assets/scss/custom.scss`. Keep the panel
+  # markup free of blank lines, except around the markdown text, because a
+  # blank line ends a raw HTML block in markdown.
   - block: markdown
+    id: join-us
     content:
-      title: 'Join Us'
-      subtitle: 
+      title:
       text: |
+        <div class="sea-join">
+        <div class="sea-join__text">
+        <h1 class="sea-join__title">Join Us</h1>
+
         We are excited to welcome passionate and self-motivated researchers to join our team!
 
         **Postdoc**: We have 0-1 talented postdoc position with a flexible start date.
@@ -78,33 +83,24 @@ sections:
 
         **General Opportunities**: We always welcome enthusiastic students and research interns who want to make an impact with us.
 
-        More details can be found in the <u>[JOIN US](/joinus/)</u> page.
-
-    design:
-      columns: '1'
-      # css_style: 'text-align: justify'
-      css_class: justify-text, section-title-left-aligned
-
-  - block: markdown
-    content:
-      title:
-      subtitle:
-      text: |
-        {{% cta cta_link="./people/" cta_text="**Meet the Team →**" %}}
+        </div>
+        <div class="sea-join__actions">
+          <a class="btn btn-primary sea-join__btn" href="/joinus/">Open Positions <span aria-hidden="true">→</span></a>
+          <a class="btn btn-outline-primary sea-join__btn" href="/people/">Meet the Team <span aria-hidden="true">→</span></a>
+        </div>
+        </div>
     design:
       columns: '1'
       background:
-        image: 
+        image:
           filename: cuimc-cs.jpeg
           filters:
-            brightness: 0.7
+            brightness: 1
           parallax: false
           position: center
           size: cover
-          text_color_light: true
-      spacing:
-        padding: ['280px', '0', '20px', '0']
-      css_class: "intro-image-banner"
+          text_color_light: false
+      css_class: sea-join-section
 
   # Funder logos. Images live in `static/uploads/funders/` (published verbatim, no
   # Hugo image processing needed for SVG); the row is styled by `.funder-logos`

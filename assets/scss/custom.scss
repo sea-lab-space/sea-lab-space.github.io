@@ -1025,9 +1025,7 @@ html {
   margin: 1.75rem 0 2rem;
 }
 
-// Each card is a flex column with the links pushed to the bottom, so the link
-// rows line up across the three cards even when their texts wrap to different
-// lengths.
+// Each card is a flex column: image, title, then text, centred.
 .sea-pillar {
   display: flex;
   flex-direction: column;
@@ -1057,10 +1055,9 @@ html {
   font-weight: 700;
 }
 
-// Links inside the hero's sentences are underlined, to match the `<u>`-wrapped
-// links in the closing line of the same block. The theme's link blue alone is
-// hard to tell from the body text. The direction pills are excluded.
-.sea-hero p > a:not(.direction-link) {
+// Links inside the hero's sentences are underlined. The theme's link blue
+// alone is hard to tell from the body text.
+.sea-hero p > a {
   text-decoration: underline;
 }
 
@@ -1071,43 +1068,6 @@ html {
 .sea-hero .sea-pillar p.sea-pillar__text {
   margin-bottom: 0.75rem;
   text-align: center;
-}
-
-.sea-hero .sea-pillar p.sea-pillar__links {
-  margin: auto 0 0;
-  text-align: center;
-}
-
-// The direction links under each card, drawn as small outlined pills in the
-// theme's accent colour so they read as "go to this part of the Research page"
-// rather than as words in the sentence above. The label and the URL come from
-// `layouts/shortcodes/direction_link.html`. Filled with the primary blue on
-// hover and focus, with a visible outline for keyboard users.
-.sea-pillar__links .direction-link {
-  display: inline-block;
-  margin: 0.2rem 0.15rem;
-  padding: 0.15rem 0.8rem;
-  border: 1px solid #3A8FB7;
-  border-radius: 999px;
-  color: #003373;
-  font-size: 0.85em;
-  font-weight: 600;
-  line-height: 1.5;
-  text-decoration: none;
-  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-
-  &:hover,
-  &:focus {
-    background-color: #003373;
-    border-color: #003373;
-    color: #fff;
-    text-decoration: none;
-  }
-
-  &:focus-visible {
-    outline: 2px solid #3A8FB7;
-    outline-offset: 2px;
-  }
 }
 
 // Below 768px three columns get too narrow for the text, so the cards stack.
@@ -1308,5 +1268,103 @@ html {
     .sea-footer__sep {
       display: none;
     }
+  }
+}
+
+// ---- Homepage Join Us on the campus photo (review round) ----
+
+// One section replaces the old "Join Us" text block and the separate photo
+// banner that held only a "Meet the Team" button, which saves most of a
+// screen of scrolling. The campus photo is the block's background
+// (`design.background` in `content/_index.md`). The text sits on a white panel
+// at 88% opacity, so the photo shows around and faintly through it while the
+// text keeps full contrast. A light blur behind the panel softens the busy
+// photo where the browser supports it.
+.sea-join-section {
+  padding: 4.5rem 0;
+  overflow: hidden;
+}
+
+// `cuimc-cs.jpeg` has a white band about 3% tall along its top and bottom
+// edges. The old banner hid it by darkening the photo. Here the photo is shown
+// at full brightness, so it is scaled up 8% inside the section (which clips
+// it), which crops the bands at every width.
+.sea-join-section .home-section-bg {
+  transform: scale(1.08);
+}
+
+.sea-join {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  padding: 2rem 2.5rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  text-align: left;
+}
+
+// `min-width: 0` lets the text column shrink instead of pushing the buttons
+// off the panel when a long word wraps.
+.sea-join__text {
+  flex: 1 1 auto;
+  min-width: 0;
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// The heading lives inside the panel rather than in the theme's section
+// heading, which would sit straight on the photo. It copies the size of the
+// other homepage section titles so the page keeps one rhythm.
+.sea-join__title {
+  margin: 0 0 1rem;
+  font-size: 2.25rem;
+}
+
+// The two buttons stack in a column to the right of the text, at one width so
+// they read as a pair.
+.sea-join__actions {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sea-join__btn {
+  min-width: 12rem;
+  font-weight: 600;
+}
+
+// Phones and small tablets: the buttons move under the text and share a row,
+// and the panel and the photo margins tighten to give the text room.
+@media (max-width: 767.98px) {
+  .sea-join-section {
+    padding: 2.5rem 0;
+  }
+
+  .sea-join {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.5rem;
+    padding: 1.5rem 1.25rem;
+  }
+
+  // Matches the theme's smaller section titles on phones.
+  .sea-join__title {
+    font-size: 1.73rem;
+  }
+
+  .sea-join__actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .sea-join__btn {
+    flex: 1 1 10rem;
+    min-width: 0;
   }
 }
