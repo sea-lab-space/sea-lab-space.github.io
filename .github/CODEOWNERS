@@ -1,0 +1,13 @@
+# Code owners for the SEA Lab website.
+#
+# A pull request that changes a file listed here automatically requests a
+# review from its owner. The research directions decide how every paper is
+# filed on the Research and Publications pages, so only Orson approves a new,
+# renamed, or removed direction.
+#
+# This is advisory for now. Lab members can still push straight to main, and a
+# pull request can merge without this review, until branch protection on main
+# turns on "Require review from Code Owners". That is a repository settings
+# decision for Orson.
+
+data/research_directions.yaml @OrsonXu

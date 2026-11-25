@@ -46,6 +46,8 @@ jobs:
             Import the latest publications from `sea-lab-publication.bib` to `content/publication/`.
             将最新的出版物从`sea-lab-publication.bib`导入到`content/publication/`。
             [View Documentation](https://github.com/GetRD/academic-file-converter)
+
+            **Before merging:** add `directions:` to the `index.md` of every new folder (see "Categorize a publication (required)" in README.md). Push them to this branch, which also starts the CI checks. The deploy stops while any publication has no directions.
           base: main
           labels: automated-pr, content
           branch: hugoblox-import-publications

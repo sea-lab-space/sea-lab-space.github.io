@@ -39,6 +39,11 @@ jobs:
         run: |
           pip install --quiet pyyaml
           python scripts/check_author_links.py
+      # A new publication without `directions` stops the deploy here, before the
+      # Hugo build, and the live site stays as it was. See "Categorize a
+      # publication (required)" in README.md.
+      - name: Check that every publication has research directions
+        run: python scripts/check_publication_directions.py
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:

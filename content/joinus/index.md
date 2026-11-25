@@ -19,8 +19,11 @@ sections:
         We are seeking 0-1 highly motivated postdoc to join our team with a **flexible start date**, focusing on the intersection of HCI, Ubiquitous Computing, and applied AI/ML.
 
         The research projects will align with our mutual interests, exploring diverse topics, including but not limited to:
-        - General Population-focused: Developing health prediction models, designing and evaluating well-being interventions, or enhancing human-AI interaction for health promotion.
-        - Health Expert-focused: Advancing clinician-AI collaboration, creating clinical decision support tools, or improving clinical workflows with innovative HCI and AI methodologies.
+        - <u>[Personal Health Agents](/research/?direction=personal-health-agents)</u>
+        - <u>[Adaptive Interventions for Behavior Change](/research/?direction=adaptive-interventions)</u>
+        - <u>[Clinician–AI Collaboration](/research/?direction=clinician-ai-collaboration)</u>
+        - <u>[Human-Centered Multimodal Foundation Models for Health](/research/?direction=human-centered-health-foundation-models)</u>
+        - <u>[Human-Centered Benchmarks and Real-World Evaluation](/research/?direction=human-centered-evaluation)</u>
         - Integration of health data modalities across wearables, clinical data, and genomics.
 
         For more information, please contact Dr. Xu at xx2489 (at) columbia.edu. Additional details can be found on the <u>[job posting](https://apply.interfolio.com/154006)</u> page.
@@ -30,9 +33,11 @@ sections:
         {{< details title="Learn More" >}}
         We are recruiting 1-2 self-motivated Ph.D. students in **Fall 2027**!
         Join us if your research interests include one or more of the following areas:
-        - Applied machine learning and data mining with multimodal behavior data across wearable and medical records.
-        - Intelligent health intervention design and evaluation with real-world deployability.
-        - Clinician-AI collaboration for actionable insights exploration and clinical decision support.
+        - <u>[Personal Health Agents](/research/?direction=personal-health-agents)</u>
+        - <u>[Adaptive Interventions for Behavior Change](/research/?direction=adaptive-interventions)</u>
+        - <u>[Clinician–AI Collaboration](/research/?direction=clinician-ai-collaboration)</u>
+        - <u>[Human-Centered Multimodal Foundation Models for Health](/research/?direction=human-centered-health-foundation-models)</u>
+        - <u>[Human-Centered Benchmarks and Real-World Evaluation](/research/?direction=human-centered-evaluation)</u>
 
         The position can go through either <u>[Biomedical Informatics](https://www.dbmi.columbia.edu/phd-in-biomedical-informatics/)</u> or <u>[Computer Science](https://www.cs.columbia.edu/education/phd/)</u> Ph.D. programs. Please contact Dr. Xu (xx2489 (at) columbia.edu) for more details.
         {{< /details >}}
