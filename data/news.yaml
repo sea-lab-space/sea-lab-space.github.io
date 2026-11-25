@@ -56,10 +56,10 @@
   text: "New course: [BINF 4070 / COMS 4995: The Future of Personal Health Assistant](https://personal-health-agent.github.io/), co-taught with Eugene Wu and cross-listed between Columbia DBMI and Computer Science."
 - date: "2026-08"
   type: grant
-  text: "New NIH R01, with Orson as site PI (Co-I): [MindGuard: Early Prediction of Post-Concussion Mental Health Sequelae in Youth with a Multimodal AI System](https://reporter.nih.gov/project-details/11274912) (NICHD)."
+  text: "New NSF award: [Human-AI Teaming for Health Coaching](https://www.nsf.gov/awardsearch/show-award?AWD_ID=2615689) (Orson as Co-PI)."
 - date: "2026-07"
   type: grant
-  text: "New NSF award: [Human-AI Teaming for Health Coaching](https://www.nsf.gov/awardsearch/show-award?AWD_ID=2615689) (Orson as Co-PI)."
+  text: "New NIH R01, with Orson as site PI (Co-I): [MindGuard: Early Prediction of Post-Concussion Mental Health Sequelae in Youth with a Multimodal AI System](https://reporter.nih.gov/project-details/11274912) (NICHD)."
 - date: "2026-07"
   type: paper
   text: "Excited to share that our paper [Capable language models can outgrow the benefits of collaboration](/publication/kim-capable-2026/) is published in *Nature Machine Intelligence*! Past a capability threshold, adding more agents rarely helps."
