@@ -6,15 +6,7 @@
 # Do NOT add, remove, or rename a direction without Orson's approval.
 # Propose changes in a pull request (CODEOWNERS requests his review).
 
-intro: >-
-  SEA Lab is an HCI lab at heart. We design, build, and deploy human-centered AI
-  that turns the data of everyday life into insight and action. Our work serves
-  two groups of people: (i) **the general population**, including end-users and
-  patients, whom we help live healthier lives every day, and (ii) **health
-  experts**, including physicians, nurses, and other care providers, whom we help
-  make better-informed decisions. Our research spans five directions, from AI
-  agents that partner with people over months to benchmarks that test whether
-  health AI holds up in the real world.
+# The Research page intro lives in content/research/_index.md (its first block).
 
 directions:
   - id: personal-health-agents

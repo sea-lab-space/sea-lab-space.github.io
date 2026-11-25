@@ -17,6 +17,7 @@ publication_types:
 - article-journal
 publication: '*Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous
   Technologies*'
+publication_short: '*IMWUT*'
 doi: 10.1145/3643540
 abstract: Advances in large language models (LLMs) have empowered a variety of applications.
   However, there is still a significant gap in research when it comes to understanding

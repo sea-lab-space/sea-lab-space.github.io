@@ -23,6 +23,7 @@ publishDate: '2026-05-17T03:19:46.634528Z'
 publication_types:
 - article-journal
 publication: '*ACM Trans. Comput. Healthcare*'
+publication_short: '*ACM HEALTH*'
 doi: 10.1145/3788689
 directions:
   - adaptive-interventions

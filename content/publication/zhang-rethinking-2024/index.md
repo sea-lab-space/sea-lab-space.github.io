@@ -18,6 +18,7 @@ publishDate: '2024-09-29T06:40:21.971850Z'
 publication_types:
 - paper-conference
 publication: '*Proceedings of the CHI Conference on Human Factors in Computing Systems*'
+publication_short: '*CHI*'
 doi: 10.1145/3613904.3642343
 links:
 - name: URL

@@ -15,6 +15,7 @@ publication_types:
 - paper-conference
 publication: '*Proceedings of the Annual Meeting of the Association for Computational
   Linguistics*'
+publication_short: '*ACL*'
 doi: 10.18653/v1/2025.acl-long.1017
 directions:
   - personal-health-agents

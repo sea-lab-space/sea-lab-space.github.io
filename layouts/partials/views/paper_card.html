@@ -1,0 +1,102 @@
+{{- /*
+  Paper card for the Research page (T3.4), rendered by blocks/research_directions.html.
+  Input: (dict "item" <publication page>).
+
+  Top to bottom: the 4:3 featured image (or a quiet placeholder with the venue),
+  "Venue · year", award badges, the title (clamped to 3 lines by CSS) and a short
+  author line (clamped to 2 lines). Styles live in the "Research page (T3)"
+  section of assets/scss/custom.scss.
+*/ -}}
+{{- $item := .item -}}
+
+{{- /* Link target, copied from views/compact.html so cards and lists agree:
+       external_link, else the `links` entry named URL, else the DOI, else the
+       paper's own page. External targets open in a new tab. */ -}}
+{{- $link := $item.RelPermalink -}}
+{{- $target := "" -}}
+{{- if $item.Params.external_link -}}
+  {{- $link = $item.Params.external_link -}}
+  {{- $target = "target=\"_blank\" rel=\"noopener\"" -}}
+{{- else if $item.Params.links -}}
+  {{- $foundLink := false -}}
+  {{- range $item.Params.links -}}
+    {{- if (and (not $foundLink) (eq .name "URL") ) -}}
+      {{- $link = .url -}}
+      {{- $target = "target=\"_blank\" rel=\"noopener\"" -}}
+      {{- $foundLink = true -}}
+    {{- end -}}
+  {{- end -}}
+{{- else if $item.Params.doi -}}
+  {{- $link = printf "https://doi.org/%s" $item.Params.doi -}}
+  {{- $target = "target=\"_blank\" rel=\"noopener\"" -}}
+{{- end -}}
+
+{{- /* Venue: the short form when a paper sets one, so long proceedings names
+       don't wrap across the card. Both are markdown (usually *italic*). */ -}}
+{{- $venue := $item.Params.publication_short | default $item.Params.publication | default "" -}}
+{{- $year := $item.Date.Format "2006" -}}
+
+<li class="paper-card">
+  {{- /* The image repeats the title link, so it is skipped by the keyboard and
+         screen readers. The title below is the one real, focusable link. */}}
+  {{- $resource := partial "blox-core/functions/get_featured_image.html" $item }}
+  {{- with $resource }}
+    {{- $image := . }}
+    {{- /* Same processing as views/compact.html: 1000px wide, then WebP. */}}
+    {{- if ne .MediaType.SubType "svg" }}
+      {{- $image = .Resize "1000x" }}
+      {{- if ne $image.MediaType.SubType "gif" }}{{ $image = $image.Process "webp" }}{{ end }}
+    {{- end }}
+  <a class="paper-card__media" href="{{ $link }}" {{ $target | safeHTMLAttr }} tabindex="-1" aria-hidden="true">
+    <img src="{{ $image.RelPermalink }}" alt="" loading="lazy" decoding="async"
+      {{- with $image.Width }} width="{{ . }}"{{ end }}{{ with $image.Height }} height="{{ . }}"{{ end }}>
+  </a>
+  {{- else }}
+  {{- /* No figure yet: a plain 4:3 panel in the primary colour with the venue
+         name. Never stand-in artwork. */}}
+  <a class="paper-card__media paper-card__media--placeholder" href="{{ $link }}" {{ $target | safeHTMLAttr }} tabindex="-1" aria-hidden="true">
+    <span class="paper-card__placeholder-text">{{ $venue | markdownify }}</span>
+  </a>
+  {{- end }}
+
+  <div class="paper-card__body">
+    <div class="paper-card__venue">
+      {{- with $venue }}{{ . | markdownify }} · {{ end }}{{ $year -}}
+    </div>
+
+    {{- partial "award_icons.html" $item }}
+
+    <h3 class="paper-card__title">
+      <a href="{{ $link }}" title="{{ $item.Title }}" {{ $target | safeHTMLAttr }}>{{ $item.Title }}</a>
+    </h3>
+
+    <p class="paper-card__authors">
+    {{- with $item.Params.authors_display }}
+      {{- . }}
+    {{- else }}
+      {{- /* First author, every lab member, and the last author, in paper
+             order. Each run of skipped authors becomes one "…". With 4 or
+             fewer authors everyone is shown. Lab members (a profile in
+             content/authors/) are linked, and T4's .author-lab-member rule
+             makes them bold. */}}
+      {{- $authors := $item.Params.authors | default slice }}
+      {{- $n := len $authors }}
+      {{- $first := true }}
+      {{- $skipping := false }}
+      {{- range $i, $name := $authors }}
+        {{- $url := partialCached "functions/lab_member_url.html" $name $name }}
+        {{- if or (le $n 4) (eq $i 0) (eq $i (sub $n 1)) (ne $url "") }}
+          {{- if not $first }}, {{ end }}
+          {{- with $url }}<a class="author-lab-member" href="{{ . }}">{{ $name }}</a>{{ else }}{{ $name }}{{ end }}
+          {{- $first = false }}
+          {{- $skipping = false }}
+        {{- else if not $skipping }}
+          {{- if not $first }}, {{ end }}…
+          {{- $first = false }}
+          {{- $skipping = true }}
+        {{- end }}
+      {{- end }}
+    {{- end -}}
+    </p>
+  </div>
+</li>

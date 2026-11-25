@@ -98,3 +98,408 @@
     height: 64px;
   }
 }
+
+// ---- Research page (T3) ----
+// The research directions block (`layouts/partials/blocks/research_directions.html`)
+// and its paper cards (`layouts/partials/views/paper_card.html`). The view
+// switching lives in `layouts/partials/hooks/body-end/research-directions.html`.
+//
+// Colours are the theme's own (`data/themes/sea-lab.toml`): #003373 Columbia
+// blue for text and the active chip, #3A8FB7 for hover and focus, #00285c for
+// the pressed blue (as in `template.scss`), plus neutrals.
+
+// The intro block (`id: research-intro`). Its text is one paragraph, and the
+// theme renders a one-paragraph markdown block without a `<p>`, so the
+// justified alignment that `.section-title-left-aligned p` gives every other
+// intro on the site would miss it. This restores the same alignment.
+#research-intro .section-heading + .col-12 {
+  text-align: justify;
+}
+
+// The block keeps the theme's "even" section colour wherever it sits on the
+// page, because the sticky bar below paints the same colour and must match it.
+.home-section.wg-research-directions {
+  background: $sta-home-section-even;
+}
+
+// Chip bar. It sticks directly under the site header while the block scrolls.
+// `--sea-navbar-height` is the header height (defined at the top of this file
+// by the top-bar work, with 84px as the fallback). The theme hides the header
+// when the visitor scrolls down on this page (Headroom adds `headroom--unpinned`
+// to `.page-header`, a sibling just before `.page-body`), and the bar then
+// slides up to the very top, timed like the header's own 200ms slide.
+// The script reads `--research-chipbar-top` to know where the bar sits when
+// the header is showing.
+.research-chipbar {
+  --research-chipbar-top: var(--sea-navbar-height, 84px);
+  position: sticky;
+  top: var(--research-chipbar-top);
+  z-index: 5;
+  margin: 0 0 1.75rem;
+  padding: 0.6rem 0;
+  background: $sta-home-section-even;
+  // Paint the bar edge to edge like the header, not just across the container.
+  // The huge spread shadow fills the sides, and the clip keeps it from
+  // spilling over the cards above and below, except for a 1px rule underneath.
+  box-shadow: 0 0 0 100vmax $sta-home-section-even, 0 1px 0 100vmax rgba(0, 51, 115, 0.12);
+  clip-path: inset(0 -100vmax -1px);
+  transition: top 200ms linear;
+}
+
+.page-header.headroom--unpinned + .page-body .research-chipbar {
+  top: 0;
+}
+
+.research-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.research-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  padding: 0.35rem 0.85rem;
+  border: 1px solid #003373;
+  border-radius: 999px;
+  background: #fff;
+  color: #003373;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.3;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    border-color: #3A8FB7;
+    color: #3A8FB7;
+    text-decoration: none;
+  }
+
+  // Visible keyboard focus, offset so it reads against both chip states.
+  &:focus-visible {
+    outline: 3px solid #3A8FB7;
+    outline-offset: 2px;
+  }
+
+  // The chip for the view on screen. The script moves `aria-current` as the
+  // view changes, so the styling and the screen-reader state never disagree.
+  &[aria-current] {
+    background: #003373;
+    border-color: #003373;
+    color: #fff;
+  }
+
+  &[aria-current]:hover {
+    background: #00285c;
+    border-color: #00285c;
+    color: #fff;
+  }
+}
+
+// The direction number, set in a small round badge before the short title.
+.research-chip__number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.45em;
+  height: 1.45em;
+  border-radius: 50%;
+  background: rgba(0, 51, 115, 0.1);
+  font-size: 0.85em;
+  line-height: 1;
+}
+
+.research-chip[aria-current] .research-chip__number {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+// Tablets and small laptops: the six chips are wider than the container, so
+// they wrap onto a second row. Slightly smaller chips and tighter spacing keep
+// that two-row bar short while it sticks.
+@media (min-width: 576px) and (max-width: 1199.98px) {
+  .research-chipbar {
+    padding: 0.45rem 0;
+  }
+
+  .research-chips {
+    gap: 0.4rem;
+  }
+
+  .research-chip {
+    padding: 0.3rem 0.7rem;
+    font-size: 0.7rem;
+  }
+}
+
+// Phones: one row that scrolls sideways, never a tall wrapped block that would
+// eat the screen while it sticks. The padding leaves room for the focus ring,
+// which the scroll box would otherwise clip, and the negative margin takes the
+// same room back so the chips stay aligned with the text below.
+@media (max-width: 575.98px) {
+  .research-chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin: -6px;
+    padding: 6px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .research-chips > li {
+    flex: 0 0 auto;
+  }
+}
+
+// Views. Only one is visible at a time. The `hidden` attribute does the hiding,
+// and this rule keeps any later `display` rule from overriding it.
+.research-view[hidden] {
+  display: none !important;
+}
+
+// Section headings in the existing `section-custom-header` look (see
+// `template.scss`, which styles that look for the `h1` of a markdown block).
+// These are `h2`s under the page's intro heading, so the size and spacing of the
+// theme's `.section-heading h1` are repeated here. The font is left to the
+// site's heading font, so it changes with the rest of the site.
+//
+// `scroll-margin-top` keeps a #direction jump clear of the sticky chip bar.
+// The `scroll-padding-top` on `html` from the top-bar work already clears the
+// site header, so this adds only the bar's own height (one row of chips, or
+// two between 576px and 1199px) plus a small gap.
+.wg-research-directions .section-custom-header .section-heading h2 {
+  margin: 0 0 10px;
+  font-size: 2.25rem;
+  text-align: left;
+  scroll-margin-top: 3.75rem;
+
+  @media (min-width: 576px) and (max-width: 1199.98px) {
+    scroll-margin-top: 5.5rem;
+  }
+
+  // On phones the longest titles ran to four lines at full size.
+  @media (max-width: 575.98px) {
+    font-size: 1.75rem;
+  }
+
+  // The view heading takes focus after "See all" only so screen readers land
+  // on it. It is not something to click, so it gets no focus ring.
+  &:focus {
+    outline: none;
+  }
+}
+
+.research-direction + .research-direction {
+  margin-top: 3.5rem;
+}
+
+.research-direction__description {
+  margin-bottom: 0;
+}
+
+// "See all N selected papers" under each overview row. The theme shrinks
+// `.btn` text to 0.8rem with a tight line height, which is too cramped for a
+// sentence, so the size and padding are reset here.
+.research-see-all {
+  padding: 0.55rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.3;
+  border-radius: 999px;
+
+  &:focus-visible {
+    outline: 3px solid #3A8FB7;
+    outline-offset: 2px;
+    box-shadow: none;
+  }
+}
+
+.research-browse-all {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+// Card grid: 4 per row from 1200px, 2 per row from 576px, 1 below. Grid rows
+// stretch every card to the tallest one in its row, so rows stay even.
+.paper-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.25rem;
+  margin: 1.5rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 576px) {
+  .paper-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1200px) {
+  .paper-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+// One paper card: image, venue and year, award badges, title, authors.
+.paper-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  // A subtle lift on hover.
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 51, 115, 0.14);
+  }
+
+  // Ring the whole card while a link inside it has keyboard focus. Browsers
+  // without `:has()` still show the link's own focus style below.
+  &:has(a:focus-visible) {
+    box-shadow: 0 0 0 2px #3A8FB7, 0 8px 20px rgba(0, 51, 115, 0.14);
+  }
+}
+
+// The figure. Every `featured.png` is exactly 4:3, so `cover` crops nothing.
+// The fixed ratio also holds the space before a lazy image arrives.
+.paper-card__media {
+  display: block;
+  aspect-ratio: 4 / 3;
+  background: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+// No figure yet: a quiet panel in the primary blue with the venue name, so the
+// row keeps its rhythm without any made-up artwork.
+.paper-card__media--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: #003373;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1rem;
+  line-height: 1.3;
+  text-align: center;
+
+  &:hover,
+  &:focus {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+  }
+}
+
+.paper-card__body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  padding: 0.7rem 0.85rem 0.85rem;
+}
+
+.paper-card__venue {
+  margin-bottom: 0.25rem;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 0.68rem;
+  line-height: 1.35;
+}
+
+// `award_icons.html` sets an inline 'medium' font size meant for the
+// publication list. That is larger than a card title, so it is scaled down here.
+// Only `!important` can outrank an inline style.
+.paper-card .award-badge {
+  margin-bottom: 0.15rem;
+  font-size: 0.66rem !important;
+  line-height: 1.35;
+}
+
+.paper-card__title {
+  margin: 0.2rem 0 0.4rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.3;
+
+  // The clamp sits on the link rather than the heading, so the link's own
+  // focus outline is not clipped by the clamp's hidden overflow.
+  a {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    color: rgba(0, 0, 0, 0.85);
+    text-decoration: none;
+
+    &:hover {
+      color: #3A8FB7;
+    }
+
+    &:focus-visible {
+      outline: 2px solid #3A8FB7;
+      outline-offset: 2px;
+    }
+  }
+}
+
+.paper-card__authors {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  margin: 0;
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 0.66rem;
+  line-height: 1.4;
+
+  // Lab members link to their profiles. The bold weight comes from the shared
+  // `.author-lab-member` rule of the publications list. The clamp's hidden
+  // overflow would clip an outline, so focus shows as a tint and underline
+  // drawn inside the link instead.
+  a {
+    color: inherit;
+
+    &:hover {
+      color: #3A8FB7;
+    }
+
+    &:focus-visible {
+      outline: none;
+      background: rgba(58, 143, 183, 0.18);
+      box-shadow: inset 0 -2px 0 #3A8FB7;
+    }
+  }
+}
+
+// Visitors who ask for less motion get no lift, no sliding bar and no fades.
+@media (prefers-reduced-motion: reduce) {
+  .research-chipbar,
+  .research-chip,
+  .paper-card {
+    transition: none;
+  }
+
+  .paper-card:hover {
+    transform: none;
+  }
+}

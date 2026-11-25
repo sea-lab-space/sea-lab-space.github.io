@@ -13,6 +13,7 @@ publishDate: '2026-11-25T06:51:07.847350Z'
 publication_types:
 - article-journal
 publication: '*Journal of Medical Internet Research*'
+publication_short: '*JMIR*'
 doi: 10.64898/2026.01.01.25342468
 abstract: General-purpose large language models (LLMs) like ChatGPT are increasingly
   used for medical advice despite lacking medical training and frequently producing

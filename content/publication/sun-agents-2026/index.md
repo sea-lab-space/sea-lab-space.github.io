@@ -269,6 +269,7 @@ publication_types:
 - paper-conference
 publication: '*Advances in Neural Information Processing Systems, Datasets and Benchmarks
   Track*'
+publication_short: '*NeurIPS Datasets & Benchmarks*'
 abstract: 'Recent AI systems achieve strong results on many benchmarks, yet these
   gains have not translated into economically meaningful deployment across professional
   domains. We argue that this gap is largely an evaluation problem: existing benchmarks

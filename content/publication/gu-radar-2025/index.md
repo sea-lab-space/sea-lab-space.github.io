@@ -28,6 +28,7 @@ publication_types:
 - paper-conference
 publication: '*Advances in Neural Information Processing Systems, Datasets and Benchmarks
   Track*'
+publication_short: '*NeurIPS Datasets & Benchmarks*'
 doi: 10.52202/085713-3699
 abstract: Language models (LMs) are increasingly being deployed to perform autonomous
   data analyses. However, their data awareness—the ability to recognize, reason over,

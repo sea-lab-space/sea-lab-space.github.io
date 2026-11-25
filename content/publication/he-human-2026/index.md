@@ -17,6 +17,7 @@ publishDate: '2026-11-25T06:51:07.854351Z'
 publication_types:
 - article-journal
 publication: '*Proceedings of the IEEE*'
+publication_short: '*Proc. IEEE*'
 doi: 10.1109/JPROC.2026.3713201
 abstract: With the rapid advancement of AI systems, their abilities to store, retrieve,
   and utilize information over the long term—referred to as long-term memory—have

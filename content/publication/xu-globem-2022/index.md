@@ -24,6 +24,7 @@ publication_types:
 - paper-conference
 publication: '*Thirty-sixth Conference on Neural Information Processing Systems Datasets
   and Benchmarks Track*'
+publication_short: '*NeurIPS Datasets & Benchmarks*'
 abstract: Recent research has demonstrated the capability of behavior signals captured
   by smartphones and wearables for longitudinal behavior modeling. However, there
   is a lack of a comprehensive public dataset that serves as an open testbed for fair

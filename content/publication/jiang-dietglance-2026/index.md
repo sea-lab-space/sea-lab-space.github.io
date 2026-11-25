@@ -17,6 +17,7 @@ publishDate: '2026-11-25T06:51:07.851827Z'
 publication_types:
 - article-journal
 publication: '*ACM Transactions on Computing for Healthcare*'
+publication_short: '*ACM HEALTH*'
 doi: 10.1145/3797883
 abstract: Growing awareness of wellness has prompted people to consider whether their
   dietary patterns align with their health and fitness goals. In response, researchers

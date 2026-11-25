@@ -27,6 +27,7 @@ publication_types:
 - paper-conference
 publication: '*Thirty-Ninth Conference on Neural Information Processing Systems Datasets
   and Benchmarks Track*'
+publication_short: '*NeurIPS Datasets & Benchmarks*'
 directions:
   - human-centered-health-foundation-models
 selected: true
