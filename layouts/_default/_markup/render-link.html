@@ -6,10 +6,11 @@
   Added (Orson's review): a link to one of our papers, written by its folder as
   [Title](/publication/<folder>/), opens the paper itself, the same target as
   its Research card and its title on the Publications page
-  (functions/paper_link.html). This is how Lab News links its papers, and it
-  keeps data/news.yaml free of copied DOIs. A folder that doesn't exist keeps
-  the link as written and prints a build warning naming it. Such a link points
-  to the shared "opens in a new tab" description (hooks/body-end/new-tab-hint.html). Links to the
+  (functions/paper_link.html). When that opens a new tab, the link points to
+  the shared "opens in a new tab" description (hooks/body-end/new-tab-hint.html).
+  This is how Lab News links its papers, and it keeps data/news.yaml free of
+  copied DOIs. A folder that doesn't exist keeps the link as written, in the
+  same tab, and prints a build warning naming it. Links to the
   Publications page itself, or with a #fragment or ?query, are not touched.
 */ -}}
 {{- $dest := .Destination -}}
