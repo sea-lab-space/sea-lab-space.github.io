@@ -287,6 +287,19 @@
     });
   });
 
+  // Keyboard users: on phones the chip rows scroll sideways, so a chip that
+  // gets focus by Tab can sit half outside its row. Scroll it into view.
+  chips.forEach(function (chip) {
+    chip.addEventListener('focus', function () {
+      var row = chip.parentElement;
+      if (!row || row.scrollWidth <= row.clientWidth) return;
+      var left = chip.offsetLeft - row.offsetLeft;
+      var right = left + chip.offsetWidth;
+      if (left < row.scrollLeft) row.scrollLeft = Math.max(0, left - 16);
+      else if (right > row.scrollLeft + row.clientWidth) row.scrollLeft = right - row.clientWidth + 16;
+    });
+  });
+
   // Back and Forward: the URL is the source of truth.
   window.addEventListener('popstate', function () {
     window.clearTimeout(searchTimer);

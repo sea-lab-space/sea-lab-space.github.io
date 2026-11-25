@@ -182,6 +182,14 @@
     scrollToViews();
   });
 
+  // Keyboard users: when the bar scrolls sideways (below 768px), a chip that
+  // gets focus by Tab can sit half outside the scroll box, cutting off its
+  // label and focus ring. Scroll it into view the same way as the active chip.
+  root.addEventListener('focusin', function (event) {
+    var chip = event.target.closest && event.target.closest('.research-chip');
+    if (chip) revealChip(chip);
+  });
+
   window.addEventListener('popstate', function (event) {
     var id = directionFromUrl();
     if (id === current) return;
