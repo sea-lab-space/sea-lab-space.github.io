@@ -42,7 +42,7 @@ sections:
 
         Learn more about our five research directions on the [Research](/research/) page, and browse all our papers on the [Publication](/publication/) page.
 
-        SEA Lab is grateful for support from the National Science Foundation (NSF), the National Institutes of Health (NIH), Columbia University, Google, OpenAI, NVIDIA, and Meta.
+        SEA Lab is grateful for support from NSF, NIH, Columbia University, Google, OpenAI, NVIDIA, and Meta.
     design:
       columns: '1'
       css_class: sea-hero section-title-left-aligned
