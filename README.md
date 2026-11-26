@@ -165,7 +165,7 @@ Every publication belongs to one or more research directions. The [Research Page
 
 ## Credits
 
-The faint photo behind the homepage overview (`assets/media/hero-crowd.webp`) is [Shibuya Crossing by Ryoji Iwata on Unsplash](https://unsplash.com/photos/crowd-walking-across-shibuya-crossing-IBaVuZsJJTo), free to use under the [Unsplash License](https://unsplash.com/license). It was turned grey, lowered in contrast, and slightly blurred. To swap it, put the new file in `assets/media/`, change `filename` under `background` in `content/_index.md`, and adjust its strength in `.sea-hero .home-section-bg` in `assets/scss/custom.scss`.
+The photo around the homepage overview (`assets/media/hero-crowd.webp`) is [Shibuya Crossing by Ryoji Iwata on Unsplash](https://unsplash.com/photos/crowd-walking-across-shibuya-crossing-IBaVuZsJJTo), free to use under the [Unsplash License](https://unsplash.com/license). It is shown in its own colours, only resized. To swap it, put the new file in `assets/media/` and change `filename` under `background` in `content/_index.md`. The white panel over it and how the photo sits on phones are set under `.sea-hero` in `assets/scss/custom.scss`.
 
 Our website is based on the following templates and tools:
 - [Hugo Research Group template](https://github.com/HugoBlox/theme-research-group), which this site started from.

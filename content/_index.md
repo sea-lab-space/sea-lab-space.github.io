@@ -50,9 +50,9 @@ sections:
     design:
       columns: '1'
       css_class: sea-hero section-title-left-aligned
-      # A faint photo of people crossing a street, behind the overview. The file
-      # is already grey and softened. How strong it is and where it fades out
-      # are set under `.sea-hero .home-section-bg` in assets/scss/custom.scss.
+      # A full-colour photo of people crossing a street, around the white panel
+      # that holds the overview. The panel's size and how the photo is placed
+      # on phones are set under `.sea-hero` in assets/scss/custom.scss.
       # Photo: Ryoji Iwata on Unsplash (Unsplash License), see README Credits.
       background:
         image:
