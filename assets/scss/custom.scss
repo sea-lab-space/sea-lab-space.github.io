@@ -1040,89 +1040,213 @@ html {
 
 // ---- Homepage hero and Lab News (T6) ----
 
-// Hero: the first block of `content/_index.md` (`css_class: sea-hero`). The
-// mission line is the one sentence a visitor should read first, so it is set a
-// step larger than body text. It stays justified like the paragraphs around
-// it, which `.section-title-left-aligned p` in `template.scss` already does,
-// except on phones: there a short line such as "human-centered and AI-powered"
-// gets stretched across the column with wide gaps between the words.
-.sea-hero__mission p {
-  font-size: 1.15em;
-  line-height: 1.6;
+// Hero: the first block of `content/_index.md` (`css_class: sea-hero`).
+// The mission statement sits in white straight on a blue-toned photo of Grand
+// Central, and the Sense, Empower, and Augment directions sit below it on one
+// white card (Orson's design). The section has no visible title. A visually
+// hidden `h1` names it for screen readers.
+//
+// The theme draws the photo on `.home-section-bg` from
+// `design.background.image` in content/_index.md, sized to cover, and keeps it
+// fixed while the page scrolls on screens 992px and wider. The blue tone is
+// part of the file (`assets/media/hero-grand-central.webp`). A navy wash over
+// it, strongest behind the statement and lighter around the card, keeps the
+// white text readable on the bright parts of the concourse. A faint light line
+// along its top edge parts the photo from the navy menu bar. The navy behind
+// the photo shows while it loads, so the white text is never on a light
+// background.
+.sea-hero.home-section {
+  padding: 3.75rem 0 4.5rem;
 }
 
-@media (max-width: 575.98px) {
-  .sea-hero .sea-hero__mission p {
-    text-align: left;
+.sea-hero .home-section-bg.bg-image {
+  background-color: #0a2a5e;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.12)) top / 100% 1px no-repeat,
+      linear-gradient(180deg, rgba(0, 32, 80, 0.62) 0%, rgba(0, 32, 80, 0.38) 45%, rgba(0, 32, 80, 0.22) 100%);
   }
 }
 
-// The overview sits on a white panel over a full-colour photo of a crowd, in
-// the style of the Join Us panel further down (Orson's request). The panel is
-// the section's `.container`: at most 1040px wide and at least 2rem from each
-// window edge, so the photo shows in full colour around it and only faintly
-// through it. The text keeps full contrast on the 90% white. The theme draws
-// the photo on `.home-section-bg` from `design.background.image` in
-// content/_index.md, sized to cover, and keeps it fixed while the page scrolls
-// on screens 992px and wider.
-.sea-hero.home-section {
-  padding: 4.5rem 0;
+// One column with the same edges as the menu bar's content (the logo on the
+// left, the last menu item on the right): 1260px at most, and 36px in from
+// each window edge below that. The statement and the card share its left
+// edge, so the theme's column gutters are taken out.
+.sea-hero > .container {
+  width: calc(100% - 72px);
+  max-width: 1260px;
+  padding: 0;
+
+  > .row {
+    margin: 0;
+  }
+
+  > .row > .col-12 {
+    padding: 0;
+  }
 }
 
-.sea-hero > .container {
-  width: calc(100% - 4rem);
-  max-width: 1040px;
-  padding: 2.25rem 3rem 2.5rem;
+// The mission statement: white, 27 to 32px on desktops as the window widens,
+// left-aligned in lines of around 65 characters, with a clear band of photo
+// between it and the card. The theme justifies paragraphs in this section
+// (`.section-title-left-aligned p` in `template.scss`), which would leave wide
+// gaps in type this size, so it is set left here. A soft shadow guards the
+// few bright spots behind it, such as the station clock.
+.sea-hero .sea-hero__mission {
+  max-width: 960px;
+  margin: 0 0 3.5rem;
+
+  p {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(1.3rem, 2.2vw, 1.52rem);
+    font-weight: 400;
+    line-height: 1.42;
+    letter-spacing: -0.01em;
+    text-align: left;
+    text-shadow: 0 1px 2px rgba(0, 20, 60, 0.35), 0 1px 14px rgba(0, 20, 60, 0.45);
+    text-wrap: pretty;
+  }
+
+  strong {
+    font-weight: 700;
+  }
+
+  // The link to Orson's site, in white with a solid white underline, so it
+  // stays distinguishable from the rest of the sentence.
+  a {
+    border-bottom: 0;
+    color: #fff;
+    text-decoration: underline;
+    text-decoration-color: #fff;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 0.18em;
+
+    &:hover,
+    &:focus {
+      text-decoration-thickness: 2.5px;
+    }
+
+    &:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: 3px;
+    }
+  }
+}
+
+// The card that holds the three directions and the line to the Research and
+// Publication pages. It matches the Join Us panel further down (`.sea-join`):
+// white at 80% with a light blur, so the photo shows through it, by Orson's
+// choice. Keep the two in step.
+.sea-hero__card {
+  padding: 2.25rem 0 1.5rem;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.8);
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
   -webkit-backdrop-filter: blur(3px);
   backdrop-filter: blur(3px);
-}
 
-@media (max-width: 991.98px) {
-  .sea-hero > .container {
-    width: calc(100% - 3rem);
-    padding: 2rem 2rem 2.25rem;
+  // The closing line, under a hairline, centred.
+  > p {
+    margin: 1.75rem 2.5rem 0;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(0, 51, 115, 0.14);
+    font-size: 0.9rem;
+    text-align: center;
   }
 }
 
-// Phones: the hero is about 2000px tall here, so covering it would enlarge the
-// photo about 1.5x past its own size and blur it. Instead the photo keeps a
-// 700px height and starts at the top, where a taller band of it shows above
-// the panel, and repeats down the narrow margins beside the panel.
+// Below 992px the wash is a little darker at the top. Under 928px the theme's
+// root font drops from 21px to 16.17px, so the statement falls to about 21px,
+// under "large text" (24px), and needs 4.5:1 against even the brightest spot
+// behind it. The darker wash starts with the other tablet rules, a little
+// earlier than it has to.
+@media (max-width: 991.98px) {
+  .sea-hero .home-section-bg.bg-image::after {
+    background:
+      linear-gradient(rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.12)) top / 100% 1px no-repeat,
+      linear-gradient(180deg, rgba(0, 32, 80, 0.7) 0%, rgba(0, 32, 80, 0.5) 30%, rgba(0, 32, 80, 0.22) 100%);
+  }
+
+  .sea-hero > .container {
+    width: calc(100% - 3rem);
+  }
+
+  .sea-hero .sea-hero__mission {
+    margin-bottom: 2.75rem;
+  }
+}
+
+// Phones: the hero is about 1,500 to 2,000px tall here, so covering it would
+// enlarge the 1140px-tall photo up to about 1.7x and blur it. Instead the
+// photo keeps a 700px height and starts 120px up, so the station clock and
+// walkers sit behind the statement, with a taller band of photo above it. It
+// does not repeat (a second copy would show a hard seam and a second clock):
+// below it, the navy behind the photo fills the narrow margins beside the card.
 @media (max-width: 767.98px) {
   .sea-hero.home-section {
-    padding: 5rem 0 2.5rem;
+    padding: 4.25rem 0 2.5rem;
   }
 
   .sea-hero .home-section-bg.bg-image {
     background-size: auto 700px;
-    background-position: center top;
-    background-repeat: repeat-y;
+    background-position: center -120px;
+    background-repeat: no-repeat;
   }
 
   .sea-hero > .container {
-    width: calc(100% - 1.5rem);
-    padding: 1.5rem 1.25rem;
+    width: calc(100% - 2rem);
+  }
+
+  .sea-hero .sea-hero__mission {
+    margin-bottom: 2rem;
+
+    p {
+      font-size: 1.15rem;
+      line-height: 1.45;
+    }
+  }
+
+  .sea-hero__card {
+    padding: 1.75rem 0 1.25rem;
+
+    > p {
+      margin: 1.5rem 1.25rem 0;
+    }
   }
 }
 
-// Visitors who ask their system for more contrast get no photo and a solid
-// panel, those who ask for less transparency get a solid panel, and those who
-// ask for less motion get a photo that scrolls with the page.
+// Visitors who ask their system for more contrast get no photo: the statement
+// stays white on the lab's navy, and the card and the Join Us panel are solid
+// white. Those who ask for less transparency get both solid, and those who ask
+// for less motion get a photo that scrolls with the page.
 @media (prefers-contrast: more) {
   .sea-hero .home-section-bg.bg-image {
-    display: none;
+    background-image: none !important; // the theme sets the photo inline
+    background-color: #003373;
+
+    &::after {
+      display: none;
+    }
   }
 
-  .sea-hero > .container {
+  .sea-hero .sea-hero__mission p {
+    text-shadow: none;
+  }
+
+  .sea-hero__card,
+  .sea-join {
     background: #fff;
   }
 }
 
 @media (prefers-reduced-transparency: reduce) {
-  .sea-hero > .container {
+  .sea-hero__card,
+  .sea-join {
     background: #fff;
   }
 }
@@ -1133,31 +1257,49 @@ html {
   }
 }
 
-// The Sense, Empower, and Augment cards. A grid rather than Bootstrap columns
-// so that each card keeps its image, title, text, and links together when the
+// The Sense, Empower, and Augment pillars. A grid rather than Bootstrap columns
+// so that each pillar keeps its image, title, text, and links together when the
 // row stacks on phones (the old `col-md-4` markup stacked all three images
 // first and all three texts after them). `minmax(0, 1fr)` stops a long word
 // from widening one column.
 .sea-pillars {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 2rem;
-  margin: 1.75rem 0 2rem;
+  margin: 0;
 }
 
-// Each card is a flex column: image, title, then text, centred.
+// Each pillar is a column of rows (image, title, text, the "Research
+// directions" label, then one row per direction link), centred, and set off
+// from its neighbour by a hairline rather than a box of its own, so the three
+// read as parts of one idea. The rows are shared across the three columns
+// (`subgrid`), so when one pillar's text or one of its links wraps to more
+// lines, the labels and every link still line up across the columns at every
+// width (Orson's request). Each pillar spans 12 rows, room for 8 links: rows a
+// pillar does not use are empty and take no space. Browsers without subgrid
+// stack each column on its own, tightly, as before. The pictograms are capped
+// so they do not outgrow the text on wide screens.
 .sea-pillar {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-row: span 12;
+  grid-template-rows: subgrid;
+  align-content: start;
+  align-items: start;
+  justify-items: center;
+  row-gap: 0;
+  padding: 0 2rem;
   text-align: center;
+
+  & + & {
+    border-left: 1px solid rgba(0, 51, 115, 0.14);
+  }
 
   figure {
     width: 100%;
+    max-width: 280px;
     margin-bottom: 0.75rem;
   }
 
-  // The pictograms carry their own rounded frame, so no card border is drawn
+  // The pictograms carry their own rounded frame, so no border is drawn
   // around them. A second frame would read as a box inside a box.
   img {
     display: block;
@@ -1166,11 +1308,13 @@ html {
   }
 }
 
-// The card titles are `h2`, one level under the section's `h1`, so the
-// heading outline does not skip a level. The theme sets `h2` in a regular
-// weight, so the bold is set here to keep the card titles reading as titles.
+// The direction titles are `h2`, one level under the section's hidden `h1`, so
+// the heading outline does not skip a level. The theme sets `h2` in a regular
+// weight, so the bold is set here to keep them reading as titles, in the lab's
+// navy to tie the card to the menu bar and the photo.
 .sea-pillar__title {
   margin: 0 0 0.35rem;
+  color: #003373;
   font-size: 1.2rem;
   font-weight: 700;
 }
@@ -1188,12 +1332,13 @@ html {
 .sea-hero .sea-pillar p.sea-pillar__text {
   margin-bottom: 0.75rem;
   text-align: center;
+  text-wrap: balance; // evens out the lines, so no word is left alone on the last one
 }
 
-// The "Research directions" label above each card's direction links (below),
-// in the style of the Publications page filter labels. It says what the
-// numbers on the links are. Its selector is as specific as the card text's, to
-// win over `.section-title-left-aligned p` in the same way.
+// The "Research directions" label above each pillar's direction links
+// (below), in the style of the Publications page filter labels. It says what
+// the numbers on the links are. Its selector is as specific as the pillar
+// text's, to win over `.section-title-left-aligned p` in the same way.
 .sea-hero .sea-pillar p.sea-pillar__directions-label {
   margin: 0.15rem 0 0.45rem;
   font-size: 0.68rem;
@@ -1202,22 +1347,39 @@ html {
   line-height: 1.3;
   text-align: center;
   text-transform: uppercase;
-  color: rgba(0, 0, 0, 0.68); // a little darker than the filter labels, for the photo faintly behind the panel
+  color: rgba(0, 0, 0, 0.68); // a little darker than the filter labels, for the photo behind the card
 }
 
 // The research directions under each pillar (shortcode
 // `layouts/shortcodes/pillar-directions.html`): small pill links in the
-// Research page chip colours, centred and wrapping under the card text. A
+// Research page chip colours, one per row, centred under the pillar text. A
 // direction can appear under more than one pillar. Unlike the Research chips
 // they may wrap inside a chip, because three columns get narrow on tablets.
+// The list's rows are the pillar's own (`subgrid`, see `.sea-pillar`), so the
+// second and third links line up across the columns even when one of them
+// wraps. Room for 8 links: unused rows take no space, which is why the space
+// between links is a margin rather than a row gap.
 .sea-pillar__directions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.45rem;
+  display: grid;
+  grid-row: span 8;
+  grid-template-rows: subgrid;
+  align-items: start;
+  justify-items: center;
+  row-gap: 0;
   margin: 0.15rem 0 0;
   padding: 0;
   list-style: none;
+
+  // A flex item rather than inline text, so each link starts at the top of
+  // its row. Inline, it would sit on a text baseline that drops when the link
+  // wraps to two lines, putting the row a few pixels out of line.
+  > li {
+    display: flex;
+  }
+
+  > li + li {
+    margin-top: 0.45rem;
+  }
 }
 
 .sea-pillar__direction {
@@ -1245,8 +1407,10 @@ html {
     text-decoration: none;
   }
 
+  // The focus ring is navy, not the hover blue: the light blue is only about
+  // 2.4:1 against the see-through card over the dark photo.
   &:focus-visible {
-    outline: 3px solid #3A8FB7;
+    outline: 3px solid #003373;
     outline-offset: 2px;
   }
 }
@@ -1264,17 +1428,29 @@ html {
   line-height: 1;
 }
 
-// Below 768px three columns get too narrow for the text, so the cards stack.
-// The pictograms are line drawings, and at the full phone width they would
-// dwarf everything else on the screen, so the image is capped.
+// Below 768px three columns get too narrow for the text, so the directions
+// stack, split by hairlines across the card instead of down it. The pictograms
+// keep the 280px cap from above, so they do not dwarf the text on a phone.
 @media (max-width: 767.98px) {
   .sea-pillars {
     grid-template-columns: minmax(0, 1fr);
-    gap: 2.25rem;
   }
 
-  .sea-pillar figure {
-    max-width: 300px;
+  .sea-pillar,
+  .sea-pillar__directions {
+    grid-row: auto;
+    grid-template-rows: none;
+  }
+
+  .sea-pillar {
+    padding: 0 1.25rem;
+
+    & + & {
+      margin-top: 1.75rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid rgba(0, 51, 115, 0.14);
+      border-left: 0;
+    }
   }
 }
 
@@ -1471,9 +1647,10 @@ html {
 // banner that held only a "Meet the Team" button, which saves most of a
 // screen of scrolling. The campus photo is the block's background
 // (`design.background` in `content/_index.md`). The text sits on a white panel
-// at 88% opacity, so the photo shows around and faintly through it while the
-// text keeps full contrast. A light blur behind the panel softens the busy
-// photo where the browser supports it.
+// at 80% opacity, so the photo shows around and through it while the text
+// keeps full contrast. A light blur behind the panel softens the busy photo
+// where the browser supports it. The homepage hero's card (`.sea-hero__card`)
+// matches it. Keep the two in step.
 .sea-join-section {
   padding: 4.5rem 0;
   overflow: hidden;
@@ -1493,7 +1670,7 @@ html {
   gap: 2.5rem;
   padding: 2rem 2.5rem;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.8);
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
   -webkit-backdrop-filter: blur(3px);
   backdrop-filter: blur(3px);

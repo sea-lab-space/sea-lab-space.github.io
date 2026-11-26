@@ -14,8 +14,8 @@
 # - `hidden: true`: nowhere. Its papers still show on the Publications page
 #   under "All" (Beyond Health).
 #
-# `pillars` lists which homepage cards (sense, empower, augment) show the
-# direction as a link. A direction can sit under several cards, and the lists
+# `pillars` lists which homepage pillars (sense, empower, augment) show the
+# direction as a link. A direction can sit under several pillars, and the lists
 # overlap on purpose (Orson's choice). Personal Health Agents spans all three,
 # like the data scientist, domain expert, and health coach roles of the agent
 # in "The Anatomy of a Personal Health Agent". Human-Centered Evaluation sits

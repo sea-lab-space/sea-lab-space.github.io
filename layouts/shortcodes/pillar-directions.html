@@ -2,7 +2,7 @@
   The research directions under one homepage pillar (Sense, Empower or
   Augment), as links to their views on the Research page.
 
-  Usage, inside a `.sea-pillar` card in content/_index.md:
+  Usage, inside a `.sea-pillar` in content/_index.md:
     {{< pillar-directions sense >}}
 
   A direction is listed when its `pillars` in data/research_directions.yaml
@@ -13,7 +13,7 @@
   A small "Research directions" label above the links says what the numbers
   are: the direction numbers on the Research page. Screen readers skip the
   label and hear the list's own name, "Research directions under Sense", so
-  the three cards' lists stay distinct and the words are not read twice.
+  the three pillars' lists stay distinct and the words are not read twice.
   The output has no blank lines, because it sits inside a raw HTML block.
 */ -}}
 {{- $pillar := lower (.Get 0) -}}

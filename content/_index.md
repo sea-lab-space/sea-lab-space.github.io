@@ -6,24 +6,28 @@ type: landing
 
 sections:
 
-  # Hero: the mission line, the three Sense, Empower, and Augment cards, and
-  # one sentence pointing to the Research and Publication pages. Under each
-  # card, `pillar-directions` lists the research directions that belong to it,
-  # as links to the Research page. Which direction goes under which card is set
+  # Hero: the mission statement in white on the photo, then one white card with
+  # the Sense, Empower, and Augment directions and a sentence pointing to the
+  # Research and Publication pages. The section has no visible title. The
+  # hidden `h1` names it for screen readers. Under each direction,
+  # `pillar-directions` lists the research directions that belong to it, as
+  # links to the Research page. Which direction goes under which pillar is set
   # by `pillars` in data/research_directions.yaml, and a direction can sit
-  # under several cards. Keep the card markup free of blank lines, because a
-  # blank line ends a raw HTML block in markdown. Styles: `.sea-hero` and
-  # `.sea-pillars` in `assets/scss/custom.scss`.
+  # under several. Keep the card markup free of blank lines, except around the
+  # closing sentence, because a blank line ends a raw HTML block in markdown.
+  # Styles: `.sea-hero`, `.sea-hero__card`, and `.sea-pillars` in
+  # `assets/scss/custom.scss`.
   - block: markdown
     id: overview
     content:
-      title: 'Overview'
       text: |
+        <h1 class="sr-only">SEA Lab overview</h1>
         <div class="sea-hero__mission">
 
         The **SEA Lab** (**S**ense, **E**mpower, **A**ugment) at Columbia University, led by [Dr. Xuhai "Orson" Xu](https://orsonxu.com), designs and builds human-centered and AI-powered methods that help people live healthier lives and empower health experts to make better decisions.
 
         </div>
+        <div class="sea-hero__card">
         <div class="sea-pillars">
           <div class="sea-pillar">
             {{<figure src="sense.png" alt="" lightbox="false">}}
@@ -47,16 +51,18 @@ sections:
 
         Learn more about our research directions on the [Research](/research/) page, and browse all our papers on the [Publication](/publication/) page.
 
+        </div>
+
     design:
       columns: '1'
       css_class: sea-hero section-title-left-aligned
-      # A full-colour photo of people crossing a street, around the white panel
-      # that holds the overview. The panel's size and how the photo is placed
-      # on phones are set under `.sea-hero` in assets/scss/custom.scss.
-      # Photo: Ryoji Iwata on Unsplash (Unsplash License), see README Credits.
+      # Grand Central Terminal in a long exposure, toned to the lab's blue. The
+      # navy wash over it and how it is placed on phones are set under
+      # `.sea-hero` in assets/scss/custom.scss.
+      # Photo: Branden Skeli on Unsplash (Unsplash License), see README Credits.
       background:
         image:
-          filename: hero-crowd.webp
+          filename: hero-grand-central.webp
 
   # Lab News: the ten newest items from `data/news.yaml`, drawn by
   # `layouts/partials/blocks/news.html`. The "All news" link to /news/ appears
