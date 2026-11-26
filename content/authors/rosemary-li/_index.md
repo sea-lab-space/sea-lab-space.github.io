@@ -2,6 +2,9 @@
 # Display name
 title: Rosemary Li
 
+# Page address: always the folder name, so the URL and the paper links agree
+slug: rosemary-li
+
 # Full Name (for SEO)
 first_name: Rosemary
 last_name: Li
