@@ -36,4 +36,8 @@ abstract: Passive mobile sensing for the purpose of human state modeling is a fa
 links:
 - name: URL
   url: https://link.springer.com/10.1007/s42486-021-00072-4
+directions:
+  - human-centered-health-foundation-models
+awards:
+- "best paper award"
 ---

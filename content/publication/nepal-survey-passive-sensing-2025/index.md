@@ -19,4 +19,6 @@ publication_types:
 - article-journal
 publication: '*Human-Computer Interaction (HCII)*'
 doi: 10.1007/978-3-031-93845-0_29
+directions:
+  - human-centered-health-foundation-models
 ---

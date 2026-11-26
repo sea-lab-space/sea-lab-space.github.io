@@ -16,4 +16,12 @@ publishDate: '2026-05-17T03:19:46.626161Z'
 publication_types:
 - paper-conference
 publication: '*Advances in Neural Information Processing Systems*'
+publication_short: '*NeurIPS*'
+links:
+- name: URL
+  url: https://github.com/mitmedialab/MDAgents
+directions:
+  - personal-health-agents
+  - clinician-ai-collaboration
+selected: true
 ---

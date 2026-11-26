@@ -15,6 +15,7 @@ publishDate: '2024-09-29T06:40:21.760298Z'
 publication_types:
 - paper-conference
 publication: '*Proceedings of the ACM Conference on Human Factors in Computing Systems*'
+doi: 10.1145/3313831.3376836
 abstract: Past research regarding on-body interaction typically requires custom sensors,
   limiting their scalability and generalizability. We propose EarBuddy, a real-time
   system that leverages the microphone in commercial wireless earbuds to detect tapping
@@ -28,4 +29,7 @@ abstract: Past research regarding on-body interaction typically requires custom 
   very positively about the system. EarBuddy provides a new eyes-free, socially acceptable
   input method that is compatible with commercial wireless earbuds and has the potential
   for scalability and generalizability.
+directions:
+  - interaction-techniques
+  - beyond-health
 ---

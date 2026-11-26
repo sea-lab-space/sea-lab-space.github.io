@@ -49,4 +49,6 @@ abstract: Academic achievement in the first year of college is critical for sett
 links:
 - name: URL
   url: https://pnas.org/doi/10.1073/pnas.2209123120
+directions:
+  - human-centered-health-foundation-models
 ---

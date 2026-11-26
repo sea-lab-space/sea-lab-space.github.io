@@ -21,4 +21,6 @@ publication_types:
 - article-journal
 publication: '*Communications Medicine*'
 doi: 10.1038/s43856-025-01114-z
+directions:
+  - human-centered-health-foundation-models
 ---

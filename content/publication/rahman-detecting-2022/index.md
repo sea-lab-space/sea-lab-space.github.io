@@ -36,4 +36,6 @@ abstract: Continuous stress exposure negatively impacts mental and physical well
   with leave-one-subject-out cross-validation. The accuracy can further be improved
   through multi-modal sensing. These findings demonstrate the feasibility of using
   earbuds for passively monitoring users' physiological responses.
+directions:
+  - human-centered-health-foundation-models
 ---

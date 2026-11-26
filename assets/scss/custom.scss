@@ -1,3 +1,29 @@
+// Height of the top bar, the site header `#navbar-main`.
+//
+// This one custom property is the single source of truth for that height.
+// The bar's own `min-height`, the anchor offset (`scroll-padding-top`) and
+// anything that has to sit just under the bar, such as the sticky chip bar on
+// the Research page, all read it from here rather than repeating a number.
+// Consumers write `var(--sea-navbar-height, 84px)`, so the page still gets a
+// sensible desktop value if this definition is ever missing.
+//
+// There are two values because the bar has two layouts. From 992px up
+// (Bootstrap's `lg`, where the menu sits inline next to the logo) the bar is
+// 84px tall around a 60px logo. Below 992px the menu folds into the hamburger
+// toggle and the bar is 64px tall around a 44px logo. Both are roughly half
+// of the old bar, which was a fixed 200px at every width. The "Top bar (T5)"
+// block at the end of this file applies these values to the bar and sizes the
+// logo from them, so changing a value here moves the bar and the logo together.
+:root {
+  --sea-navbar-height: 64px;
+}
+
+@media (min-width: 992px) {
+  :root {
+    --sea-navbar-height: 84px;
+  }
+}
+
 // People page: the "Now at <organization>" line shown under an alum's role.
 // Rendered by `layouts/partials/blocks/people.html` when a person's front matter
 // sets `now_at`; this rule is inert for everyone else.
@@ -16,18 +42,31 @@
 // Homepage "Our Funders" logo row, rendered by the last markdown block in
 // `content/_index.md`. Sources are SVGs in `static/uploads/funders/`.
 //
-// The five marks have very different aspect ratios (NSF is ~1:1, NVIDIA is
-// ~5.5:1), so sizing them by width would leave the emblems towering over the
-// wordmarks. Sizing by height instead, with a taller cap for the two agency
-// emblems, is what makes the row read as one line. `height: auto` +
-// `max-width: 100%` keeps each SVG's aspect ratio and stops the widest mark
-// from overflowing on narrow screens.
+// Seven marks: three institutional ones (the NSF seal, the stacked NIH logo,
+// and Columbia's crown), then four company wordmarks (Google, OpenAI, NVIDIA,
+// Meta). Their aspect ratios differ a lot (NSF is ~1:1, NVIDIA is ~5.5:1), so
+// sizing them by width would leave the emblems towering over the wordmarks.
+// Sizing by height instead, with taller caps for the emblems, makes the row
+// read as one line. `max-width: 100%` keeps the widest mark from overflowing
+// on narrow screens.
+//
+// Layout by screen width, each measured so that no mark is left alone on a
+// line:
+// - 992px and up: one line.
+// - Tablets (768-991px): two lines, the three institutions above the four
+//   companies. The `.funder-logos__break` element in the markup forces the
+//   break, so it never falls somewhere arbitrary.
+// - Below 768px: a grid with the three institutions in one row, then the
+//   companies two by two.
+// The column gap leaves about 30px of slack in the 1200px layout, so the row
+// still fits when a classic scrollbar (Windows, or macOS set to always show
+// them) takes ~17px of the window.
 .funder-logos {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 1.75rem 3rem;
+  gap: 1.75rem;
   margin: 0.25rem 0 0.5rem;
 }
 
@@ -67,27 +106,63 @@
   height: 82px;
 }
 
-// Tablet: at full size the five marks total just over the container width, which
-// orphans the widest one (NVIDIA) onto a line by itself. Trimming the heights a
-// little keeps the row on one line down to ~700px.
-@media (min-width: 576px) and (max-width: 991.98px) {
+// Columbia's crown is one solid shape, so at the seals' height it would
+// outweigh them. About three quarters of their height balances the row. It comes
+// after the emblem rule so it wins at every width.
+.funder-logos .funder-logo--crown img {
+  height: 62px;
+}
+
+// Meta's lockup fills its box more than the other wordmarks do (a full-height
+// symbol and tall capitals), so at the shared height it reads a size larger
+// than OpenAI and NVIDIA. Scaling the drawing down a tenth evens out the
+// letter heights. A transform rather than a smaller height keeps this one rule
+// valid at every breakpoint below, and it leaves the layout box alone, so the
+// row widths those breakpoints were sized for still hold.
+.funder-logos .funder-logo--meta img {
+  transform: scale(0.9);
+}
+
+// The forced line break between the institutions and the companies. Only the
+// tablet layout shows it.
+.funder-logos__break {
+  display: none;
+}
+
+// Small desktop (992-1199px, a 930px content box): the full-size row is wider
+// than the box, so trim the heights and the gap to keep one line.
+@media (min-width: 992px) and (max-width: 1199.98px) {
   .funder-logos {
-    gap: 1.5rem 2rem;
+    gap: 1.75rem 1.25rem;
   }
 
   .funder-logos .funder-logo img {
-    height: 32px;
+    height: 30px;
   }
 
   .funder-logos .funder-logo--emblem img {
-    height: 70px;
+    height: 68px;
+  }
+
+  .funder-logos .funder-logo--crown img {
+    height: 50px;
   }
 }
 
-// Phones: two lines is unavoidable here, so size for legibility instead.
-@media (max-width: 575.98px) {
+// Tablet (768-991px, a 690px content box): two lines, the institutions above
+// the companies. One line would need unreadably small marks. The break element
+// is an empty flex line of its own, so the row gap appears twice between the
+// two rows. Half of 1.5rem each way gives the same 1.5rem space as the phone
+// grid.
+@media (min-width: 768px) and (max-width: 991.98px) {
   .funder-logos {
-    gap: 1.5rem 2rem;
+    gap: 0.75rem 2rem;
+  }
+
+  .funder-logos__break {
+    display: block;
+    flex-basis: 100%;
+    height: 0;
   }
 
   .funder-logos .funder-logo img {
@@ -96,5 +171,1578 @@
 
   .funder-logos .funder-logo--emblem img {
     height: 64px;
+  }
+
+  .funder-logos .funder-logo--crown img {
+    height: 50px;
+  }
+}
+
+// Small tablets and phones: a six-column grid. Each institution spans two
+// columns (three in a row) and each company three (two in a row), so the rows
+// are the three institutions, Google and OpenAI, then NVIDIA and Meta, at
+// every width. Each mark is centred in its cell, and `max-width: 100%` on the
+// image lets the widest ones shrink to fit on the narrowest phones.
+@media (max-width: 767.98px) {
+  .funder-logos {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    justify-items: center;
+    gap: 1.5rem 1rem;
+  }
+
+  .funder-logos .funder-logo {
+    grid-column: span 3;
+    max-width: 100%;
+  }
+
+  .funder-logos .funder-logo--emblem {
+    grid-column: span 2;
+  }
+
+  .funder-logos .funder-logo img {
+    height: 30px;
+  }
+
+  .funder-logos .funder-logo--emblem img {
+    height: 64px;
+  }
+
+  .funder-logos .funder-logo--crown img {
+    height: 50px;
+  }
+}
+
+// ---- Research page (T3) ----
+// The research directions block (`layouts/partials/blocks/research_directions.html`)
+// and its paper cards (`layouts/partials/views/paper_card.html`). The view
+// switching lives in `layouts/partials/hooks/body-end/research-directions.html`.
+//
+// Colours are the theme's own (`data/themes/sea-lab.toml`): #003373 Columbia
+// blue for text and the active chip, #3A8FB7 for hover and focus, #00285c for
+// the pressed blue (as in `template.scss`), plus neutrals.
+
+// The intro block (`id: research-intro`). Its text is one paragraph, and the
+// theme renders a one-paragraph markdown block without a `<p>`, so the
+// justified alignment that `.section-title-left-aligned p` gives every other
+// intro on the site would miss it. This restores the same alignment.
+#research-intro .section-heading + .col-12 {
+  text-align: justify;
+}
+
+// The block keeps the theme's "even" section colour wherever it sits on the
+// page, because the sticky bar below paints the same colour and must match it.
+.home-section.wg-research-directions {
+  background: $sta-home-section-even;
+}
+
+// Chip bar. It sticks directly under the site header while the block scrolls.
+// `--sea-navbar-height` is the header height (defined at the top of this file
+// by the top-bar work, with 84px as the fallback). The theme hides the header
+// when the visitor scrolls down on this page (Headroom adds `headroom--unpinned`
+// to `.page-header`, a sibling just before `.page-body`), and the bar then
+// slides up to the very top, timed like the header's own 200ms slide.
+// The script reads `--research-chipbar-top` to know where the bar sits when
+// the header is showing.
+.research-chipbar {
+  --research-chipbar-top: var(--sea-navbar-height, 84px);
+  position: sticky;
+  top: var(--research-chipbar-top);
+  z-index: 5;
+  margin: 0 0 1.75rem;
+  padding: 0.6rem 0;
+  background: $sta-home-section-even;
+  // Paint the bar edge to edge like the header, not just across the container.
+  // The huge spread shadow fills the sides, and the clip keeps it from
+  // spilling over the cards above and below, except for a 1px rule underneath.
+  box-shadow: 0 0 0 100vmax $sta-home-section-even, 0 1px 0 100vmax rgba(0, 51, 115, 0.12);
+  clip-path: inset(0 -100vmax -1px);
+  transition: top 200ms linear;
+}
+
+.page-header.headroom--unpinned + .page-body .research-chipbar {
+  top: 0;
+}
+
+// On this page, anything the browser scrolls into view on its own (a link
+// that gets focus while someone tabs, a #direction jump, `scrollIntoView()`)
+// must clear both the header and the sticky bar, or it ends up hidden behind
+// the bar. The script keeps `--research-chipbar-h` equal to the bar's real
+// height plus a small gap (one row of chips, or two from 768px to about
+// 1290px). The fallbacks cover the page without JavaScript.
+html:has(.research-chipbar) {
+  scroll-padding-top: calc(var(--sea-navbar-height, 84px) + var(--research-chipbar-h, 3.75rem));
+
+  @media (min-width: 768px) and (max-width: 1289.98px) {
+    scroll-padding-top: calc(var(--sea-navbar-height, 84px) + var(--research-chipbar-h, 5.5rem));
+  }
+}
+
+.research-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.research-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  padding: 0.35rem 0.85rem;
+  border: 1px solid #003373;
+  border-radius: 999px;
+  background: #fff;
+  color: #003373;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.3;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    border-color: #3A8FB7;
+    color: #3A8FB7;
+    text-decoration: none;
+  }
+
+  // Visible keyboard focus, offset so it reads against both chip states.
+  &:focus-visible {
+    outline: 3px solid #3A8FB7;
+    outline-offset: 2px;
+  }
+
+  // The chip for the view on screen. The script moves `aria-current` as the
+  // view changes, so the styling and the screen-reader state never disagree.
+  &[aria-current] {
+    background: #003373;
+    border-color: #003373;
+    color: #fff;
+  }
+
+  &[aria-current]:hover {
+    background: #00285c;
+    border-color: #00285c;
+    color: #fff;
+  }
+}
+
+// The direction number, set in a small round badge before the short title.
+.research-chip__number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.45em;
+  height: 1.45em;
+  border-radius: 50%;
+  background: rgba(0, 51, 115, 0.1);
+  font-size: 0.85em;
+  line-height: 1;
+}
+
+.research-chip[aria-current] .research-chip__number {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+// From tablets up: slightly smaller chips and tighter spacing keep the bar
+// short while it sticks. With the full direction names (Orson's review), the
+// six chips need about 1255px, so they fit one row only in the widest
+// container (viewports from about 1290px). Narrower screens get two rows.
+@media (min-width: 576px) {
+  .research-chipbar {
+    padding: 0.45rem 0;
+  }
+
+  .research-chips {
+    gap: 0.4rem;
+  }
+
+  .research-chip {
+    padding: 0.3rem 0.7rem;
+    font-size: 0.7rem;
+  }
+}
+
+// Phones and small tablets (below 768px): one row that scrolls sideways, never
+// a tall wrapped block that would eat the screen while it sticks. With the
+// full direction names, 576-767px would otherwise wrap to three rows. The padding leaves room for the focus ring,
+// which the scroll box would otherwise clip, and the negative margin takes the
+// same room back so the chips stay aligned with the text below.
+@media (max-width: 767.98px) {
+  .research-chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin: -6px;
+    padding: 6px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .research-chips > li {
+    flex: 0 0 auto;
+  }
+}
+
+// Views. Only one is visible at a time. The `hidden` attribute does the hiding,
+// and this rule keeps any later `display` rule from overriding it.
+.research-view[hidden] {
+  display: none !important;
+}
+
+// Section headings in the existing `section-custom-header` look (see
+// `template.scss`, which styles that look for the `h1` of a markdown block).
+// These are `h2`s under the page's intro heading, so the size and spacing of the
+// theme's `.section-heading h1` are repeated here. The font is left to the
+// site's heading font, so it changes with the rest of the site.
+//
+// A #direction jump clears the header and the sticky chip bar through the
+// page's `scroll-padding-top` (just below), so the headings need no margin.
+.wg-research-directions .section-custom-header .section-heading h2 {
+  margin: 0 0 10px;
+  font-size: 2.25rem;
+  text-align: left;
+
+  // On phones the longest titles ran to four lines at full size.
+  @media (max-width: 575.98px) {
+    font-size: 1.75rem;
+  }
+
+  // The view heading takes focus after "See all" only so screen readers land
+  // on it. It is not something to click, so it gets no focus ring.
+  &:focus {
+    outline: none;
+  }
+}
+
+.research-direction + .research-direction {
+  margin-top: 3.5rem;
+}
+
+.research-direction__description {
+  margin-bottom: 0;
+}
+
+// "See all highlighted papers" (no count) under each overview row. The theme shrinks
+// `.btn` text to 0.8rem with a tight line height, which is too cramped for a
+// sentence, so the size and padding are reset here.
+.research-see-all {
+  padding: 0.55rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.3;
+  border-radius: 999px;
+
+  &:focus-visible {
+    outline: 3px solid #3A8FB7;
+    outline-offset: 2px;
+    box-shadow: none;
+  }
+}
+
+.research-browse-all {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+// Card grid: 4 per row from 1200px, 2 per row from 576px, 1 below. Grid rows
+// stretch every card to the tallest one in its row, so rows stay even.
+.paper-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.25rem;
+  margin: 1.5rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 576px) {
+  .paper-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1200px) {
+  .paper-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+// One paper card: image, venue and year, award badges, title, authors.
+.paper-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  // A subtle lift on hover.
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 51, 115, 0.14);
+  }
+
+  // Ring the whole card while a link inside it has keyboard focus. Browsers
+  // without `:has()` still show the link's own focus style below.
+  &:has(a:focus-visible) {
+    box-shadow: 0 0 0 2px #3A8FB7, 0 8px 20px rgba(0, 51, 115, 0.14);
+  }
+}
+
+// The figure. Every `featured.png` is exactly 4:3, so `cover` crops nothing.
+// The fixed ratio also holds the space before a lazy image arrives.
+.paper-card__media {
+  display: block;
+  aspect-ratio: 4 / 3;
+  background: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+// No figure yet: a quiet panel in the primary blue with the venue name, so the
+// row keeps its rhythm without any made-up artwork.
+.paper-card__media--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: #003373;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1rem;
+  line-height: 1.3;
+  text-align: center;
+
+  &:hover,
+  &:focus {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+  }
+}
+
+.paper-card__body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  padding: 0.7rem 0.85rem 0.85rem;
+}
+
+.paper-card__venue {
+  margin-bottom: 0.25rem;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 0.68rem;
+  line-height: 1.35;
+}
+
+// `award_icons.html` sets an inline 'medium' font size meant for the
+// publication list. That is larger than a card title, so it is scaled down here.
+// Only `!important` can outrank an inline style.
+.paper-card .award-badge {
+  margin-bottom: 0.15rem;
+  font-size: 0.66rem !important;
+  line-height: 1.35;
+}
+
+.paper-card__title {
+  margin: 0.2rem 0 0.4rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.3;
+
+  // The clamp sits on the link rather than the heading, so the link's own
+  // focus outline is not clipped by the clamp's hidden overflow.
+  a {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    color: rgba(0, 0, 0, 0.85);
+    text-decoration: none;
+
+    &:hover {
+      color: #3A8FB7;
+    }
+
+    &:focus-visible {
+      outline: 2px solid #3A8FB7;
+      outline-offset: 2px;
+    }
+  }
+}
+
+.paper-card__authors {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  margin: 0;
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 0.66rem;
+  line-height: 1.4;
+
+  // Lab members link to their profiles. The bold weight comes from the shared
+  // `.author-lab-member` rule of the publications list. The clamp's hidden
+  // overflow would clip an outline, so focus shows as a tint and underline
+  // drawn inside the link instead.
+  a {
+    color: inherit;
+
+    &:hover {
+      color: #3A8FB7;
+    }
+
+    &:focus-visible {
+      outline: none;
+      background: rgba(58, 143, 183, 0.18);
+      box-shadow: inset 0 -2px 0 #3A8FB7;
+    }
+  }
+}
+
+// Visitors who ask for less motion get no lift, no sliding bar and no fades.
+@media (prefers-reduced-motion: reduce) {
+  .research-chipbar,
+  .research-chip,
+  .paper-card {
+    transition: none;
+  }
+
+  .paper-card:hover {
+    transform: none;
+  }
+}
+
+// ---- Publications page and lab-member names (T4) ----
+//
+// The /publication/ list is `layouts/section/publication.html`, one row per
+// paper from `layouts/partials/views/publication_list_item.html`, filtered by
+// `assets/js/publication-filters.js`. The author-name rule at the top of this
+// block is site-wide.
+
+// Lab members' names, bold in every author list: paper pages, this list, the
+// other list views, and the Research cards. The class comes from
+// `layouts/partials/page_metadata_authors.html` (and the cards' own markup),
+// and only this block defines it, so change the weight here and nowhere else.
+.author-lab-member {
+  font-weight: 700;
+}
+
+// Inside the theme's grey metadata line, the theme greys every link to
+// rgba(0, 0, 0, 0.54). Bold alone at that grey sits just under the 4.5:1
+// contrast bar on the page background, so members get a darker grey. Hover
+// keeps the theme's primary blue.
+.article-metadata a.author-lab-member {
+  color: rgba(0, 0, 0, 0.75);
+
+  &:hover,
+  &:focus {
+    color: #003373;
+  }
+}
+
+// Filter panel: search box, a row of direction chips, a row of type chips, and
+// the "Showing N of M papers" line. A white card so the controls read as one
+// unit against the grey page. Hidden without JS by a <noscript> style in the
+// template, because the chips cannot do anything then.
+.pub-filters {
+  margin: 0.5rem 0 0;
+  padding: 1.25rem 1.25rem 0.85rem;
+  background: #fff;
+  border: 1px solid rgba(0, 51, 115, 0.12);
+  border-radius: 8px;
+}
+
+.pub-search {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+// The magnifier sits inside the input's left padding and ignores clicks, so
+// clicking it still focuses the field.
+.pub-search__icon {
+  position: absolute;
+  top: 50%;
+  left: 0.9rem;
+  transform: translateY(-50%);
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 0.85rem;
+  pointer-events: none;
+}
+
+.pub-search__input {
+  height: auto;
+  padding: 0.45rem 0.9rem 0.45rem 2.4rem;
+  font-size: 0.95rem;
+  border-radius: 6px;
+
+  &:focus {
+    border-color: #3A8FB7;
+    box-shadow: 0 0 0 0.2rem rgba(58, 143, 183, 0.25);
+  }
+}
+
+// One labelled row of chips. The label sits in a fixed column beside the
+// chips, so both rows line up.
+.pub-filter-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem 1rem;
+  margin-bottom: 0.6rem;
+}
+
+.pub-filter-label {
+  flex: 0 0 5.25rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.pub-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+// The chips are toggle buttons: `aria-pressed="true"` marks the active one in
+// each row, and the same attribute drives the filled style, so what a screen
+// reader hears and what the eye sees cannot drift apart.
+.pub-chip {
+  padding: 0.25rem 0.8rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.4;
+  white-space: nowrap;
+  color: #003373;
+  background: #fff;
+  border: 1px solid rgba(0, 51, 115, 0.35);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    color: #3A8FB7;
+    border-color: #3A8FB7;
+  }
+
+  // Bootstrap's reboot drops the outline for mouse focus only. Keyboard focus
+  // gets a clear accent ring that also shows on the filled (active) chip.
+  &:focus-visible {
+    outline: 2px solid #3A8FB7;
+    outline-offset: 2px;
+  }
+
+  &[aria-pressed="true"] {
+    color: #fff;
+    background: #003373;
+    border-color: #003373;
+
+    &:hover {
+      color: #fff;
+      background: #00285c;
+      border-color: #00285c;
+    }
+  }
+}
+
+// The live count, plus a "Clear filters" link that only shows while something
+// is filtered.
+.pub-filter-status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 1rem;
+  margin-top: 0.85rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  font-size: 0.9rem;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.pub-count {
+  margin: 0;
+
+  strong {
+    color: #003373;
+  }
+}
+
+.pub-reset {
+  padding: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #003373;
+  text-decoration: underline;
+  background: none;
+  border: 0;
+  cursor: pointer;
+
+  &:hover {
+    color: #3A8FB7;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #3A8FB7;
+    outline-offset: 2px;
+  }
+}
+
+// Year groups. The heading carries the year and a muted count that the script
+// keeps in step with the filters. The script hides a whole group when nothing
+// in it matches. The gap lives on the group, not the heading, so a hidden
+// group (display: none) takes its gap with it.
+.pub-year {
+  margin-top: 2rem;
+}
+
+.pub-year__heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0 0 1rem;
+  padding-bottom: 0.4rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #003373;
+  border-bottom: 2px solid rgba(0, 51, 115, 0.15);
+}
+
+.pub-year__count {
+  font-size: 0.85rem;
+  font-weight: 400;
+  white-space: nowrap;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+// One paper. These are the values `views/citation_custom.html` used to set
+// inline, kept so the list looks the same as before.
+.pub-item {
+  margin-bottom: 1.25rem;
+
+  .pub-authors,
+  .pub-venue {
+    font-size: medium;
+  }
+
+  // Darker than the old inline `gray` (3.4:1 on the page background) so the
+  // author line passes the 4.5:1 contrast bar (about 5.5:1). Non-member names
+  // are links to auto-made author pages, so they take the same colour.
+  .pub-authors,
+  .pub-authors a:not(.author-lab-member) {
+    color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+// Long author lists (Agents' Last Exam has 262 names) show a short line plus
+// this native disclosure with the full list.
+// <details> needs no JS, and the browser handles keyboard and screen readers.
+.pub-authors-all {
+  margin: 0.15rem 0 0.25rem;
+
+  > summary {
+    width: max-content;
+    max-width: 100%;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #003373;
+    cursor: pointer;
+
+    &::marker {
+      color: #3A8FB7;
+    }
+
+    &:hover {
+      color: #3A8FB7;
+    }
+
+    &:focus-visible {
+      outline: 2px solid #3A8FB7;
+      outline-offset: 2px;
+    }
+  }
+
+  .pub-authors-all__less {
+    display: none;
+  }
+
+  &[open] {
+    .pub-authors-all__more {
+      display: none;
+    }
+
+    .pub-authors-all__less {
+      display: inline;
+    }
+  }
+}
+
+// Once the full list is open, the short line above it is redundant.
+.pub-item .pub-authors:has(+ .pub-authors-all[open]) {
+  display: none;
+}
+
+.pub-empty {
+  margin-top: 2rem;
+  padding: 2.5rem 1rem;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.6);
+  background: #fff;
+  border: 1px dashed rgba(0, 51, 115, 0.25);
+  border-radius: 8px;
+
+  p {
+    margin-bottom: 0.75rem;
+  }
+}
+
+// Phones: each label goes above its chips, and each chip row becomes a single
+// line that scrolls sideways instead of wrapping into a tall block (the same
+// rule as the Research page chip bar). The row bleeds to the panel's edges so
+// the cut-off chip at the right hints that there is more.
+@media (max-width: 575.98px) {
+  .pub-filters {
+    padding: 1rem 1rem 0.75rem;
+  }
+
+  .pub-filter-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pub-filter-label {
+    flex-basis: auto;
+  }
+
+  .pub-chips {
+    flex-wrap: nowrap;
+    margin: 0 -1rem;
+    padding: 3px 1rem 5px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .pub-year__heading {
+    font-size: 1.35rem;
+  }
+}
+
+// ---- Top bar (T5) ----
+// Sizes for the site header, `layouts/partials/components/headers/navbar.html`.
+// They used to be inline styles in that template (a fixed `height:200px` on the
+// bar and a `max-height` on each of the two logo images). Here they follow
+// `--sea-navbar-height` from the top of this file, so there is one place to
+// change them.
+
+// The bar. The id selector outranks the theme's `.navbar { height: 70px }`
+// (50px below 992px). `min-height` rather than `height` lets the bar grow if
+// its content ever needs more room, instead of that content spilling out of a
+// box of fixed height. Bootstrap's navbar is a flex row that centres its items
+// vertically, so the logo and the links stay centred in the bar.
+#navbar-main {
+  height: auto;
+  min-height: var(--sea-navbar-height, 84px);
+}
+
+// The logo. navbar.html generates it 120px tall and it is shown at half that
+// or less, so it stays sharp on 2x screens. `height: auto` replaces the theme's
+// stretch-to-fill height, which leaves `max-height` as the only thing that sets
+// the size. `width: auto` keeps the aspect ratio, so the logo never distorts.
+//
+// The logo height is the bar height minus a fixed margin, so the logo always
+// fits inside the bar. If it did not, `min-height` would let the bar grow past
+// `--sea-navbar-height`, and the anchor offset and the chip bar would then sit
+// too high. Phones get a 44px logo in the 64px bar, which leaves 10px of bar
+// above and below it. If the bar is ever made taller than 84px, raise the
+// `get_logo` size in navbar.html too, so the logo stays at 2x.
+#navbar-main .navbar-brand img {
+  width: auto;
+  height: auto;
+  max-height: calc(var(--sea-navbar-height, 84px) - 20px);
+}
+
+// Desktop gets a 60px logo in the 84px bar, which leaves 12px of bar above and
+// below it.
+@media (min-width: 992px) {
+  #navbar-main .navbar-brand img {
+    max-height: calc(var(--sea-navbar-height, 84px) - 24px);
+  }
+}
+
+// The mobile menu, below 992px. The theme hangs the open menu panel from a
+// hard-coded `top: 50px`, which matched its own 50px bar. On the old 200px bar
+// that put the open panel over the logo and the hamburger toggle, and since the
+// panel's z-index is above both, the toggle could not be tapped to close the
+// menu again. `top: 100%` hangs the panel from the bottom edge of the bar at
+// whatever height the bar has, so the logo and the toggle stay visible and
+// usable while the menu is open.
+//
+// On a short screen, such as a phone held sideways, the open panel can be
+// taller than the space left under the bar. Capping it to that space and
+// letting it scroll keeps every item reachable. `100dvh` follows the mobile
+// browser toolbars, and browsers without it keep the `100vh` line. The cap
+// applies only once the panel is fully open (`.show`), so it leaves Bootstrap's
+// open and close animation alone.
+//
+// `overscroll-behavior: contain` keeps a swipe on the open panel inside the
+// panel. Without it, a swipe past the end of the panel (or on a panel too short
+// to need scrolling) scrolls the page behind it. On every page except home the
+// theme then hides the header, which slides the open panel up over the content
+// with the toggle out of view. A swipe on the page below the panel still
+// scrolls the page as usual.
+@media (max-width: 991.98px) {
+  #navbar-main .navbar-collapse {
+    top: 100%;
+  }
+
+  #navbar-main .navbar-collapse.show {
+    max-height: calc(100vh - var(--sea-navbar-height, 84px));
+    max-height: calc(100dvh - var(--sea-navbar-height, 84px));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+}
+
+// Anchor offset. The theme's hash scrolling (`wowchemy-navigation.js`) measures
+// the bar at the moment it scrolls and stops that far above the target, so it
+// needs nothing from here. Jumps that skip that code (the browser's own jump to
+// a `#fragment` before the theme's scripts run, `scrollIntoView()`, or the page
+// scrolling a focused element into view while someone tabs through it) would
+// otherwise tuck the target under the bar. This padding gives them the same
+// offset. It does not add to the theme's own scrolling, which sets the scroll
+// position directly. Anything that also sits under the bar, such as the chip
+// bar on the Research page, should add only its own height on top of this.
+html {
+  scroll-padding-top: var(--sea-navbar-height, 84px);
+}
+
+// ---- Homepage hero and Lab News (T6) ----
+
+// Hero: the first block of `content/_index.md` (`css_class: sea-hero`).
+// The mission statement sits in white straight on a blue-toned photo of Grand
+// Central, and the Sense, Empower, and Augment directions sit below it on one
+// white card (Orson's design). The section has no visible title. A visually
+// hidden `h1` names it for screen readers.
+//
+// The theme draws the photo on `.home-section-bg` from
+// `design.background.image` in content/_index.md, sized to cover, and keeps it
+// fixed while the page scrolls on screens 992px and wider. The blue tone is
+// part of the file (`assets/media/hero-grand-central.webp`). A navy wash over
+// it, strongest behind the statement and lighter around the card, keeps the
+// white text readable on the bright parts of the concourse. A faint light line
+// along its top edge parts the photo from the navy menu bar. The navy behind
+// the photo shows while it loads, so the white text is never on a light
+// background.
+.sea-hero.home-section {
+  padding: 3.75rem 0 4.5rem;
+}
+
+.sea-hero .home-section-bg.bg-image {
+  background-color: #0a2a5e;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.12)) top / 100% 1px no-repeat,
+      linear-gradient(180deg, rgba(0, 32, 80, 0.62) 0%, rgba(0, 32, 80, 0.38) 45%, rgba(0, 32, 80, 0.22) 100%);
+  }
+}
+
+// One column with the same edges as the menu bar's content (the logo on the
+// left, the last menu item on the right): 1260px at most, and 36px in from
+// each window edge below that. The statement and the card share its left
+// edge, so the theme's column gutters are taken out.
+.sea-hero > .container {
+  width: calc(100% - 72px);
+  max-width: 1260px;
+  padding: 0;
+
+  > .row {
+    margin: 0;
+  }
+
+  > .row > .col-12 {
+    padding: 0;
+  }
+}
+
+// The mission statement: white, 27 to 32px on desktops as the window widens,
+// left-aligned in lines of around 65 characters, with a clear band of photo
+// between it and the card. The theme justifies paragraphs in this section
+// (`.section-title-left-aligned p` in `template.scss`), which would leave wide
+// gaps in type this size, so it is set left here. A soft shadow guards the
+// few bright spots behind it, such as the station clock.
+.sea-hero .sea-hero__mission {
+  max-width: 960px;
+  margin: 0 0 3.5rem;
+
+  p {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(1.3rem, 2.2vw, 1.52rem);
+    font-weight: 400;
+    line-height: 1.42;
+    letter-spacing: -0.01em;
+    text-align: left;
+    text-shadow: 0 1px 2px rgba(0, 20, 60, 0.35), 0 1px 14px rgba(0, 20, 60, 0.45);
+    text-wrap: pretty;
+  }
+
+  strong {
+    font-weight: 700;
+  }
+
+  // The link to Orson's site, in white with a solid white underline, so it
+  // stays distinguishable from the rest of the sentence.
+  a {
+    border-bottom: 0;
+    color: #fff;
+    text-decoration: underline;
+    text-decoration-color: #fff;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 0.18em;
+
+    &:hover,
+    &:focus {
+      text-decoration-thickness: 2.5px;
+    }
+
+    &:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: 3px;
+    }
+  }
+}
+
+// The card that holds the three directions and the line to the Research and
+// Publication pages. It matches the Join Us panel further down (`.sea-join`):
+// white at 80% with a light blur, so the photo shows through it, by Orson's
+// choice. Keep the two in step.
+.sea-hero__card {
+  padding: 2.25rem 0 1.5rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+
+  // The closing line, under a hairline, centred.
+  > p {
+    margin: 1.75rem 2.5rem 0;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(0, 51, 115, 0.14);
+    font-size: 0.9rem;
+    text-align: center;
+  }
+}
+
+// Below 992px the wash is a little darker at the top. Under 928px the theme's
+// root font drops from 21px to 16.17px, so the statement falls to about 21px,
+// under "large text" (24px), and needs 4.5:1 against even the brightest spot
+// behind it. The darker wash starts with the other tablet rules, a little
+// earlier than it has to.
+@media (max-width: 991.98px) {
+  .sea-hero .home-section-bg.bg-image::after {
+    background:
+      linear-gradient(rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.12)) top / 100% 1px no-repeat,
+      linear-gradient(180deg, rgba(0, 32, 80, 0.7) 0%, rgba(0, 32, 80, 0.5) 30%, rgba(0, 32, 80, 0.22) 100%);
+  }
+
+  .sea-hero > .container {
+    width: calc(100% - 3rem);
+  }
+
+  .sea-hero .sea-hero__mission {
+    margin-bottom: 2.75rem;
+  }
+}
+
+// Phones: the hero is about 1,500 to 2,000px tall here, so covering it would
+// enlarge the 1140px-tall photo up to about 1.7x and blur it. Instead the
+// photo keeps a 700px height and starts 120px up, so the station clock and
+// walkers sit behind the statement, with a taller band of photo above it. It
+// does not repeat (a second copy would show a hard seam and a second clock):
+// below it, the navy behind the photo fills the narrow margins beside the card.
+@media (max-width: 767.98px) {
+  .sea-hero.home-section {
+    padding: 4.25rem 0 2.5rem;
+  }
+
+  .sea-hero .home-section-bg.bg-image {
+    background-size: auto 700px;
+    background-position: center -120px;
+    background-repeat: no-repeat;
+  }
+
+  .sea-hero > .container {
+    width: calc(100% - 2rem);
+  }
+
+  .sea-hero .sea-hero__mission {
+    margin-bottom: 2rem;
+
+    p {
+      font-size: 1.15rem;
+      line-height: 1.45;
+    }
+  }
+
+  .sea-hero__card {
+    padding: 1.75rem 0 1.25rem;
+
+    > p {
+      margin: 1.5rem 1.25rem 0;
+    }
+  }
+}
+
+// Visitors who ask their system for more contrast get no photo: the statement
+// stays white on the lab's navy, and the card and the Join Us panel are solid
+// white. Those who ask for less transparency get both solid, and those who ask
+// for less motion get a photo that scrolls with the page.
+@media (prefers-contrast: more) {
+  .sea-hero .home-section-bg.bg-image {
+    background-image: none !important; // the theme sets the photo inline
+    background-color: #003373;
+
+    &::after {
+      display: none;
+    }
+  }
+
+  .sea-hero .sea-hero__mission p {
+    text-shadow: none;
+  }
+
+  .sea-hero__card,
+  .sea-join {
+    background: #fff;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .sea-hero__card,
+  .sea-join {
+    background: #fff;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sea-hero .home-section-bg.parallax {
+    background-attachment: scroll;
+  }
+}
+
+// The Sense, Empower, and Augment pillars. A grid rather than Bootstrap columns
+// so that each pillar keeps its image, title, text, and links together when the
+// row stacks on phones (the old `col-md-4` markup stacked all three images
+// first and all three texts after them). `minmax(0, 1fr)` stops a long word
+// from widening one column.
+.sea-pillars {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+}
+
+// Each pillar is a column of rows (image, title, text, the "Research
+// directions" label, then one row per direction link), centred, and set off
+// from its neighbour by a hairline rather than a box of its own, so the three
+// read as parts of one idea. The rows are shared across the three columns
+// (`subgrid`), so when one pillar's text or one of its links wraps to more
+// lines, the labels and every link still line up across the columns at every
+// width (Orson's request). Each pillar spans 12 rows, room for 8 links: rows a
+// pillar does not use are empty and take no space. Browsers without subgrid
+// stack each column on its own, tightly, as before. The pictograms are capped
+// so they do not outgrow the text on wide screens.
+.sea-pillar {
+  display: grid;
+  grid-row: span 12;
+  grid-template-rows: subgrid;
+  align-content: start;
+  align-items: start;
+  justify-items: center;
+  row-gap: 0;
+  padding: 0 2rem;
+  text-align: center;
+
+  & + & {
+    border-left: 1px solid rgba(0, 51, 115, 0.14);
+  }
+
+  figure {
+    width: 100%;
+    max-width: 280px;
+    margin-bottom: 0.75rem;
+  }
+
+  // The pictograms carry their own rounded frame, so no border is drawn
+  // around them. A second frame would read as a box inside a box.
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
+// The direction titles are `h2`, one level under the section's hidden `h1`, so
+// the heading outline does not skip a level. The theme sets `h2` in a regular
+// weight, so the bold is set here to keep them reading as titles, in the lab's
+// navy to tie the card to the menu bar and the photo.
+.sea-pillar__title {
+  margin: 0 0 0.35rem;
+  color: #003373;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+// Links inside the hero's sentences are underlined. The theme's link blue
+// alone is hard to tell from the body text.
+.sea-hero p > a {
+  text-decoration: underline;
+}
+
+// Card text is centred under the centred image and title. The section-wide
+// `.section-title-left-aligned p` rule would justify it, which leaves wide gaps
+// between words in a column this narrow, so this selector is one class more
+// specific to win.
+.sea-hero .sea-pillar p.sea-pillar__text {
+  margin-bottom: 0.75rem;
+  text-align: center;
+  text-wrap: balance; // evens out the lines, so no word is left alone on the last one
+}
+
+// The "Research directions" label above each pillar's direction links
+// (below), in the style of the Publications page filter labels. It says what
+// the numbers on the links are. Its selector is as specific as the pillar
+// text's, to win over `.section-title-left-aligned p` in the same way.
+.sea-hero .sea-pillar p.sea-pillar__directions-label {
+  margin: 0.15rem 0 0.45rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+  text-align: center;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.68); // a little darker than the filter labels, for the photo behind the card
+}
+
+// The research directions under each pillar (shortcode
+// `layouts/shortcodes/pillar-directions.html`): small pill links in the
+// Research page chip colours, one per row, centred under the pillar text. A
+// direction can appear under more than one pillar. Unlike the Research chips
+// they may wrap inside a chip, because three columns get narrow on tablets.
+// The list's rows are the pillar's own (`subgrid`, see `.sea-pillar`), so the
+// second and third links line up across the columns even when one of them
+// wraps. Room for 8 links: unused rows take no space, which is why the space
+// between links is a margin rather than a row gap.
+.sea-pillar__directions {
+  display: grid;
+  grid-row: span 8;
+  grid-template-rows: subgrid;
+  align-items: start;
+  justify-items: center;
+  row-gap: 0;
+  margin: 0.15rem 0 0;
+  padding: 0;
+  list-style: none;
+
+  // A flex item rather than inline text, so each link starts at the top of
+  // its row. Inline, it would sit on a text baseline that drops when the link
+  // wraps to two lines, putting the row a few pixels out of line.
+  > li {
+    display: flex;
+  }
+
+  > li + li {
+    margin-top: 0.45rem;
+  }
+}
+
+.sea-pillar__direction {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  max-width: 100%;
+  padding: 0.3rem 0.8rem;
+  border: 1px solid #003373;
+  border-bottom: 1px solid #003373; // the theme underlines markdown-block links with a border
+  border-radius: 999px;
+  background: #fff;
+  color: #003373;
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: left;
+  text-decoration: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+
+  &:hover,
+  &:focus {
+    border-color: #3A8FB7;
+    color: #3A8FB7;
+    text-decoration: none;
+  }
+
+  // The focus ring is navy, not the hover blue: the light blue is only about
+  // 2.4:1 against the see-through card over the dark photo.
+  &:focus-visible {
+    outline: 3px solid #003373;
+    outline-offset: 2px;
+  }
+}
+
+.sea-pillar__direction-number {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.45em;
+  height: 1.45em;
+  border-radius: 50%;
+  background: rgba(0, 51, 115, 0.1);
+  font-size: 0.85em;
+  line-height: 1;
+}
+
+// Below 768px three columns get too narrow for the text, so the directions
+// stack, split by hairlines across the card instead of down it. The pictograms
+// keep the 280px cap from above, so they do not dwarf the text on a phone.
+@media (max-width: 767.98px) {
+  .sea-pillars {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sea-pillar,
+  .sea-pillar__directions {
+    grid-row: auto;
+    grid-template-rows: none;
+  }
+
+  .sea-pillar {
+    padding: 0 1.25rem;
+
+    & + & {
+      margin-top: 1.75rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid rgba(0, 51, 115, 0.14);
+      border-left: 0;
+    }
+  }
+}
+
+// Lab News list, drawn by `layouts/partials/blocks/news.html` from
+// `data/news.yaml` on the homepage and on /news/. A compact dated list rather
+// than cards, so ten items stay quick to skim.
+//
+// Each item is a three-column grid (date, type icon, text). `baseline`
+// alignment puts the date and the icon on the first line of the text however
+// many lines the text wraps to.
+.sea-news__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sea-news__item {
+  display: grid;
+  grid-template-columns: 5.25em 1.25em minmax(0, 1fr);
+  column-gap: 0.75em;
+  align-items: baseline;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid rgba(0, 51, 115, 0.15);
+
+  &:first-child {
+    border-top: 1px solid rgba(0, 51, 115, 0.15);
+  }
+}
+
+// Tabular figures keep "Nov 2026" and "Apr 2026" the same width, so the icons
+// form a straight column.
+.sea-news__date {
+  color: #003373;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.sea-news__icon {
+  color: #3A8FB7;
+  text-align: center;
+}
+
+// Links inside an item (people, papers) are underlined like the `<u>` links in
+// the markdown blocks, because the theme's link blue is close to the body text
+// colour and they would otherwise be hard to spot.
+.sea-news__text a {
+  text-decoration: underline;
+  text-decoration-color: rgba(0, 51, 115, 0.4);
+  text-underline-offset: 2px;
+
+  &:hover,
+  &:focus {
+    text-decoration-color: currentColor;
+  }
+}
+
+// The optional external `link:` of an item, as a short "More" after the text.
+.sea-news__text a.sea-news__more {
+  margin-left: 0.3em;
+  font-size: 0.85em;
+  font-weight: 600;
+  white-space: nowrap;
+
+  i {
+    margin-left: 0.3em;
+    font-size: 0.8em;
+  }
+}
+
+// Year headings on /news/ (`group_by_year: true`).
+.sea-news__year {
+  margin: 2rem 0 0.5rem;
+  color: #003373;
+  font-size: 1.5rem;
+  font-weight: 700;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+// "All news →" under the homepage list. Shown only when the list is cut short.
+.sea-news__archive {
+  margin: 1rem 0 0;
+  font-weight: 600;
+
+  a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+}
+
+// Phones: three columns would leave the text a narrow strip, so the icon sits
+// in a slim left gutter and the date moves above the text.
+@media (max-width: 575.98px) {
+  .sea-news__item {
+    grid-template-columns: 1.25em minmax(0, 1fr);
+    grid-template-areas:
+      "icon date"
+      "icon text";
+    column-gap: 0.6em;
+    row-gap: 0.1rem;
+  }
+
+  .sea-news__date {
+    grid-area: date;
+    font-size: 0.85em;
+  }
+
+  .sea-news__icon {
+    grid-area: icon;
+  }
+
+  .sea-news__text {
+    grid-area: text;
+  }
+}
+
+// ---- Site footer (T7) ----
+// Markup: `layouts/partials/site_footer.html`. Three short centered lines in the
+// theme's small grey footer type: the lab's address, a row of links, then the
+// copyright year and build date.
+//
+// The theme already sets the size and centering for `footer p` and
+// `.powered-by`, so these rules mostly tighten the spacing and handle the parts
+// the theme has no opinion on: the `<address>` element and the `·` separators.
+.sea-footer {
+  // The theme's footer grey, black at 54% opacity, comes out at 4.4:1 on the
+  // light footer background. That is just under the 4.5:1 that WCAG AA asks of
+  // small text. At 60% it reaches 5.5:1 and still reads as the same quiet grey.
+  // The theme's `.dark .site-footer` rule is more specific, so a dark theme
+  // keeps its own colour.
+  color: rgba(0, 0, 0, 0.6);
+
+  // Bootstrap gives every paragraph (and `<address>`) a 1rem bottom margin,
+  // which spreads three one-liners into a tall block. A small gap keeps the
+  // footer compact while the lines still read as separate groups.
+  .sea-footer__address,
+  p {
+    margin-bottom: 0.35rem;
+  }
+
+  // The last line keeps the theme's breathing room above the bottom edge.
+  .sea-footer__meta {
+    margin-bottom: 1rem;
+  }
+
+  // `<address>` is the right element for contact details, but browsers italicise
+  // it and `footer p` (which centers text) does not match it.
+  .sea-footer__address {
+    font-style: normal;
+    text-align: center;
+  }
+
+  .sea-footer__sep {
+    margin: 0 0.45em;
+  }
+
+  // Links keep the theme's link colours. The vertical padding enlarges the tap
+  // target on phones without changing how the line looks.
+  .sea-footer__link {
+    display: inline-block;
+    padding: 0.2rem 0;
+  }
+
+  .sea-footer__link .fa-github {
+    margin-right: 0.3em;
+  }
+
+  // A wrapped date ("Nov 25," / "2026") reads badly, so keep it on one line.
+  time {
+    white-space: nowrap;
+  }
+}
+
+// Phones: the address is too long for one line, and a wrapped line would leave a
+// stray `·` at a line edge. Stack the lab name over the street address instead.
+@media (max-width: 575.98px) {
+  .sea-footer .sea-footer__address {
+    .sea-footer__item {
+      display: block;
+    }
+
+    .sea-footer__sep {
+      display: none;
+    }
+  }
+}
+
+// ---- Homepage Join Us on the campus photo (review round) ----
+
+// One section replaces the old "Join Us" text block and the separate photo
+// banner that held only a "Meet the Team" button, which saves most of a
+// screen of scrolling. The campus photo is the block's background
+// (`design.background` in `content/_index.md`). The text sits on a white panel
+// at 80% opacity, so the photo shows around and through it while the text
+// keeps full contrast. A light blur behind the panel softens the busy photo
+// where the browser supports it. The homepage hero's card (`.sea-hero__card`)
+// matches it. Keep the two in step.
+.sea-join-section {
+  padding: 4.5rem 0;
+  overflow: hidden;
+}
+
+// `cuimc-cs.jpeg` has a white band about 3% tall along its top and bottom
+// edges. The old banner hid it by darkening the photo. Here the photo is shown
+// at full brightness, so it is scaled up 8% inside the section (which clips
+// it), which crops the bands at every width.
+.sea-join-section .home-section-bg {
+  transform: scale(1.08);
+}
+
+.sea-join {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  padding: 2rem 2.5rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  text-align: left;
+}
+
+// `min-width: 0` lets the text column shrink instead of pushing the buttons
+// off the panel when a long word wraps.
+.sea-join__text {
+  flex: 1 1 auto;
+  min-width: 0;
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// The heading lives inside the panel rather than in the theme's section
+// heading, which would sit straight on the photo. It copies the size of the
+// other homepage section titles so the page keeps one rhythm.
+.sea-join__title {
+  margin: 0 0 1rem;
+  font-size: 2.25rem;
+}
+
+// The two buttons stack in a column to the right of the text, at one width so
+// they read as a pair.
+.sea-join__actions {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sea-join__btn {
+  min-width: 12rem;
+  font-weight: 600;
+}
+
+// Below 992px a button column beside the text would squeeze the text to a
+// narrow strip, so the buttons move under the text and share a row.
+@media (max-width: 991.98px) {
+  .sea-join {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.5rem;
+  }
+
+  .sea-join__actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+// Phones: the panel and the photo margins tighten to give the text room, and
+// the two buttons share the full width.
+@media (max-width: 767.98px) {
+  .sea-join-section {
+    padding: 2.5rem 0;
+  }
+
+  .sea-join {
+    padding: 1.5rem 1.25rem;
+  }
+
+  // Matches the theme's smaller section titles on phones.
+  .sea-join__title {
+    font-size: 1.73rem;
+  }
+
+  .sea-join__btn {
+    flex: 1 1 10rem;
+    min-width: 0;
   }
 }

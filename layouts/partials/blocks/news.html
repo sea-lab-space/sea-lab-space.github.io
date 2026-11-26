@@ -1,0 +1,159 @@
+{{- /*
+  Lab News block: renders `data/news.yaml` as a compact dated list.
+
+  Used twice, with different options:
+    - the homepage (`content/_index.md`): the ten newest items plus an
+      "All news" link to the archive
+    - the archive (`content/news/_index.md`): every item, grouped by year
+
+  Block options, all under `content:` in the page's front matter:
+    title          Section heading. `news` is not one of the block types that
+                   `functions/parse_block_v2.html` injects a heading for, so
+                   this partial prints its own, with the same markup the
+                   markdown blocks get. That way `section-title-left-aligned`
+                   and the other heading styles apply unchanged.
+    subtitle       Optional line under the heading.
+    count          How many items to show. 0, the default, shows them all.
+    group_by_year  true prints a year heading above each year's items.
+    archive_link   URL of the full list. The "All news" link appears only
+                   when `count` actually hides some items.
+
+  Order: newest month first. Items from the same month keep the order they
+  have in the data file. Rather than trust the sort to be stable, each item's
+  sort key carries its file position as a tie-breaker, so the result is the
+  same whatever the sort algorithm does with equal keys.
+
+  Bad data fails the build with a message naming the entry. That shows up in
+  `hugo server` locally and in the deploy build (publish.yaml), which then
+  stops and leaves the live site as it was, instead of publishing a silently
+  wrong row. No pull-request check builds the site.
+*/ -}}
+
+{{- $page := .wcPage -}}
+{{- $block := .wcBlock -}}
+{{- $section_id := .wcIdentifier -}}
+{{- $count := int ($block.content.count | default 0) -}}
+{{- $group_by_year := $block.content.group_by_year | default false -}}
+{{- $archive_link := $block.content.archive_link | default "" -}}
+
+{{- /*
+  One Font Awesome icon per news type. The theme self-hosts Font Awesome Free
+  6.5.1, so these are the FA6 names (all in the free Solid set). `label` is
+  read out to screen readers in place of the icon, and shown as a tooltip.
+*/ -}}
+{{- $types := dict
+  "paper"    (dict "icon" "fa-file-lines"          "label" "Paper")
+  "award"    (dict "icon" "fa-trophy"              "label" "Award")
+  "grant"    (dict "icon" "fa-dollar-sign"         "label" "Grant")
+  "people"   (dict "icon" "fa-user-group"          "label" "People")
+  "teaching" (dict "icon" "fa-chalkboard-user"     "label" "Teaching")
+  "service"  (dict "icon" "fa-handshake-angle"     "label" "Service")
+  "talk"     (dict "icon" "fa-microphone"          "label" "Talk")
+  "press"    (dict "icon" "fa-newspaper"           "label" "Press")
+-}}
+
+{{- /* Validate every entry and give it a sort key, a year and a display date. */ -}}
+{{- $items := slice -}}
+{{- range $i, $entry := site.Data.news | default slice -}}
+  {{- $n := add $i 1 -}}
+
+  {{- /*
+    A quoted date is a string. An unquoted YYYY-MM-DD becomes a YAML date, so
+    accept that too. Anything else, such as an unquoted year (a number), is
+    left empty so it fails below. Converting a number would turn it into a
+    1970 timestamp and file the item under the wrong year without a word.
+  */ -}}
+  {{- $date := "" -}}
+  {{- $date_kind := printf "%T" $entry.date -}}
+  {{- if eq $date_kind "string" -}}
+    {{- $date = trim $entry.date " " -}}
+  {{- else if eq $date_kind "time.Time" -}}
+    {{- $date = (time.AsTime $entry.date).Format "2006-01-02" -}}
+  {{- end -}}
+  {{- if not (findRE `^\d{4}-(0[1-9]|1[0-2])(-(0[1-9]|[12]\d|3[01]))?$` $date) -}}
+    {{- errorf "data/news.yaml, entry %d: date %v must be a quoted \"YYYY-MM\" or \"YYYY-MM-DD\" string" $n $entry.date -}}
+    {{- continue -}}
+  {{- end -}}
+
+  {{- $type := lower (string ($entry.type | default "")) -}}
+  {{- $meta := index $types $type -}}
+  {{- if not $meta -}}
+    {{- errorf "data/news.yaml, entry %d (%s): type %q is not one of paper, award, grant, people, teaching, service, talk, press" $n $date $type -}}
+    {{- continue -}}
+  {{- end -}}
+
+  {{- if not $entry.text -}}
+    {{- errorf "data/news.yaml, entry %d (%s): text is missing" $n $date -}}
+    {{- continue -}}
+  {{- end -}}
+
+  {{- $month := substr $date 0 7 -}}
+  {{- $items = $items | append (dict
+    "key" (printf "%s#%05d" $month (sub 99999 $i))
+    "year" (substr $date 0 4)
+    "datetime" $date
+    "label" ((time.AsTime (printf "%s-01" $month)).Format "Jan 2006")
+    "type" $meta
+    "text" $entry.text
+    "link" ($entry.link | default "")
+  ) -}}
+{{- end -}}
+
+{{- $items = sort $items "key" "desc" -}}
+{{- $total := len $items -}}
+{{- if gt $count 0 -}}
+  {{- $items = first $count $items -}}
+{{- end -}}
+
+{{- /* One list item. Shared by the flat and the grouped layouts below. */ -}}
+{{- define "partials/inline/sea-news-item.html" -}}
+  {{- $item := .item -}}
+  <li class="sea-news__item">
+    <time class="sea-news__date" datetime="{{ $item.datetime }}">{{ $item.label }}</time>
+    <span class="sea-news__icon" title="{{ $item.type.label }}">
+      <i class="fas {{ $item.type.icon }}" aria-hidden="true"></i>
+      <span class="sr-only">{{ $item.type.label }}:</span>
+    </span>
+    <div class="sea-news__text">
+      {{ $.page.RenderString $item.text }}
+      {{- with $item.link }}
+        <a class="sea-news__more" href="{{ . }}" target="_blank" rel="noopener">More<i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i><span class="sr-only"> (opens in a new tab)</span></a>
+      {{- end }}
+    </div>
+  </li>
+{{- end -}}
+
+<div class="row justify-content-center">
+  {{- with $block.content.title }}
+  <div class="section-heading col-12 mb-3 text-center">
+    <h1 class="mb-0">{{ . | markdownify | emojify }}</h1>
+    {{- with $block.content.subtitle }}<p class="mt-1">{{ . | markdownify | emojify }}</p>{{ end }}
+  </div>
+  {{- end }}
+
+  <div class="col-12 sea-news">
+    {{- if $group_by_year }}
+      {{- $years := slice }}
+      {{- range $items }}{{ if not (in $years .year) }}{{ $years = $years | append .year }}{{ end }}{{ end }}
+      {{- range $years }}
+        {{- $year := . }}
+        <h2 class="sea-news__year" id="{{ $section_id }}-{{ $year }}">{{ $year }}</h2>
+        <ul class="sea-news__list">
+          {{- range where $items "year" $year }}
+            {{- partial "inline/sea-news-item.html" (dict "item" . "page" $page) }}
+          {{- end }}
+        </ul>
+      {{- end }}
+    {{- else }}
+      <ul class="sea-news__list">
+        {{- range $items }}
+          {{- partial "inline/sea-news-item.html" (dict "item" . "page" $page) }}
+        {{- end }}
+      </ul>
+    {{- end }}
+
+    {{- if and $archive_link (gt $count 0) (gt $total $count) }}
+      <p class="sea-news__archive"><a href="{{ $archive_link | relURL }}">All news<span aria-hidden="true"> →</span></a></p>
+    {{- end }}
+  </div>
+</div>

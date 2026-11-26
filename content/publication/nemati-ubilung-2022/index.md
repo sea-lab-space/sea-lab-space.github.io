@@ -28,4 +28,6 @@ abstract: Lung health assessment is traditionally done mainly through X-ray imag
   healthy v.s. diseased, 0.881 for obstructive v.s. non-obstructive, 0.854 for chronic
   obstructive pulmonary disease (COPD) v.s. asthma, and 0.892 for severe v.s. non-severe
   obstruction classification.
+directions:
+  - human-centered-health-foundation-models
 ---

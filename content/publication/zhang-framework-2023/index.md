@@ -18,4 +18,6 @@ doi: 10.1145/3594739.3610677
 links:
 - name: URL
   url: https://dl.acm.org/doi/10.1145/3594739.3610677
+directions:
+  - beyond-health
 ---

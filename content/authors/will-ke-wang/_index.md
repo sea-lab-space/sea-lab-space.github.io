@@ -17,7 +17,7 @@ authors:
 superuser: false
 
 # Role/position
-role: Postdoc Researcher
+role: Associate Research Scientist
 
 # Organizations/Affiliations
 organizations:

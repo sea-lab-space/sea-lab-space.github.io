@@ -1,9 +1,14 @@
 # Award name → icon + canonical display name.
 # Keys are lowercased for case-insensitive matching against the `awards` list
-# in a publication's frontmatter. The `display` field is what shows in the
-# hover tooltip, regardless of how the user typed the award name in frontmatter.
+# in a publication's frontmatter. The `display` field is the text shown next to
+# the icon (see layouts/partials/award_icons.html), regardless of how the user
+# typed the award name in frontmatter.
 #
 # To add a new award: add an entry below using a lowercased key.
+#
+# Icon convention: 🏆 marks an award the paper won outright (best paper,
+# distinguished paper, best artifact, editor's pick). 🏅 marks a step below
+# the top prize, such as an honorable mention or a best paper nomination.
 awards:
   "best paper award":
     icon: "🏆"
@@ -11,9 +16,19 @@ awards:
   "distinguished paper award":
     icon: "🏆"
     display: "Distinguished Paper Award"
+  # A best artifact award is a win in its own category, so it gets the trophy
+  # like the other best/distinguished awards.
+  "best artifact award":
+    icon: "🏆"
+    display: "Best Artifact Award"
   "honorable mention award":
     icon: "🏅"
     display: "Honorable Mention Award"
+  # A nomination is a shortlist for the best paper prize, not the prize itself.
+  # It ranks with an honorable mention, so it shares the medal.
+  "best paper nominee":
+    icon: "🏅"
+    display: "Best Paper Nominee"
   "editor's pick":
     icon: "🏆"
     display: "Editor's Pick"

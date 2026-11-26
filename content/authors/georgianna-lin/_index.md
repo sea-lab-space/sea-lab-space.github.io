@@ -21,6 +21,9 @@ superuser: false
 # Role/position
 role: Postdoc Researcher
 
+# Where they are now
+now_at: "[nuri](https://nurihealth.ai/) (Co-founder)"
+
 # Organizations/Affiliations
 organizations:
   - name: Columbia University
@@ -76,7 +79,7 @@ highlight_name: true
 # Organizational groups that you belong to (for People widget)
 #   Set this to `[]` or comment out if you are not using People widget.
 user_groups:
-  - Researchers
+  - Alumni
 ---
 
 I am a Postdoctoral Research Fellow collaborating with Orson Xu and Noémie Elhadad. My goal is to bridge HCI, AI, machine learning, and human physiology to create end-to-end systems that support holistic health tracking and personalized goal fulfillment. I earned my PhD in Computer Science from the University of Toronto where my work focused on how people make sense of rich, multimodal personal data,particularly in women’s health, and how to design tools that empower them to make informed, confident decisions about their well-being. Prior, I earned my B.S. and M.S. at Georgia Institute of Technology.

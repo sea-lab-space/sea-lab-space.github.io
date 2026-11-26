@@ -23,4 +23,6 @@ publication_types:
 - article-journal
 publication: '*Scientific Reports*'
 doi: 10.1038/s41598-025-25759-x
+directions:
+  - human-centered-health-foundation-models
 ---

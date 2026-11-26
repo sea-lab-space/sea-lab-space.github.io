@@ -40,7 +40,10 @@ abstract: We present a framework for gesture customization requiring minimal exa
 links:
 - name: URL
   url: https://dl.acm.org/doi/10.1145/3491102.3501904
-tags:
-  - 'intelligent interaction and intervention'
+directions:
+  - interaction-techniques
+  - beyond-health
+awards:
+- "honorable mention award"
 ---
 

@@ -24,6 +24,7 @@ publication_types:
 - paper-conference
 publication: '*Thirty-sixth Conference on Neural Information Processing Systems Datasets
   and Benchmarks Track*'
+publication_short: '*NeurIPS Datasets & Benchmarks*'
 abstract: Recent research has demonstrated the capability of behavior signals captured
   by smartphones and wearables for longitudinal behavior modeling. However, there
   is a lack of a comprehensive public dataset that serves as an open testbed for fair
@@ -40,6 +41,11 @@ abstract: Recent research has demonstrated the capability of behavior signals ca
   achieve adequate cross-dataset generalizability. We envision our multi-year datasets
   can support the ML community in developing generalizable longitudinal behavior modeling
   algorithms.
-tags:
-  - 'health prediction'
+links:
+- name: URL
+  url: https://the-globem.github.io/
+directions:
+  - human-centered-evaluation
+  - human-centered-health-foundation-models
+selected: true
 ---

@@ -1,0 +1,220 @@
+{{- /*
+  Research page view switching (T3), loaded through the theme's body-end hook.
+
+  Only pages that render blocks/research_directions.html get this script. That
+  block sets the "has_research_directions" page flag while `main` renders, which
+  happens before the theme renders its scripts and this hook.
+
+  What it does:
+    - Chips and "See all" links point to ?direction=<id> (or the bare page for
+      the overview). A plain click swaps the view in place and pushes the new
+      URL, so the Back and Forward buttons move between views. Middle-click and
+      modifier clicks are left alone and open the real URL.
+    - On load it reads ?direction=. An unknown or hidden id shows the overview
+      and the bad parameter is dropped from the address bar.
+    - It keeps `--research-chipbar-h` on <html> equal to the chip bar's height,
+      so the page's `scroll-padding-top` (custom.scss) clears both the header
+      and the bar. Anything the browser scrolls into view on its own, such as
+      a link that gets focus while someone tabs, then lands below the bar.
+    - The theme scrolls to a #hash itself (on load and on hashchange) and
+      offsets only the header. For a #direction heading the script scrolls
+      again right after it, with the bar included.
+    - After a switch it scrolls to the top of the views, just below the sticky
+      chip bar, but only when that spot is out of sight. Back returns to the
+      scroll position the visitor left. Smooth scrolling is skipped when the
+      visitor prefers reduced motion.
+  The state lives in the query string, never the #hash, because the theme's
+  hash-scrolling code owns hashes.
+*/ -}}
+{{- if .Store.Get "has_research_directions" }}
+<script>
+(function () {
+  'use strict';
+
+  var root = document.querySelector('[data-research-directions]');
+  if (!root || !window.history || !history.pushState || !window.URLSearchParams) return;
+
+  var bar = root.querySelector('.research-chipbar');
+  var viewsBox = root.querySelector('[data-research-views]');
+  var status = root.querySelector('[data-research-status]');
+  var chips = root.querySelectorAll('.research-chip[data-direction]');
+  var views = {};
+  Array.prototype.forEach.call(root.querySelectorAll('[data-view]'), function (el) {
+    views[el.getAttribute('data-view')] = el;
+  });
+  if (!bar || !viewsBox || !views.hasOwnProperty('')) return;
+
+  var reducedMotion = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+  var current = '';
+
+  // The bar's height plus a small gap, kept current as the chips wrap or the
+  // window resizes. custom.scss adds it to the header height in the page's
+  // `scroll-padding-top`.
+  function measureBar() {
+    document.documentElement.style.setProperty('--research-chipbar-h', (bar.offsetHeight + 12) + 'px');
+  }
+  measureBar();
+  if (window.ResizeObserver) {
+    new ResizeObserver(measureBar).observe(bar);
+  } else {
+    window.addEventListener('resize', measureBar);
+  }
+
+  // The theme's own #hash scroll stops one header height above the target,
+  // which leaves a direction heading under the chip bar. Scroll again just
+  // after it, this time with the browser's scroll padding (header plus bar).
+  function fixHashScroll() {
+    var id = window.location.hash ? decodeURIComponent(window.location.hash.slice(1)) : '';
+    var target = id ? document.getElementById(id) : null;
+    if (!target || !root.contains(target)) return;
+    window.setTimeout(function () {
+      target.scrollIntoView({ block: 'start', behavior: 'auto' });
+    }, 60);
+  }
+  window.addEventListener('load', fixHashScroll);
+  window.addEventListener('hashchange', fixHashScroll);
+
+  // Only the visible directions are rendered, so a hidden id is simply unknown here.
+  function isDirection(id) {
+    return typeof id === 'string' && id !== '' && views.hasOwnProperty(id);
+  }
+
+  function directionFromUrl() {
+    var id = new URLSearchParams(window.location.search).get('direction');
+    return isDirection(id) ? id : '';
+  }
+
+  function urlFor(id) {
+    var url = new URL(window.location.href);
+    if (id) {
+      url.searchParams.set('direction', id);
+    } else {
+      url.searchParams.delete('direction');
+    }
+    return url.pathname + url.search;
+  }
+
+  // Keep the active chip visible when the bar scrolls sideways on phones.
+  function revealChip(chip) {
+    var list = chip.parentNode && chip.parentNode.parentNode;
+    if (!list || list.scrollWidth <= list.clientWidth) return;
+    var listBox = list.getBoundingClientRect();
+    var chipBox = chip.getBoundingClientRect();
+    if (chipBox.left < listBox.left) {
+      list.scrollLeft += chipBox.left - listBox.left - 16;
+    } else if (chipBox.right > listBox.right) {
+      list.scrollLeft += chipBox.right - listBox.right + 16;
+    }
+  }
+
+  function show(id) {
+    current = id;
+    Object.keys(views).forEach(function (key) {
+      views[key].hidden = key !== id;
+    });
+    Array.prototype.forEach.call(chips, function (chip) {
+      if (chip.getAttribute('data-direction') === id) {
+        chip.setAttribute('aria-current', 'page');
+        revealChip(chip);
+      } else {
+        chip.removeAttribute('aria-current');
+      }
+    });
+  }
+
+  function announce(id) {
+    if (!status) return;
+    if (!id) {
+      status.textContent = 'Showing the overview of all research directions.';
+      return;
+    }
+    var heading = views[id].querySelector('h2');
+    var count = views[id].querySelectorAll('.paper-card').length;
+    status.textContent = 'Showing ' + (heading ? heading.textContent : id) + ', ' +
+      count + ' selected ' + (count === 1 ? 'paper.' : 'papers.');
+  }
+
+  function scrollBehavior() {
+    return reducedMotion && reducedMotion.matches ? 'auto' : 'smooth';
+  }
+
+  // Bring the top of the views to just below the sticky bar. Nothing happens
+  // when the views already start below the bar (the bar has not stuck yet).
+  // The scroll goes up, which makes the theme show its header again, so the
+  // target uses the bar's "header shown" offset (--research-chipbar-top).
+  function scrollToViews() {
+    var barBox = bar.getBoundingClientRect();
+    var viewsTop = viewsBox.getBoundingClientRect().top;
+    if (viewsTop >= barBox.bottom) return;
+    var style = window.getComputedStyle(bar);
+    var barTop = parseFloat(style.getPropertyValue('--research-chipbar-top')) || 0;
+    var gap = parseFloat(style.marginBottom) || 0;
+    var y = window.pageYOffset + viewsTop - barTop - barBox.height - gap;
+    window.scrollTo({ top: Math.max(0, Math.round(y)), behavior: scrollBehavior() });
+  }
+
+  function saveScroll() {
+    var state = { researchDirection: current, scrollY: window.pageYOffset };
+    history.replaceState(state, '', window.location.href);
+  }
+
+  root.addEventListener('click', function (event) {
+    var link = event.target.closest ? event.target.closest('a[data-direction]') : null;
+    if (!link || !root.contains(link)) return;
+    if (event.defaultPrevented || event.button !== 0 ||
+        event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    var id = link.getAttribute('data-direction');
+    if (id !== '' && !isDirection(id)) return;
+    event.preventDefault();
+
+    if (id !== current) {
+      saveScroll();
+      history.pushState({ researchDirection: id }, '', urlFor(id));
+      show(id);
+      announce(id);
+    }
+    // "See all" disappears with the overview, so move focus to the new
+    // heading instead of letting it fall back to the top of the page.
+    if (id && link.classList.contains('research-see-all')) {
+      var heading = views[id].querySelector('h2');
+      if (heading) heading.focus({ preventScroll: true });
+    }
+    scrollToViews();
+  });
+
+  // Keyboard users: when the bar scrolls sideways (below 768px), a chip that
+  // gets focus by Tab can sit half outside the scroll box, cutting off its
+  // label and focus ring. Scroll it into view the same way as the active chip.
+  root.addEventListener('focusin', function (event) {
+    var chip = event.target.closest && event.target.closest('.research-chip');
+    if (chip) revealChip(chip);
+  });
+
+  window.addEventListener('popstate', function (event) {
+    var id = directionFromUrl();
+    if (id === current) return;
+    show(id);
+    announce(id);
+    var saved = event.state && typeof event.state.scrollY === 'number' ? event.state.scrollY : null;
+    // Wait a frame so the swapped view has its height before scrolling.
+    window.requestAnimationFrame(function () {
+      if (saved !== null) {
+        window.scrollTo({ top: saved, behavior: 'auto' });
+      } else {
+        scrollToViews();
+      }
+    });
+  });
+
+  // First load: honour ?direction=, and drop an unknown or hidden id.
+  var requested = new URLSearchParams(window.location.search).get('direction');
+  var initial = directionFromUrl();
+  if (requested !== null && !initial) {
+    history.replaceState({ researchDirection: '' }, '', urlFor('') + window.location.hash);
+  } else {
+    history.replaceState({ researchDirection: initial }, '', window.location.href);
+  }
+  show(initial);
+})();
+</script>
+{{- end }}

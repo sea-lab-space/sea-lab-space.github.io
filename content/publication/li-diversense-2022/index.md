@@ -38,4 +38,6 @@ abstract: The ubiquity of Wi-Fi infrastructure has facilitated the development o
 links:
 - name: URL
   url: https://dl.acm.org/doi/10.1145/3536393
+directions:
+  - beyond-health
 ---

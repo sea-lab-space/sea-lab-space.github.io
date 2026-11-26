@@ -17,4 +17,7 @@ name = "SEA Lab"
   # Home sections
   background = "#eceff1"
   home_section_odd = "#eceff1"
-  home_section_even = "#cfd8dc"
+  # The alternating band (Lab News, the Research directions block and its
+  # sticky chip bar, and others). A light blue-grey that leans a little toward
+  # the navy, lighter than the old #cfd8dc at Orson's request (2026-11-26).
+  home_section_even = "#dbe2e9"

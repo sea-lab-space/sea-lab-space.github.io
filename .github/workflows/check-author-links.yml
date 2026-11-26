@@ -1,15 +1,23 @@
 name: Check author links
 
 # Runs on every pull request so a naming mistake shows up in review,
-# before it reaches main. The deploy workflow runs the same check again.
+# before it reaches main. The deploy workflow runs the same checks again.
+#
+# Two checks run here:
+#   - check_author_links.py: every lab member's name links to their profile.
+#   - check_publication_directions.py: every publication lists one or more
+#     research directions from data/research_directions.yaml (see
+#     "Categorize a publication (required)" in README.md).
 on:
   pull_request:
     paths:
       - 'content/authors/**'
       - 'content/publication/**'
+      - 'data/research_directions.yaml'
       - 'sea-lab-publication.bib'
       - 'processing/**'
       - 'scripts/check_author_links.py'
+      - 'scripts/check_publication_directions.py'
   workflow_dispatch:
 
 jobs:
@@ -21,4 +29,8 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install pyyaml
-      - run: python scripts/check_author_links.py
+      - id: author_links
+        run: python scripts/check_author_links.py
+      # Also runs when the author check fails, so one run reports both problems.
+      - if: success() || steps.author_links.outcome == 'failure'
+        run: python scripts/check_publication_directions.py

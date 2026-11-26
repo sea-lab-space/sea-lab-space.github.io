@@ -40,4 +40,6 @@ abstract: The COVID-19 pandemic upended college education and the experiences of
 links:
 - name: URL
   url: https://dl.acm.org/doi/10.1145/3538514
+directions:
+  - beyond-health
 ---

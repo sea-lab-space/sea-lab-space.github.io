@@ -49,4 +49,6 @@ abstract: 'The prevalence of ubiquitous computing enables new opportunities for 
 links:
 - name: URL
   url: https://dl.acm.org/doi/10.1145/3448124
+directions:
+  - human-centered-health-foundation-models
 ---

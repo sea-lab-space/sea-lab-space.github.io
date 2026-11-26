@@ -17,5 +17,9 @@ publication_types:
 - article-journal
 publication: '*Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous
   Technologies*'
+publication_short: '*IMWUT*'
 doi: 10.1145/3749508
+directions:
+  - clinician-ai-collaboration
+selected: true
 ---

@@ -29,6 +29,8 @@ doi: 10.1145/3544548.3581500
 links:
 - name: URL
   url: https://dl.acm.org/doi/10.1145/3544548.3581500
-tags:
-  - 'intelligent interaction and intervention'
+directions:
+  - beyond-health
+awards:
+- "honorable mention award"
 ---

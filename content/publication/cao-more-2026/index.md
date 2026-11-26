@@ -17,6 +17,7 @@ publication_types:
 - paper-conference
 publication: '*Proceedings of the 2026 CHI Conference on Human Factors in Computing
   Systems*'
+publication_short: '*CHI*'
 doi: 10.1145/3772318.3791946
 abstract: Large language models (LLMs) have been increasingly adopted to support patients’
   healthcare-seeking in recent years. While prior patient-centered studies have examined
@@ -35,4 +36,10 @@ abstract: Large language models (LLMs) have been increasingly adopted to support
 links:
 - name: URL
   url: https://doi.org/10.1145/3772318.3791946
+directions:
+  - personal-health-agents
+  - human-centered-evaluation
+selected: true
+highlight: personal-health-agents
+highlight_rank: 4
 ---

@@ -14,4 +14,7 @@ publication_types:
 - article-journal
 publication: '*Proc. ACM Interact. Mob. Wearable Ubiquitous Technol.*'
 doi: 10.1145/3770661
+directions:
+  - human-centered-evaluation
+  - personal-health-agents
 ---

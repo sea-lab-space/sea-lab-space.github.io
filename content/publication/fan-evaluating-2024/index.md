@@ -33,4 +33,6 @@ abstract: Smartphones hold a great variety of personal data during usage, which 
 links:
 - name: URL
   url: https://dl.acm.org/doi/10.1145/3678509
+directions:
+  - beyond-health
 ---

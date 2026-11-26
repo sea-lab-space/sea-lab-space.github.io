@@ -43,11 +43,14 @@ date: '2026-04-28'
 publishDate: '2026-05-17T03:23:07.869606Z'
 publication_types:
 - article-journal
-publication: '*Nature (under revision)*'
-doi: 10.48550/arXiv.2508.20148
+publication: '*Nature*'
+doi: 10.1038/s41586-026-11161-8
 links:
 - name: arXiv
   url: https://arxiv.org/abs/2508.20148
-tags:
-  - 'intelligent interaction and intervention'
+directions:
+  - personal-health-agents
+selected: true
+highlight: personal-health-agents
+highlight_rank: 1
 ---

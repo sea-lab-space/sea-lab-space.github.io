@@ -1,0 +1,71 @@
+# Lab News for the SEA Lab website.
+#
+# The homepage shows the ten newest items, with an "All news" link, and
+# /news/ shows every item grouped by year. Both are drawn by
+# layouts/partials/blocks/news.html from this one file, so this is the only
+# place to edit.
+#
+# To add an item, copy an existing entry to the top of the list and fill in
+# these fields:
+#
+# - date: "2026-04"   # quoted string, "YYYY-MM" or "YYYY-MM-DD"
+#   type: award       # paper | award | grant | people | teaching | service | talk | press
+#   text: "Markdown, one or two sentences."
+#   link: ""          # optional external URL (prefer a link inside `text`)
+#
+# Notes:
+# - Keep the date in quotes. Only the month and year are shown ("Apr 2026").
+# - Items are sorted by month, newest first. Items from the same month keep the
+#   order they have in this file, so put the one you want shown first higher up.
+# - The type picks the small icon next to the item. A misspelled type or a
+#   malformed date stops the build with a message that names the entry.
+# - In `text`, link people to their profile and papers by their folder, using
+#   the folder names: [Will](/author/will-ke-wang/) for content/authors/will-ke-wang/
+#   and [MIND](/publication/zou-mind-2026/) for content/publication/zou-mind-2026/.
+#   A paper link opens the paper itself (its URL or DOI) in a new tab, the same
+#   place its title goes on the Publication page. The site looks that up, so
+#   keep writing the folder link. A folder that doesn't exist prints a warning.
+# - New papers follow one pattern, so the list is quick to skim: "Excited to
+#   share that our paper [Title](/publication/<folder>/) is published in
+#   *Venue*!" and then one short, plain sentence (about ten words) on what
+#   it found or built.
+# - Wrap `text` in double quotes, and write any double quote inside it as \".
+# - `link` is for one extra external page, such as an award announcement. Leave
+#   it out when there is none.
+
+- date: "2026-11"
+  type: people
+  text: "Proud of our lab member [Blue](/author/georgianna-lin/) for co-founding [nuri](https://nurihealth.ai/), a new startup using data and AI for women's health! We're excited to see her bring great work out into the world."
+- date: "2026-11"
+  type: people
+  text: "Congratulations to one of the earliest lab members [Will](/author/will-ke-wang/) on his thrilling new role as Associate Research Scientist at Columbia's Mailman School of Public Health, where he continues to lead health AI and agent research!"
+- date: "2026-11"
+  type: award
+  text: "Congratulations to our lab member [Zhihan](/author/zhihan-jiang/) on being selected as a [UW Rising Star in EECS](https://risingstars.cs.washington.edu/)! Very well deserved."
+- date: "2026-10"
+  type: paper
+  text: "Excited to share that our paper [The Anatomy of a Personal Health Agent](/publication/heydari-anatomy-personal-health-2025-a/) is published in *Nature*! It supports [the science behind Google Health Coach](https://healthapp.google/our-research/)."
+- date: "2026-09"
+  type: paper
+  text: "Excited to share that our paper [Divergent impacts of explainable AI for dermatological diagnosis on clinicians versus lay people](/publication/xu-divergent-2026/) is published in *Nature Medicine*!"
+- date: "2026-09"
+  type: paper
+  text: "Excited to share that our paper [DUET](/publication/hu-duet-2026/) is accepted at *NeurIPS 2026*! It trains reasoning models better and faster on the same compute budget."
+- date: "2026-09"
+  type: teaching
+  text: "New course: [BINF 4070 / COMS 4995: The Future of Personal Health Assistant](https://personal-health-agent.github.io/), co-taught with Eugene Wu and cross-listed between Columbia DBMI and Computer Science."
+- date: "2026-08"
+  type: grant
+  text: "New NSF award: [Human-AI Teaming for Health Coaching](https://www.nsf.gov/awardsearch/show-award?AWD_ID=2615689) (Orson as Co-PI)."
+- date: "2026-07"
+  type: grant
+  text: "New NIH NICHD R01: [MindGuard: Early Prediction of Post-Concussion Mental Health Sequelae in Youth with a Multimodal AI System](https://reporter.nih.gov/project-details/11274912) (Orson as site PI, Co-I)."
+- date: "2026-05"
+  type: paper
+  text: "Excited to share that our perspective [A Framework for Longitudinal Health AI Agents](/publication/lin-framework-2026/) is published in *Nature Health*!"
+- date: "2026-04"
+  type: award
+  text: "Congratulations to [Ruishi](/author/ruishi-zou/), [Shiyu](/author/shiyu-xu/), and [Millie](/author/millie-mengyuan-wu/)! [MIND](/publication/zou-mind-2026/) and [MindfulAgents](/publication/wu-mindfulagents-2026/) both received Best Paper Honorable Mention Awards at CHI 2026."
+- date: "2026-04"
+  type: award
+  text: "Congratulations to [Zhihan](/author/zhihan-jiang/) and [Millie](/author/millie-mengyuan-wu/)! PAWS, an AI digital pet on smartwatches for cannabis use disorder support, won the Best Workshop Paper Award at the CHI 2026 Workshop on Everyday Wearable for Personalized Health and Well-Being."

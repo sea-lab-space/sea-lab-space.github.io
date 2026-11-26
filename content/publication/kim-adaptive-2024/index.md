@@ -32,4 +32,7 @@ abstract: 'Foundation models have become invaluable in advancing the medical fie
 links:
 - name: URL
   url: http://arxiv.org/abs/2404.15155
+directions:
+  - personal-health-agents
+  - clinician-ai-collaboration
 ---

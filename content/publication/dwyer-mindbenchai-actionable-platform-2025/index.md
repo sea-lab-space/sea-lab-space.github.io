@@ -40,5 +40,9 @@ publishDate: '2026-05-17T03:19:46.605711Z'
 publication_types:
 - article-journal
 publication: '*NPP---Digital Psychiatry and Neuroscience*'
+publication_short: '*NPP Digit. Psychiatry Neurosci.*'
 doi: 10.1038/s44277-025-00049-6
+directions:
+  - human-centered-evaluation
+selected: true
 ---

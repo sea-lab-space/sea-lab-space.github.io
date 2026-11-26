@@ -21,12 +21,16 @@ publishDate: '2026-04-29T21:49:29.943598Z'
 publication_types:
 - paper-conference
 publication: '*Proceedings of the ACM Conference on Human Factors in Computing Systems (ACM CHI)*'
+publication_short: '*CHI*'
 doi: 10.1145/3772318.3790529
 links:
 - name: Project Website
   url: https://sea-lab.space/MIND/
 awards:
 - "honorable mention award"
-tags:
-  - 'clinical support'
+directions:
+  - clinician-ai-collaboration
+selected: true
+highlight: clinician-ai-collaboration
+highlight_rank: 2
 ---

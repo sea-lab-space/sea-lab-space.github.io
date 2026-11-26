@@ -16,10 +16,14 @@ publishDate: '2024-09-29T06:40:21.640990Z'
 publication_types:
 - paper-conference
 publication: '*Proceedings of the CHI Conference on Human Factors in Computing Systems*'
+publication_short: '*CHI*'
 doi: 10.1145/3613904.3642747
 links:
 - name: URL
   url: https://dl.acm.org/doi/10.1145/3613904.3642747
-tags:
-  - 'intelligent interaction and intervention'
+directions:
+  - adaptive-interventions
+selected: true
+highlight: adaptive-interventions
+highlight_rank: 3
 ---

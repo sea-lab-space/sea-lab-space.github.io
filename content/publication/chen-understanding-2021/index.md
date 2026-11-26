@@ -29,4 +29,7 @@ abstract: As wearable devices move toward the face (i.e. smart earbuds, glasses)
 links:
 - name: URL
   url: https://dl.acm.org/doi/10.1145/3461778.3462004
+directions:
+  - interaction-techniques
+  - beyond-health
 ---

@@ -1,0 +1,34 @@
+---
+title: 'Recovery is Relational: Everyday Support Needs in Eating Disorder Recovery
+  with Patients and Their Supporters'
+authors:
+- Ryuhaerang Choi
+- Seohyeon Yoo
+- Xuhai Xu
+- Sung-Ju Lee
+date: '2026-04-01'
+publishDate: '2026-11-25T06:51:07.842437Z'
+publication_types:
+- paper-conference
+publication: '*Proceedings of the 2026 CHI Conference on Human Factors in Computing
+  Systems*'
+doi: 10.1145/3772318.3791262
+abstract: Eating disorder (ED) recovery extends beyond therapy sessions, unfolding
+  in vulnerable moments embedded in everyday life and relationships. Yet empirical
+  understanding of how these moments arise, how supporters contribute, and how technologies
+  might offer timely, contextual assistance remains limited. To address this gap,
+  we conducted a design session and two-week diary study with 27 individuals with
+  ED and 12 social supporters. Our analysis identified diverse contexts in which patients
+  and supporters perceived support to be needed, and the forms of support they envisioned
+  digital tools could offer. While many needs were mutually recognized, the actual
+  practice of support often involved mismatches, suggesting opportunities for technologies
+  to help mediate supportive engagement. Our study contributes empirical insight into
+  everyday support moments in ED recovery and highlights opportunities to design digital
+  interventions that provide context-sensitive assistance, empower supporters, and
+  extend care beyond clinical settings.
+links:
+- name: URL
+  url: https://dl.acm.org/doi/10.1145/3772318.3791262
+directions:
+  - adaptive-interventions
+---

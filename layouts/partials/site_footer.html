@@ -1,8 +1,45 @@
-<div class="container">
-  <footer class="site-footer">
-    <p class="powered-by copyright-license-text">
-      Copyright @ 2026 SEA Lab. Latest Update: Aug 15, 2026. <br/>
-      <a href="https://accessibility.columbia.edu/" aria-label="accessibility"> Accessibility. </a>
-    </p>
-  </footer>
-</div>
+{{- /*
+  Site footer, shown at the bottom of every page.
+  Overrides the theme's `site_footer.html`. The theme's `_default/baseof.html`
+  already wraps this partial in a `.container`, so this file adds no container of
+  its own.
+
+  Three short centered lines (styles: "Site footer (T7)" in custom.scss):
+    1. who and where we are (the lab's mailing address)
+    2. links: our GitHub, Columbia's accessibility page, our Privacy Policy
+    3. the copyright year and the date the site was last built
+
+  Both dates come from `now`, the moment Hugo builds the site, so they update on
+  every deploy with nothing to edit by hand. `.UTC` keeps a local build and the
+  GitHub Actions build (which runs in UTC) on the same calendar day. Do not use
+  `hugo.BuildDate` here, because that is the date the Hugo binary was compiled.
+
+  The `·` separators are their own `aria-hidden` spans so screen readers skip
+  them and so they never pick up link color or underline.
+*/ -}}
+{{- $built := now.UTC -}}
+{{- $privacy_url := "privacy-policy/" | relLangURL -}}
+{{- with site.GetPage "/privacy-policy" }}{{ $privacy_url = .RelPermalink }}{{ end -}}
+<footer class="site-footer sea-footer">
+
+  {{- /* The theme's extension point. The earlier override had dropped this call. */}}
+  {{ partial "blox-core/functions/get_hook" (dict "hook" "footer-start" "context" .) }}
+
+  <address class="powered-by sea-footer__address">
+    <span class="sea-footer__item">SEA Lab, Columbia University</span>
+    <span class="sea-footer__sep" aria-hidden="true">&middot;</span>
+    <span class="sea-footer__item">622 W 168th St PH20, New York, NY 10032</span>
+  </address>
+
+  <p class="powered-by sea-footer__links">
+    <a class="sea-footer__link" href="https://github.com/sea-lab-space"><i class="fab fa-github" aria-hidden="true"></i>GitHub</a>
+    <span class="sea-footer__sep" aria-hidden="true">&middot;</span>
+    <a class="sea-footer__link" href="https://accessibility.columbia.edu/">Accessibility</a>
+    <span class="sea-footer__sep" aria-hidden="true">&middot;</span>
+    <a class="sea-footer__link" href="{{ $privacy_url }}">Privacy Policy</a>
+  </p>
+
+  <p class="powered-by copyright-license-text sea-footer__meta">
+    Copyright &copy; {{ $built.Year }} SEA Lab. Latest Update: <time datetime="{{ $built.Format "2006-01-02" }}">{{ $built.Format "Jan 2, 2006" }}</time>.
+  </p>
+</footer>

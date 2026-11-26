@@ -1,0 +1,138 @@
+{{- /*
+  Research directions block (T3). Used by content/research/_index.md as
+  `- block: research_directions` and takes no options.
+
+  Where the content comes from:
+    - data/research_directions.yaml lists the directions in display order.
+      A direction with `hidden: true` or `research_page: false` never appears
+      here (no chip, heading or view).
+    - Each publication's front matter says which directions it belongs to
+      (`directions`), whether it is shown here (`selected`), and whether it is
+      one of a direction's top cards (`highlight`, `highlight_rank`).
+      See "Categorize a publication" in the README.
+
+  What it renders:
+    - A sticky chip bar: "Overview", then one chip per visible direction.
+    - The overview: for each direction, its heading, description, up to 4
+      highlight cards, and a "See all highlighted papers" link (no count, by
+      Orson's choice). It shows only when the direction has selected papers.
+    - One view per direction with every selected paper in that direction.
+
+  Every view is in the HTML, so the page works without JavaScript: the
+  overview shows and the direction views carry `hidden`. The chips and
+  "See all" links are real links to ?direction=<id>. The script in
+  layouts/partials/hooks/body-end/research-directions.html turns them into
+  in-page view switches and keeps the URL and the Back button in sync.
+*/ -}}
+{{- $page := .wcPage -}}
+
+{{- /* Ask the body-end hook to add the view-switching script. The block renders
+       inside `main`, which runs before the page's scripts, so the flag is set in
+       time. */ -}}
+{{- $page.Store.Set "has_research_directions" true -}}
+
+{{- $directions := slice -}}
+{{- range site.Data.research_directions.directions -}}
+  {{- if and (not .hidden) (ne .research_page false) }}{{ $directions = $directions | append . }}{{ end -}}
+{{- end -}}
+
+{{- /* Papers shown on this page. `highlight` implies `selected`. */ -}}
+{{- $pubs := where site.RegularPages "Section" "publication" -}}
+{{- $selected := where $pubs "Params.selected" true | union (where $pubs "Params.highlight" "!=" nil) -}}
+{{- $pub_list_url := "" -}}
+{{- with site.GetPage "/publication" }}{{ $pub_list_url = .RelPermalink }}{{ end -}}
+
+<div class="research-directions" data-research-directions>
+
+  <nav class="research-chipbar" aria-label="Research directions">
+    <ul class="research-chips">
+      <li>
+        <a class="research-chip" href="{{ $page.RelPermalink }}" data-direction="" aria-current="page">Overview</a>
+      </li>
+      {{- range $directions }}
+      <li>
+        <a class="research-chip" href="{{ $page.RelPermalink }}?direction={{ .id }}" data-direction="{{ .id }}">
+          {{- with .number }}<span class="research-chip__number">{{ . }}</span> {{ end }}{{ .short_title -}}
+        </a>
+      </li>
+      {{- end }}
+    </ul>
+  </nav>
+
+  {{- /* Announces view changes to screen readers. Filled in by the script. */}}
+  <p class="sr-only" aria-live="polite" data-research-status></p>
+
+  <div class="research-views" data-research-views>
+
+    {{- /* ---- Overview (the default view) ---- */}}
+    <div class="research-view" data-view="">
+      {{- range $directions }}
+        {{- $id := .id }}
+        {{- $in_direction := where $selected "Params.directions" "intersect" (slice $id) }}
+
+        {{- /* Up to 4 highlight cards: the 4 most recent highlights, ordered by
+               highlight_rank (1 first), then any unranked ones, newest first. */}}
+        {{- $top := first 4 (where $selected "Params.highlight" $id).ByDate.Reverse }}
+        {{- $ranked := sort (where $top "Params.highlight_rank" "!=" nil) "Params.highlight_rank" "asc" }}
+        {{- $unranked := (complement $ranked $top).ByDate.Reverse }}
+      <section class="research-direction" aria-labelledby="{{ $id }}">
+        <div class="section-custom-header">
+          <div class="section-heading">
+            <h2 id="{{ $id }}">{{ with .number }}{{ . }} · {{ end }}{{ .title }}</h2>
+          </div>
+        </div>
+        <p class="research-direction__description">{{ .description | $page.RenderString }}</p>
+
+        {{- if or $ranked $unranked }}
+        <ul class="paper-grid">
+          {{- range $ranked }}{{ partialCached "views/paper_card.html" (dict "item" .) .RelPermalink }}{{ end }}
+          {{- range $unranked }}{{ partialCached "views/paper_card.html" (dict "item" .) .RelPermalink }}{{ end }}
+        </ul>
+        {{- end }}
+
+        {{- with len $in_direction }}
+        <a class="btn btn-outline-primary research-see-all" href="{{ $page.RelPermalink }}?direction={{ $id }}" data-direction="{{ $id }}">
+          See all highlighted papers →
+        </a>
+        {{- end }}
+      </section>
+      {{- end }}
+    </div>
+
+    {{- /* ---- One view per direction ---- */}}
+    {{- range $directions }}
+      {{- $id := .id }}
+      {{- $in_direction := where $selected "Params.directions" "intersect" (slice $id) }}
+
+      {{- /* Every selected paper in this direction: its highlights in rank order
+             (unranked ones after, newest first), then the rest, newest first.
+             A paper tagged with several directions shows up in each of them. */}}
+      {{- $highlights := where $in_direction "Params.highlight" $id }}
+      {{- $ranked := sort (where $highlights "Params.highlight_rank" "!=" nil) "Params.highlight_rank" "asc" }}
+      {{- $unranked := (complement $ranked $highlights).ByDate.Reverse }}
+      {{- $rest := (complement $highlights $in_direction).ByDate.Reverse }}
+    <div class="research-view" data-view="{{ $id }}" hidden>
+      <div class="section-custom-header">
+        <div class="section-heading">
+          {{- /* tabindex lets the script move focus here after "See all". */}}
+          <h2 id="view-{{ $id }}" tabindex="-1">{{ with .number }}{{ . }} · {{ end }}{{ .title }}</h2>
+        </div>
+      </div>
+      <p class="research-direction__description">{{ .description | $page.RenderString }}</p>
+
+      <ul class="paper-grid">
+        {{- range $ranked }}{{ partialCached "views/paper_card.html" (dict "item" .) .RelPermalink }}{{ end }}
+        {{- range $unranked }}{{ partialCached "views/paper_card.html" (dict "item" .) .RelPermalink }}{{ end }}
+        {{- range $rest }}{{ partialCached "views/paper_card.html" (dict "item" .) .RelPermalink }}{{ end }}
+      </ul>
+
+      {{- with $pub_list_url }}
+      <p class="research-browse-all">
+        <a href="{{ . }}?direction={{ $id }}">Browse all publications in this direction →</a>
+      </p>
+      {{- end }}
+    </div>
+    {{- end }}
+
+  </div>
+</div>

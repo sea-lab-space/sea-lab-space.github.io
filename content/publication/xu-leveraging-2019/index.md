@@ -47,6 +47,6 @@ abstract: 'The rate of depression in college students is rising, which is known 
 links:
 - name: URL
   url: https://dl.acm.org/doi/10.1145/3351274
-tags:
-  - 'health prediction'
+directions:
+  - human-centered-health-foundation-models
 ---

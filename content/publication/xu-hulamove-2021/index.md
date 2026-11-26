@@ -35,4 +35,7 @@ abstract: We present HulaMove, a novel interaction technique that leverages the 
 links:
 - name: URL
   url: https://dl.acm.org/doi/10.1145/3411764.3445182
+directions:
+  - interaction-techniques
+  - beyond-health
 ---

@@ -11,6 +11,7 @@ publishDate: '2024-09-29T06:40:21.541879Z'
 publication_types:
 - paper-conference
 publication: '*Proceedings of Machine Learning Research, Conference on Health, Inference, and Learning (CHIL)*'
+publication_short: '*CHIL*'
 abstract: Large language models (LLMs) are capable of many natural language tasks,
   yet they are far from perfect. In health applications, grounding and interpreting
   domain-specific and nonlinguistic data is important. This paper investigates the
@@ -32,6 +33,9 @@ abstract: Large language models (LLMs) are capable of many natural language task
 links:
 - name: URL
   url: http://arxiv.org/abs/2401.06866
-tags:
-  - 'health prediction'
+directions:
+  - human-centered-health-foundation-models
+selected: true
+highlight: human-centered-health-foundation-models
+highlight_rank: 4
 ---

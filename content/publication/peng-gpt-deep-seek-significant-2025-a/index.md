@@ -15,4 +15,6 @@ publication_types:
 - article-journal
 publication: '*Journal of Biomedical Informatics*'
 doi: 10.1016/j.jbi.2025.104791
+directions:
+  - human-centered-evaluation
 ---

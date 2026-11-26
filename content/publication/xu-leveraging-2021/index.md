@@ -54,6 +54,6 @@ abstract: The prevalence of mobile phones and wearable devices enables the passi
 links:
 - name: URL
   url: https://dl.acm.org/doi/10.1145/3448107
-tags:
-  - 'health prediction'
+directions:
+  - human-centered-health-foundation-models
 ---

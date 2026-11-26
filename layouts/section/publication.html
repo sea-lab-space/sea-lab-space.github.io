@@ -1,0 +1,138 @@
+{{- define "main" -}}
+
+{{- /*
+  The /publication/ page: every paper on one page, grouped by year, with a
+  search box and two rows of filter chips (research direction and type).
+
+  Site override of the theme's `section/publication.html`, copied from
+  blox-bootstrap v5 at the pinned commit 41bd113535e8 and then rewritten.
+  What changed from the theme, and why:
+  * No Isotope. The theme set `has_isotope` and filtered `#container-publications`
+    with Isotope plus Type and Date dropdowns. Both the flag and that id are
+    gone on purpose: the theme's publication script initialises Isotope on that
+    id, and if the id stays while Isotope is not loaded the script throws
+    before it binds the Cite buttons.
+  * Filtering is done by `assets/js/publication-filters.js`, loaded only on this
+    page through the body-end hook `hooks/body-end/publication-filters.html`.
+    State lives in the query string, `?direction=…&type=…&q=…`, never in the
+    hash, because the theme's scroll script owns hashes. The Research page links
+    here with `?direction=<id>`.
+  * Each paper renders through `views/publication_list_item.html`, not the
+    `view:` set in content/publication/_index.md, so that setting is unused.
+  * Without JS the filter bar is hidden (see the <noscript> below) and the page
+    is simply every paper, newest year first.
+
+  Directions come from data/research_directions.yaml, the single source of
+  truth. Hidden directions (Beyond Health) get no chip, but their papers still
+  show under "All". Type buckets come from `functions/get_pub_type_bucket.html`.
+*/ -}}
+
+{{- /* Tells the body-end hook to load the filter script on this page only. */ -}}
+{{- $.Page.Store.Set "has_pub_filters" true -}}
+
+{{ partial "page_header.html" . }}
+
+{{- $pubs := .RegularPages.ByDate.Reverse -}}
+{{- $total := len $pubs -}}
+
+{{- /* Distinct years, newest first. `uniq` keeps first occurrences, so the
+       order follows $pubs. */ -}}
+{{- $years := slice -}}
+{{- range $pubs }}{{ $years = $years | append (.Date.Format "2006") }}{{ end -}}
+{{- $years = uniq $years -}}
+
+{{- /* Visible directions, in file order. */ -}}
+{{- $directions := slice -}}
+{{- range site.Data.research_directions.directions -}}
+  {{- if not .hidden }}{{ $directions = $directions | append . }}{{ end -}}
+{{- end -}}
+
+{{- /* Type chips. The ids are what ?type= takes and what the bucket helper
+       returns. */ -}}
+{{- $types := slice
+  (dict "id" "journal" "label" "Journal")
+  (dict "id" "conference" "label" "Conference")
+  (dict "id" "workshop-poster" "label" "Workshop & Poster")
+  (dict "id" "preprint" "label" "Preprint")
+-}}
+
+<div class="universal-wrapper">
+  <div class="row">
+    <div class="col-lg-12">
+
+      {{ with .Content }}
+      <div class="article-style">{{ . }}</div>
+      {{ end }}
+
+      <div id="pub-browser" class="pub-browser">
+
+        {{- /* The chips do nothing without JS, so hide them then. */}}
+        <noscript><style>.pub-filters { display: none; }</style></noscript>
+
+        <div class="pub-filters" role="search" aria-label="Filter publications">
+
+          <div class="pub-search">
+            <label for="pub-search-input" class="sr-only">Search publications</label>
+            <i class="fas fa-search pub-search__icon" aria-hidden="true"></i>
+            <input id="pub-search-input" type="search" class="form-control pub-search__input"
+                   placeholder="Search titles, authors, venues"
+                   autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false">
+          </div>
+
+          <div class="pub-filter-row">
+            <span class="pub-filter-label" id="pub-filter-direction-label">Direction</span>
+            <div class="pub-chips" role="group" aria-labelledby="pub-filter-direction-label">
+              <button type="button" class="pub-chip" data-filter="direction" data-value="all" aria-pressed="true">All</button>
+              {{- range $directions }}
+              <button type="button" class="pub-chip" data-filter="direction" data-value="{{ .id }}" aria-pressed="false" title="{{ .title }}">{{ .short_title }}</button>
+              {{- end }}
+            </div>
+          </div>
+
+          <div class="pub-filter-row">
+            <span class="pub-filter-label" id="pub-filter-type-label">Type</span>
+            <div class="pub-chips" role="group" aria-labelledby="pub-filter-type-label">
+              <button type="button" class="pub-chip" data-filter="type" data-value="all" aria-pressed="true">All</button>
+              {{- range $types }}
+              <button type="button" class="pub-chip" data-filter="type" data-value="{{ .id }}" aria-pressed="false">{{ .label }}</button>
+              {{- end }}
+            </div>
+          </div>
+
+          <div class="pub-filter-status">
+            <p class="pub-count" role="status">
+              Showing <strong data-pub-shown>{{ $total }}</strong> of {{ $total }} papers
+            </p>
+            <button type="button" class="pub-reset" data-pub-reset hidden>Clear filters</button>
+          </div>
+        </div>
+
+        <div class="pub-years">
+          {{- range $year := $years }}
+          {{- $items := slice -}}
+          {{- range $pubs }}{{ if eq (.Date.Format "2006") $year }}{{ $items = $items | append . }}{{ end }}{{ end -}}
+          {{- $n := len $items }}
+          <section class="pub-year" data-year="{{ $year }}">
+            <h2 class="pub-year__heading" id="year-{{ $year }}">
+              <span class="pub-year__label">{{ $year }}</span>
+              <span class="pub-year__count" data-pub-year-count>{{ $n }} {{ cond (eq $n 1) "paper" "papers" }}</span>
+            </h2>
+            {{- range $index, $item := $items }}
+            {{ partial "views/publication_list_item.html" (dict "page" $ "item" $item "index" $index) }}
+            {{- end }}
+          </section>
+          {{- end }}
+        </div>
+
+        <div class="pub-empty" hidden>
+          <p>No papers match these filters.</p>
+          <button type="button" class="btn btn-outline-primary btn-sm" data-pub-reset>Clear filters</button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{{- end -}}

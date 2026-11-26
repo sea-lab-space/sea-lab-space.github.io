@@ -16,4 +16,6 @@ publication_types:
 - article-journal
 publication: '*Journal of Medical Internet Research*'
 doi: 10.2196/72053
+directions:
+  - adaptive-interventions
 ---

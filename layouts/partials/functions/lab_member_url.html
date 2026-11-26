@@ -1,0 +1,15 @@
+{{- /*
+  Lab-member lookup shared by the Research cards and the publication lists.
+  Input: an author name exactly as written on a paper, e.g. "Millie Mengyuan Wu".
+  Returns: that member's profile URL (/author/<folder>/), or "" when the author
+  has no profile in content/authors/. The folder rule is the one
+  scripts/check_author_links.py enforces: lowercase, whitespace runs to "-".
+*/ -}}
+{{- $slug := replaceRE `\s+` "-" (lower (trim (string .) " ")) -}}
+{{- $url := "" -}}
+{{- if fileExists (printf "content/authors/%s/_index.md" $slug) -}}
+  {{- with site.GetPage (printf "/authors/%s" $slug) -}}
+    {{- $url = .RelPermalink -}}
+  {{- end -}}
+{{- end -}}
+{{- return $url -}}
