@@ -10,6 +10,7 @@ publishDate: '2024-09-29T06:40:21.749007Z'
 publication_types:
 - paper-conference
 publication: '*Proceedings of the ACM Conference on Human Factors in Computing Systems*'
+publication_short: '*ACM CHI*'
 doi: 10.1145/3290605.3300505
 abstract: People eat every day and biting is one of the most fundamental and natural
   actions that they perform on a daily basis. Existing work has explored tooth click

@@ -14,6 +14,7 @@ publishDate: '2024-09-29T06:40:21.562974Z'
 publication_types:
 - paper-conference
 publication: '*Proceedings of the ACM Conference on Human Factors in Computing Systems*'
+publication_short: '*ACM CHI*'
 doi: 10.1145/3411764.3445624
 abstract: We propose Auth+Track, a novel authentication model that aims to reduce
   redundant authentication in everyday smartphone usage. By sparse authentication

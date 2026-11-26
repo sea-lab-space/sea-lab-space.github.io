@@ -12,6 +12,7 @@ publishDate: '2024-09-29T06:40:21.911949Z'
 publication_types:
 - paper-conference
 publication: '*Proceedings of the ACM Conference on Human Factors in Computing Systems*'
+publication_short: '*ACM CHI*'
 doi: 10.1145/3313831.3376810
 abstract: 'In the conversations with smart speakers, misunderstandings of users’ requests
   lead to erroneous responses. We propose FrownOnError, a novel interaction technique

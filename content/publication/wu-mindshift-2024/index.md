@@ -19,7 +19,7 @@ publishDate: '2024-09-29T06:40:21.740191Z'
 publication_types:
 - paper-conference
 publication: '*Proceedings of the CHI Conference on Human Factors in Computing Systems*'
-publication_short: '*CHI*'
+publication_short: '*ACM CHI*'
 doi: 10.1145/3613904.3642790
 links:
 - name: URL

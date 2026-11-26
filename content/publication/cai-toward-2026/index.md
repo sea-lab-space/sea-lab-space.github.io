@@ -18,6 +18,7 @@ publication_types:
 - paper-conference
 publication: '*Proceedings of the 2026 CHI Conference on Human Factors in Computing
   Systems*'
+publication_short: '*ACM CHI*'
 doi: 10.1145/3772318.3790774
 abstract: 'American Sign Language (ASL) is the primary language of many Deaf and Hard
   of Hearing (DHH) individuals. However, existing learning resources often lack timely,

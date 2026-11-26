@@ -17,7 +17,7 @@ publication_types:
 - article-journal
 publication: '*Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous
   Technologies*'
-publication_short: '*IMWUT*'
+publication_short: '*ACM IMWUT*'
 doi: 10.1145/3659625
 abstract: "Despite the plethora of telehealth applications to assist home-based older
   adults and healthcare providers, basic messaging and phone calls are still the most

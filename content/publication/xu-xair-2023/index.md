@@ -25,6 +25,7 @@ publication_types:
 - paper-conference
 publication: '*Proceedings of the 2023 CHI Conference on Human Factors in Computing
   Systems*'
+publication_short: '*ACM CHI*'
 doi: 10.1145/3544548.3581500
 links:
 - name: URL

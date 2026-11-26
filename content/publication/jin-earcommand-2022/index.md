@@ -15,6 +15,7 @@ publication_types:
 - article-journal
 publication: '*Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous
   Technologies*'
+publication_short: '*ACM IMWUT*'
 doi: 10.1145/3534613
 abstract: Intelligent speech interfaces have been developing vastly to support the
   growing demands for convenient control and interaction with wearable/earable and

@@ -13,6 +13,7 @@ publishDate: '2024-09-29T06:40:21.731016Z'
 publication_types:
 - paper-conference
 publication: '*Proceedings of the ACM Conference on Human Factors in Computing Systems*'
+publication_short: '*ACM CHI*'
 doi: 10.1145/3411764.3445322
 abstract: Learning to write is challenging for blind and low vision (BLV) people because
   of the lack of visual feedback. Regardless of the drastic advancement of digital

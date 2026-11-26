@@ -23,6 +23,7 @@ publication_types:
 - article-journal
 publication: '*Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous
   Technologies*'
+publication_short: '*ACM IMWUT*'
 doi: 10.1145/3448107
 abstract: The prevalence of mobile phones and wearable devices enables the passive
   capturing and modeling of human behavior at an unprecedented resolution and scale.

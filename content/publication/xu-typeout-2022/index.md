@@ -16,6 +16,7 @@ publishDate: '2024-09-29T06:40:21.868855Z'
 publication_types:
 - paper-conference
 publication: '*Proceedings of the ACM Conference on Human Factors in Computing Systems*'
+publication_short: '*ACM CHI*'
 doi: 10.1145/3491102.3517476
 abstract: 'Smartphone overuse is related to a variety of issues such as lack of sleep
   and anxiety. We explore the application of Self-Afrmation Theory on smartphone overuse

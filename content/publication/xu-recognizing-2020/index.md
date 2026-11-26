@@ -11,6 +11,7 @@ publication_types:
 - article-journal
 publication: '*Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous
   Technologies*'
+publication_short: '*ACM IMWUT*'
 doi: 10.1145/3381011
 abstract: A multi-touch interactive tabletop is designed to embody the benefits of
   a digital computer within the familiar surface of a physical tabletop. However,

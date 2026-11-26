@@ -17,6 +17,7 @@ publication_types:
 - article-journal
 publication: '*Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous
   Technologies*'
+publication_short: '*ACM IMWUT*'
 doi: 10.1145/3448124
 abstract: 'The prevalence of ubiquitous computing enables new opportunities for lung
   health monitoring and assessment. In the past few years, there have been extensive
