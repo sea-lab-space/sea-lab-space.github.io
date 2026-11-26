@@ -17,15 +17,8 @@ sections:
     content:
       title: Research Directions
       text: >-
-        Grounded in human-computer interaction (HCI), SEA Lab designs, builds, and
-        deploys human-centered AI that turns the data of everyday life into insight and
-        action. Our work serves
-        two groups of people: (i) **the general population**, including end-users and
-        patients, whom we help live healthier lives every day, and (ii) **health
-        experts**, including physicians, nurses, and other care providers, whom we help
-        make better-informed decisions. Our research spans five directions, from AI
-        agents that partner with people over months to benchmarks that test whether
-        health AI holds up in the real world.
+        At the intersection of human–computer interaction (HCI) and artificial intelligence (AI), SEA Lab explores how intelligent systems can sense, understand, and respond to the complexities of human life. We develop computational methods to interpret rich, longitudinal data and design novel human–AI interactions that translate this understanding into meaningful insights and actions.<br/><br/>
+        Our research serves two complementary goals: (i) empowering individuals and patients to better understand their health and navigate their everyday lives, and (ii) augmenting the expertise of physicians, nurses, and other health professionals to enable more informed and personalized care. Through these efforts, we seek to establish the scientific and technological foundations for a future in which humans and AI work together to advance human health and well-being.
     design:
       columns: '1'
       css_class: section-title-left-aligned

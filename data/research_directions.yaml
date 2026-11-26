@@ -77,12 +77,11 @@ directions:
     title: Human-Centered Multimodal Foundation Models for Health
     short_title: Foundation Models
     description: >-
-      We build foundation models that learn from the rich, messy data of everyday
+      Grown from our long-standing work on
+      modeling longitudinal behavior through passive sensing, we build foundation
+      models that learn from the rich, messy data of everyday
       life, from smartphones and wearables to electronic health records, and we
-      make them work for real people. Grown from our long-standing work on
-      modeling longitudinal behavior through passive sensing, this direction now
-      spans sensor-language models, LLMs that reason over behavioral time series,
-      and large-scale studies of how wearable data strengthens clinical prediction.
+      make them work for real people.
     definition: >-
       Models that learn from multimodal health data (sensors, wearables, EHR,
       text), including foundation models and LLM-based reasoning, plus the
