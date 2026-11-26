@@ -1,0 +1,178 @@
+name: Slack bot - approve or decline a publication
+
+# The Slack bot (slack-bot/bot.py) starts this when a website admin presses
+# Approve or Decline on a publication request. The bot has already checked
+# that the person is on the admin list.
+#   approve: merge the bot's pull request into main, deploy, report back.
+#   decline: close the pull request and delete its branch.
+# Setup and the whole flow: slack-bot/README.md.
+on:
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: Number of the bot's pull request
+        required: true
+        type: string
+      decision:
+        description: What to do with it
+        required: true
+        type: choice
+        options: [approve, decline]
+      context:
+        description: Filled in by the Slack bot (who decided, where to reply)
+        required: false
+        default: '{}'
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+
+# One decision at a time, so two approvals in a row don't race to push main.
+concurrency:
+  group: slack-publication-decision
+  cancel-in-progress: false
+
+jobs:
+  decide:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      BOT_CONTEXT: ${{ inputs.context }}
+      PR: ${{ inputs.pr_number }}
+      DECISION: ${{ inputs.decision }}
+      RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install --quiet pyyaml
+
+      # The bot only ever handles its own pull requests, and only while they
+      # change nothing but a publication. Anything else is merged on GitHub.
+      - name: Check the pull request
+        id: pr
+        run: |
+          if ! [[ "$PR" =~ ^[0-9]+$ ]]; then
+            echo "'$PR' is not a pull request number." > "$RUNNER_TEMP/problem.txt"
+            exit 1
+          fi
+          gh pr view "$PR" --json state,headRefName,isCrossRepository,url,title,files > "$RUNNER_TEMP/pr.json"
+          state=$(jq -r .state "$RUNNER_TEMP/pr.json")
+          branch=$(jq -r .headRefName "$RUNNER_TEMP/pr.json")
+          echo "url=$(jq -r .url "$RUNNER_TEMP/pr.json")" >> "$GITHUB_OUTPUT"
+          echo "branch=$branch" >> "$GITHUB_OUTPUT"
+
+          if [ "$state" != "OPEN" ]; then
+            echo "This request was already handled (its pull request is $(echo "$state" | tr '[:upper:]' '[:lower:]'))." > "$RUNNER_TEMP/problem.txt"
+            exit 1
+          fi
+          if [ "$(jq -r .isCrossRepository "$RUNNER_TEMP/pr.json")" != "false" ] || [[ "$branch" != bot/publication-* ]]; then
+            echo "Pull request #$PR was not opened by the Slack bot." > "$RUNNER_TEMP/problem.txt"
+            exit 1
+          fi
+          other=$(jq -r '.files[].path' "$RUNNER_TEMP/pr.json" \
+            | grep -v -e '^sea-lab-publication\.bib$' -e '^content/publication/' || true)
+          if [ -n "$other" ]; then
+            echo "The pull request now also changes $(echo "$other" | head -3 | paste -sd ' ' -), so it needs a review on GitHub." > "$RUNNER_TEMP/problem.txt"
+            exit 1
+          fi
+
+      - name: Decline
+        id: decline
+        if: inputs.decision == 'decline'
+        run: gh pr close "$PR" --delete-branch --comment "Declined by a website admin in Slack."
+
+      - name: Merge into main
+        id: merge
+        if: inputs.decision == 'approve'
+        env:
+          BRANCH: ${{ steps.pr.outputs.branch }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch --quiet origin "$BRANCH"
+
+          if ! git merge --no-ff --no-edit \
+              -m "Merge pull request #$PR from $GITHUB_REPOSITORY_OWNER/$BRANCH" \
+              -m "$(jq -r .title "$RUNNER_TEMP/pr.json")" "origin/$BRANCH"; then
+            # Every bot branch appends its paper to the end of the bib, so a
+            # second paper approved before this one conflicts there. Keep both.
+            conflicted=$(git diff --name-only --diff-filter=U)
+            if [ "$conflicted" != "sea-lab-publication.bib" ]; then
+              echo "It conflicts with main in $(echo "$conflicted" | paste -sd ' ' -)." > "$RUNNER_TEMP/problem.txt"
+              exit 1
+            fi
+            git show :2:sea-lab-publication.bib > "$RUNNER_TEMP/main.bib"
+            git show :3:sea-lab-publication.bib > "$RUNNER_TEMP/branch.bib"
+            python scripts/add_publication.py \
+              --merge-bib "$RUNNER_TEMP/main.bib" "$RUNNER_TEMP/branch.bib" > sea-lab-publication.bib
+            git add sea-lab-publication.bib
+            git commit --quiet --no-edit --cleanup=strip
+          fi
+
+          # The deploy runs these again. Running them first keeps a failing
+          # paper off main.
+          if ! { python scripts/check_author_links.py && python scripts/check_publication_directions.py; } > "$RUNNER_TEMP/checks.log" 2>&1; then
+            cat "$RUNNER_TEMP/checks.log"
+            echo "The site checks fail with this paper merged." > "$RUNNER_TEMP/problem.txt"
+            exit 1
+          fi
+
+          if ! git push --quiet origin main; then
+            echo "main changed while I was merging. Merge the pull request on GitHub." > "$RUNNER_TEMP/problem.txt"
+            exit 1
+          fi
+          git push --quiet origin --delete "$BRANCH" || true
+
+      # A push made by a workflow does not start other workflows, so the
+      # deploy is started here, and watched so Slack hears how it ended.
+      - name: Deploy the site
+        id: deploy
+        if: inputs.decision == 'approve'
+        run: |
+          started=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+          gh workflow run publish.yaml --ref main
+          run_id=""
+          for attempt in 1 2 3 4 5 6; do
+            sleep 10
+            run_id=$(gh run list --workflow publish.yaml --event workflow_dispatch \
+              --created ">=$started" --limit 1 --json databaseId --jq '.[0].databaseId // empty')
+            [ -n "$run_id" ] && break
+          done
+          if [ -z "$run_id" ]; then
+            echo "The deploy did not start." > "$RUNNER_TEMP/problem.txt"
+            exit 1
+          fi
+          for attempt in $(seq 1 80); do
+            status=$(gh run view "$run_id" --json status --jq .status)
+            [ "$status" = "completed" ] && break
+            sleep 15
+          done
+          conclusion=$(gh run view "$run_id" --json conclusion --jq .conclusion)
+          if [ "$conclusion" != "success" ]; then
+            echo "The deploy run ended as '${conclusion:-still running}'." > "$RUNNER_TEMP/problem.txt"
+            exit 1
+          fi
+
+      - name: Report back in Slack
+        if: always()
+        env:
+          DECLINED: ${{ steps.decline.outcome }}
+          MERGED: ${{ steps.merge.outcome }}
+          DEPLOYED: ${{ steps.deploy.outcome }}
+        run: |
+          status=failed
+          if [ "$DECLINED" = "success" ]; then status=declined; fi
+          if [ "$MERGED" = "success" ]; then status=deploy_failed; fi
+          if [ "$DEPLOYED" = "success" ]; then status=live; fi
+          python slack-bot/notify.py outcome --status "$status" \
+            --problem "$RUNNER_TEMP/problem.txt" \
+            --pr-url "${{ steps.pr.outputs.url }}" \
+            --run-url "$RUN_URL"
