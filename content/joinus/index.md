@@ -27,7 +27,7 @@ sections:
         - Health Informatics and Integration into Healthcare Systems
         - Integration of health data modalities across wearables, clinical data, and genomics.
 
-        Please contact Dr. Xu (xx2489 (at) columbia.edu) for more details.
+        Please contact Orson (xx2489 (at) columbia.edu) for more details.
         {{< /details >}}
 
         ### Ph.D. Student
@@ -41,7 +41,7 @@ sections:
         - Human-Centered Benchmarks and Real-World Evaluation
         - Health Informatics and Integration into Healthcare Systems
 
-        The position can go through either <u>[Biomedical Informatics](https://www.dbmi.columbia.edu/phd-in-biomedical-informatics/)</u> or <u>[Computer Science](https://www.cs.columbia.edu/education/phd/)</u> Ph.D. programs. Please contact Dr. Xu (xx2489 (at) columbia.edu) for more details.
+        The position can go through either <u>[Biomedical Informatics](https://www.dbmi.columbia.edu/phd-in-biomedical-informatics/)</u> or <u>[Computer Science](https://www.cs.columbia.edu/education/phd/)</u> Ph.D. programs. Please contact Orson (xx2489 (at) columbia.edu) for more details.
         {{< /details >}}
 
         ### Visiting Role / General Opportunities
