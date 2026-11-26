@@ -165,6 +165,8 @@ Every publication belongs to one or more research directions. The [Research Page
 
 ## Credits
 
+The faint photo behind the homepage overview (`assets/media/hero-crowd.webp`) is [Shibuya Crossing by Ryoji Iwata on Unsplash](https://unsplash.com/photos/crowd-walking-across-shibuya-crossing-IBaVuZsJJTo), free to use under the [Unsplash License](https://unsplash.com/license). It was turned grey, lowered in contrast, and slightly blurred. To swap it, put the new file in `assets/media/`, change `filename` under `background` in `content/_index.md`, and adjust its strength in `.sea-hero .home-section-bg` in `assets/scss/custom.scss`.
+
 Our website is based on the following templates and tools:
 - [Hugo Research Group template](https://github.com/HugoBlox/theme-research-group), which this site started from.
 - [Hugo Blox Builder](https://github.com/HugoBlox/hugo-blox-builder/tree/41bd113535e815487ba69ad3c10aa8c03df91508/modules/blox-bootstrap), the Bootstrap 5 theme module. `go.mod` pins it to this May 2024 commit, and the site replaces many of its templates. Don't update it (for example with `hugo mod get -u`). The docs on [hugoblox.com](https://hugoblox.com) now describe a newer Hugo Blox, so some of their steps don't apply here.

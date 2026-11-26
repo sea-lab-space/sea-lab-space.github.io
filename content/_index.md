@@ -50,6 +50,13 @@ sections:
     design:
       columns: '1'
       css_class: sea-hero section-title-left-aligned
+      # A faint photo of people crossing a street, behind the overview. The file
+      # is already grey and softened. How strong it is and where it fades out
+      # are set under `.sea-hero .home-section-bg` in assets/scss/custom.scss.
+      # Photo: Ryoji Iwata on Unsplash (Unsplash License), see README Credits.
+      background:
+        image:
+          filename: hero-crowd.webp
 
   # Lab News: the ten newest items from `data/news.yaml`, drawn by
   # `layouts/partials/blocks/news.html`. The "All news" link to /news/ appears

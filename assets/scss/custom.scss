@@ -1057,6 +1057,50 @@ html {
   }
 }
 
+// The faint photo behind the hero, so the first thing a visitor sees is not a
+// plain grey page (Orson's request). The theme draws it on `.home-section-bg`
+// from `design.background.image` in content/_index.md, sized to cover, and
+// keeps it fixed while the page scrolls on screens 992px and wider. The file
+// (`assets/media/hero-crowd.webp`) is already grey, lower in contrast and
+// slightly blurred, so only its strength and a fade are set here. The fade
+// ends at the bottom of the section, so the hero meets the Lab News band
+// without an edge.
+.sea-hero .home-section-bg.bg-image {
+  opacity: 0.09;
+  -webkit-mask-image: linear-gradient(to bottom, #000 50%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 50%, transparent 100%);
+}
+
+// Below 992px the photo scrolls with the page, and covering the tall phone
+// hero would enlarge it about 2x, turning the walkers into blobs. Instead it
+// keeps about its desktop size, starts at the top, and fades out by 1100px or
+// the bottom of the section, whichever comes first.
+@media (max-width: 991.98px) {
+  .sea-hero .home-section-bg.bg-image {
+    opacity: 0.08;
+    background-size: auto 1100px;
+    background-position: center top;
+    // `unquote` passes the CSS min() through, which Sass would otherwise try to
+    // work out itself and fail on, because it mixes px and %.
+    -webkit-mask-image: unquote("linear-gradient(to bottom, #000 min(650px, 50%), transparent min(1100px, 100%))");
+    mask-image: unquote("linear-gradient(to bottom, #000 min(650px, 50%), transparent min(1100px, 100%))");
+  }
+}
+
+// No photo for visitors who ask their system for more contrast, and no fixed
+// background for those who ask for less motion.
+@media (prefers-contrast: more) {
+  .sea-hero .home-section-bg.bg-image {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sea-hero .home-section-bg.parallax {
+    background-attachment: scroll;
+  }
+}
+
 // The Sense, Empower, and Augment cards. A grid rather than Bootstrap columns
 // so that each card keeps its image, title, text, and links together when the
 // row stacks on phones (the old `col-md-4` markup stacked all three images
@@ -1126,7 +1170,7 @@ html {
   line-height: 1.3;
   text-align: center;
   text-transform: uppercase;
-  color: rgba(0, 0, 0, 0.6);
+  color: rgba(0, 0, 0, 0.68); // a little darker than the filter labels, for the photo behind it
 }
 
 // The research directions under each pillar (shortcode
