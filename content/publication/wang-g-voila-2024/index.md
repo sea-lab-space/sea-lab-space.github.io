@@ -16,6 +16,7 @@ publication_types:
 - article-journal
 publication: '*Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous
   Technologies*'
+publication_short: '*ACM IMWUT*'
 doi: 10.1145/3659623
 abstract: Modern information querying systems are progressively incorporating multimodal
   inputs like vision and audio. However, the integration of gaze --- a modality deeply

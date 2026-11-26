@@ -12,6 +12,7 @@ publication_types:
 - paper-conference
 publication: '*Proceedings of the 2026 CHI Conference on Human Factors in Computing
   Systems*'
+publication_short: '*ACM CHI*'
 doi: 10.1145/3772318.3791262
 abstract: Eating disorder (ED) recovery extends beyond therapy sessions, unfolding
   in vulnerable moments embedded in everyday life and relationships. Yet empirical

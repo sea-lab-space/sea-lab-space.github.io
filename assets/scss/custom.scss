@@ -409,6 +409,15 @@ html:has(.research-chipbar) {
   font-size: 2.25rem;
   text-align: left;
 
+  // On laptop screens every title fits on one line (Orson's request). At
+  // 2.25rem (47px) the three longest, such as "2 · Intelligent and Adaptive
+  // Interventions for Behavior Change", wrapped by one word. At 2rem (42px)
+  // the longest is about 1,195px, inside the 1,250px column at 1280px.
+  // Narrower screens wrap as before.
+  @media (min-width: 992px) {
+    font-size: 2rem;
+  }
+
   // On phones the longest titles ran to four lines at full size.
   @media (max-width: 575.98px) {
     font-size: 1.75rem;

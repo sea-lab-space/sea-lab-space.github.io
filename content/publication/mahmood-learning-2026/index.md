@@ -15,6 +15,7 @@ publication_types:
 - article-journal
 publication: '*Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous
   Technologies*'
+publication_short: '*ACM IMWUT*'
 doi: 10.48550/arXiv.2605.01616
 abstract: "Human behavior is difficult to observe continuously at scale, yet it leaves
   measurable traces in everyday device use. We test whether encrypted smartphone network

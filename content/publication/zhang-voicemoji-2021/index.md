@@ -12,6 +12,7 @@ publishDate: '2024-09-29T06:40:21.980485Z'
 publication_types:
 - paper-conference
 publication: '*Proceedings of the ACM Conference on Human Factors in Computing Systems*'
+publication_short: '*ACM CHI*'
 doi: 10.1145/3411764.3445338
 links:
 - name: URL

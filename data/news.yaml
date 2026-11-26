@@ -28,7 +28,10 @@
 # - New papers follow one pattern, so the list is quick to skim: "Excited to
 #   share that our paper [Title](/publication/<folder>/) is published in
 #   *Venue*!" and then one short, plain sentence (about ten words) on what
-#   it found or built.
+#   it found or built. When a lab member other than Orson leads the paper,
+#   end with "Congratulations [Name](/author/<folder>/)!" so their name links
+#   to their profile. Write venues the way readers know them: *ACM CHI 2026*,
+#   *ACM IMWUT*.
 # - Wrap `text` in double quotes, and write any double quote inside it as \".
 # - `link` is for one extra external page, such as an award announcement. Leave
 #   it out when there is none.
@@ -55,6 +58,9 @@
   type: teaching
   text: "New course: [BINF 4070 / COMS 4995: The Future of Personal Health Assistant](https://personal-health-agent.github.io/), co-taught with Eugene Wu and cross-listed between Columbia DBMI and Computer Science."
 - date: "2026-08"
+  type: paper
+  text: "Excited to share that our paper [TimeSRL](/publication/fan-timesrl-2026/) is published in *ACM IMWUT*! It turns raw sensing data into language, so predictions generalize across cohorts. Congratulations [Yuang](/author/yuang-fan/)!"
+- date: "2026-08"
   type: grant
   text: "New NSF award: [Human-AI Teaming for Health Coaching](https://www.nsf.gov/awardsearch/show-award?AWD_ID=2615689) (Orson as Co-PI)."
 - date: "2026-07"
@@ -62,10 +68,16 @@
   text: "New NIH NICHD R01: [MindGuard: Early Prediction of Post-Concussion Mental Health Sequelae in Youth with a Multimodal AI System](https://reporter.nih.gov/project-details/11274912) (Orson as site PI, Co-I)."
 - date: "2026-05"
   type: paper
-  text: "Excited to share that our perspective [A Framework for Longitudinal Health AI Agents](/publication/lin-framework-2026/) is published in *Nature Health*!"
+  text: "Excited to share that our perspective [A Framework for Longitudinal Health AI Agents](/publication/lin-framework-2026/) is published in *Nature Health*! Congratulations [Blue](/author/georgianna-lin/)!"
 - date: "2026-04"
   type: award
-  text: "Congratulations to [Ruishi](/author/ruishi-zou/), [Shiyu](/author/shiyu-xu/), and [Millie](/author/millie-mengyuan-wu/)! [MIND](/publication/zou-mind-2026/) and [MindfulAgents](/publication/wu-mindfulagents-2026/) both received Best Paper Honorable Mention Awards at CHI 2026."
+  text: "Congratulations to [Ruishi](/author/ruishi-zou/), [Shiyu](/author/shiyu-xu/), and [Millie](/author/millie-mengyuan-wu/)! [MIND](/publication/zou-mind-2026/) and [MindfulAgents](/publication/wu-mindfulagents-2026/) both received Best Paper Honorable Mention Awards at ACM CHI 2026."
 - date: "2026-04"
   type: award
-  text: "Congratulations to [Zhihan](/author/zhihan-jiang/) and [Millie](/author/millie-mengyuan-wu/)! PAWS, an AI digital pet on smartwatches for cannabis use disorder support, won the Best Workshop Paper Award at the CHI 2026 Workshop on Everyday Wearable for Personalized Health and Well-Being."
+  text: "Congratulations to [Zhihan](/author/zhihan-jiang/) and [Millie](/author/millie-mengyuan-wu/)! PAWS, an AI digital pet on smartwatches for cannabis use disorder support, won the Best Workshop Paper Award at the ACM CHI 2026 Workshop on Everyday Wearable for Personalized Health and Well-Being."
+- date: "2026-01"
+  type: paper
+  text: "Excited to share that our paper [MIND](/publication/zou-mind-2026/) is accepted at *ACM CHI 2026*! It gives mental health clinicians a narrative dashboard of patients' multimodal data. Congratulations [Ruishi](/author/ruishi-zou/) and [Shiyu](/author/shiyu-xu/)!"
+- date: "2026-01"
+  type: paper
+  text: "Excited to share that our paper [MindfulAgents](/publication/wu-mindfulagents-2026/) is accepted at *ACM CHI 2026*! It personalizes mindfulness meditation with an expert-aligned multi-agent system. Congratulations [Millie](/author/millie-mengyuan-wu/)!"

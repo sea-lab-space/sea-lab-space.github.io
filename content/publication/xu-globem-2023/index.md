@@ -24,7 +24,7 @@ publication_types:
 - article-journal
 publication: '*Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous
   Technologies*'
-publication_short: '*IMWUT*'
+publication_short: '*ACM IMWUT*'
 doi: 10.1145/3569485
 abstract: There is a growing body of research revealing that longitudinal passive
   sensing data from smartphones and wearable devices can capture daily behavior signals

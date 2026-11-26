@@ -16,6 +16,7 @@ publishDate: '2024-09-29T06:40:21.797827Z'
 publication_types:
 - paper-conference
 publication: '*Proceedings of the ACM Conference on Human Factors in Computing Systems*'
+publication_short: '*ACM CHI*'
 doi: 10.1145/3411764.3445182
 abstract: We present HulaMove, a novel interaction technique that leverages the movement
   of the waist as a new eyes-free and hands-free input method for both the physical

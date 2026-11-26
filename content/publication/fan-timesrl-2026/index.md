@@ -19,7 +19,7 @@ publication_types:
 - article-journal
 publication: '*Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous
   Technologies*'
-publication_short: '*IMWUT*'
+publication_short: '*ACM IMWUT*'
 doi: 10.48550/arXiv.2605.21295
 abstract: Longitudinal passive sensing enables continuous health prediction, yet models
   often fail under cross-dataset distribution shifts. Traditional ML overfits cohort-specific

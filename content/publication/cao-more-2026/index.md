@@ -17,7 +17,7 @@ publication_types:
 - paper-conference
 publication: '*Proceedings of the 2026 CHI Conference on Human Factors in Computing
   Systems*'
-publication_short: '*CHI*'
+publication_short: '*ACM CHI*'
 doi: 10.1145/3772318.3791946
 abstract: Large language models (LLMs) have been increasingly adopted to support patients’
   healthcare-seeking in recent years. While prior patient-centered studies have examined

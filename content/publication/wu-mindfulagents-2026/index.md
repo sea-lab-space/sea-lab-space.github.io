@@ -18,7 +18,7 @@ publishDate: '2026-05-05T16:22:53.591411Z'
 publication_types:
 - paper-conference
 publication: '*Proceedings of the ACM Conference on Human Factors in Computing Systems (ACM CHI)*'
-publication_short: '*CHI*'
+publication_short: '*ACM CHI*'
 doi: 10.1145/3772318.3791817
 abstract: 'Mindfulness meditation is a widely accessible and evidence-based method
   for supporting mental health. Despite the proliferation of mindfulness meditation

@@ -22,6 +22,7 @@ publishDate: '2024-09-29T06:40:21.772118Z'
 publication_types:
 - paper-conference
 publication: '*Proceedings of the ACM Conference on Human Factors in Computing Systems*'
+publication_short: '*ACM CHI*'
 doi: 10.1145/3491102.3501904
 abstract: We present a framework for gesture customization requiring minimal examples
   from users, all without degrading the performance of existing gesture sets. To achieve

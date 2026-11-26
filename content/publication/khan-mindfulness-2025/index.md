@@ -16,6 +16,7 @@ publication_types:
 - article-journal
 publication: '*Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous
   Technologies*'
+publication_short: '*ACM IMWUT*'
 doi: 10.1145/3749498
 abstract: Mindfulness training is widely recognized for its benefits in reducing depression,
   anxiety, and loneliness. With the rise of smartphone-based mindfulness apps, digital

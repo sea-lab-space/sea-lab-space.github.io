@@ -13,6 +13,7 @@ publishDate: '2026-05-17T03:19:46.655445Z'
 publication_types:
 - article-journal
 publication: '*Proc. ACM Interact. Mob. Wearable Ubiquitous Technol.*'
+publication_short: '*ACM IMWUT*'
 doi: 10.1145/3770661
 directions:
   - human-centered-evaluation

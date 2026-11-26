@@ -20,6 +20,7 @@ publication_types:
 - article-journal
 publication: '*Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous
   Technologies*'
+publication_short: '*ACM IMWUT*'
 doi: 10.1145/3351274
 abstract: 'The rate of depression in college students is rising, which is known to
   increase suicide risk, lower academic performance and double the likelihood of dropping
