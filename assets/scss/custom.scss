@@ -1286,8 +1286,11 @@ html {
 // width (Orson's request). Each pillar spans 12 rows, room for 8 links: rows a
 // pillar does not use are empty and take no space. Browsers without subgrid
 // stack each column on its own, tightly, as before. The pictograms are capped
-// so they do not outgrow the text on wide screens.
+// so they do not outgrow the text on wide screens. The direction links below
+// share that cap, so their edges line up with the pictogram frame.
 .sea-pillar {
+  --sea-pillar-media: 280px;
+
   display: grid;
   grid-row: span 12;
   grid-template-rows: subgrid;
@@ -1296,15 +1299,16 @@ html {
   justify-items: center;
   row-gap: 0;
   padding: 0 2rem;
+  border-left: 1px solid transparent; // the first pillar's is invisible, so all three columns are the same width inside
   text-align: center;
 
   & + & {
-    border-left: 1px solid rgba(0, 51, 115, 0.14);
+    border-left-color: rgba(0, 51, 115, 0.14);
   }
 
   figure {
     width: 100%;
-    max-width: 280px;
+    max-width: var(--sea-pillar-media);
     margin-bottom: 0.75rem;
   }
 
@@ -1362,25 +1366,37 @@ html {
 // The research directions under each pillar (shortcode
 // `layouts/shortcodes/pillar-directions.html`): small pill links in the
 // Research page chip colours, one per row, centred under the pillar text. A
-// direction can appear under more than one pillar. Unlike the Research chips
-// they may wrap inside a chip, because three columns get narrow on tablets.
-// The list's rows are the pillar's own (`subgrid`, see `.sea-pillar`), so the
-// second and third links line up across the columns even when one of them
-// wraps. Room for 8 links: unused rows take no space, which is why the space
-// between links is a margin rather than a row gap.
+// direction can appear under more than one pillar.
+//
+// Every link has the same width, that of the pictogram frame above it (or the
+// whole column when the column is narrower), so the links form an even stack
+// whose edges line up with the frame, and the stacks match across the three
+// pillars (Orson's request). The number and title sit at the left, so the
+// numbers line up down each stack. The Research page chips are not affected:
+// they keep the width of their text.
+//
+// Unlike the Research chips, the links may wrap inside the pill, because the
+// columns get narrow on tablets and small laptops. The list's rows are the
+// pillar's own (`subgrid`, see `.sea-pillar`), so the links line up across the
+// columns even when one of them wraps, and the links in a row stretch to the
+// row's height, so a wrapped link and its neighbours stay the same size. Room
+// for 8 links: unused rows take no space, which is why the space between links
+// is a margin rather than a row gap.
 .sea-pillar__directions {
   display: grid;
   grid-row: span 8;
   grid-template-rows: subgrid;
-  align-items: start;
-  justify-items: center;
+  align-items: stretch;
+  justify-items: stretch;
   row-gap: 0;
+  width: 100%;
+  max-width: var(--sea-pillar-media);
   margin: 0.15rem 0 0;
   padding: 0;
   list-style: none;
 
-  // A flex item rather than inline text, so each link starts at the top of
-  // its row. Inline, it would sit on a text baseline that drops when the link
+  // A flex item rather than inline text, so each link fills its row from the
+  // top. Inline, it would sit on a text baseline that drops when the link
   // wraps to two lines, putting the row a few pixels out of line.
   > li {
     display: flex;
@@ -1393,6 +1409,7 @@ html {
 
 .sea-pillar__direction {
   display: inline-flex;
+  flex: 1 1 auto; // fills its row, so every link is as wide as the list
   align-items: center;
   gap: 0.45em;
   max-width: 100%;
@@ -1453,6 +1470,7 @@ html {
 
   .sea-pillar {
     padding: 0 1.25rem;
+    border-left: 0;
 
     & + & {
       margin-top: 1.75rem;
