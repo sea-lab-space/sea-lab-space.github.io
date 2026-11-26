@@ -1,0 +1,126 @@
+name: Slack bot - propose a publication
+
+# The Slack bot (slack-bot/bot.py) starts this when a lab member sends a
+# paper. It adds the paper on a branch, opens a pull request, and posts an
+# approval card in the admins' Slack channel. Nothing reaches main here.
+# You can also start it by hand from the Actions tab.
+# Setup and the whole flow: slack-bot/README.md.
+on:
+  workflow_dispatch:
+    inputs:
+      entry:
+        description: One BibTeX entry, or a DOI or arXiv link
+        required: true
+        type: string
+      directions:
+        description: Research direction ids, comma-separated, main one first
+        required: true
+        type: string
+      abstract:
+        description: Abstract, used when the entry has none
+        required: false
+        type: string
+      context:
+        description: Filled in by the Slack bot (who asked, where to reply)
+        required: false
+        default: '{}'
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  propose:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      SLACK_ADMIN_CHANNEL: ${{ vars.SLACK_ADMIN_CHANNEL }}
+      BOT_CONTEXT: ${{ inputs.context }}
+      RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      # The same import tool and version as import-publications.yml.
+      - run: pip install --quiet academic==0.10.0 pyyaml
+
+      # The inputs are text a person typed. They reach the shell only as
+      # environment variables, never pasted into a command.
+      - name: Add the publication
+        env:
+          PUB_ENTRY: ${{ inputs.entry }}
+          PUB_ABSTRACT: ${{ inputs.abstract }}
+          PUB_DIRECTIONS: ${{ inputs.directions }}
+        run: |
+          printf '%s' "$PUB_ENTRY" > "$RUNNER_TEMP/entry.txt"
+          printf '%s' "$PUB_ABSTRACT" > "$RUNNER_TEMP/abstract.txt"
+          python scripts/add_publication.py "$RUNNER_TEMP/entry.txt" \
+            --directions "$PUB_DIRECTIONS" \
+            --abstract-file "$RUNNER_TEMP/abstract.txt" \
+            --summary "$RUNNER_TEMP/summary.json"
+
+      # GitHub does not start pull request checks on a pull request that a
+      # workflow opened, so the checks run here, before it is opened.
+      - name: Run the site checks
+        id: checks
+        run: |
+          set -o pipefail
+          {
+            python scripts/check_author_links.py
+            python scripts/check_publication_directions.py
+          } 2>&1 | tee "$RUNNER_TEMP/checks.log"
+
+      - name: Open the pull request
+        id: pr
+        run: |
+          key=$(jq -r .key "$RUNNER_TEMP/summary.json")
+          folder=$(jq -r .folder "$RUNNER_TEMP/summary.json")
+          title=$(jq -r .title "$RUNNER_TEMP/summary.json")
+          branch="bot/publication-$folder"
+
+          if git ls-remote --exit-code --heads origin "$branch" > /dev/null; then
+            echo "A request for this paper is already waiting for approval." > "$RUNNER_TEMP/problem.txt"
+            exit 1
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$branch"
+          git add sea-lab-publication.bib "content/publication/$folder"
+          git commit --quiet -m "content: add publication $key"
+          git push --quiet origin "$branch"
+
+          {
+            echo "Requested through the lab's Slack bot."
+            echo
+            echo "- Adds \`$key\` to \`sea-lab-publication.bib\`."
+            echo "- Adds \`content/publication/$folder/\`, with research directions: $(jq -r '.directions | join(", ")' "$RUNNER_TEMP/summary.json")."
+            echo
+            echo "The author-link and directions checks passed before this was opened."
+            echo "A website admin approves or declines it from the card in Slack. Merging it here works too."
+          } > "$RUNNER_TEMP/body.md"
+          url=$(gh pr create --base main --head "$branch" \
+            --title "Add publication: $title" --body-file "$RUNNER_TEMP/body.md")
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          echo "number=${url##*/}" >> "$GITHUB_OUTPUT"
+
+      - name: Ask the admins in Slack
+        run: |
+          python slack-bot/notify.py review \
+            --summary "$RUNNER_TEMP/summary.json" \
+            --pr-number "${{ steps.pr.outputs.number }}" \
+            --pr-url "${{ steps.pr.outputs.url }}"
+
+      - name: Tell the requester what went wrong
+        if: failure()
+        run: |
+          python slack-bot/notify.py failed \
+            --summary "$RUNNER_TEMP/summary.json" \
+            --problem "$RUNNER_TEMP/problem.txt" \
+            --checks "$RUNNER_TEMP/checks.log" \
+            --checks-outcome "${{ steps.checks.outcome }}" \
+            --pr-url "${{ steps.pr.outputs.url }}" \
+            --run-url "$RUN_URL"

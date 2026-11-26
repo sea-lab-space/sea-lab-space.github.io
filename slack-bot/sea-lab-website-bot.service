@@ -1,0 +1,21 @@
+# systemd unit that keeps bot.py running on the lab server and starts it
+# again after a crash or a reboot. Setup: README.md in this folder.
+#
+# Change USERNAME and the two paths, then:
+#   sudo cp sea-lab-website-bot.service /etc/systemd/system/
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now sea-lab-website-bot
+[Unit]
+Description=SEA Lab website Slack bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=USERNAME
+WorkingDirectory=/home/USERNAME/sea-lab-space.github.io/slack-bot
+ExecStart=/home/USERNAME/sea-lab-space.github.io/slack-bot/venv/bin/python bot.py
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

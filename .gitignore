@@ -32,3 +32,7 @@ __pycache__/
 
 .vscode/
 .vscode/*
+
+# Slack bot (slack-bot/): its tokens and its Python environment on the server
+slack-bot/.env
+slack-bot/venv/

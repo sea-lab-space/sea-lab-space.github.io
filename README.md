@@ -52,6 +52,17 @@ Submit a pull request once you edit the website, and ping Orson to check the con
 
 ## <a name="add-pub"></a> Add A New Publication
 
+### <a name="add-pub-slack"></a> From Slack
+The quickest way to add a new paper. You don't need this repository on your computer.
+
+- In Slack, type `/add-paper`. Or mention `@SEA Lab Website` in a channel it has been invited to, and press the button it replies with.
+- Paste the paper's BibTeX entry, a DOI, or an arXiv link. One paper per request.
+- Pick its research directions, the main one first. They are described in `data/research_directions.yaml` and under [Categorize a publication](#categorize-pub).
+- If you sent a DOI, or BibTeX without an abstract, paste the abstract in the last box.
+- Press **Send for approval**. The bot sets the citation key, writes lab members' names the way that links to their profiles, and opens a pull request. A website admin gets a card in Slack and approves or declines it. The bot tells you the result, in a direct message or in the thread where you mentioned it. An approved paper is on the site about five minutes later.
+- The bot only adds new papers. An award badge, a `featured.png`, a project link, or a fix to a paper that is already listed is done by hand, as described below.
+- Setup and upkeep of the bot are in [slack-bot/README.md](slack-bot/README.md).
+
 ### List in the [Publication Page](https://sea-lab.space/publication/)
 - We use `./sea-lab-publication.bib` to maintain the group bib file. Update the bib file by adding new publications.
 - Set each new entry's citation key (the text right after `@inproceedings{` or `@article{`) to `lastname_firstword_year` in lowercase: the last name of the first author, the first word of the title, and the year, e.g. `zou_mind_2026`. The import names the paper's folder after this key, with underscores turned into dashes (`content/publication/zou-mind-2026/`). Capital letters and numbers inside a key are split off with dashes too, so a Zotero key like `kimMDAgentsAdaptiveCollaboration2024` becomes the long folder `kim-md-agents-adaptive-collaboration-2024`. The folder name is the paper's address and what Lab News links to, so don't rename a folder or change a key once the paper is live.
@@ -60,6 +71,7 @@ Submit a pull request once you edit the website, and ping Orson to check the con
   - Add all name aliases to the `Alias` column, separated by semicolons.
   - It needs the Python environment from [Local Test](#local-test), which has the right libraries (version 2 of bibtexparser does not work with it).
   - Copy the bib to `bak/` first, as the commented lines in `./process.sh` do. Then run `python3 ./processing/bib_post_processing.py`. It rewrites each alias in the bib to the `Full Name`. It also rewrites the whole bib, sorted by citation key, so `git diff` shows changes to almost every entry. Check that the author names you meant to fix are the only real changes. Its long "Names not found in df_author" list is normal.
+- Shortcut for one new paper: save its BibTeX entry in a file and run `python3 scripts/add_publication.py paper.bib -d <direction ids, comma-separated>`. It sets the citation key, adds the entry to the bib, creates the paper's folder, and writes its `directions`, which are the steps below. It needs the Python environment from [Local Test](#local-test). Review what it changed, then commit.
 - Import the new entries:
   - It needs the import tool, `academic` 0.10.0, the same version the import Action uses. Set it up once as described under [Local Test](#local-test), and activate that Python environment first.
   - Run `bash process.sh`. It runs `academic import ./sea-lab-publication.bib ./content/publication/ --compact`.
@@ -161,7 +173,8 @@ Every publication belongs to one or more research directions. The [Research Page
 - **Deploy website to GitHub Pages** (`.github/workflows/publish.yaml`) runs on every push to `main`. It runs both check scripts, builds the site with Hugo 0.126.3, and publishes it. If any step fails, the live site stays as it was. After you push or merge, open the Actions tab on GitHub and make sure the run is green.
 - **Check author links** (`.github/workflows/check-author-links.yml`) runs on a pull request that changes `content/authors/`, `content/publication/`, `data/research_directions.yaml`, `sea-lab-publication.bib`, `processing/`, or the two check scripts. It runs the two check scripts but does not build the site.
 - **Import Publications From Bibtex** (`.github/workflows/import-publications.yml`) runs when `sea-lab-publication.bib` changes on `main`, or by hand from the Actions tab. It opens a pull request with folders for the new entries.
-- None of them needs a secret. In the repository settings, Pages must stay set to deploy from GitHub Actions, and Actions must stay allowed to create pull requests.
+- **Slack bot - propose a publication** (`.github/workflows/slack-add-publication.yml`) and **Slack bot - approve or decline a publication** (`.github/workflows/slack-publication-decision.yml`) are started by the lab's Slack bot (see [From Slack](#add-pub-slack)). The first opens a pull request for a new paper. The second merges it when a website admin approves in Slack, and then starts the deploy itself.
+- Only the two Slack bot workflows need settings: the secret `SLACK_BOT_TOKEN` and the variable `SLACK_ADMIN_CHANNEL` (see [slack-bot/README.md](slack-bot/README.md)). In the repository settings, Pages must stay set to deploy from GitHub Actions, and Actions must stay allowed to create pull requests.
 
 ## Credits
 
